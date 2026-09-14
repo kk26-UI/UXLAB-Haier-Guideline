@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-zh="Haier Design | 组件" data-i18n-en="Haier Design | Components">Haier Design | 组件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-primary: #2283E2;
+            --brand-light: #E5F0FF;
+            --text-main: #1D1D1F;
+            --text-secondary: #86868B;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #F5F7FA;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* 弥散光晕动画背景 */
+        .aura-background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: #F4F7FB;
+        }
+        .aura-blob {
+            position: absolute;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .aura-blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #C4E0FF; animation-delay: 0s; }
+        .aura-blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: #E0E8FF; animation-delay: -5s; }
+        .aura-blob-3 { top: 40%; left: 60%; width: 40vw; height: 40vw; background: #E8F4FF; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
+        }
+
+        /* 磨玻璃质感卡片核心类 */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            border-radius: 24px;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar-nav-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-nav-item.active {
+            color: var(--brand-primary);
+            font-weight: 600;
+            border-left-color: var(--brand-primary);
+            background: linear-gradient(90deg, var(--brand-light) 0%, transparent 100%);
+        }
+
+        /* 代码与Token块 */
+        .token-block {
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        
+        /* 隐藏原生滚动条，美化 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+        /* Haier 纯文本 Logo 的基础样式 */
+        .haier-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2283E2; /* 海尔蓝 */
+            color: white;
+            font-family: Arial, Helvetica, sans-serif; /* 使用最基础的无衬线字体 */
+            font-weight: bold;
+            border-radius: 8px; /* 轻微圆角 */
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="aura-background">
+        <div class="aura-blob aura-blob-1"></div>
+        <div class="aura-blob aura-blob-2"></div>
+        <div class="aura-blob aura-blob-3"></div>
+    </div>
+    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">
+                Haier
+            </div>
+            <h1 class="font-bold text-lg">Haier Design</h1>
+        </div>
+        <button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </header>
+
+    <div class="flex h-screen pt-16 md:pt-0">
+<aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+        <main class="flex-1 md:ml-72 p-6 md:p-12 lg:p-20 overflow-y-auto h-full scroll-smooth" id="main-content">
+            <section id="components" class="mb-20 scroll-mt-10">
+                <h2 class="text-3xl font-bold mb-2" data-i18n-zh="3. 组件" data-i18n-en="3. Components">3. 组件</h2>
+                <p class="text-gray-500 mb-8">Figma 中的标准预制件与组装逻辑。</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <a href="component_buttons.html" class="glass-panel p-6 hover:shadow-lg transition block">
+                        <h4 class="font-bold text-gray-800 mb-2">3.1 操作类 Actions</h4>
+                        <p class="text-xs text-gray-500">Buttons、Switch / Toggle</p>
+                    </a>
+                    <a href="component_switch.html" class="glass-panel p-6 hover:shadow-lg transition block">
+                        <h4 class="font-bold text-gray-800 mb-2">3.2 选择类 Selection</h4>
+                        <p class="text-xs text-gray-500">Radio、Checkbox、Wheel Picker</p>
+                    </a>
+                    <a href="component_text_field.html" class="glass-panel p-6 hover:shadow-lg transition block">
+                        <h4 class="font-bold text-gray-800 mb-2">3.3 输入类 Inputs</h4>
+                        <p class="text-xs text-gray-500">Text Field、Control、Keyboard</p>
+                    </a>
+                    <a href="component_app_bar.html" class="glass-panel p-6 hover:shadow-lg transition block">
+                        <h4 class="font-bold text-gray-800 mb-2">3.4 导航类 Navigation</h4>
+                        <p class="text-xs text-gray-500">App Bar、Navigation、Tabs、Breadcrumbs、Pagination、Steps</p>
+                    </a>
+                    <a href="component_card.html" class="glass-panel p-6 hover:shadow-lg transition block">
+                        <h4 class="font-bold text-gray-800 mb-2">3.5 数据展示 Data Display</h4>
+                        <p class="text-xs text-gray-500">Card、List、Avatar、Divider、Badge</p>
+                    </a>
+                    <a href="component_dialog_modal.html" class="glass-panel p-6 hover:shadow-lg transition block">
+                        <h4 class="font-bold text-gray-800 mb-2">3.6 反馈与浮层 Feedback &amp; Overlays</h4>
+                        <p class="text-xs text-gray-500">Dialog、Bottom Sheet、Snackbar、Tooltip、Progress Indicator</p>
+                    </a>
+                </div>
+
+                <div class="glass-panel p-8 md:p-10 mb-10">
+                    <h3 class="text-xl font-semibold mb-4" data-i18n-zh="组件变体架构示例" data-i18n-en="Variants Strategy">组件变体架构示例</h3>
+                    <p class="text-gray-600 mb-6 text-sm">为了支持全品类家电，严禁堆砌离散组件。核心组件必须按类似代码 <code>Props</code> 的逻辑配置，实现原子化装配。</p>
+                    <div class="bg-white/60 rounded-2xl p-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
+                            <div class="font-mono font-bold text-gray-800">Control Card (控制面板卡片)</div>
+                            <span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded">Master Component</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                            <div>
+                                <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">1. 硬件维度 (Variants)</h5>
+                                <div class="flex items-center space-x-2 text-sm"><span class="w-16">Scale:</span> <span class="bg-gray-200 px-2 rounded">Small</span> <span class="bg-gray-200 px-2 rounded border border-blue-500 text-blue-600">Medium</span> <span class="bg-gray-200 px-2 rounded">Large</span></div>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">2. 状态维度 (Variants)</h5>
+                                <div class="flex items-center space-x-2 text-sm"><span class="w-16">State:</span> <span class="bg-gray-200 px-2 rounded border border-blue-500 text-blue-600">Default</span> <span class="bg-gray-200 px-2 rounded">Focused</span> <span class="bg-gray-200 px-2 rounded">Disabled</span></div>
+                            </div>
+                            <div class="md:col-span-2 pt-4 border-t border-gray-200 mt-2">
+                                <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">3. 内容组合开关 (Boolean Properties)</h5>
+                                <div class="flex flex-wrap gap-4 text-sm">
+                                    <label class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-lg border shadow-sm"><input type="checkbox" checked class="form-checkbox text-blue-600 rounded"> <span>Show Icon?</span></label>
+                                    <label class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-lg border shadow-sm"><input type="checkbox" checked class="form-checkbox text-blue-600 rounded"> <span>Show Subtitle?</span></label>
+                                    <label class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-lg border shadow-sm"><input type="checkbox" class="form-checkbox text-blue-600 rounded"> <span>Show Toggle?</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            
+            <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+
+        </main>
+    </div>
+
+    <script src="haier-nav.js"></script>
+    <script>
+        // 左侧导航由 haier-nav.js 统一渲染与管理。
+    </script>
+</body>
+</html>

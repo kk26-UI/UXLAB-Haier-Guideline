@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-zh="Haier Design | 图标规范" data-i18n-en="Haier Design | Iconography">Haier Design | 图标规范</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --brand-primary:#2283E2; --brand-light:#E5F0FF; --text-main:#1D1D1F; --text-secondary:#86868B; --glass-bg:rgba(255,255,255,.68); --glass-border:rgba(255,255,255,.5); }
+        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; background:#F5F7FA; color:var(--text-main); overflow-x:hidden; }
+        .aura-background { position:fixed; inset:0; z-index:-1; overflow:hidden; background:#F4F7FB; }
+        .aura-blob { position:absolute; filter:blur(120px); opacity:.6; animation:float 20s infinite ease-in-out alternate; }
+        .aura-blob-1 { top:-10%; left:-10%; width:50vw; height:50vw; background:#C4E0FF; }
+        .aura-blob-2 { bottom:-20%; right:-10%; width:60vw; height:60vw; background:#E0E8FF; animation-delay:-5s; }
+        .aura-blob-3 { top:40%; left:60%; width:40vw; height:40vw; background:#E8F4FF; animation-delay:-10s; }
+        @keyframes float { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(10%,15%) scale(1.1)} }
+        .glass-panel { background:var(--glass-bg); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid var(--glass-border); box-shadow:0 8px 32px rgba(0,0,0,.04); border-radius:24px; }
+        .haier-logo-container { display:flex; align-items:center; justify-content:center; background:#2283E2; color:#fff; font-family:Arial,Helvetica,sans-serif; font-weight:bold; border-radius:8px; }
+        .icon-tabs { display:flex; gap:32px; overflow-x:auto; border-bottom:1px solid #E5E6EB; scrollbar-width:none; }
+        .icon-tabs::-webkit-scrollbar { display:none; }
+        .icon-tab { flex:0 0 auto; padding:0 0 14px; color:#86909C; font-size:14px; font-weight:500; border-bottom:2px solid transparent; transition:color .2s,border-color .2s; }
+        .icon-tab:hover { color:var(--brand-primary); }
+        .icon-tab.active { color:var(--brand-primary); border-bottom-color:var(--brand-primary); font-weight:600; }
+        .icon-pane { display:none; }
+        .icon-pane.active { display:block; animation:pane-in .24s ease-out; }
+        @keyframes pane-in { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+        .icon-library { display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); border-top:1px solid #E5E6EB; border-left:1px solid #E5E6EB; background:rgba(255,255,255,.45); }
+        .icon-slot { min-height:104px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; border-right:1px solid #E5E6EB; border-bottom:1px solid #E5E6EB; color:#C9CDD4; background:rgba(255,255,255,.25); transition:background .2s,color .2s,box-shadow .2s; }
+        .icon-slot:hover { position:relative; z-index:1; color:var(--brand-primary); background:#F2F8FF; box-shadow:inset 0 0 0 1px var(--brand-primary); }
+        .icon-slot-mark { width:28px; height:28px; border:1px dashed currentColor; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:400; }
+        .icon-slot-label { font-size:11px; font-weight:400; color:#A9AEB8; }
+        .icon-filter-bar { display:grid; grid-template-columns:minmax(0,auto) minmax(260px,1fr); gap:20px; margin-bottom:24px; }
+        .icon-category-selector { display:flex; align-items:center; gap:4px; padding:6px; overflow-x:auto; border:1px solid #E5E6EB; border-radius:6px; background:rgba(255,255,255,.25); scrollbar-width:none; }
+        .icon-category-selector::-webkit-scrollbar { display:none; }
+        .icon-category-button { flex:0 0 auto; min-height:40px; padding:0 16px; border-radius:4px; color:#4E5969; font-size:14px; font-weight:500; white-space:nowrap; transition:background .2s,color .2s,box-shadow .2s; }
+        .icon-category-button:hover { color:var(--brand-hover,#4292FF); }
+        .icon-category-button.active { color:#0066FF; background:#fff; box-shadow:0 1px 4px rgba(29,33,41,.06); }
+        .icon-search { position:relative; display:flex; align-items:center; min-width:0; border:1px solid #E5E6EB; border-radius:6px; background:rgba(255,255,255,.25); }
+        .icon-search input { width:100%; height:52px; padding:0 52px 0 20px; border:0; outline:0; color:#1D2129; font-size:15px; background:transparent; }
+        .icon-search input::placeholder { color:#86909C; }
+        .icon-search svg { position:absolute; right:18px; width:20px; height:20px; color:#4E5969; pointer-events:none; }
+        .icon-filter-empty { grid-column:1/-1; padding:40px 20px; color:#86909C; text-align:center; border-right:1px solid #E5E6EB; border-bottom:1px solid #E5E6EB; }
+        .icon-library[hidden], .icon-search-results[hidden] { display:none !important; }
+        @media (max-width:900px) { .icon-filter-bar { grid-template-columns:1fr; gap:12px; } }
+        .weather-library-wrap { overflow-x:auto; }
+        .weather-library { min-width:960px; display:grid; grid-template-columns:repeat(15,minmax(64px,1fr)); border-top:1px solid #E5E6EB; border-left:1px solid #E5E6EB; background:rgba(255,255,255,.45); }
+        .weather-library .icon-slot { min-height:82px; }
+        .rule-row:last-child { border-bottom:0; }
+        .color-section-title { font-size:24px; line-height:1.4; font-weight:400; color:#111827; }
+        .baseline-table { width:100%; border-collapse:separate; border-spacing:0; font-size:14px; }
+        .baseline-table th { padding:14px 16px; color:#86909C; font-size:12px; font-weight:500; text-align:left; background:rgba(247,248,250,.85); border-bottom:1px solid #E5E6EB; }
+        .baseline-table td { padding:16px; color:#4E5969; border-bottom:1px solid #E5E6EB; vertical-align:middle; }
+        .baseline-table tr:last-child td { border-bottom:0; }
+        .baseline-table td:first-child { color:#1D2129; font-weight:500; }
+        .example-card { overflow:hidden; border:1px solid #E5E6EB; border-radius:16px; background:rgba(255,255,255,.62); }
+        .example-label { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 16px; font-size:13px; font-weight:600; border-bottom:1px solid #E5E6EB; }
+        .example-label::before { display:grid; place-items:center; width:20px; height:20px; border-radius:50%; color:white; font-size:12px; font-weight:700; }
+        .example-label.do { color:#00A870; background:#F2FFFA; }
+        .example-label.do::before { content:'\2713'; background:#00A870; }
+        .example-label.dont { color:#F53F3F; background:#FFF7F7; }
+        .example-label.dont::before { content:'\00D7'; background:#F53F3F; }
+        .example-card p { text-align:center; }
+        .device-rule-card { border:1px solid #E5E6EB; border-radius:16px; background:rgba(255,255,255,.58); padding:20px; }
+        .device-tag { display:inline-flex; align-items:center; min-height:28px; padding:0 10px; border-radius:999px; color:#0066CC; background:#EAF4FF; font-size:12px; font-weight:600; }
+        .filled-hero { display:block; }
+        .evolution-stage { margin-top:28px; padding:22px; overflow-x:auto; border:1px solid #E5E6EB; border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(240,246,253,.78)); }
+        .evolution-flow { min-width:680px; display:grid; grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr; align-items:center; gap:4px; }
+        .evolution-icon { display:flex; flex-direction:column; align-items:center; gap:10px; color:#86909C; font-size:11px; text-align:center; }
+        .evolution-icon img { width:88px; height:88px; padding:18px; object-fit:contain; border-radius:20px; background:#19212D; border:1px solid #2F3A49; }
+        .evolution-arrow { color:#C9CDD4; text-align:center; }
+        .principle-mini { min-height:150px; padding:20px; border:1px solid #E5E6EB; border-radius:16px; background:rgba(255,255,255,.58); }
+        .principle-number { display:block; margin-bottom:18px; color:#2283E2; font-size:12px; font-weight:700; letter-spacing:.08em; }
+        .icon-dna-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px; }
+        .icon-dna-card { padding:22px; border:1px solid #E5E6EB; border-radius:18px; background:rgba(255,255,255,.62); }
+        .icon-dna-tag { display:inline-flex; align-items:center; min-height:26px; margin-bottom:14px; padding:0 9px; border-radius:999px; color:#0066CC; background:#EAF4FF; font-size:11px; font-weight:700; letter-spacing:.04em; }
+        .icon-dna-items { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+        .icon-dna-items span { padding:6px 9px; border:1px solid #E5E6EB; border-radius:8px; color:#4E5969; background:rgba(255,255,255,.72); font-size:12px; }
+        .variation-table { width:100%; border-collapse:collapse; table-layout:fixed; }
+        .variation-table th { padding:0 18px 16px; color:#1D2129; font-size:13px; font-weight:600; text-align:left; border-bottom:1px solid #DDE1E6; }
+        .variation-table td { padding:20px 18px; color:#4E5969; font-size:14px; line-height:1.65; text-align:left; border-bottom:1px solid #E8EAED; vertical-align:top; }
+        .variation-table th:first-child, .variation-table td:first-child { width:17%; padding-left:0; color:#1D2129; font-weight:500; }
+        .variation-table th:nth-child(2), .variation-table td:nth-child(2) { width:46%; }
+        .variation-table th:last-child, .variation-table td:last-child { width:37%; padding-right:0; }
+        .variation-table tr:last-child td { border-bottom:0; padding-bottom:0; }
+        .dna-traits { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 30px; }
+        .dna-trait { display:inline-flex; align-items:center; min-height:34px; padding:0 13px; border:1px solid #CFE4FA; border-radius:999px; color:#0066CC; background:#F1F7FE; font-size:13px; font-weight:600; }
+        .dna-moodboard { overflow:hidden; border:0; border-radius:18px; background:transparent; }
+        .dna-moodboard img { display:block; width:100%; height:auto; object-fit:contain; }
+        .dna-moodboard figcaption { padding:12px 16px; color:#86909C; background:rgba(255,255,255,.98); font-size:12px; line-height:1.6; text-align:center; }
+        .style-level-table { width:100%; border-collapse:collapse; table-layout:fixed; }
+        .style-level-table th { padding:0 16px 16px; color:#1D2129; font-size:13px; font-weight:600; text-align:left; border-bottom:1px solid #DDE1E6; }
+        .style-level-table td { padding:20px 16px; color:#4E5969; font-size:14px; line-height:1.65; text-align:left; border-bottom:1px solid #E8EAED; vertical-align:top; }
+        .style-level-table th:first-child, .style-level-table td:first-child { width:17%; padding-left:0; color:#1D2129; }
+        .style-level-table th:nth-child(2), .style-level-table td:nth-child(2) { width:46%; }
+        .style-level-table th:last-child, .style-level-table td:last-child { width:37%; padding-right:0; }
+        .style-level-table tr:last-child td { border-bottom:0; padding-bottom:0; }
+        .style-level-name { font-weight:600; white-space:nowrap; }
+        .style-level-code { margin-right:6px; color:#1D2129; font-size:14px; font-weight:600; letter-spacing:0; }
+        @media (max-width:700px) { .icon-dna-grid { grid-template-columns:1fr; } }
+        @media (max-width:640px) { .variation-table, .style-level-table { min-width:680px; } }
+        .issue-card { overflow:hidden; border:1px solid #E5E6EB; border-radius:18px; background:rgba(255,255,255,.66); }
+        .issue-stage { position:relative; height:184px; display:grid; place-items:center; overflow:hidden; background:#EEF3F8; border-bottom:1px solid #E5E6EB; }
+        .issue-stage::after { content:'×'; position:absolute; z-index:2; top:14px; right:14px; display:grid; place-items:center; width:26px; height:26px; border-radius:50%; color:#fff; background:#F53F3F; font-size:16px; font-weight:700; }
+        .issue-stage svg { width:104px; height:104px; overflow:visible; }
+        .issue-stage.material img { width:132px; height:132px; object-fit:contain; }
+        .issue-stage.highlight img { width:132px; height:132px; object-fit:contain; }
+        .issue-stage.blur img { width:132px; height:132px; object-fit:contain; }
+        .issue-stage.color img { width:132px; height:132px; object-fit:contain; }
+        @media (max-width:480px) { .evolution-stage { padding:16px 10px; } }
+        #color-pane img { width:200px; height:200px; max-width:100%; object-fit:contain; }
+        @media (min-width:1024px) {
+            #color-pane > section:nth-of-type(3) > div.grid,
+            #color-pane > section:nth-of-type(4) > div.grid { grid-template-columns:240px minmax(0,1fr) !important; }
+        }
+        #color-pane > section:nth-of-type(5) .example-card > div:nth-child(2) { height:240px; aspect-ratio:auto; }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="aura-background"><div class="aura-blob aura-blob-1"></div><div class="aura-blob aura-blob-2"></div><div class="aura-blob aura-blob-3"></div></div>
+    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button></header>
+    <div class="flex h-screen pt-16 md:pt-0">
+        <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+        <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+        <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full" id="main-content">
+            <div class="max-w-[1200px] mx-auto pb-24">
+                <div class="hidden md:flex items-center mb-8"><a href="haier_os_design_system.html" class="px-4 py-2 bg-white/50 hover:bg-white/90 rounded-xl transition-colors flex items-center text-gray-700 shadow-sm border border-gray-200/50 backdrop-blur-md"><span class="text-sm font-semibold" data-i18n-zh="返回主页" data-i18n-en="Home">返回主页</span></a></div>
+
+                <section class="mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900" data-i18n-zh="图标" data-i18n-en="Iconography">图标</h1>
+                    <p class="text-lg text-text-secondary max-w-3xl leading-relaxed" data-i18n-zh="系统图标用于统一功能表达、状态反馈和跨设备识别，确保不同尺寸与表现形式下保持清晰一致。" data-i18n-en="System icons unify functional expression, status feedback, and cross-device recognition while remaining clear and consistent across sizes and styles.">系统图标用于统一功能表达、状态反馈和跨设备识别，确保不同尺寸与表现形式下保持清晰一致。</p>
+                </section>
+                <div class="mb-8" aria-hidden="true"></div>
+
+                <nav class="icon-tabs mb-12" role="tablist" aria-label="图标类型">
+                    <button class="icon-tab active" type="button" role="tab" aria-selected="true" aria-controls="linear-pane" data-icon-tab="linear" data-i18n-zh="线性图标" data-i18n-en="Linear Icons">线性图标</button>
+                    <button class="icon-tab" type="button" role="tab" aria-selected="false" aria-controls="filled-pane" data-icon-tab="filled" data-i18n-zh="面性图标" data-i18n-en="Filled Icons">面性图标</button>
+                    <button class="icon-tab" type="button" role="tab" aria-selected="false" aria-controls="color-pane" data-icon-tab="color" data-i18n-zh="彩色图标" data-i18n-en="Color Icons">彩色图标</button>
+                    <button class="icon-tab" type="button" role="tab" aria-selected="false" aria-controls="weather-pane" data-icon-tab="weather" data-i18n-zh="天气图标" data-i18n-en="Weather Icons">天气图标</button>
+                </nav>
+
+                <div id="linear-pane" class="icon-pane active" role="tabpanel" data-icon-pane="linear">
+                    <section class="mb-16">
+                        <h2 class="text-2xl font-bold mb-3 text-gray-900" data-i18n-zh="线性图标库" data-i18n-en="Linear Icon Library">线性图标库</h2>
+                        <div class="icon-filter-bar" data-icon-filter="linear">
+                            <div class="icon-category-selector" role="group" aria-label="线性图标分类">
+                                <button class="icon-category-button active" type="button" data-icon-category="通用">通用</button><button class="icon-category-button" type="button" data-icon-category="冰箱">冰箱</button><button class="icon-category-button" type="button" data-icon-category="洗衣机">洗衣机</button><button class="icon-category-button" type="button" data-icon-category="厨电">厨电</button><button class="icon-category-button" type="button" data-icon-category="空调">空调</button><button class="icon-category-button" type="button" data-icon-category="热水器">热水器</button><button class="icon-category-button" type="button" data-icon-category="小家电">小家电</button>
+                            </div>
+                            <label class="icon-search"><span class="sr-only">搜索线性图标</span><input type="search" placeholder="搜索图标" data-icon-search><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke-width="2"></circle><path d="m20 20-4-4" stroke-width="2" stroke-linecap="round"></path></svg></label>
+                        </div>
+                        <div class="icon-library" data-icon-library="linear" data-count="60"></div>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-16">
+                        <h2 class="text-2xl font-bold mb-3 text-gray-900" data-i18n-zh="线性图标网格系统" data-i18n-en="Linear Icon Grid System">线性图标网格系统</h2>
+                        <p class="text-gray-500 mb-8 text-sm leading-relaxed" data-i18n-zh="网格采用 24 × 24 的相对比例，不绑定 pt、dp 或 mm，以基础单位 a 描述全部构造关系。" data-i18n-en="The grid uses a relative 24 × 24 ratio independent of pt, dp, or mm, with base unit a defining all construction relationships.">网格采用 24 × 24 的相对比例，不绑定 pt、dp 或 mm，以基础单位 a 描述全部构造关系。</p>
+                        <div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-10 items-center">
+                            <div class="bg-white/70 rounded-2xl border border-gray-200 p-4 w-full max-w-[240px] mx-auto"><img src="assets/icons/icon-grid-frame.svg" alt="24 × 24 图标标准网格" class="w-full h-auto" data-i18n-alt-zh="24 × 24 图标标准网格" data-i18n-alt-en="24 × 24 icon standard grid"></div>
+                            <div class="divide-y divide-gray-200 text-sm">
+                                <div class="py-5 first:pt-0"><h3 class="font-semibold text-gray-900 mb-2" data-i18n-zh="24 × 24 基准" data-i18n-en="24 × 24 Base Grid">24 × 24 基准</h3><p class="text-gray-500 leading-relaxed" data-i18n-zh="所有图标优先以正方形网格制作；仅当图形隐喻无法成立时，才使用圆形、垂直或水平特殊网格。" data-i18n-en="Build icons on the square grid by default. Use circular, vertical, or horizontal grids only when the metaphor cannot be represented within a square.">所有图标优先以正方形网格制作；仅当图形隐喻无法成立时，才使用圆形、垂直或水平特殊网格。</p></div>
+                                <div class="py-5"><h3 class="font-semibold text-gray-900 mb-2" data-i18n-zh="2a 安全区域" data-i18n-en="2a Safe Area">2a 安全区域</h3><p class="text-gray-500 leading-relaxed" data-i18n-zh="四周保留 2a 安全区域，主体轮廓不得侵入，以保证小尺寸下的识别度。" data-i18n-en="Maintain a 2a safe area on all sides to preserve recognition at small sizes.">四周保留 2a 安全区域，主体轮廓不得侵入，以保证小尺寸下的识别度。</p></div>
+                                <div class="py-5 pb-0"><h3 class="font-semibold text-gray-900 mb-2" data-i18n-zh="1a 线条粗细" data-i18n-en="1a Stroke Weight">1a 线条粗细</h3><p class="text-gray-500 leading-relaxed" data-i18n-zh="标准描边为 1a，端点、转角与相交位置保持一致的视觉重量。" data-i18n-en="Use a standard 1a stroke and maintain consistent visual weight at caps, corners, and intersections.">标准描边为 1a，端点、转角与相交位置保持一致的视觉重量。</p></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="mb-16">
+                        <h2 class="text-2xl font-bold mb-3 text-gray-900" data-i18n-zh="构图" data-i18n-en="Composition">构图</h2>
+                        <p class="text-gray-500 mb-6 text-sm leading-relaxed" data-i18n-zh="根据主体形态选择标准、圆形、垂直或水平网格，并统一处理复合语义。" data-i18n-en="Choose a standard, circular, vertical, or horizontal grid based on the silhouette and handle compound meaning consistently.">根据主体形态选择标准、圆形、垂直或水平网格，并统一处理复合语义。</p>
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                            <div class="glass-panel p-5 text-center"><div class="aspect-square rounded-xl border border-dashed border-gray-300 flex items-center justify-center mb-4"><div class="w-2/3 h-2/3 rounded-xl border-4 border-gray-300"></div></div><p class="text-sm font-medium" data-i18n-zh="标准" data-i18n-en="Standard">标准</p></div>
+                            <div class="glass-panel p-5 text-center"><div class="aspect-square rounded-xl border border-dashed border-gray-300 flex items-center justify-center mb-4"><div class="w-2/3 h-2/3 rounded-full border-4 border-gray-300"></div></div><p class="text-sm font-medium" data-i18n-zh="圆形" data-i18n-en="Circular">圆形</p></div>
+                            <div class="glass-panel p-5 text-center"><div class="aspect-square rounded-xl border border-dashed border-gray-300 flex items-center justify-center mb-4"><div class="w-1/2 h-3/4 rounded-xl border-4 border-gray-300"></div></div><p class="text-sm font-medium" data-i18n-zh="垂直" data-i18n-en="Vertical">垂直</p></div>
+                            <div class="glass-panel p-5 text-center"><div class="aspect-square rounded-xl border border-dashed border-gray-300 flex items-center justify-center mb-4"><div class="w-3/4 h-1/2 rounded-xl border-4 border-gray-300"></div></div><p class="text-sm font-medium" data-i18n-zh="水平" data-i18n-en="Horizontal">水平</p></div>
+                        </div>
+                    </section>
+
+                    <section class="mb-16">
+                        <h2 class="text-2xl font-bold mb-3 text-gray-900" data-i18n-zh="辅助符号布局" data-i18n-en="Secondary Symbol Placement">辅助符号布局</h2>
+                        <p class="text-gray-500 mb-6 text-sm leading-relaxed" data-i18n-zh="辅助符号建议为主符号尺寸的 1/4，默认位于右下角；其面积不得超过主符号的一半，也不得遮挡主体识别特征。" data-i18n-en="Secondary symbols should be one quarter of the main symbol and placed at the bottom right. Their area must not exceed half of the main symbol or obscure defining features.">辅助符号建议为主符号尺寸的 1/4，默认位于右下角；其面积不得超过主符号的一半，也不得遮挡主体识别特征。</p>
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="glass-panel p-5 text-center">
+                                <div class="aspect-square rounded-xl border border-dashed border-gray-300 flex items-center justify-center mb-4">
+                                    <div class="relative w-2/3 h-2/3 border-4 border-gray-300">
+                                        <div class="absolute -right-1 -bottom-1 border-2 border-red-500 bg-red-50" style="width:calc(50% + 4px);height:calc(50% + 4px);"></div>
+                                    </div>
+                                </div>
+                                <p class="text-sm font-medium" data-i18n-zh="右下角辅助符号" data-i18n-en="Bottom-right Secondary Symbol">右下角辅助符号</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="filled-pane" class="icon-pane" role="tabpanel" data-icon-pane="filled" hidden>
+                    <section class="glass-panel p-6 sm:p-10 mb-10">
+                        <h2 class="color-section-title mb-3" data-i18n-zh="视觉 DNA" data-i18n-en="Visual DNA">视觉 DNA</h2>
+                        <p class="text-gray-500 text-sm leading-relaxed" data-i18n-zh="所有面性图标共享圆润、轻盈、柔和、科技与适度立体的视觉性格，任何渠道适配与风格变化均不得偏离这些核心特征。" data-i18n-en="All filled icons share a rounded, light, soft, technological, and moderately dimensional character. Channel adaptations and style variations must preserve these defining traits.">所有面性图标共享圆润、轻盈、柔和、科技与适度立体的视觉性格，任何渠道适配与风格变化均不得偏离这些核心特征。</p>
+                        <div class="dna-traits" aria-label="视觉 DNA">
+                            <span class="dna-trait" data-i18n-zh="圆润" data-i18n-en="Rounded">圆润</span><span class="dna-trait" data-i18n-zh="轻盈" data-i18n-en="Light">轻盈</span><span class="dna-trait" data-i18n-zh="柔和" data-i18n-en="Soft">柔和</span><span class="dna-trait" data-i18n-zh="科技" data-i18n-en="Technological">科技</span>
+                        </div>
+                        <figure class="dna-moodboard"><img src="assets/examples/iconography/filled-visual-dna-moodboard-reference.png" alt="圆润、轻盈、柔和与科技感的视觉 DNA 情绪版" data-i18n-alt-zh="圆润、轻盈、柔和与科技感的视觉 DNA 情绪版" data-i18n-alt-en="Visual DNA moodboard showing rounded, light, soft, and technological forms"><figcaption data-i18n-zh="视觉情绪参考：以圆角几何、柔和渐变、半透明叠层与克制高光建立统一的科技感。" data-i18n-en="Visual mood reference: rounded geometry, soft gradients, translucent layering, and restrained highlights create a coherent technological character.">视觉情绪参考：以圆角几何、柔和渐变、半透明叠层与克制高光建立统一的科技感。</figcaption></figure>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-10">
+                        <div class="filled-hero mb-9">
+                            <div class="max-w-3xl">
+                                <h2 class="color-section-title mb-3" data-i18n-zh="核心原则" data-i18n-en="Core Principle">核心原则</h2>
+                                <p class="text-gray-500 text-sm leading-relaxed" data-i18n-zh="图标需要建立统一的视觉基因，在轮廓、比例、结构和视觉特征一致的基础上，允许材质、色彩及细节进行适应性变化。" data-i18n-en="Icons need to establish a unified visual DNA. Silhouette, proportions, structure, and defining visual features remain consistent, while material, color, and detail may adapt to each context.">图标需要建立统一的视觉基因，在轮廓、比例、结构和视觉特征一致的基础上，允许材质、色彩及细节进行适应性变化。</p>
+                            </div>
+                            <figure class="evolution-stage"><div class="evolution-flow"><div class="evolution-icon"><img src="assets/examples/iconography/filled-evolution-linear.png" alt="基础线性图标示例"><span data-i18n-zh="基础线性" data-i18n-en="Linear">基础线性</span></div><span class="evolution-arrow">→</span><div class="evolution-icon"><img src="assets/examples/iconography/filled-evolution-monochrome.png" alt="单色面性图标示例"><span data-i18n-zh="单色面性" data-i18n-en="Monochrome filled">单色面性</span></div><span class="evolution-arrow">→</span><div class="evolution-icon"><img src="assets/examples/iconography/filled-evolution-color.png" alt="彩色面性图标示例"><span data-i18n-zh="彩色面性" data-i18n-en="Color-filled">彩色面性</span></div><span class="evolution-arrow">→</span><div class="evolution-icon"><img src="assets/examples/iconography/filled-evolution-material.png" alt="材质面性图标示例"><span data-i18n-zh="材质面性" data-i18n-en="Material filled">材质面性</span></div></div><figcaption class="mt-5 pt-4 text-xs text-gray-500 text-center" data-i18n-zh="四种表现保持同一轮廓、比例与视觉重心" data-i18n-en="All four treatments retain the same silhouette, proportions, and visual center">四种表现保持同一轮廓、比例与视觉重心</figcaption></figure>
+                            <div class="icon-dna-grid">
+                                <article class="icon-dna-card"><span class="icon-dna-tag" data-i18n-zh="基础骨架层 · 固定" data-i18n-en="Foundation · Fixed">基础骨架层 · 固定</span><h3 class="font-semibold text-gray-900" data-i18n-zh="统一设计基因" data-i18n-en="Shared design DNA">统一设计基因</h3><p class="mt-2 text-sm text-gray-500 leading-relaxed" data-i18n-zh="首先识别形，再感知风格。所有渠道应保留决定图标身份的核心结构。" data-i18n-en="Recognize the form before perceiving its style. Every channel retains the defining structure of the icon.">首先识别形，再感知风格。所有渠道应保留决定图标身份的核心结构。</p><div class="icon-dna-items"><span data-i18n-zh="轮廓" data-i18n-en="Silhouette">轮廓</span><span data-i18n-zh="比例" data-i18n-en="Proportion">比例</span><span data-i18n-zh="圆角" data-i18n-en="Corners">圆角</span><span data-i18n-zh="构图" data-i18n-en="Composition">构图</span><span data-i18n-zh="关键特征" data-i18n-en="Defining features">关键特征</span><span data-i18n-zh="层级关系" data-i18n-en="Hierarchy">层级关系</span></div></article>
+                                <article class="icon-dna-card"><span class="icon-dna-tag" data-i18n-zh="渠道表现层 · 可变" data-i18n-en="Channel expression · Variable">渠道表现层 · 可变</span><h3 class="font-semibold text-gray-900" data-i18n-zh="适配场景表达" data-i18n-en="Contextual expression">适配场景表达</h3><p class="mt-2 text-sm text-gray-500 leading-relaxed" data-i18n-zh="差异集中在表现层，并保持圆润、轻盈、柔和、科技与适度立体的共同视觉性格。" data-i18n-en="Variation belongs in the rendering layer while preserving a rounded, light, soft, technological, and moderately dimensional character.">差异集中在表现层，并保持圆润、轻盈、柔和、科技与适度立体的共同视觉性格。</p><div class="icon-dna-items"><span data-i18n-zh="色彩" data-i18n-en="Color">色彩</span><span data-i18n-zh="渐变" data-i18n-en="Gradient">渐变</span><span data-i18n-zh="材质" data-i18n-en="Material">材质</span><span data-i18n-zh="光影" data-i18n-en="Lighting">光影</span><span data-i18n-zh="透明度" data-i18n-en="Opacity">透明度</span><span data-i18n-zh="细节程度" data-i18n-en="Detail level">细节程度</span></div></article>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-10">
+                        <h2 class="color-section-title mb-4" data-i18n-zh="多渠道设计原则" data-i18n-en="Multi-channel Design Principles">多渠道设计原则</h2>
+                        <p class="text-gray-500 mb-8 text-sm leading-relaxed" data-i18n-zh="不同渠道的区分应集中在表现层。可根据渠道属性与使用场景调整以下内容，但变化必须控制在对应边界内，不得改变图标的核心造型基因与家族识别。" data-i18n-en="Channel differentiation should remain in the rendering layer. The following elements may adapt to channel needs and context, but each change must stay within its defined boundary without altering the icon's defining form genes or family recognition.">不同渠道的区分应集中在表现层。可根据渠道属性与使用场景调整以下内容，但变化必须控制在对应边界内，不得改变图标的核心造型基因与家族识别。</p>
+                        <div class="overflow-x-auto">
+                            <table class="variation-table">
+                                <thead><tr><th data-i18n-zh="维度" data-i18n-en="Dimension">维度</th><th data-i18n-zh="可以变化" data-i18n-en="May vary">可以变化</th><th data-i18n-zh="保持统一" data-i18n-en="Keep unified">保持统一</th></tr></thead>
+                                <tbody>
+                                    <tr><td data-i18n-zh="色彩" data-i18n-en="Color">色彩</td><td data-i18n-zh="蓝、紫、粉、青、黄等" data-i18n-en="Blue, purple, pink, cyan, yellow, and more">蓝、紫、粉、青、黄等</td><td data-i18n-zh="整体明度与饱和度气质" data-i18n-en="Overall luminance and saturation character">整体明度与饱和度气质</td></tr>
+                                    <tr><td data-i18n-zh="渐变" data-i18n-en="Gradient">渐变</td><td data-i18n-zh="单向、双色、多色、局部光感" data-i18n-en="Directional, duotone, multicolor, or localized glow">单向、双色、多色、局部光感</td><td data-i18n-zh="渐变保持柔和" data-i18n-en="Soft gradient transitions">渐变保持柔和</td></tr>
+                                    <tr><td data-i18n-zh="材质" data-i18n-en="Material">材质</td><td data-i18n-zh="柔光、半透明、纯色、轻微面性" data-i18n-en="Soft light, translucency, solid color, or subtle faceting">柔光、半透明、纯色、轻微面性</td><td data-i18n-zh="避免过强真实材质" data-i18n-en="Avoid intense physical realism">避免过强真实材质</td></tr>
+                                    <tr><td data-i18n-zh="层次" data-i18n-en="Layering">层次</td><td data-i18n-zh="叠层、透明层、切面" data-i18n-en="Overlays, transparent layers, and facets">叠层、透明层、切面</td><td data-i18n-zh="主体结构不变" data-i18n-en="Stable primary structure">主体结构不变</td></tr>
+                                    <tr><td data-i18n-zh="光影" data-i18n-en="Lighting">光影</td><td data-i18n-zh="柔光、高光、局部亮面" data-i18n-en="Soft light, highlights, and localized bright planes">柔光、高光、局部亮面</td><td data-i18n-zh="光源逻辑基本统一" data-i18n-en="Consistent lighting logic">光源逻辑基本统一</td></tr>
+                                    <tr><td data-i18n-zh="细节" data-i18n-en="Detail">细节</td><td data-i18n-zh="简洁 → 丰富" data-i18n-en="Simple → rich">简洁 → 丰富</td><td data-i18n-zh="不改变核心识别特征" data-i18n-en="Preserve defining features">不改变核心识别特征</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-10">
+                        <h2 class="color-section-title mb-3" data-i18n-zh="风格等级" data-i18n-en="Style Levels">风格等级</h2>
+                        <p class="text-gray-500 mb-8 text-sm leading-relaxed" data-i18n-zh="所有等级共享统一的视觉 DNA。等级只描述表现强度，不代表质量高低，也不改变图标的核心造型基因。" data-i18n-en="All levels share the same visual DNA. Levels describe rendering intensity, not quality, and never alter the icon's defining form genes.">所有等级共享统一的视觉 DNA。等级只描述表现强度，不代表质量高低，也不改变图标的核心造型基因。</p>
+                        <div class="overflow-x-auto">
+                            <table class="style-level-table">
+                                <thead><tr><th data-i18n-zh="风格等级" data-i18n-en="Style level">风格等级</th><th data-i18n-zh="视觉表现" data-i18n-en="Visual treatment">视觉表现</th><th data-i18n-zh="推荐场景" data-i18n-en="Recommended context">推荐场景</th></tr></thead>
+                                <tbody>
+                                    <tr><td><span class="style-level-code">L1</span><span class="style-level-name" data-i18n-zh="基础型" data-i18n-en="Foundation">基础型</span></td><td data-i18n-zh="纯色或少量明暗变化，几乎无材质；以清晰轮廓和高识别度为主。" data-i18n-en="Solid color or minimal tonal variation with almost no material treatment; prioritizes a crisp silhouette and recognition.">纯色或少量明暗变化，几乎无材质；以清晰轮廓和高识别度为主。</td><td data-i18n-zh="信息密集、小尺寸、功能性较强或硬件表现受限的渠道。" data-i18n-en="Information-dense, small-size, highly functional, or hardware-constrained channels.">信息密集、小尺寸、功能性较强或硬件表现受限的渠道。</td></tr>
+                                    <tr><td><span class="style-level-code">L2</span><span class="style-level-name" data-i18n-zh="柔光型" data-i18n-en="Soft light">柔光型</span></td><td data-i18n-zh="双色渐变、柔和光感与少量层次，在清晰度和表现力之间取得平衡。" data-i18n-en="Duotone gradients, soft lighting, and subtle layering balance clarity with expression.">双色渐变、柔和光感与少量层次，在清晰度和表现力之间取得平衡。</td><td data-i18n-zh="默认标准风格，适用于大多数常规界面与主流数字屏幕。" data-i18n-en="The default standard for most interfaces and mainstream digital displays.">默认标准风格，适用于大多数常规界面与主流数字屏幕。</td></tr>
+                                    <tr><td><span class="style-level-code">L3</span><span class="style-level-name" data-i18n-zh="丰富型" data-i18n-en="Rich">丰富型</span></td><td data-i18n-zh="多色渐变、半透明叠层与局部高光，强化科技感、层次与品牌表现。" data-i18n-en="Multicolor gradients, translucent layers, and localized highlights strengthen technological character, depth, and brand expression.">多色渐变、半透明叠层与局部高光，强化科技感、层次与品牌表现。</td><td data-i18n-zh="强调品牌感、视觉吸引力或内容展示的渠道。" data-i18n-en="Channels emphasizing brand presence, visual appeal, or content presentation.">强调品牌感、视觉吸引力或内容展示的渠道。</td></tr>
+                                    <tr><td><span class="style-level-code">L4</span><span class="style-level-name" data-i18n-zh="特征型" data-i18n-en="Signature">特征型</span></td><td data-i18n-zh="加入明显面性、特殊配色或更强材质表达，但仍保持柔和、轻盈与适度立体。" data-i18n-en="Distinct faceting, signature color, or stronger material expression while remaining soft, light, and moderately dimensional.">加入明显面性、特殊配色或更强材质表达，但仍保持柔和、轻盈与适度立体。</td><td data-i18n-zh="特殊场景、主题活动或需要强化个性的渠道，不作为全局默认。" data-i18n-en="Special contexts, campaigns, or channels requiring stronger personality; not a global default.">特殊场景、主题活动或需要强化个性的渠道，不作为全局默认。</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-10">
+                        <h2 class="color-section-title mb-3" data-i18n-zh="避免视觉效果过载" data-i18n-en="Avoid visual-effect overload">避免视觉效果过载</h2>
+                        <p class="text-gray-500 mb-7 text-sm leading-relaxed" data-i18n-zh="以下效果会改变基础图标的视觉重量，并在低分辨率、强环境光或偏视角下损失边界。彩色面性图标可适度建立立体层次，但应保持边缘清晰、效果克制且可降级。" data-i18n-en="These treatments alter visual weight and lose boundaries on low-resolution displays, in bright light, or off-axis. Color-filled icons may use moderate dimensional depth, but edges must remain crisp, effects restrained, and rendering degradable.">以下效果会改变基础图标的视觉重量，并在低分辨率、强环境光或偏视角下损失边界。彩色面性图标可适度建立立体层次，但应保持边缘清晰、效果克制且可降级。</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+                            <article class="issue-card"><div class="issue-stage material"><img src="assets/examples/iconography/filled-material-overload.png" alt="金属强质感材质过载反面示例"></div><div class="p-5"><h3 class="font-semibold text-gray-900 mb-2" data-i18n-zh="材质过载" data-i18n-en="Material overload">材质过载</h3><p class="text-sm text-gray-500 leading-relaxed" data-i18n-zh="避免使用金属、玻璃、钻石等强质感材质，保持图标视觉简洁、克制。" data-i18n-en="Avoid strongly tactile materials such as metal, glass, and diamonds. Keep the icon visually simple and restrained.">避免使用金属、玻璃、钻石等强质感材质，保持图标视觉简洁、克制。</p></div></article>
+                            <article class="issue-card"><div class="issue-stage highlight"><img src="assets/examples/iconography/filled-highlight-overload.png" alt="大面积镜面高光过载反面示例"></div><div class="p-5"><h3 class="font-semibold text-gray-900 mb-2" data-i18n-zh="高光过载" data-i18n-en="Highlight overload">高光过载</h3><p class="text-sm text-gray-500 leading-relaxed" data-i18n-zh="避免大面积镜面高光、光斑与外发光；它们会挤占主体色并造成局部过曝。" data-i18n-en="Avoid large specular highlights, flares, and glow; they displace the main color and cause local bloom.">避免大面积镜面高光、光斑与外发光；它们会挤占主体色并造成局部过曝。</p></div></article>
+                            <article class="issue-card"><div class="issue-stage blur"><img src="assets/examples/iconography/filled-blur-shadow-overload.png" alt="模糊与厚重阴影过载反面示例"></div><div class="p-5"><h3 class="font-semibold text-gray-900 mb-2" data-i18n-zh="模糊与阴影过载" data-i18n-en="Blur and shadow overload">模糊与阴影过载</h3><p class="text-sm text-gray-500 leading-relaxed" data-i18n-zh="不要依靠羽化边缘、厚重投影或柔焦建立层次，小尺寸下轮廓会直接丢失。" data-i18n-en="Do not use feathered edges, heavy shadows, or soft focus for hierarchy; the silhouette disappears at small sizes.">不要依靠羽化边缘、厚重投影或柔焦建立层次，小尺寸下轮廓会直接丢失。</p></div></article>
+                            <article class="issue-card"><div class="issue-stage color"><img src="assets/examples/iconography/filled-color-overload.png" alt="多种高饱和颜色竞争的颜色过载反面示例"></div><div class="p-5"><h3 class="font-semibold text-gray-900 mb-2" data-i18n-zh="颜色过载" data-i18n-en="Color overload">颜色过载</h3><p class="text-sm text-gray-500 leading-relaxed" data-i18n-zh="避免高饱和色等量竞争。主色承担识别，辅助色仅标记关键部件或状态。" data-i18n-en="Avoid equally competing saturated colors. Let the primary color identify the icon and use accents only for key parts or states.">避免高饱和色等量竞争。主色承担识别，辅助色仅标记关键部件或状态。</p></div></article>
+                        </div>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-16">
+                        <h2 class="color-section-title mb-3" data-i18n-zh="交付与验收清单" data-i18n-en="Delivery and validation checklist">交付与验收清单</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 mt-7 text-sm text-gray-600"><p data-i18n-zh="✓ 与原生线性图标的隐喻、朝向、比例和重心一致" data-i18n-en="✓ Matches the native linear icon's metaphor, orientation, proportions, and visual center">✓ 与原生线性图标的隐喻、朝向、比例和重心一致</p><p data-i18n-zh="✓ 缩至最小使用尺寸后，主体与关键负形仍可辨认" data-i18n-en="✓ Subject and defining counters remain recognizable at minimum size">✓ 缩至最小使用尺寸后，主体与关键负形仍可辨认</p><p data-i18n-zh="✓ 高光、模糊、投影与反射均受控，不遮蔽核心轮廓" data-i18n-en="✓ Highlights, blur, shadows, and reflections remain controlled and never obscure the defining silhouette">✓ 高光、模糊、投影与反射均受控，不遮蔽核心轮廓</p><p data-i18n-zh="✓ 去色或色觉差异模拟下，状态仍不混淆" data-i18n-en="✓ States remain distinct in grayscale and color-vision simulations">✓ 去色或色觉差异模拟下，状态仍不混淆</p><p data-i18n-zh="✓ 标准、深色背景与单色版本保持同一核心特征" data-i18n-en="✓ Standard, dark-background, and monochrome versions retain the same defining feature">✓ 标准、深色背景与单色版本保持同一核心特征</p><p data-i18n-zh="✓ 已在目标 TFT / LED 模组的实际亮度、视距与视角下验证" data-i18n-en="✓ Verified on the target TFT / LED module at real brightness, distance, and viewing angles">✓ 已在目标 TFT / LED 模组的实际亮度、视距与视角下验证</p></div>
+                    </section>
+                </div>
+
+                <div id="color-pane" class="icon-pane" role="tabpanel" data-icon-pane="color" hidden>
+                    <section class="glass-panel p-6 sm:p-10 mb-10">
+                        <h2 class="color-section-title mb-3" data-i18n-zh="设计原则" data-i18n-en="Design Principles">设计原则</h2>
+                        <p class="text-gray-500 mb-6 text-sm leading-relaxed" data-i18n-zh="彩色图标以真实物体为基础，通过统一光影、克制色彩和品牌化造型建立温暖、清晰且一致的视觉语言。" data-i18n-en="Color icons begin with real objects and use consistent lighting, restrained color, and branded form to create a warm, clear, and coherent visual language.">彩色图标以真实物体为基础，通过统一光影、克制色彩和品牌化造型建立温暖、清晰且一致的视觉语言。</p>
+                        <div>
+                            <article class="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-3 md:gap-10 py-6"><h3 class="text-sm font-semibold text-gray-900" data-i18n-zh="真实的亲和力" data-i18n-en="Genuine Affinity">真实的亲和力</h3><p class="text-sm text-gray-500 leading-relaxed" data-i18n-zh="图形源于真实生活，并进行适度风格化提炼；避免纯粹抽象符号，在保持辨识度的同时呈现温暖、可触摸的质感。" data-i18n-en="Derive graphics from real life and refine them with moderate stylization. Avoid purely abstract symbols while preserving recognition, warmth, and tactile quality.">图形源于真实生活，并进行适度风格化提炼；避免纯粹抽象符号，在保持辨识度的同时呈现温暖、可触摸的质感。</p></article>
+                            <article class="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-3 md:gap-10 py-6"><h3 class="text-sm font-semibold text-gray-900" data-i18n-zh="一致的光影叙事" data-i18n-en="Consistent Lighting Narrative">一致的光影叙事</h3><p class="text-sm text-gray-500 leading-relaxed" data-i18n-zh="所有图标处于统一的光源环境，以一致的光影方向塑造体积感，并建立品牌视觉世界的秩序与真实性。" data-i18n-en="Place all icons on a unified lighting stage. Consistent light direction shapes volume and establishes order and authenticity.">所有图标处于统一的光源环境，以一致的光影方向塑造体积感，并建立品牌视觉世界的秩序与真实性。</p></article>
+                            <article class="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-3 md:gap-10 py-6"><h3 class="text-sm font-semibold text-gray-900" data-i18n-zh="克制的色彩表达" data-i18n-en="Restrained Color Expression">克制的色彩表达</h3><p class="text-sm text-gray-500 leading-relaxed" data-i18n-zh="色彩服务于品牌，通过标准色板传达层次与情感，确保整体和谐并保持品牌独特性。" data-i18n-en="Color serves the brand. Use the defined palette to communicate hierarchy and emotion while preserving harmony and distinction.">色彩服务于品牌，通过标准色板传达层次与情感，确保整体和谐并保持品牌独特性。</p></article>
+                            <article class="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-3 md:gap-10 py-6"><h3 class="text-sm font-semibold text-gray-900" data-i18n-zh="海尔品牌定位" data-i18n-en="Haier Brand Positioning">海尔品牌定位</h3><p class="text-sm text-gray-500 leading-relaxed" data-i18n-zh="以活力与科技为核心：光影过渡柔和、造型圆润、色彩明快，传递亲和而有活力的科技感。" data-i18n-en="Express vitality and technology through soft lighting transitions, rounded forms, and brighter colors, creating an approachable technological character.">以活力与科技为核心：光影过渡柔和、造型圆润、色彩明快，传递亲和而有活力的科技感。</p></article>
+                        </div>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-10">
+                        <h2 class="color-section-title mb-3" data-i18n-zh="视觉风格基准" data-i18n-en="Visual Style Baseline">视觉风格基准</h2>
+                        <p class="text-gray-500 mb-8 text-sm leading-relaxed" data-i18n-zh="核心彩色图标以 256 × 256pt 为基准尺寸，并在同一品类中保持统一朝向、角标位置和光影条件。" data-i18n-en="Core color icons use a 256 × 256pt baseline and maintain consistent orientation, badge placement, and lighting within each category.">核心彩色图标以 256 × 256pt 为基准尺寸，并在同一品类中保持统一朝向、角标位置和光影条件。</p>
+                        <div class="overflow-x-auto rounded-xl border border-gray-200"><table class="baseline-table min-w-[720px]"><thead><tr><th data-i18n-zh="规范维度" data-i18n-en="Dimension">规范维度</th><th data-i18n-zh="基准值" data-i18n-en="Baseline">基准值</th><th data-i18n-zh="应用说明" data-i18n-en="Usage">应用说明</th></tr></thead><tbody><tr><td data-i18n-zh="画布与尺寸" data-i18n-en="Canvas and Size">画布与尺寸</td><td>256 × 256pt</td><td data-i18n-zh="主体居中并保留稳定安全区" data-i18n-en="Center the subject and preserve a stable safe area">主体居中并保留稳定安全区</td></tr><tr><td data-i18n-zh="图形视角" data-i18n-en="Object View">图形视角</td><td data-i18n-zh="正视 / 轻微四分之三视角" data-i18n-en="Front / slight three-quarter view">正视 / 轻微四分之三视角</td><td data-i18n-zh="同一品类使用一致视角，避免明显透视变形" data-i18n-en="Keep one view per category and avoid obvious distortion">同一品类使用一致视角，避免明显透视变形</td></tr><tr><td data-i18n-zh="光线与色温" data-i18n-en="Light and Temperature">光线与色温</td><td data-i18n-zh="正面柔光 / 冷白光" data-i18n-en="Frontal soft light / cool white">正面柔光 / 冷白光</td><td data-i18n-zh="高光柔和、明暗自然过渡，避免死黑" data-i18n-en="Use soft highlights, natural transitions, and no dead black">高光柔和、明暗自然过渡，避免死黑</td></tr><tr><td data-i18n-zh="阴影与倒影" data-i18n-en="Shadow and Reflection">阴影与倒影</td><td data-i18n-zh="低强度 / 无倒影" data-i18n-en="Low intensity / no reflection">低强度 / 无倒影</td><td data-i18n-zh="阴影仅用于建立体积，不制造悬浮感" data-i18n-en="Use shadows only to define volume, not create floating">阴影仅用于建立体积，不制造悬浮感</td></tr><tr><td data-i18n-zh="辅助角标" data-i18n-en="Secondary Badge">辅助角标</td><td data-i18n-zh="右下角" data-i18n-en="Bottom right">右下角</td><td data-i18n-zh="位置与比例统一，不遮挡主体识别特征" data-i18n-en="Keep position and scale consistent without hiding key features">位置与比例统一，不遮挡主体识别特征</td></tr></tbody></table></div>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-10 text-left">
+                        <h2 class="color-section-title mb-3" data-i18n-zh="光影与体积" data-i18n-en="Light, Shadow and Volume">光影与体积</h2>
+                        <p class="text-gray-500 mb-6 text-sm leading-relaxed" data-i18n-zh="统一采用正面定向柔光，通过柔和过渡控制不同设计人员或 AI 输出的体积感保持一致。" data-i18n-en="Use frontal directional soft light and gentle transitions to keep volume consistent across designers and AI-generated outputs.">统一采用正面定向柔光，通过柔和过渡控制不同设计人员或 AI 输出的体积感保持一致。</p>
+                        <div class="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8 items-center"><img src="assets/examples/iconography/color-icon-lighting-reference.jpg" alt="彩色图标正面定向柔光参考" class="rounded-xl"><div class="space-y-5 text-sm text-gray-500"><div><h3 class="font-medium text-gray-900 mb-1" data-i18n-zh="柔和高光" data-i18n-en="Soft Highlights">柔和高光</h3><p data-i18n-zh="高光位于物体正面上半部分，形态柔和；中间调保持物体固有色。" data-i18n-en="Place soft highlights on the upper front of the object and preserve its inherent color in the midtones.">高光位于物体正面上半部分，形态柔和；中间调保持物体固有色。</p></div><div><h3 class="font-medium text-gray-900 mb-1" data-i18n-zh="自然过渡" data-i18n-en="Natural Transitions">自然过渡</h3><p data-i18n-zh="明暗交界线应自然过渡，反射光可弱化或忽略。" data-i18n-en="Keep the light-dark boundary soft and natural; reflected light may be minimized or omitted.">明暗交界线应自然过渡，反射光可弱化或忽略。</p></div><div><h3 class="font-medium text-gray-900 mb-1" data-i18n-zh="克制对比" data-i18n-en="Restrained Contrast">克制对比</h3><p data-i18n-zh="海尔彩色图标的光影对比度约为 30%，阴影以柔光为主，避免死黑。" data-i18n-en="Haier color icons use approximately 30% lighting contrast with soft shadows and no dead black areas.">海尔彩色图标的光影对比度约为 30%，阴影以柔光为主，避免死黑。</p></div></div></div>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-10 text-left">
+                        <h2 class="color-section-title mb-3" data-i18n-zh="构图与透视" data-i18n-en="Composition and Perspective">构图与透视</h2>
+                        <p class="text-gray-500 mb-6 text-sm leading-relaxed" data-i18n-zh="海尔使用稳定镜头传达清晰直观的感受，同一品类应保持零透视或极微弱透视。" data-i18n-en="Haier uses a stable camera to communicate clarity. Icons within a category should maintain zero or extremely slight perspective.">海尔使用稳定镜头传达清晰直观的感受，同一品类应保持零透视或极微弱透视。</p>
+                        <div class="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8 items-center"><div class="flex justify-center lg:justify-start"><img src="assets/examples/iconography/color-icon-do-perspective.png" alt="构图与透视正确示例"></div><div class="space-y-5 text-sm text-gray-500 text-left"><div><h3 class="font-medium text-gray-900 mb-1" data-i18n-zh="稳定视角" data-i18n-en="Stable View">稳定视角</h3><p data-i18n-zh="核心视角为正面视角或俯视视角：主体与画面平行，避免明显透视变形。" data-i18n-en="Use frontal or top views, keeping the subject parallel to the picture plane and avoiding obvious perspective distortion.">核心视角为正面视角或俯视视角：主体与画面平行，避免明显透视变形。</p></div><div><h3 class="font-medium text-gray-900 mb-1" data-i18n-zh="光影塑造体积" data-i18n-en="Shape Volume with Light">光影塑造体积</h3><p data-i18n-zh="即使需要表现体积，也应依靠光影而不是透视变形；同一品类必须采用一致视角。" data-i18n-en="Express volume through lighting rather than perspective distortion, and use one consistent view within each category.">即使需要表现体积，也应依靠光影而不是透视变形；同一品类必须采用一致视角。</p></div></div></div>
+                    </section>
+
+                    <section class="glass-panel p-6 sm:p-10 mb-10">
+                        <h2 class="color-section-title mb-3" data-i18n-zh="图标剖析与正误示例" data-i18n-en="Icon Analysis: Do and Don't">图标剖析与正误示例</h2>
+                        <p class="text-gray-500 mb-8 text-sm leading-relaxed" data-i18n-zh="以成对示例说明推荐做法与禁止做法；对比光影、造型、色彩和透视，快速判断彩色图标是否符合品牌标准。" data-i18n-en="Paired examples show recommended and prohibited treatments across lighting, form, color, and perspective.">以成对示例说明推荐做法与禁止做法；对比光影、造型、色彩和透视，快速判断彩色图标是否符合品牌标准。</p>
+                        <div class="space-y-8">
+                            <div><h3 class="text-base font-medium text-gray-900 mb-4" data-i18n-zh="光影对比" data-i18n-en="Lighting Contrast">光影对比</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><article class="example-card"><div class="example-label do">Do</div><div class="aspect-[4/3] p-5 flex items-center justify-center"><img src="assets/examples/iconography/color-icon-lighting-reference.jpg" alt="柔和光影正确示例" class="max-h-full max-w-full object-contain rounded-lg"></div><p class="px-5 pb-5 text-sm text-gray-500" data-i18n-zh="使用正面柔光与自然明暗过渡，阴影保持通透。" data-i18n-en="Use frontal soft light, natural transitions, and translucent shadows.">使用正面柔光与自然明暗过渡，阴影保持通透。</p></article><article class="example-card"><div class="example-label dont">Don't</div><div class="aspect-[4/3] p-5 flex items-center justify-center"><img src="assets/examples/iconography/color-icon-error-contrast.png" alt="高对比度错误示例" class="max-h-full max-w-full object-contain"></div><p class="px-5 pb-5 text-sm text-gray-500" data-i18n-zh="不要使用过强对比或死黑阴影。" data-i18n-en="Do not use excessive contrast or dead black shadows.">不要使用过强对比或死黑阴影。</p></article></div></div>
+                            <div><h3 class="text-base font-medium text-gray-900 mb-4" data-i18n-zh="造型与材质" data-i18n-en="Form and Material">造型与材质</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><article class="example-card"><div class="example-label do">Do</div><div class="aspect-[4/3] p-5 flex items-center justify-center"><img src="assets/examples/iconography/color-icon-do-material.png" alt="统一造型与材质正确示例"></div><p class="px-5 pb-5 text-sm text-gray-500" data-i18n-zh="保持圆润造型、克制反射与统一材质语言。" data-i18n-en="Keep rounded forms, restrained reflections, and consistent materials.">保持圆润造型、克制反射与统一材质语言。</p></article><article class="example-card"><div class="example-label dont">Don't</div><div class="aspect-[4/3] p-5 flex items-center justify-center"><img src="assets/examples/iconography/color-icon-error-style.png" alt="风格变化错误示例"></div><p class="px-5 pb-5 text-sm text-gray-500" data-i18n-zh="不要混用不同风格或制造不真实的材质。" data-i18n-en="Do not mix styles or create unrealistic materials.">不要混用不同风格或制造不真实的材质。</p></article></div></div>
+                            <div><h3 class="text-base font-medium text-gray-900 mb-4" data-i18n-zh="色彩表达" data-i18n-en="Color Expression">色彩表达</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><article class="example-card"><div class="example-label do">Do</div><div class="aspect-[4/3] p-5 flex items-center justify-center"><img src="assets/examples/iconography/color-icon-do-color.png" alt="克制色彩正确示例"></div><p class="px-5 pb-5 text-sm text-gray-500" data-i18n-zh="使用品牌色板控制主色、辅助色与高光层级。" data-i18n-en="Use the brand palette to control primary, secondary, and highlight colors.">使用品牌色板控制主色、辅助色与高光层级。</p></article><article class="example-card"><div class="example-label dont">Don't</div><div class="aspect-[4/3] p-5 flex items-center justify-center"><img src="assets/examples/iconography/color-icon-error-saturation.png" alt="色彩饱和度错误示例"></div><p class="px-5 pb-5 text-sm text-gray-500" data-i18n-zh="不要使用过高饱和度或互相争抢的颜色。" data-i18n-en="Do not use excessive saturation or competing colors.">不要使用过高饱和度或互相争抢的颜色。</p></article></div></div>
+                            <div><h3 class="text-base font-medium text-gray-900 mb-4" data-i18n-zh="构图与透视" data-i18n-en="Composition and Perspective">构图与透视</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><article class="example-card"><div class="example-label do">Do</div><div class="aspect-[4/3] p-5 flex items-center justify-center"><img src="assets/examples/iconography/color-icon-do-perspective.png" alt="稳定透视正确示例"></div><p class="px-5 pb-5 text-sm text-gray-500" data-i18n-zh="主体与画面保持平行，同一品类采用一致视角。" data-i18n-en="Keep the subject parallel to the canvas and use one view per category.">主体与画面保持平行，同一品类采用一致视角。</p></article><article class="example-card"><div class="example-label dont">Don't</div><div class="aspect-[4/3] p-5 flex items-center justify-center"><img src="assets/examples/iconography/color-icon-error-perspective.png" alt="透视变化错误示例"></div><p class="px-5 pb-5 text-sm text-gray-500" data-i18n-zh="不要使用夸张透视或在同组中切换视角。" data-i18n-en="Do not use exaggerated perspective or change views within a set.">不要使用夸张透视或在同组中切换视角。</p></article></div></div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="weather-pane" class="icon-pane" role="tabpanel" data-icon-pane="weather" hidden>
+                    <section class="mb-16">
+                        <h2 class="text-2xl font-bold mb-3 text-gray-900" data-i18n-zh="天气图标库" data-i18n-en="Weather Icon Library">天气图标库</h2>
+                        <p class="text-gray-500 mb-8 text-sm leading-relaxed" data-i18n-zh="天气图标用于环境与气象信息表达，应保持统一的光源方向、体积关系、材质细节和色彩层级。每组预留三排，每排 15 个位置。" data-i18n-en="Weather icons communicate environmental and meteorological information with consistent lighting, volume, material detail, and color hierarchy. Each group reserves three rows of fifteen slots.">天气图标用于环境与气象信息表达，应保持统一的光源方向、体积关系、材质细节和色彩层级。每组预留三排，每排 15 个位置。</p>
+                        <div class="space-y-10">
+                            <div><h3 class="text-sm font-semibold text-gray-900 mb-4" data-i18n-zh="天气图标组 01" data-i18n-en="Weather Icon Group 01">天气图标组 01</h3><div class="weather-library-wrap"><div class="weather-library" data-icon-library="weather-1" data-count="45"></div></div></div>
+                            <div><h3 class="text-sm font-semibold text-gray-900 mb-4" data-i18n-zh="天气图标组 02" data-i18n-en="Weather Icon Group 02">天气图标组 02</h3><div class="weather-library-wrap"><div class="weather-library" data-icon-library="weather-2" data-count="45"></div></div></div>
+                        </div>
+                    </section>
+                </div>
+
+                <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.querySelectorAll('[data-icon-library]').forEach((library) => {
+            const count = Number(library.dataset.count || 0);
+            const fragment = document.createDocumentFragment();
+            for (let index = 1; index <= count; index += 1) {
+                const slot = document.createElement('div');
+                slot.className = 'icon-slot';
+                const category = ['linear', 'filled'].includes(library.dataset.iconLibrary) ? '通用' : '';
+                slot.dataset.iconName = `${category} ${String(index).padStart(2, '0')}`.trim();
+                slot.setAttribute('aria-label', `Icon slot ${index}`);
+                slot.innerHTML = `<span class="icon-slot-mark" aria-hidden="true">+</span><span class="icon-slot-label">${String(index).padStart(2, '0')}</span>`;
+                fragment.appendChild(slot);
+            }
+            library.appendChild(fragment);
+        });
+
+        document.querySelectorAll('[data-icon-filter]').forEach((filter) => {
+            const library = document.querySelector(`[data-icon-library="${filter.dataset.iconFilter}"]`);
+            const buttons = Array.from(filter.querySelectorAll('[data-icon-category]'));
+            const search = filter.querySelector('[data-icon-search]');
+            let activeCategory = '通用';
+
+            const applyIconFilter = () => {
+                const keyword = search.value.trim().toLowerCase();
+                let results = library.parentElement.querySelector('.icon-search-results');
+                if (!results) {
+                    results = document.createElement('div');
+                    results.className = 'icon-library icon-search-results';
+                    results.hidden = true;
+                    library.insertAdjacentElement('afterend', results);
+                }
+
+                library.hidden = Boolean(keyword);
+                results.hidden = !keyword;
+                results.replaceChildren();
+                if (!keyword) return;
+
+                const matches = Array.from(library.querySelectorAll('.icon-slot')).filter((slot) =>
+                    slot.dataset.iconName.toLowerCase().includes(keyword)
+                );
+                if (matches.length) matches.forEach((slot) => results.appendChild(slot.cloneNode(true)));
+                else {
+                    const empty = document.createElement('div');
+                    empty.className = 'icon-filter-empty';
+                    empty.textContent = '暂无匹配图标';
+                    results.appendChild(empty);
+                }
+            };
+
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    activeCategory = button.dataset.iconCategory;
+                    buttons.forEach((item) => item.classList.toggle('active', item === button));
+                    library.querySelectorAll('.icon-slot').forEach((slot, index) => {
+                        slot.dataset.iconName = `${activeCategory} ${String(index + 1).padStart(2, '0')}`;
+                        slot.setAttribute('aria-label', `${activeCategory} icon slot ${index + 1}`);
+                    });
+                    applyIconFilter();
+                });
+            });
+            search.addEventListener('input', applyIconFilter);
+            applyIconFilter();
+        });
+
+        const iconTabs = Array.from(document.querySelectorAll('[data-icon-tab]'));
+        const iconPanes = Array.from(document.querySelectorAll('[data-icon-pane]'));
+        iconTabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.iconTab;
+                iconTabs.forEach((item) => {
+                    const selected = item === tab;
+                    item.classList.toggle('active', selected);
+                    item.setAttribute('aria-selected', String(selected));
+                });
+                iconPanes.forEach((pane) => {
+                    const selected = pane.dataset.iconPane === target;
+                    pane.classList.toggle('active', selected);
+                    pane.hidden = !selected;
+                });
+            });
+        });
+    </script>
+    <script src="haier-nav.js"></script>
+</body>
+</html>

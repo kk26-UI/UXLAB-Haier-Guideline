@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haier Design | 组件</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --brand-primary:#2283E2; --brand-light:#E5F0FF; --text-main:#1D1D1F; --text-secondary:#86868B; --glass-bg:rgba(255,255,255,.6); --glass-border:rgba(255,255,255,.4); }
+        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; background:#F5F7FA; color:var(--text-main); overflow-x:hidden; }
+        .aura-background { position:fixed; inset:0; z-index:-1; overflow:hidden; background:#F4F7FB; }
+        .aura-blob { position:absolute; filter:blur(120px); opacity:.6; animation:float 20s infinite ease-in-out alternate; }
+        .aura-blob-1 { top:-10%; left:-10%; width:50vw; height:50vw; background:#C4E0FF; }
+        .aura-blob-2 { bottom:-20%; right:-10%; width:60vw; height:60vw; background:#E0E8FF; animation-delay:-5s; }
+        .aura-blob-3 { top:40%; left:60%; width:40vw; height:40vw; background:#E8F4FF; animation-delay:-10s; }
+        @keyframes float { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(10%,15%) scale(1.1)} }
+        .glass-panel { background:var(--glass-bg); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid var(--glass-border); box-shadow:0 8px 32px rgba(0,0,0,.04); border-radius:24px; }
+        .sidebar-nav-item { transition:all .3s ease; border-left:3px solid transparent; }
+        .sidebar-nav-item.active { color:var(--brand-primary); font-weight:600; border-left-color:var(--brand-primary); background:linear-gradient(90deg,var(--brand-light) 0%,transparent 100%); }
+        .haier-logo-container { display:flex; align-items:center; justify-content:center; background-color:#2283E2; color:white; font-family:Arial,Helvetica,sans-serif; font-weight:bold; border-radius:8px; }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="aura-background"><div class="aura-blob aura-blob-1"></div><div class="aura-blob aura-blob-2"></div><div class="aura-blob aura-blob-3"></div></div>
+    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开目录"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button></header>
+    <div class="flex h-screen pt-16 md:pt-0">
+        <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+        <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+        <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
+            <div class="max-w-[1200px] mx-auto pb-24">
+                <div id="component-page"></div>
+                <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+            </div>
+        </main>
+    </div>
+    <script src="component-page.js"></script>
+    <script src="haier-nav.js"></script>
+</body>
+</html>

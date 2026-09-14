@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haier Design | 设计体验原则</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-primary: #2283E2;
+            --brand-light: #E5F0FF;
+            --text-main: #1D1D1F;
+            --text-secondary: #86868B;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #F5F7FA;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* 弥散光晕动画背景 */
+        .aura-background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: #F4F7FB;
+        }
+        .aura-blob {
+            position: absolute;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .aura-blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #C4E0FF; animation-delay: 0s; }
+        .aura-blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: #E0E8FF; animation-delay: -5s; }
+        .aura-blob-3 { top: 40%; left: 60%; width: 40vw; height: 40vw; background: #E8F4FF; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
+        }
+
+        /* 磨玻璃质感卡片核心类 */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            border-radius: 24px;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar-nav-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-nav-item.active {
+            color: var(--brand-primary);
+            font-weight: 600;
+            border-left-color: var(--brand-primary);
+            background: linear-gradient(90deg, var(--brand-light) 0%, transparent 100%);
+        }
+
+        /* 代码与Token块 */
+        .token-block {
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        
+        /* 隐藏原生滚动条，美化 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+        /* Haier 纯文本 Logo 的基础样式 */
+        .haier-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2283E2; /* 海尔蓝 */
+            color: white;
+            font-family: Arial, Helvetica, sans-serif; /* 使用最基础的无衬线字体 */
+            font-weight: bold;
+            border-radius: 8px; /* 轻微圆角 */
+        }
+
+        .principle-image-placeholder {
+            aspect-ratio: 16 / 9;
+            min-height: 140px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(229, 231, 235, 0.6);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+
+        .principle-image-placeholder img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .tft-principle-visual{position:relative;padding:10px 10px 16px;aspect-ratio:16/9;background-color:#F4F9FE;background-image:linear-gradient(rgba(34,131,226,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(34,131,226,.07) 1px,transparent 1px);background-size:24px 24px;border:1px solid rgba(34,131,226,.32);border-radius:16px;box-shadow:0 10px 26px rgba(41,83,124,.08)}
+        .tft-principle-visual img{border-radius:10px;border:1px solid rgba(151,175,199,.28)}
+        .tft-principle-visual:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:#10B981}
+        .tft-principle-visual.bad:after{background:#FF4D4F}
+        .tft-principle-visual:before{content:"✓";position:absolute;z-index:2;left:12px;bottom:8px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#10B981;color:#fff;font-size:13px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+        .tft-principle-visual.bad:before{content:"×";background:#FF4D4F}
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="aura-background">
+        <div class="aura-blob aura-blob-1"></div>
+        <div class="aura-blob aura-blob-2"></div>
+        <div class="aura-blob aura-blob-3"></div>
+    </div>
+    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">
+                Haier
+            </div>
+            <h1 class="font-bold text-lg">Haier Design</h1>
+        </div>
+        <button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </header>
+
+    <div class="flex h-screen pt-16 md:pt-0">
+<aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+        <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
+            <div class="max-w-[1200px] mx-auto pb-24">
+                <div class="hidden md:flex items-center mb-8">
+                    <a href="haier_os_design_system.html" class="px-4 py-2 bg-white/50 hover:bg-white/90 rounded-xl transition-colors flex items-center text-gray-700 shadow-sm border border-gray-200/50 backdrop-blur-md">
+                        <span class="text-sm font-semibold" data-i18n-zh="返回主页" data-i18n-en="Home">返回主页</span>
+                    </a>
+                </div>
+                <section class="mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900" data-i18n-zh="设计体验原则" data-i18n-en="User Experience Principles">设计体验原则</h1>
+                    <p class="text-lg text-text-secondary max-w-3xl leading-relaxed">此部分作为 UI 设计争议的最高决策依据，帮助团队在复杂取舍中保持一致判断。</p>
+                </section>
+
+                <hr class="border-t border-black/5 mb-8">
+                <section id="principles-ux" class="mb-16 scroll-mt-10">
+                    <div class="glass-panel p-6 md:p-10 mb-10">
+                        <article class="mb-12 last:mb-0">
+                            <h2 class="text-xl font-bold text-gray-900 tracking-tight mb-4">Less is more</h2>
+                            <p class="text-xs md:text-sm text-gray-600 leading-loose max-w-4xl">
+                                秉持“少即是多”的设计哲学，家电的核心价值在于让用户以最低的关注度高效完成任务。优秀的设计应当是隐形的。系统需通过多模态传感器与场景算法精准预测用户意图，将复杂的底层机器运转逻辑封装于极简的交互架构中。用最少的操作步骤与视觉干预，释放最大的服务效能，最大化降低用户的认知与操作成本。
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div class="principle-image-placeholder tft-principle-visual good"><img src="assets/examples/design-principles/less-is-more-1.png" alt="Less is more 推荐示例：聚焦核心任务与状态"></div>
+                                <div class="principle-image-placeholder tft-principle-visual bad"><img src="assets/examples/design-principles/less-is-more-2.png" alt="Less is more 不推荐示例：信息与控制项过度堆叠"></div>
+                            </div>
+                        </article>
+                        <article class="mb-12 last:mb-0">
+                            <h2 class="text-xl font-bold text-gray-900 tracking-tight mb-4">信息克制</h2>
+                            <p class="text-xs md:text-sm text-gray-600 leading-loose max-w-4xl">
+                                界面设计应保持视觉焦点的绝对专注。在任何场景下，仅优先呈现与当前任务最关键的数据和核心操作。坚决避免将所有功能平铺堆砌在同一视区，通过清晰的主次划分，有效降低界面的视觉噪音与用户的决策负担。
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div class="principle-image-placeholder tft-principle-visual good"><img src="assets/examples/design-principles/information-restraint-1.png" alt="信息克制推荐示例：仅呈现当前任务关键信息"></div>
+                                <div class="principle-image-placeholder tft-principle-visual bad"><img src="assets/examples/design-principles/information-restraint-2.png" alt="信息克制不推荐示例：展示过多低优先级信息"></div>
+                            </div>
+                        </article>
+                        <article class="mb-12 last:mb-0">
+                            <h2 class="text-xl font-bold text-gray-900 tracking-tight mb-4">允许犯错</h2>
+                            <p class="text-xs md:text-sm text-gray-600 leading-loose max-w-4xl">
+                                构建安全的系统探索环境。所有的破坏性或关键性操作均需提供清晰的状态预警与非破坏性的回退机制。通过降低误操作的不可逆成本，消除用户在交互过程中的认知负担与焦虑感。
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div class="principle-image-placeholder tft-principle-visual good"><img src="assets/examples/design-principles/error-tolerance-1.png" alt="允许犯错推荐示例：在当前任务内保留清晰返回路径"></div>
+                                <div class="principle-image-placeholder tft-principle-visual bad"><img src="assets/examples/design-principles/error-tolerance-2.png" alt="允许犯错不推荐示例：多个任务上下文混杂"></div>
+                            </div>
+                        </article>
+                        <article class="mb-12 last:mb-0">
+                            <h2 class="text-xl font-bold text-gray-900 tracking-tight mb-4">一致性</h2>
+                            <p class="text-xs md:text-sm text-gray-600 leading-loose max-w-4xl">
+                                跨端认知要保持一致，系统图标、语义色彩、操控手势等必须具备唯一且确定的含义。同时全局性的底层视觉基建不可随意篡改，各产业在接入规范时，必须严格调用基础平台下的视觉构建块。
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div class="principle-image-placeholder"><img src="assets/examples/design-principles/consistency-1.png" alt="一致性推荐示例：跨设备保持统一视觉语言"></div>
+                                <div class="principle-image-placeholder"><img src="assets/examples/design-principles/consistency-2.png" alt="一致性不推荐示例：跨设备界面语言不统一"></div>
+                            </div>
+                        </article>
+                        <article class="mb-12 last:mb-0">
+                            <h2 class="text-xl font-bold text-gray-900 tracking-tight mb-4">多维协同</h2>
+                            <p class="text-xs md:text-sm text-gray-600 leading-loose max-w-4xl">
+                                在体验上，用户不应该被困在单一的屏幕玻璃内。界面的视觉内容需要向物理环境延伸，保证硬件如实体灯带、旋钮等以及触觉反馈或系统音效之间的无缝联动，避免多维之间各行其事，割裂用户体验。
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div class="principle-image-placeholder"><img src="assets/examples/design-principles/multidimensional-collaboration-1.png" alt="多维协同推荐示例：视觉状态与实体灯光语义一致"></div>
+                                <div class="principle-image-placeholder"><img src="assets/examples/design-principles/multidimensional-collaboration-2.png" alt="多维协同不推荐示例：视觉状态与实体灯光语义冲突"></div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+            </div>
+        </main>
+    </div>
+
+    <script src="haier-nav.js"></script>
+    <script>
+        // 左侧导航由 haier-nav.js 统一渲染与管理。
+    </script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-zh="Haier Design | 色彩规范" data-i18n-en="Haier Design | Color Palette">Haier Design | 色彩规范</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-primary: #2283E2;
+            --brand-light: #E5F0FF;
+            --text-main: #1D1D1F;
+            --text-secondary: #86868B;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #F5F7FA;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* 弥散光晕动画背景 */
+        .aura-background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: #F4F7FB;
+        }
+        .aura-blob {
+            position: absolute;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .aura-blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #C4E0FF; animation-delay: 0s; }
+        .aura-blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: #E0E8FF; animation-delay: -5s; }
+        .aura-blob-3 { top: 40%; left: 60%; width: 40vw; height: 40vw; background: #E8F4FF; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            border-radius: 24px;
+        }
+
+        .color-swatch-container {
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .color-swatch {
+            height: 48px; /* 统一所有色块高度为 48px */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            font-size: 0.85rem;
+            font-family: monospace;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.02);
+            z-index: 10;
+            box-shadow: 0 0 12px rgba(0,0,0,0.15);
+        }
+        .swatch-hex { margin-left: auto; opacity: 0; transform: translateX(6px); font-size: 11px; font-weight: 600; transition: opacity .18s ease, transform .18s ease; }
+        .color-swatch:hover .swatch-hex, .color-swatch:focus-visible .swatch-hex { opacity: 1; transform: translateX(0); }
+
+        /* 自动化 10 级色阶推导引擎 (使用现代 CSS color-mix) */
+        .shade-1 { background-color: color-mix(in srgb, var(--base-color) 10%, #ffffff); color: #1D1D1F; }
+        .shade-2 { background-color: color-mix(in srgb, var(--base-color) 25%, #ffffff); color: #1D1D1F; }
+        .shade-3 { background-color: color-mix(in srgb, var(--base-color) 40%, #ffffff); color: #1D1D1F; }
+        .shade-4 { background-color: color-mix(in srgb, var(--base-color) 60%, #ffffff); color: #1D1D1F; }
+        .shade-5 { background-color: color-mix(in srgb, var(--base-color) 80%, #ffffff); color: rgba(0,0,0,0.9); }
+        .shade-6 { background-color: var(--base-color); color: #ffffff; font-weight: bold; font-size: 0.95rem; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .shade-7 { background-color: color-mix(in srgb, var(--base-color) 80%, #000000); color: #ffffff; }
+        .shade-8 { background-color: color-mix(in srgb, var(--base-color) 60%, #000000); color: #ffffff; }
+        .shade-9 { background-color: color-mix(in srgb, var(--base-color) 40%, #000000); color: #ffffff; }
+        .shade-10 { background-color: color-mix(in srgb, var(--base-color) 25%, #000000); color: #ffffff; }
+
+        /* 复制提示 Toast */
+        .copy-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+        }
+        .copy-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* 隐藏原生滚动条，美化 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+        .haier-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-primary);
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .sidebar-nav-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-nav-item.active {
+            color: var(--brand-primary);
+            font-weight: 600;
+            border-left-color: var(--brand-primary);
+            background: linear-gradient(90deg, var(--brand-light) 0%, transparent 100%);
+        }
+
+        .usage-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+        .usage-card { background: rgba(255,255,255,.72); border: 1px solid rgba(203,213,225,.72); border-radius: 16px; padding: 18px; }
+        .usage-card h4 { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; font-size: 14px; font-weight: 700; color: #1f2937; }
+        .usage-card p { color: #667085; font-size: 13px; line-height: 1.65; }
+        .color-dot { width: 12px; height: 12px; border-radius: 4px; flex: 0 0 auto; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+        .principle-card { background: none; border: 0; border-radius: 0; padding: 0; box-shadow: none; }
+        .principle-number { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; background: #2283E2; color: white; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
+        .semantic-card-body { padding: 18px; }
+        .semantic-card-body p { color: #667085; font-size: 13px; line-height: 1.65; }
+        .palette-guidance { min-height: 99px; padding: 12px 14px; background: rgba(255,255,255,.92); border-bottom: 1px solid #eef2f7; }
+        .palette-guidance strong { display: block; margin-bottom: 6px; color: #27364a; font-size: 12px; line-height: 1.4; }
+        .palette-guidance p { color: #667085; font-size: 11px; line-height: 1.55; }
+        @media (max-width: 720px) { .usage-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="aura-background">
+        <div class="aura-blob aura-blob-1"></div>
+        <div class="aura-blob aura-blob-2"></div>
+        <div class="aura-blob aura-blob-3"></div>
+    </div>
+    <div id="copy-toast" class="copy-toast">已复制色值到剪贴板</div>
+    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center border-b border-white/50">
+        <div class="flex items-center">
+            <a href="haier_os_design_system.html" class="mr-3 p-2 bg-black/5 hover:bg-black/10 rounded-lg transition-colors flex items-center text-gray-700">
+            </a>
+            <div class="haier-logo-container w-8 h-8 mr-2 text-[12px]">Haier</div>
+            <h1 class="font-bold text-base text-gray-800">色彩规范</h1>
+        </div>
+        <button id="mobile-menu-btn" class="p-2 bg-black/5 hover:bg-black/10 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </header>
+
+    <div class="flex h-screen pt-16 md:pt-0">
+<aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+
+        <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
+            <div class="max-w-[1200px] mx-auto pb-24">
+                
+                <div class="hidden md:flex items-center mb-8">
+                    <a href="haier_os_design_system.html" class="px-4 py-2 bg-white/50 hover:bg-white/90 rounded-xl transition-colors flex items-center text-gray-700 shadow-sm border border-gray-200/50 backdrop-blur-md">
+                        <span class="text-sm font-semibold" data-i18n-zh="返回主页" data-i18n-en="Home">返回主页</span>
+                    </a>
+                </div>
+
+                <section class="mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900" data-i18n-zh="色彩" data-i18n-en="Color">色彩</h1>
+                    <p class="text-lg text-text-secondary max-w-3xl leading-relaxed">系统色彩用于统一品牌识别、状态反馈和跨设备视觉层级，点击色块可复制对应色值。</p>
+                </section>
+
+                <section class="glass-panel p-6 md:p-10 mb-10">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-3 text-gray-900" data-i18n-zh="色彩使用原则" data-i18n-en="Color Usage Principles">色彩使用原则</h2>
+                            <p class="text-sm text-gray-500 leading-6 max-w-3xl" data-i18n-zh="颜色必须先承担明确角色，再进入具体界面。品牌色建立识别，辅助色区分类别，中性色组织层级，功能色传达状态。" data-i18n-en="Assign every color a clear role before applying it. Brand colors build recognition, secondary colors distinguish categories, neutrals organize hierarchy, and semantic colors communicate status.">颜色必须先承担明确角色，再进入具体界面。品牌色建立识别，辅助色区分类别，中性色组织层级，功能色传达状态。</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="principle-card"><div class="principle-number">01</div><h3 class="font-bold text-gray-900 mb-2" data-i18n-zh="角色唯一" data-i18n-en="One Role per Color">角色唯一</h3><p class="text-sm text-gray-600 leading-relaxed" data-i18n-zh="同一界面中，相同颜色应表达相同含义。禁止将危险红同时用于装饰或普通分类。" data-i18n-en="Within one interface, the same color must carry the same meaning. Never reuse danger red for decoration or ordinary categories.">同一界面中，相同颜色应表达相同含义。禁止将危险红同时用于装饰或普通分类。</p></div>
+                        <div class="principle-card"><div class="principle-number">02</div><h3 class="font-bold text-gray-900 mb-2" data-i18n-zh="主次克制" data-i18n-en="Controlled Emphasis">主次克制</h3><p class="text-sm text-gray-600 leading-relaxed" data-i18n-zh="单屏只保留一个主强调色。大面积背景优先使用浅色阶，核心操作使用基准色。" data-i18n-en="Keep one primary accent per screen. Use light shades for large surfaces and the base shade for primary actions.">单屏只保留一个主强调色。大面积背景优先使用浅色阶，核心操作使用基准色。</p></div>
+                        <div class="principle-card"><div class="principle-number">03</div><h3 class="font-bold text-gray-900 mb-2" data-i18n-zh="不只依赖颜色" data-i18n-en="Never Rely on Color Alone">不只依赖颜色</h3><p class="text-sm text-gray-600 leading-relaxed" data-i18n-zh="状态必须同时配合文字、图标、形状或灯光节奏，确保色觉差异和低色彩硬件仍可识别。" data-i18n-en="Pair status color with text, icon, shape, or lighting rhythm so it remains recognizable with color-vision differences and low-color hardware.">状态必须同时配合文字、图标、形状或灯光节奏，确保色觉差异和低色彩硬件仍可识别。</p></div>
+                        <div class="principle-card"><div class="principle-number">04</div><h3 class="font-bold text-gray-900 mb-2" data-i18n-zh="颜色校准" data-i18n-en="Color Calibration">颜色校准</h3><p class="text-sm text-gray-600 leading-relaxed" data-i18n-zh="TFT、LED 与实体灯的亮度和色域不同，最终色值必须在真实材质、亮度和观看距离下校准。" data-i18n-en="TFT, LED, and physical lights differ in brightness and gamut. Calibrate final colors on real materials at the intended brightness and viewing distance.">TFT、LED 与实体灯的亮度和色域不同，最终色值必须在真实材质、亮度和观看距离下校准。</p></div>
+                    </div>
+                </section>
+                <section class="glass-panel p-6 md:p-10 mb-10">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-900" data-i18n-zh="1. 主品牌色" data-i18n-en="1. Primary Color">1. 主品牌色</h2>
+                    <p class="text-gray-500 mb-6 text-sm">主品牌色定义了 Haier Design 的核心视觉识别，并为重点操作与品牌场景提供统一基准。</p>
+
+                    <div>
+                        <div class="text-white rounded-2xl p-6 sm:p-8 mb-8 shadow-lg shadow-blue-500/20 relative overflow-hidden group cursor-pointer" style="background-color: #2283E2;" onclick="copyColor('#2283E2')">
+                            <div class="absolute -right-10 -top-10 w-48 h-48 bg-white rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
+                            <div class="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between">
+                                <div>
+                                    <h3 class="text-3xl font-bold mb-1">Haier Blue</h3>
+                                    <p class="text-blue-100 text-sm">主品牌色</p>
+                                </div>
+                                <div class="mt-4 sm:mt-0 text-right">
+                                    <div class="text-2xl font-mono font-bold">#2283E2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="color-swatch-container">
+                                <div class="color-swatch text-gray-900" style="background-color: #E8F3FF;" onclick="copyColor('#E8F3FF')"><span>Blue-1 (最浅)</span><span>#E8F3FF</span></div>
+                                <div class="color-swatch text-gray-900" style="background-color: #CBE4FF;" onclick="copyColor('#CBE4FF')"><span>Blue-2</span><span>#CBE4FF</span></div>
+                                <div class="color-swatch text-gray-900" style="background-color: #9ECAFF;" onclick="copyColor('#9ECAFF')"><span>Blue-3</span><span>#9ECAFF</span></div>
+                                <div class="color-swatch text-gray-900" style="background-color: #6EADFF;" onclick="copyColor('#6EADFF')"><span>Blue-4</span><span>#6EADFF</span></div>
+                                <div class="color-swatch text-gray-900" style="background-color: #4292FF;" onclick="copyColor('#4292FF')"><span>Blue-5</span><span>#4292FF</span></div>
+                            </div>
+                            <div class="color-swatch-container">
+                                <div class="color-swatch text-white font-bold" style="background-color: #2283E2;" onclick="copyColor('#2283E2')"><span>Blue-6 (主色)</span><span>#2283E2</span></div>
+                                <div class="color-swatch text-white" style="background-color: #1A67B8;" onclick="copyColor('#1A67B8')"><span>Blue-7</span><span>#1A67B8</span></div>
+                                <div class="color-swatch text-white" style="background-color: #124D8F;" onclick="copyColor('#124D8F')"><span>Blue-8</span><span>#124D8F</span></div>
+                                <div class="color-swatch text-white" style="background-color: #0B3566;" onclick="copyColor('#0B3566')"><span>Blue-9</span><span>#0B3566</span></div>
+                                <div class="color-swatch text-white" style="background-color: #051F3D;" onclick="copyColor('#051F3D')"><span>Blue-10</span><span>#051F3D</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="usage-grid mt-6">
+                        <div class="usage-card"><h4><span class="color-dot bg-[#E8F3FF]"></span><span data-i18n-zh="Blue-1–2 · 大面积承载" data-i18n-en="Blue-1–2 · Large Surfaces">Blue-1–2 · 大面积承载</span></h4><p data-i18n-zh="用于品牌浅背景、选中区域底色、信息提示容器和环境光晕。不得承担关键文字或单独表达状态。" data-i18n-en="Use for light brand backgrounds, selected-area fills, informational containers, and ambient glows. Do not use for key text or as the only status signal.">用于品牌浅背景、选中区域底色、信息提示容器和环境光晕。不得承担关键文字或单独表达状态。</p></div>
+                        <div class="usage-card"><h4><span class="color-dot bg-[#4292FF]"></span><span data-i18n-zh="Blue-3–5 · 交互反馈" data-i18n-en="Blue-3–5 · Interaction Feedback">Blue-3–5 · 交互反馈</span></h4><p data-i18n-zh="用于悬停、聚焦、选中描边、进度和轻量强调。相邻状态至少跨一个色阶，避免状态差异过弱。" data-i18n-en="Use for hover, focus, selected borders, progress, and light emphasis. Separate adjacent states by at least one shade.">用于悬停、聚焦、选中描边、进度和轻量强调。相邻状态至少跨一个色阶，避免状态差异过弱。</p></div>
+                        <div class="usage-card"><h4><span class="color-dot bg-[#2283E2]"></span><span data-i18n-zh="Blue-6 · 主操作与品牌识别" data-i18n-en="Blue-6 · Primary Action & Brand">Blue-6 · 主操作与品牌识别</span></h4><p data-i18n-zh="用于页面唯一主按钮、关键开关开启态、当前导航和品牌标识。避免在同一视窗出现多个同权重蓝色焦点。" data-i18n-en="Use for the single primary button, key switch-on states, current navigation, and brand marks. Avoid multiple equal-weight blue focal points in one viewport.">用于页面唯一主按钮、关键开关开启态、当前导航和品牌标识。避免在同一视窗出现多个同权重蓝色焦点。</p></div>
+                        <div class="usage-card"><h4><span class="color-dot bg-[#124D8F]"></span><span data-i18n-zh="Blue-7–10 · 深色层级" data-i18n-en="Blue-7–10 · Dark Hierarchy">Blue-7–10 · 深色层级</span></h4><p data-i18n-zh="用于深色主题背景、按压态、品牌标题和高对比前景。大面积使用时必须验证文字与图标对比度。" data-i18n-en="Use for dark-theme surfaces, pressed states, brand headings, and high-contrast foregrounds. Validate text and icon contrast when used on large areas.">用于深色主题背景、按压态、品牌标题和高对比前景。大面积使用时必须验证文字与图标对比度。</p></div>
+                    </div>
+                </section>
+                <section class="glass-panel p-6 md:p-10 mb-10">
+                    <h2 class="text-2xl font-bold mb-2 text-gray-900" data-i18n-zh="2. 辅助色" data-i18n-en="2. Secondary Colors">2. 辅助色</h2>
+                    <p class="text-gray-600 mb-8 max-w-3xl text-sm leading-relaxed"
+                        data-i18n-zh="辅助色包含内容色与语义色。内容色用于图表、品类和主题表达；语义色专用于成功、警告与危险状态，两者禁止混用。"
+                        data-i18n-en="Secondary colors include content colors and semantic colors. Content colors support charts, categories, and themes; semantic colors are reserved for success, warning, and danger states. Never mix the two roles.">
+                        辅助色包含内容色与语义色。内容色用于图表、品类和主题表达；语义色专用于成功、警告与危险状态，两者禁止混用。
+                    </p>
+
+                    <div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="color-swatch-container" style="--base-color: #32BEFF;">
+                                <div class="py-3 text-center bg-white border-b border-gray-100">
+                                    <span class="font-bold text-gray-800 block text-sm" data-i18n-zh="Cyan / 信息与连接" data-i18n-en="Cyan / Information & Connection">Cyan / 信息与连接</span>
+                                </div>
+                                <div class="palette-guidance"><p data-i18n-zh="用于水、空气、联网、数据流和信息型图表。不得替代品牌蓝的主操作角色。" data-i18n-en="Use for water, air, connectivity, data flow, and informational charts. Never replace brand blue for primary actions.">用于水、空气、联网、数据流和信息型图表。不得替代品牌蓝的主操作角色。</p></div>
+                                <div class="color-swatch shade-1" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>cyan-1</span></div>
+                                <div class="color-swatch shade-2" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>cyan-2</span></div>
+                                <div class="color-swatch shade-3" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>cyan-3</span></div>
+                                <div class="color-swatch shade-4" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>cyan-4</span></div>
+                                <div class="color-swatch shade-5" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>cyan-5</span></div>
+                                <div class="color-swatch shade-6" onclick="copyColor('#32BEFF', this)"><span>cyan-6</span></div>
+                                <div class="color-swatch shade-7" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>cyan-7</span></div>
+                                <div class="color-swatch shade-8" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>cyan-8</span></div>
+                                <div class="color-swatch shade-9" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>cyan-9</span></div>
+                                <div class="color-swatch shade-10" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>cyan-10</span></div>
+                            </div>
+                            <div class="color-swatch-container" style="--base-color: #00B988;">
+                                <div class="py-3 text-center bg-white border-b border-gray-100">
+                                    <span class="font-bold text-gray-800 block text-sm" data-i18n-zh="Green / 自然与生态" data-i18n-en="Green / Nature & Ecology">Green / 自然与生态</span>
+                                </div>
+                                <div class="palette-guidance"><p data-i18n-zh="用于植物、自然、清洁、循环与低碳主题，以及相关分类和数据系列。不用于任何系统状态反馈。" data-i18n-en="Use for plants, nature, cleaning, circularity, low-carbon themes, and related categories or data series. Never use for system status feedback.">用于植物、自然、清洁、循环与低碳主题，以及相关分类和数据系列。不用于任何系统状态反馈。</p></div>
+                                <div class="color-swatch shade-1" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>green-1</span></div>
+                                <div class="color-swatch shade-2" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>green-2</span></div>
+                                <div class="color-swatch shade-3" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>green-3</span></div>
+                                <div class="color-swatch shade-4" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>green-4</span></div>
+                                <div class="color-swatch shade-5" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>green-5</span></div>
+                                <div class="color-swatch shade-6" onclick="copyColor('#00B988', this)"><span>green-6</span></div>
+                                <div class="color-swatch shade-7" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>green-7</span></div>
+                                <div class="color-swatch shade-8" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>green-8</span></div>
+                                <div class="color-swatch shade-9" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>green-9</span></div>
+                                <div class="color-swatch shade-10" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>green-10</span></div>
+                            </div>
+                            <div class="color-swatch-container" style="--base-color: #6539D1;">
+                                <div class="py-3 text-center bg-white border-b border-gray-100">
+                                    <span class="font-bold text-gray-800 block text-sm" data-i18n-zh="Purple / 智能与探索" data-i18n-en="Purple / Intelligence & Exploration">Purple / 智能与探索</span>
+                                </div>
+                                <div class="palette-guidance"><p data-i18n-zh="用于 AI 能力、智能建议、探索型入口和独立数据系列。不得用于常规确认或完成状态。" data-i18n-en="Use for AI capabilities, smart suggestions, exploratory entry points, and distinct data series. Do not use for ordinary confirmation or completion states.">用于 AI 能力、智能建议、探索型入口和独立数据系列。不得用于常规确认或完成状态。</p></div>
+                                <div class="color-swatch shade-1" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>purple-1</span></div>
+                                <div class="color-swatch shade-2" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>purple-2</span></div>
+                                <div class="color-swatch shade-3" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>purple-3</span></div>
+                                <div class="color-swatch shade-4" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>purple-4</span></div>
+                                <div class="color-swatch shade-5" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>purple-5</span></div>
+                                <div class="color-swatch shade-6" onclick="copyColor('#6539D1', this)"><span>purple-6</span></div>
+                                <div class="color-swatch shade-7" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>purple-7</span></div>
+                                <div class="color-swatch shade-8" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>purple-8</span></div>
+                                <div class="color-swatch shade-9" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>purple-9</span></div>
+                                <div class="color-swatch shade-10" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>purple-10</span></div>
+                            </div>
+                            <div class="color-swatch-container" style="--base-color: #F23D3D;">
+                                <div class="py-3 text-center bg-white border-b border-gray-100">
+                                    <span class="font-bold text-gray-800 block text-sm" data-i18n-zh="Red / 热力与能量" data-i18n-en="Red / Heat & Energy">Red / 热力与能量</span>
+                                </div>
+                                <div class="palette-guidance"><p data-i18n-zh="用于加热、温度、强度、能量等内容主题与数据系列。不表示错误、失败、删除或安全风险。" data-i18n-en="Use for heating, temperature, intensity, energy themes, and related data series. It must not indicate errors, failure, deletion, or safety risks.">用于加热、温度、强度、能量等内容主题与数据系列。不表示错误、失败、删除或安全风险。</p></div>
+                                <div class="color-swatch shade-1" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>red-1</span></div>
+                                <div class="color-swatch shade-2" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>red-2</span></div>
+                                <div class="color-swatch shade-3" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>red-3</span></div>
+                                <div class="color-swatch shade-4" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>red-4</span></div>
+                                <div class="color-swatch shade-5" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>red-5</span></div>
+                                <div class="color-swatch shade-6" onclick="copyColor('#F23D3D', this)"><span>red-6</span></div>
+                                <div class="color-swatch shade-7" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>red-7</span></div>
+                                <div class="color-swatch shade-8" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>red-8</span></div>
+                                <div class="color-swatch shade-9" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>red-9</span></div>
+                                <div class="color-swatch shade-10" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>red-10</span></div>
+                            </div>
+                            <div class="color-swatch-container" style="--base-color: #F7AB48;">
+                                <div class="py-3 text-center bg-white border-b border-gray-100">
+                                    <span class="font-bold text-gray-800 block text-sm" data-i18n-zh="Orange / 温暖与活力" data-i18n-en="Orange / Warmth & Activity">Orange / 温暖与活力</span>
+                                </div>
+                                <div class="palette-guidance"><p data-i18n-zh="用于烹饪、食物、温暖氛围、活跃度、推荐标签与生活方式内容。不表示警告或操作风险。" data-i18n-en="Use for cooking, food, warm atmospheres, activity, recommendation tags, and lifestyle content. It must not indicate warnings or operational risk.">用于烹饪、食物、温暖氛围、活跃度、推荐标签与生活方式内容。不表示警告或操作风险。</p></div>
+                                <div class="color-swatch shade-1" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>orange-1</span></div>
+                                <div class="color-swatch shade-2" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>orange-2</span></div>
+                                <div class="color-swatch shade-3" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>orange-3</span></div>
+                                <div class="color-swatch shade-4" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>orange-4</span></div>
+                                <div class="color-swatch shade-5" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>orange-5</span></div>
+                                <div class="color-swatch shade-6" onclick="copyColor('#F7AB48', this)"><span>orange-6</span></div>
+                                <div class="color-swatch shade-7" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>orange-7</span></div>
+                                <div class="color-swatch shade-8" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>orange-8</span></div>
+                                <div class="color-swatch shade-9" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>orange-9</span></div>
+                                <div class="color-swatch shade-10" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>orange-10</span></div>
+                            </div>
+                            <div class="color-swatch-container" style="--base-color: #00B42A;">
+                                <div class="py-3 text-center bg-white border-b border-gray-100"><span class="font-bold text-gray-800 block text-sm" data-i18n-zh="Success / 成功与完成" data-i18n-en="Success / Completion">Success / 成功与完成</span></div>
+                                <div class="palette-guidance"><p data-i18n-zh="专用于操作成功、任务完成、设备正常和安全确认。不得用于内容分类、节能主题或普通开启态。" data-i18n-en="Reserved for successful actions, completed tasks, normal device status, and safety confirmation. Do not use for content categories, efficiency themes, or ordinary on states.">专用于操作成功、任务完成、设备正常和安全确认。不得用于内容分类、节能主题或普通开启态。</p></div>
+                                <div class="color-swatch shade-1" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>success-1</span></div><div class="color-swatch shade-2" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>success-2</span></div><div class="color-swatch shade-3" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>success-3</span></div><div class="color-swatch shade-4" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>success-4</span></div><div class="color-swatch shade-5" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>success-5</span></div><div class="color-swatch shade-6" onclick="copyColor('#00B42A', this)"><span>success-6</span></div><div class="color-swatch shade-7" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>success-7</span></div><div class="color-swatch shade-8" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>success-8</span></div><div class="color-swatch shade-9" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>success-9</span></div><div class="color-swatch shade-10" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>success-10</span></div>
+                            </div>
+                            <div class="color-swatch-container" style="--base-color: #FF7D00;">
+                                <div class="py-3 text-center bg-white border-b border-gray-100"><span class="font-bold text-gray-800 block text-sm" data-i18n-zh="Warning / 注意与提醒" data-i18n-en="Warning / Attention">Warning / 注意与提醒</span></div>
+                                <div class="palette-guidance"><p data-i18n-zh="专用于需要关注但仍可继续的异常、维护提醒和操作风险。必须同时说明原因与下一步。" data-i18n-en="Reserved for conditions that need attention but still allow continuation, maintenance reminders, and operational risks. Always explain the reason and next step.">专用于需要关注但仍可继续的异常、维护提醒和操作风险。必须同时说明原因与下一步。</p></div>
+                                <div class="color-swatch shade-1" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>warning-1</span></div><div class="color-swatch shade-2" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>warning-2</span></div><div class="color-swatch shade-3" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>warning-3</span></div><div class="color-swatch shade-4" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>warning-4</span></div><div class="color-swatch shade-5" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>warning-5</span></div><div class="color-swatch shade-6" onclick="copyColor('#FF7D00', this)"><span>warning-6</span></div><div class="color-swatch shade-7" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>warning-7</span></div><div class="color-swatch shade-8" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>warning-8</span></div><div class="color-swatch shade-9" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>warning-9</span></div><div class="color-swatch shade-10" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>warning-10</span></div>
+                            </div>
+                            <div class="color-swatch-container" style="--base-color: #F53F3F;">
+                                <div class="py-3 text-center bg-white border-b border-gray-100"><span class="font-bold text-gray-800 block text-sm" data-i18n-zh="Danger / 故障与风险" data-i18n-en="Danger / Fault & Risk">Danger / 故障与风险</span></div>
+                                <div class="palette-guidance"><p data-i18n-zh="专用于故障、操作失败、不可逆删除及人身或设备安全风险。不得用于营销、装饰或普通数据系列。" data-i18n-en="Reserved for faults, failed actions, irreversible deletion, and risks to people or equipment. Do not use for marketing, decoration, or ordinary data series.">专用于故障、操作失败、不可逆删除及人身或设备安全风险。不得用于营销、装饰或普通数据系列。</p></div>
+                                <div class="color-swatch shade-1" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>danger-1</span></div><div class="color-swatch shade-2" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>danger-2</span></div><div class="color-swatch shade-3" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>danger-3</span></div><div class="color-swatch shade-4" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>danger-4</span></div><div class="color-swatch shade-5" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>danger-5</span></div><div class="color-swatch shade-6" onclick="copyColor('#F53F3F', this)"><span>danger-6</span></div><div class="color-swatch shade-7" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>danger-7</span></div><div class="color-swatch shade-8" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>danger-8</span></div><div class="color-swatch shade-9" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>danger-9</span></div><div class="color-swatch shade-10" onclick="copyColor(getComputedStyle(this).backgroundColor, this)"><span>danger-10</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="glass-panel p-6 md:p-10 mb-10">
+                    <h2 class="text-2xl font-bold mb-2 text-gray-900" data-i18n-zh="3. 中性色" data-i18n-en="3. Neutral Colors">3. 中性色</h2>
+                    <p class="text-gray-600 mb-8 max-w-3xl text-sm leading-relaxed">
+                        通过控制明度，建立清晰的信息层级与空间纵深感。下面展示了标准的 9 阶灰度连续色带，采用竖向排列并补充了各阶色值的核心应用场景。
+                    </p>
+
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row gap-8 shadow-sm border border-gray-100">
+                        <div class="w-full md:w-1/3 max-w-[280px]">
+                            <div class="color-swatch-container shadow-sm border border-gray-200">
+                                <div class="py-3 text-center bg-gray-50 border-b border-gray-200">
+                                    <span class="font-bold text-gray-800 block text-sm">Neutral / 中性灰</span>
+                                </div>
+                                <div class="color-swatch hover:scale-[1.03] transition-transform" style="background-color: #EEEEEE; color: #1D1D1F;" onclick="copyColor('#EEEEEE')"><span class="font-mono">93%</span><span class="font-mono text-xs">#EEEEEE</span></div>
+                                <div class="color-swatch hover:scale-[1.03] transition-transform" style="background-color: #CCCCCC; color: #1D1D1F;" onclick="copyColor('#CCCCCC')"><span class="font-mono">80%</span><span class="font-mono text-xs">#CCCCCC</span></div>
+                                <div class="color-swatch hover:scale-[1.03] transition-transform" style="background-color: #999999; color: #1D1D1F;" onclick="copyColor('#999999')"><span class="font-mono">60%</span><span class="font-mono text-xs">#999999</span></div>
+                                <div class="color-swatch hover:scale-[1.03] transition-transform" style="background-color: #666666; color: #ffffff;" onclick="copyColor('#666666')"><span class="font-mono">39%</span><span class="font-mono text-xs">#666666</span></div>
+                                <div class="color-swatch hover:scale-[1.03] transition-transform" style="background-color: #444444; color: #ffffff;" onclick="copyColor('#444444')"><span class="font-mono">26%</span><span class="font-mono text-xs">#444444</span></div>
+                                <div class="color-swatch hover:scale-[1.03] transition-transform" style="background-color: #333333; color: #ffffff;" onclick="copyColor('#333333')"><span class="font-mono">20%</span><span class="font-mono text-xs">#333333</span></div>
+                                <div class="color-swatch hover:scale-[1.03] transition-transform" style="background-color: #222222; color: #ffffff;" onclick="copyColor('#222222')"><span class="font-mono">13%</span><span class="font-mono text-xs">#222222</span></div>
+                                <div class="color-swatch hover:scale-[1.03] transition-transform" style="background-color: #111111; color: #ffffff;" onclick="copyColor('#111111')"><span class="font-mono">7%</span><span class="font-mono text-xs">#111111</span></div>
+                                <div class="color-swatch hover:scale-[1.03] transition-transform" style="background-color: #0A0A0A; color: #ffffff;" onclick="copyColor('#0A0A0A')"><span class="font-mono">4%</span><span class="font-mono text-xs">#0A0A0A</span></div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/3 flex flex-col justify-center">
+                            <h4 class="text-xl font-bold text-gray-900 mb-5">中性色应用规范</h4>
+                            <div class="space-y-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 hover:shadow-md transition duration-300">
+                                    <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                                        <div class="w-4 h-4 rounded bg-[#EEEEEE] border border-gray-300 mr-2"></div>
+                                        背景与容器 (Backgrounds)
+                                    </h5>
+                                    <p class="text-sm text-gray-600 leading-relaxed">以浅灰作为页面背景与容器底色，保证磨玻璃层次稳定且不过度抢占注意力。</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 hover:shadow-md transition duration-300">
+                                    <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                                        <div class="w-4 h-4 rounded bg-[#999999] mr-2"></div>
+                                        边框与分割 (Dividers)
+                                    </h5>
+                                    <p class="text-sm text-gray-600 leading-relaxed">以 80% 至 60% 的灰度作为轻量级分割线，对视觉打扰降到最低；对于强调用途的控件描边，可选用 39% (#666666) 的色阶。</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 hover:shadow-md transition duration-300">
+                                    <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                                        <div class="w-4 h-4 rounded bg-[#222222] mr-2"></div>
+                                        <span data-i18n-zh="排版与文本" data-i18n-en="Typography">排版与文本</span>
+                                    </h5>
+                                    <p class="text-sm text-gray-600 leading-relaxed">使用 4% 或 7% 作为一级大标题文字色；20% 至 26% 适用于大量正文阅读，缓解视疲劳；39% 用于辅助或次要信息说明。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="glass-panel p-6 md:p-10 mb-10">
+                    <h2 class="text-2xl font-bold mb-2 text-gray-900" data-i18n-zh="4. 跨屏幕与硬件" data-i18n-en="4. Cross-screen & Hardware">4. 跨屏幕与硬件</h2>
+                    <p class="text-gray-500 mb-6 text-sm" data-i18n-zh="同一颜色角色在 TFT、LED 与实体灯上必须保持一致，并依据硬件能力进行可识别的降级。" data-i18n-en="Keep each color role consistent across TFT, LED, and physical lighting, with recognizable fallbacks based on hardware capability.">同一颜色角色在 TFT、LED 与实体灯上必须保持一致，并依据硬件能力进行可识别的降级。</p>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-5" data-i18n-zh="跨屏幕与硬件使用原则" data-i18n-en="Cross-screen & Hardware Principles">跨屏幕与硬件使用原则</h3>
+                        <div class="usage-grid">
+                            <div class="usage-card"><h4 data-i18n-zh="TFT · 保持语义 Token" data-i18n-en="TFT · Preserve Semantic Tokens">TFT · 保持语义 Token</h4><p data-i18n-zh="不同主题与屏幕尺寸可以调整明度，但品牌、成功、警告、危险的角色不可互换；前景与背景组合需满足可读性。" data-i18n-en="Themes and screen sizes may adjust lightness, but brand, success, warning, and danger roles must never swap. Foreground and background combinations must remain readable.">不同主题与屏幕尺寸可以调整明度，但品牌、成功、警告、危险的角色不可互换；前景与背景组合需满足可读性。</p></div>
+                            <div class="usage-card"><h4 data-i18n-zh="LED · 颜色只做增强" data-i18n-en="LED · Color as Reinforcement">LED · 颜色只做增强</h4><p data-i18n-zh="低色彩 LED 不承担完整语义。固定标签、图标、亮灭和闪烁节奏必须先传达状态，颜色仅作为第二识别通道。" data-i18n-en="Low-color LED must not carry complete meaning. Fixed labels, icons, on/off states, and blink rhythm communicate status first; color is a secondary channel.">低色彩 LED 不承担完整语义。固定标签、图标、亮灭和闪烁节奏必须先传达状态，颜色仅作为第二识别通道。</p></div>
+                            <div class="usage-card"><h4 data-i18n-zh="实体灯 · 控制亮度与干扰" data-i18n-en="Physical Light · Control Brightness & Distraction">实体灯 · 控制亮度与干扰</h4><p data-i18n-zh="夜间、卧室和近距离场景应降低亮度，持续警示不得使用高频闪烁；危险状态需同时提供声音或文字反馈。" data-i18n-en="Reduce brightness at night, in bedrooms, and at close range. Persistent alerts must avoid high-frequency flashing; danger states also require sound or text feedback.">夜间、卧室和近距离场景应降低亮度，持续警示不得使用高频闪烁；危险状态需同时提供声音或文字反馈。</p></div>
+                            <div class="usage-card"><h4 data-i18n-zh="验收 · 使用真实环境" data-i18n-en="Validation · Test in Real Environments">验收 · 使用真实环境</h4><p data-i18n-zh="至少在明亮、正常、暗光三种环境及主要观看角度下验证辨识度，避免只依据设计稿或显示器色值验收。" data-i18n-en="Validate recognition in bright, normal, and dark environments and at primary viewing angles. Never approve colors from design files or monitor values alone.">至少在明亮、正常、暗光三种环境及主要观看角度下验证辨识度，避免只依据设计稿或显示器色值验收。</p></div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+                <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+            </main>
+    </div>
+
+    <script src="haier-nav.js"></script>
+    <script>
+        // 左侧导航由 haier-nav.js 统一渲染与管理。
+
+        // 复制色彩，支持将浏览器计算出的 rgb / color(srgb) 转换为 HEX。
+        async function copyColor(colorValue, element) {
+            const hexValue = parseColorToHex(colorValue);
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(hexValue);
+                } else {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = hexValue;
+                    textArea.style.position = 'fixed';
+                    textArea.style.opacity = '0';
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    const copied = document.execCommand('copy');
+                    textArea.remove();
+                    if (!copied) throw new Error('Copy command failed');
+                }
+                showToast(`已复制: ${hexValue}`);
+                if (element) {
+                    element.style.transform = 'scale(0.98)';
+                    setTimeout(() => { element.style.transform = ''; }, 150);
+                }
+            } catch (error) {
+                console.error('复制失败', error);
+                showToast('复制失败，请手动复制');
+            }
+        }
+
+        function parseColorToHex(colorValue) {
+            if (!colorValue) return '';
+            const value = String(colorValue).trim();
+            if (value.startsWith('#')) return value.toUpperCase();
+
+            const channels = value.match(/[\d.]+%?/g);
+            if (!channels || channels.length < 3) return value.toUpperCase();
+            const isSrgb = value.includes('color(srgb');
+            const toByte = (channel) => {
+                if (channel.includes('%')) return Math.round(parseFloat(channel) * 2.55);
+                const number = parseFloat(channel);
+                return Math.round(isSrgb ? number * 255 : number);
+            };
+            const [red, green, blue] = channels.slice(0, 3).map(toByte);
+            return `#${[red, green, blue].map((channel) =>
+                Math.max(0, Math.min(255, channel)).toString(16).padStart(2, '0')
+            ).join('').toUpperCase()}`;
+        }
+
+        function initSwatchHexLabels() {
+            document.querySelectorAll('.color-swatch-container[style*="--base-color"] .color-swatch').forEach((swatch) => {
+                if (swatch.querySelector('.swatch-hex')) return;
+                const hex = parseColorToHex(getComputedStyle(swatch).backgroundColor);
+                const label = document.createElement('span');
+                label.className = 'swatch-hex';
+                label.textContent = hex;
+                label.setAttribute('aria-hidden', 'true');
+                swatch.appendChild(label);
+                swatch.tabIndex = 0;
+                swatch.setAttribute('aria-label', `${swatch.querySelector('span')?.textContent || ''} ${hex}`.trim());
+            });
+        }
+
+        requestAnimationFrame(initSwatchHexLabels);
+
+        function showToast(message) {
+            const toast = document.getElementById('copy-toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            if (window.toastTimeout) {
+                clearTimeout(window.toastTimeout);
+            }
+            window.toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

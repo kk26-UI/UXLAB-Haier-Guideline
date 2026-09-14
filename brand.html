@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haier Design | 品牌</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-primary: #2283E2;
+            --brand-light: #E5F0FF;
+            --text-main: #1D1D1F;
+            --text-secondary: #86868B;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #F5F7FA;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* 弥散光晕动画背景 */
+        .aura-background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: #F4F7FB;
+        }
+        .aura-blob {
+            position: absolute;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .aura-blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #C4E0FF; animation-delay: 0s; }
+        .aura-blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: #E0E8FF; animation-delay: -5s; }
+        .aura-blob-3 { top: 40%; left: 60%; width: 40vw; height: 40vw; background: #E8F4FF; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
+        }
+
+        /* 磨玻璃质感卡片核心类 */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            border-radius: 24px;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar-nav-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-nav-item.active {
+            color: var(--brand-primary);
+            font-weight: 600;
+            border-left-color: var(--brand-primary);
+            background: linear-gradient(90deg, var(--brand-light) 0%, transparent 100%);
+        }
+
+        /* 代码与Token块 */
+        .token-block {
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        
+        /* 隐藏原生滚动条，美化 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+        /* Haier 纯文本 Logo 的基础样式 */
+        .haier-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2283E2; /* 海尔蓝 */
+            color: white;
+            font-family: Arial, Helvetica, sans-serif; /* 使用最基础的无衬线字体 */
+            font-weight: bold;
+            border-radius: 8px; /* 轻微圆角 */
+        }
+
+        .brand-image-placeholder {
+            aspect-ratio: 16 / 9;
+            min-height: 140px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(229, 231, 235, 0.6);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .brand-value-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+            gap: 0;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .brand-value-copy {
+            padding: 24px;
+        }
+
+        .brand-value-image {
+            display: block;
+            width: 100%;
+            aspect-ratio: 570 / 318;
+            object-fit: cover;
+        }
+
+        .brand-direction-image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 767px) {
+            .brand-value-row {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-value-copy {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="aura-background">
+        <div class="aura-blob aura-blob-1"></div>
+        <div class="aura-blob aura-blob-2"></div>
+        <div class="aura-blob aura-blob-3"></div>
+    </div>
+    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">
+                Haier
+            </div>
+            <h1 class="font-bold text-lg">Haier Design</h1>
+        </div>
+        <button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </header>
+
+    <div class="flex h-screen pt-16 md:pt-0">
+<aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+        <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
+            <div class="max-w-[1200px] mx-auto pb-24">
+                <div class="hidden md:flex items-center mb-8">
+                    <a href="haier_os_design_system.html" class="px-4 py-2 bg-white/50 hover:bg-white/90 rounded-xl transition-colors flex items-center text-gray-700 shadow-sm border border-gray-200/50 backdrop-blur-md">
+                        <span class="text-sm font-semibold" data-i18n-zh="返回主页" data-i18n-en="Home">返回主页</span>
+                    </a>
+                </div>
+                <section class="mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900" data-i18n-zh="品牌" data-i18n-en="Brand Identity">品牌</h1>
+                    <p class="text-lg text-text-secondary max-w-4xl leading-relaxed">品牌体验用于统一跨设备、跨品类、跨触点的视觉表达和交互认知。品牌体验的核心目标不是堆叠视觉符号，而是在不同设备、场景和触点之间建立一致、清晰、可信赖的体验秩序。</p>
+                </section>
+
+                <hr class="border-t border-black/5 mb-12">
+                <section id="principles-brand" class="mb-16 scroll-mt-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 mb-10">
+                        <div class="glass-panel overflow-hidden relative min-h-[320px]">
+                            <img class="absolute inset-0 w-full h-full object-cover" src="assets/brand/one-haier.png" alt="One Haier">
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="p-2">
+                                <h5 class="text-lg font-bold text-gray-900 mb-2" data-i18n-zh="一致" data-i18n-en="Consistent">一致</h5>
+                                <p class="text-sm text-gray-600 leading-relaxed">视觉、交互语言跨品类体验保持统一，降低用户学习成本</p>
+                            </div>
+                            <div class="p-2">
+                                <h5 class="text-lg font-bold text-gray-900 mb-2" data-i18n-zh="克制" data-i18n-en="Restrained">克制</h5>
+                                <p class="text-sm text-gray-600 leading-relaxed">品牌表达服务于用户体验，不以装饰性元素干扰核心信息</p>
+                            </div>
+                            <div class="p-2">
+                                <h5 class="text-lg font-bold text-gray-900 mb-2" data-i18n-zh="可信" data-i18n-en="Trustworthy">可信</h5>
+                                <p class="text-sm text-gray-600 leading-relaxed">状态清晰、反馈及时、关键操作可预期，建立长期品牌信任</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-12">
+                        <div class="flex items-end justify-between gap-6 mb-6">
+                            <div>
+                                <h4 class="text-2xl font-bold text-gray-900" data-i18n-zh="从价值到视觉表达" data-i18n-en="From Values to Visual Expression">从价值到视觉表达</h4>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="brand-value-row bg-white/60 rounded-xl border border-gray-200/60 shadow-sm">
+                                <img class="brand-value-image" src="assets/brand/technology-innovation.png" alt="蓝白球体构成的科技创新视觉表达">
+                                <div class="brand-value-copy">
+                                    <h5 class="text-lg font-bold text-gray-900 mb-2">科技创新</h5>
+                                    <p class="text-sm text-gray-600 leading-relaxed">体现前瞻、迭代和自信的科技探索精神，为品牌视觉提供坚实基底。</p>
+                                </div>
+                            </div>
+                            <div class="brand-value-row bg-white/60 rounded-xl border border-gray-200/60 shadow-sm">
+                                <img class="brand-value-image" src="assets/brand/premium-quality.png" alt="洗衣机与冰箱呈现的高端家电质感">
+                                <div class="brand-value-copy">
+                                    <h5 class="text-lg font-bold text-gray-900 mb-2">高端质感</h5>
+                                    <p class="text-sm text-gray-600 leading-relaxed">以现代简约、智慧亲和、优雅愉悦的表达建立高品质体验感知。</p>
+                                </div>
+                            </div>
+                            <div class="brand-value-row bg-white/60 rounded-xl border border-gray-200/60 shadow-sm">
+                                <img class="brand-value-image" src="assets/brand/lifestyle-taste.png" alt="现代家庭厨房中的品质生活场景">
+                                <div class="brand-value-copy">
+                                    <h5 class="text-lg font-bold text-gray-900 mb-2">生活品味</h5>
+                                    <p class="text-sm text-gray-600 leading-relaxed">连接真实生活方式，让科技体验具有温度、灵感和亲近感。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex items-end justify-between gap-6 mb-6">
+                            <h4 class="text-2xl font-bold text-gray-900" data-i18n-zh="品牌设计方向" data-i18n-en="Brand Design Directions">品牌设计方向</h4>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-white/60 rounded-xl border border-gray-200/60 shadow-sm overflow-hidden">
+                                <img class="brand-direction-image" src="assets/brand/calm-tech.png" alt="Calm Tech 品牌设计方向">
+                                <p class="p-5 md:p-6 text-sm text-gray-600 leading-relaxed" data-i18n-zh="科技不应表现为冰冷、复杂的机器指令，而应通过智能化的多模态交互提供无缝、精准的使用体验。复杂的机器算力与 AI 模型应隐藏在极简、直觉的界面之下，在用户需要时精准出现，在不需要时安静隐去。" data-i18n-en="Technology should not present itself through cold, complex machine commands. Instead, it should deliver seamless, precise experiences through intelligent multimodal interaction. Complex computational power and AI models should remain concealed beneath a minimalist, intuitive interface—appearing precisely when needed and quietly receding when not.">科技不应表现为冰冷、复杂的机器指令，而应通过智能化的多模态交互提供无缝、精准的使用体验。复杂的机器算力与 AI 模型应隐藏在极简、直觉的界面之下，在用户需要时精准出现，在不需要时安静隐去。</p>
+                            </div>
+                            <div class="bg-white/60 rounded-xl border border-gray-200/60 shadow-sm overflow-hidden">
+                                <img class="brand-direction-image" src="assets/brand/balance-life.png" alt="Balance Life 品牌设计方向">
+                                <p class="p-5 md:p-6 text-sm text-gray-600 leading-relaxed" data-i18n-zh="家电是家庭空间的一部分，设计必须尊重用户的居住环境与生活节奏。数字界面应展现温润的生命力，与真实家居生活达成视觉与心理上的双重平衡。" data-i18n-en="Home appliances are part of the living space, so design must respect users’ home environments and rhythms of life. Digital interfaces should convey a warm sense of vitality, achieving both visual and emotional balance with everyday home life.">家电是家庭空间的一部分，设计必须尊重用户的居住环境与生活节奏。数字界面应展现温润的生命力，与真实家居生活达成视觉与心理上的双重平衡。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+            </div>
+        </main>
+    </div>
+
+    <script src="haier-nav.js"></script>
+    <script>
+        // 左侧导航由 haier-nav.js 统一渲染与管理。
+    </script>
+</body>
+</html>

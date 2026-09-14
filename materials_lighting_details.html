@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haier Design | 材质</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#2283E2;--ink:#1D1D1F;--line:rgba(15,23,42,.08);--glass:rgba(255,255,255,.68)}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#F5F7FA;color:var(--ink);overflow-x:hidden}
+    .aura-background{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 8% 2%,#c9e3ff 0,transparent 32%),radial-gradient(circle at 92% 62%,#dfe7ff 0,transparent 38%),#f5f7fa}
+    .glass-panel{background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.5);box-shadow:0 8px 32px rgba(0,0,0,.04);border-radius:24px}
+    .sidebar-nav-item{transition:all .3s ease;border-left:3px solid transparent}.sidebar-nav-item.active{color:var(--brand);font-weight:600;border-left-color:var(--brand);background:linear-gradient(90deg,#E5F0FF 0%,transparent 100%)}
+    .haier-logo-container{display:flex;align-items:center;justify-content:center;background:var(--brand);color:#fff;font-family:Arial,sans-serif;font-weight:bold;border-radius:8px}
+    .eyebrow{color:var(--brand);font-size:.75rem;line-height:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+    .material-demo{position:relative;min-height:280px;overflow:hidden;isolation:isolate;background:linear-gradient(135deg,#082d55,#2283e2 55%,#80c5ff)}
+    .material-demo:before,.material-demo:after{content:"";position:absolute;border-radius:999px;filter:blur(48px)}.material-demo:before{width:190px;height:190px;left:7%;top:15%;background:#3d77ca;opacity:.74}.material-demo:after{width:240px;height:240px;right:-4%;bottom:-36%;background:#f1fbff;opacity:.55}
+    .material-surface{position:relative;z-index:1;border:1px solid rgba(255,255,255,.46);box-shadow:inset 0 1px rgba(255,255,255,.56)}
+    .surface-solid{background:#fff}
+    .surface-soft{background:rgba(245,249,252,.82);backdrop-filter:blur(12px) saturate(110%);-webkit-backdrop-filter:blur(12px) saturate(110%)}
+    .surface-focus{background:rgba(255,255,255,.68);backdrop-filter:blur(24px) saturate(120%);-webkit-backdrop-filter:blur(24px) saturate(120%)}
+    .surface-media{background:rgba(255,255,255,.34);backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%);border-color:rgba(255,255,255,.62);box-shadow:inset 0 1px rgba(255,255,255,.72),0 4px 12px rgba(16,24,40,.08)}
+    .principle-card{background:none;border:0;border-radius:0;padding:0;box-shadow:none}
+    .principle-number{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#2283E2;color:#fff;font-size:12px;font-weight:700;margin-bottom:14px}
+    .spec-row{display:grid;grid-template-columns:128px 1fr;gap:20px;padding:18px 0;border-top:1px solid var(--line)}.spec-row:first-child{border-top:0}
+    .token{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;color:#475467;background:#F2F4F7;border:1px solid #EAECF0;border-radius:7px;padding:.24rem .46rem;white-space:nowrap}
+    .shadow-stage{background:linear-gradient(#f9fbfd,#eef3f8)}.shadow-swatch{min-height:108px;background:#fff;border:1px solid rgba(15,23,42,.04)}
+    .shadow-1{box-shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08)}.shadow-2{box-shadow:0 4px 10px rgba(16,24,40,.08),0 2px 4px rgba(16,24,40,.04)}.shadow-3{box-shadow:0 10px 24px rgba(16,24,40,.12),0 4px 8px rgba(16,24,40,.05)}.shadow-4{box-shadow:0 20px 48px rgba(16,24,40,.16),0 8px 16px rgba(16,24,40,.08)}
+    .rule-card{border-top:3px solid var(--brand)}.do-list li:before{content:"✓";color:#12A150;font-weight:700;margin-right:.65rem}.dont-list li:before{content:"×";color:#E5484D;font-weight:700;margin-right:.65rem}
+    main section.glass-panel{padding:2.5rem!important;margin-bottom:2rem!important}main section.glass-panel h2{font-size:1.5rem!important;line-height:2rem!important;color:#1d1d1f!important}
+    @media(max-width:767px){main section.glass-panel{padding:1.5rem!important}.spec-row{grid-template-columns:1fr;gap:6px}.material-demo{min-height:420px}}
+    @media(prefers-reduced-transparency:reduce){.glass-panel,.surface-soft,.surface-focus{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff}}
+  </style>
+</head>
+<body class="antialiased">
+  <div class="aura-background"></div>
+  <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开导航"><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700"></span></button></header>
+  <div class="flex h-screen pt-16 md:pt-0">
+    <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+    <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
+      <div class="max-w-[1200px] mx-auto pb-24">
+        <section class="mb-12"><h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">材质</h1><p class="text-lg text-gray-500 max-w-3xl leading-relaxed">材质通过透光、模糊、明暗与阴影建立前后关系。海尔多终端界面以清晰、安静、可信为前提：材质负责区分内容与功能，阴影只负责表达真实的悬浮层级。</p></section>
+
+        <section id="principles" class="glass-panel scroll-mt-8">
+          <div class="mb-8"><h2 class="font-bold mb-3">设计原则</h2><p class="text-sm text-gray-500 leading-6 max-w-3xl">材质不是装饰滤镜。先确定元素在任务中的语义与层级，再选择视觉表现；任何效果都不能牺牲状态识别、文本对比度和操作确定性。</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <article class="principle-card"><div class="principle-number">01</div><h3 class="font-bold text-gray-900 mb-2">内容优先</h3><p class="text-sm text-gray-600 leading-relaxed">设备状态、环境数据和主任务始终清晰。材质只能帮助理解，不得与内容争夺注意力。</p></article>
+            <article class="principle-card"><div class="principle-number">02</div><h3 class="font-bold text-gray-900 mb-2">语义选材</h3><p class="text-sm text-gray-600 leading-relaxed">同一用途跨端使用同一材质角色，不以“更亮、更透明、更科技”作为选择依据。</p></article>
+            <article class="principle-card"><div class="principle-number">03</div><h3 class="font-bold text-gray-900 mb-2">克制分层</h3><p class="text-sm text-gray-600 leading-relaxed">内容层保持稳定，功能层按需浮现。一个视图原则上只保留一个最高悬浮层级。</p></article>
+          </div>
+        </section>
+
+        <section id="element-materials" class="glass-panel scroll-mt-8">
+          <div class="mb-8"><h2 class="font-bold mb-3">层级材质</h2><p class="text-sm text-gray-500 leading-6 max-w-3xl">针对家电屏、移动端、TV 与中控屏的高频场景，材质分为稳定内容层与临时功能层。透明度越高，信息承载能力越低；文本越多，材质越应接近不透明。</p></div>
+          <div class="material-demo rounded-2xl p-5 md:p-8 grid grid-cols-1 md:grid-cols-[repeat(3,minmax(0,1fr))_80px] gap-5 items-stretch mb-8">
+            <div class="relative z-[1] flex flex-col"><div class="text-base font-semibold text-white mb-3">Solid</div><div class="material-surface surface-solid rounded-2xl flex-1 min-h-[164px]" aria-label="Solid 材质效果示例"></div></div>
+            <div class="relative z-[1] flex flex-col"><div class="text-base font-semibold text-white mb-3">Soft</div><div class="material-surface surface-soft rounded-2xl flex-1 min-h-[164px]" aria-label="Soft 材质效果示例"></div></div>
+            <div class="relative z-[1] flex flex-col"><div class="text-base font-semibold text-white mb-3">Focus</div><div class="material-surface surface-focus rounded-2xl flex-1 min-h-[164px]" aria-label="Focus 材质效果示例"></div></div>
+            <div class="relative z-[1] flex flex-col md:items-center"><div class="text-base font-semibold text-white mb-3">Media</div><div class="material-surface surface-media rounded-full w-[72px] h-[72px] shrink-0" aria-label="Media 材质效果示例"></div></div>
+          </div>
+          <h3 class="text-base font-bold text-gray-900 mb-4">材质角色与 Token</h3>
+          <div class="overflow-x-auto mb-8"><table class="w-full min-w-[760px] text-left text-sm">
+            <thead><tr class="border-b border-black/10 text-xs text-gray-500"><th class="py-3 pr-4 font-medium">角色 / Token</th><th class="py-3 px-4 font-medium">视觉定义</th><th class="py-3 px-4 font-medium">推荐场景</th><th class="py-3 pl-4 font-medium">限制</th></tr></thead>
+            <tbody class="text-gray-600">
+              <tr class="border-b border-black/5"><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Solid</strong><span class="token">material.solid</span></td><td class="py-5 px-4">不透明表面；无背景模糊</td><td class="py-5 px-4">数据密集卡片、设置页、长文本、告警详情</td><td class="py-5 pl-4">默认内容材质；不为追求“玻璃感”降低不透明度</td></tr>
+              <tr class="border-b border-black/5"><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Soft</strong><span class="token">material.soft</span></td><td class="py-5 px-4">浅色 82% / 深色 78%；blur 12</td><td class="py-5 px-4">内容分组、状态卡片、侧栏、设备概览</td><td class="py-5 pl-4">仅承载短文本；复杂背景上切换为 Solid</td></tr>
+              <tr class="border-b border-black/5"><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Focus</strong><span class="token">material.focus</span></td><td class="py-5 px-4">浅色 68% / 深色 64%；blur 24</td><td class="py-5 px-4">临时控制盘、导航浮层、弹窗、底部面板</td><td class="py-5 pl-4">只用于功能层；同屏不超过 2 个独立区域</td></tr>
+              <tr><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Media</strong><span class="token">material.media</span></td><td class="py-5 px-4">浅色 34% / 深色 28%；blur 14</td><td class="py-5 px-4">照片、视频、摄像头画面上的快捷控制</td><td class="py-5 pl-4">仅限视觉丰富且持续可见的媒体背景</td></tr>
+            </tbody>
+          </table></div>
+          <h3 class="text-base font-bold text-gray-900 mb-4">材质使用规则</h3>
+          <div>
+            <div class="spec-row"><h3 class="font-normal">层级边界</h3><p class="text-sm text-gray-500 leading-6">内容层使用 Solid / Soft；临时导航与控制使用 Focus / Media。禁止在普通内容卡片中使用功能层材质。</p></div>
+            <div class="spec-row"><h3 class="font-normal">可读性</h3><p class="text-sm text-gray-500 leading-6">主要文本对比度不低于 4.5:1，大号文本和关键图形不低于 3:1。背景不可预测时，优先增加表面不透明度，而不是叠加更多阴影。</p></div>
+            <div class="spec-row"><h3 class="font-normal">状态表达</h3><p class="text-sm text-gray-500 leading-6">运行、离线、告警、选中等状态由语义色、文案与图标共同表达；透明度和模糊不能作为唯一状态信号。</p></div>
+            <div class="spec-row"><h3 class="font-normal">多端适配</h3><p class="text-sm text-gray-500 leading-6">移动端与高性能中控可使用实时模糊；家电 TFT、低算力屏和 LED 映射为预混合实色。跨端保持角色、层级与对比度一致。</p></div>
+            <div class="spec-row"><h3 class="font-normal">无障碍降级</h3><p class="text-sm text-gray-500 leading-6">系统开启“降低透明度”或设备处于节能/高亮环境时，Soft、Focus、Media 自动切换为对应的高不透明表面，并保留边界与层级。</p></div>
+          </div>
+        </section>
+
+        <section id="shadow-materials" class="glass-panel scroll-mt-8">
+          <div class="mb-8"><h2 class="font-bold mb-3">阴影的材质</h2><p class="text-sm text-gray-500 leading-6 max-w-3xl">阴影模拟统一、柔和的顶部环境光，用于说明元素离开承载面的距离。海尔界面不使用阴影制造装饰性立体感；层级越高，阴影位移、模糊和扩散越大，但边缘始终克制。</p></div>
+          <div class="shadow-stage rounded-2xl p-5 md:p-8 grid grid-cols-2 lg:grid-cols-5 gap-5 mb-8">
+            <div><div class="shadow-swatch rounded-xl flex items-center justify-center text-xs text-gray-500">Level 0</div><p class="text-xs mt-3 text-gray-500">承载面</p></div><div><div class="shadow-swatch shadow-1 rounded-xl flex items-center justify-center text-xs text-gray-500">Level 1</div><p class="text-xs mt-3 text-gray-500">可点击元素</p></div><div><div class="shadow-swatch shadow-2 rounded-xl flex items-center justify-center text-xs text-gray-500">Level 2</div><p class="text-xs mt-3 text-gray-500">悬浮控件</p></div><div><div class="shadow-swatch shadow-3 rounded-xl flex items-center justify-center text-xs text-gray-500">Level 3</div><p class="text-xs mt-3 text-gray-500">面板 / 菜单</p></div><div><div class="shadow-swatch shadow-4 rounded-xl flex items-center justify-center text-xs text-gray-500">Level 4</div><p class="text-xs mt-3 text-gray-500">模态任务</p></div>
+          </div>
+          <div class="overflow-x-auto mb-8"><table class="w-full min-w-[780px] text-left text-sm">
+            <thead><tr class="border-b border-black/10 text-xs text-gray-500"><th class="py-3 pr-4 font-medium">层级</th><th class="py-3 px-4 font-medium">Token / 参数</th><th class="py-3 px-4 font-medium">使用场景</th><th class="py-3 pl-4 font-medium">行为</th></tr></thead>
+            <tbody class="text-gray-600">
+              <tr class="border-b border-black/5"><td class="py-5 pr-4 font-semibold text-gray-900">0 · Flat</td><td class="py-5 px-4"><span class="token">shadow.0 · none</span></td><td class="py-5 px-4">页面背景、嵌入式内容、普通列表</td><td class="py-5 pl-4">依靠色差、间距或分隔线组织</td></tr>
+              <tr class="border-b border-black/5"><td class="py-5 pr-4 font-semibold text-gray-900">1 · Rest</td><td class="py-5 px-4"><span class="token">0 1 3 / 8%</span></td><td class="py-5 px-4">按钮、可点击卡片的静止态</td><td class="py-5 pl-4">只提示可交互，不改变信息层级</td></tr>
+              <tr class="border-b border-black/5"><td class="py-5 pr-4 font-semibold text-gray-900">2 · Raised</td><td class="py-5 px-4"><span class="token">0 4 10 / 8%</span></td><td class="py-5 px-4">悬停卡片、悬浮快捷控制</td><td class="py-5 pl-4">仅在元素确实离开承载面时出现</td></tr>
+              <tr class="border-b border-black/5"><td class="py-5 pr-4 font-semibold text-gray-900">3 · Overlay</td><td class="py-5 px-4"><span class="token">0 10 24 / 12%</span></td><td class="py-5 px-4">下拉菜单、底部面板、临时控制盘</td><td class="py-5 pl-4">背景降低竞争，前景焦点清晰</td></tr>
+              <tr><td class="py-5 pr-4 font-semibold text-gray-900">4 · Modal</td><td class="py-5 px-4"><span class="token">0 20 48 / 16%</span></td><td class="py-5 px-4">确认弹窗、关键告警、阻断式任务</td><td class="py-5 pl-4">必须配合背景遮罩；同屏只能有一个</td></tr>
+            </tbody>
+          </table></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <article class="rule-card bg-white/66 rounded-2xl p-6 border border-white"><h3 class="font-semibold mb-4">光源与颜色</h3><p class="text-sm text-gray-500 leading-6">统一使用顶部环境光，Y 轴向下偏移；中性色阴影以 <span class="token">#101828</span> 为基色。深色模式降低黑色阴影效果，改用 1px 浅色轮廓保持边界。</p></article>
+            <article class="rule-card bg-white/66 rounded-2xl p-6 border border-white"><h3 class="font-semibold mb-4">交互变化</h3><p class="text-sm text-gray-500 leading-6">按下时降低一级或缩短阴影，悬停最多提高一级；层级变化需与位移或缩放方向一致，持续时间遵循动态效果规范。</p></article>
+          </div>
+        </section>
+
+        <section id="usage" class="glass-panel scroll-mt-8">
+          <div class="mb-7"><h2 class="font-bold">使用与验收</h2></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm">
+            <div class="bg-white/66 rounded-2xl p-6 border border-white"><h3 class="font-bold text-green-700 mb-4">应该</h3><ul class="do-list space-y-3 text-gray-600"><li>先确定内容层或功能层，再选择材质</li><li>复杂背景上提高不透明度并验证对比度</li><li>用 Solid 承载告警、数据和长文本</li><li>让阴影、遮挡和焦点指向同一层级</li><li>在真实家居光线与目标屏幕上验收</li></ul></div>
+            <div class="bg-white/66 rounded-2xl p-6 border border-white"><h3 class="font-bold text-red-600 mb-4">不应该</h3><ul class="dont-list space-y-3 text-gray-600"><li>让整个页面和每张卡片都使用玻璃效果</li><li>以透明度或阴影作为唯一状态提示</li><li>在图片上直接放置低对比文字与图标</li><li>给嵌入式列表和小图标添加悬浮阴影</li><li>在低性能设备上强制实时模糊</li></ul></div>
+          </div>
+          <div class="mt-6 p-5 rounded-2xl bg-blue-50/80 border border-blue-100"><p class="text-sm text-blue-900 leading-6"><strong>验收基线：</strong>关闭模糊后层级仍可理解；开启降低透明度后信息无缺失；强光、暗光与复杂背景下主文本可读；同屏没有两个竞争的最高浮层；TFT 降级方案与移动端保持同一语义。</p></div>
+        </section>
+        <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+      </div>
+    </main>
+  </div>
+  <script src="haier-nav.js"></script>
+</body>
+</html>

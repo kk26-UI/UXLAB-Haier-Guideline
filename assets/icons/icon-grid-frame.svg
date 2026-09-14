@@ -1,0 +1,25 @@
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M120 170C147.614 170 170 147.614 170 120C170 92.3858 147.614 70 120 70C92.3858 70 70 92.3858 70 120C70 147.614 92.3858 170 120 170Z" stroke="#999999" stroke-width="0.8" stroke-miterlimit="10"/>
+<path d="M120 220C175.228 220 220 175.228 220 120C220 64.7715 175.228 20 120 20C64.7715 20 20 64.7715 20 120C20 175.228 64.7715 220 120 220Z" stroke="black" stroke-width="0.8" stroke-miterlimit="10"/>
+<path d="M210 50C210 39 201 30 190 30H50C39 30 30 39 30 50V190C30 201 39 210 50 210C104.673 210 135.327 210 190 210C201 210 210 201 210 190V50Z" stroke="black" stroke-width="0.8" stroke-miterlimit="10"/>
+<path d="M200 40C200 29 191 20 180 20H60C49 20 40 29 40 40V200C40 211 49 220 60 220H180C191 220 200 211 200 200V40Z" stroke="black" stroke-width="0.8" stroke-miterlimit="10"/>
+<path d="M200 200C211 200 220 191 220 180V60C220 49 211 40 200 40H40C29 40 20 49 20 60V180C20 191 29 200 40 200H200Z" stroke="black" stroke-width="0.8" stroke-miterlimit="10"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M20 20V220H0V20H20Z" fill="#FF00FF" fill-opacity="0.15"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M220 220V20H240V220H220Z" fill="#FF00FF" fill-opacity="0.15"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M20 0H220V20H20V0Z" fill="#FF00FF" fill-opacity="0.15"/>
+<path d="M20 240V220H220V240H20Z" fill="#FF00FF" fill-opacity="0.15"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M240 220V240H220V220H240Z" fill="#FF00FF" fill-opacity="0.15"/>
+<path d="M220 0H240V20H220V0Z" fill="#FF00FF" fill-opacity="0.15"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H20V20H0V0Z" fill="#FF00FF" fill-opacity="0.15"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 240V220H20V240H0Z" fill="#FF00FF" fill-opacity="0.15"/>
+<rect x="230" width="10" height="10" fill="#F23D3D"/>
+<path d="M85.2374 44.9172L86.7383 42.7597C92.0852 35.8181 99.4958 30.7526 107.845 28.2198C116.193 25.687 125.199 25.8746 133.454 28.6888C141.708 31.503 148.932 36.8499 153.997 43.9792C159.063 51.1084 161.783 59.6447 161.783 68.3687V69.682" stroke="#111111" stroke-width="16.464" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M154.747 44.9172C154.278 44.1668 153.716 43.5101 153.247 42.7597C147.9 35.8181 140.489 30.7526 132.14 28.2198C123.791 25.687 114.786 25.8746 106.531 28.6888C98.1825 31.503 90.9595 36.8499 85.8939 43.9792C80.8284 51.1084 78.1081 59.6447 78.1081 68.3687C78.1081 68.8377 78.1081 69.2129 78.1081 69.682" stroke="#111111" stroke-width="16.464" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M161.783 69.6818C172.008 67.2428 182.702 68.6499 191.895 73.7154C201.088 78.781 208.029 87.1297 211.406 97.0731C214.783 107.017 214.22 117.898 209.999 127.466C205.778 137.034 197.992 144.726 188.424 148.854" stroke="#111111" stroke-width="16.464" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M51.186 148.854C41.524 144.633 33.8319 137.034 29.6106 127.466C25.3894 117.898 24.8265 107.017 28.2035 97.0731C31.5805 87.1297 38.5222 78.781 47.7151 73.7154C56.8143 68.6499 67.602 67.2428 77.733 69.6818" stroke="#111111" stroke-width="16.464" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M119.664 191.536C113.66 197.07 106.25 200.729 98.1825 202.042C90.1152 203.355 81.9541 202.323 74.4496 199.134C67.039 195.851 60.6602 190.504 56.1575 183.656C51.7486 176.808 49.4035 168.835 49.4035 160.767C49.4035 156.734 49.9663 152.7 51.092 148.854" stroke="#111111" stroke-width="16.464" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M188.236 148.854C189.362 152.7 190.019 156.64 189.925 160.674C189.925 168.835 187.58 176.808 183.077 183.562C178.668 190.41 172.289 195.757 164.785 199.04C157.374 202.323 149.119 203.355 141.052 201.948C132.985 200.635 125.574 196.977 119.57 191.442" stroke="#111111" stroke-width="16.464" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M119.664 119.399V214.049" stroke="#111111" stroke-width="16.464" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M149.025 133.844L119.664 155.138L90.3027 133.844" stroke="#111111" stroke-width="16.464" stroke-miterlimit="10" stroke-linecap="round"/>
+<circle cx="88" cy="130.4" r="20.8" stroke="#F23D3D" stroke-width="1.6"/>
+</svg>

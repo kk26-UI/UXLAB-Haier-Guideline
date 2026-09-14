@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haier Design | 信息架构</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --brand:#2283E2; --ink:#1D1D1F; --muted:#667085; --glass:rgba(255,255,255,.66); }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#F5F7FA; color:var(--ink); overflow-x:hidden; }
+    .aura-background { position:fixed; inset:0; z-index:-1; background:radial-gradient(circle at 12% 4%,#c9e3ff 0,transparent 32%),radial-gradient(circle at 88% 70%,#dfe7ff 0,transparent 38%),#f5f7fa; }
+    .glass-panel { background:var(--glass); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid rgba(255,255,255,.4); box-shadow:0 8px 32px rgba(0,0,0,.04); border-radius:24px; }
+    .sidebar-nav-item { transition:all .3s ease; border-left:3px solid transparent; }
+    .sidebar-nav-item.active { color:var(--brand); font-weight:600; border-left-color:var(--brand); background:linear-gradient(90deg,#E5F0FF 0%,transparent 100%); }
+    .haier-logo-container { display:flex; align-items:center; justify-content:center; background:var(--brand); color:#fff; font-family:Arial,sans-serif; font-weight:bold; border-radius:8px; }
+    .brand-text { color:var(--brand); }
+    .axis-card { position:relative; overflow:hidden; }
+    .axis-image { width:100%; aspect-ratio:2.36/1; display:block; object-fit:cover; background:#000; }
+    .axis-content { position:relative; min-height:230px; }
+    .axis-mark { position:absolute; right:18px; top:8px; font-size:7rem; line-height:1; font-weight:700; color:rgba(34,131,226,.08); }
+    .axis-line { height:2px; background:linear-gradient(90deg,var(--brand),rgba(34,131,226,.08)); position:relative; }
+    .axis-line::after { content:""; position:absolute; right:0; top:-4px; border-left:8px solid var(--brand); border-top:5px solid transparent; border-bottom:5px solid transparent; }
+    .layer-stage { position:relative; overflow:hidden; border-radius:20px; background:#eef6ff; }
+    .layer-stage img { width:100%; height:auto; display:block; }
+    .layer-copy { position:absolute; left:8%; width:48%; display:grid; grid-template-columns:minmax(72px,24%) 1fr; gap:clamp(8px,1.6vw,24px); align-items:center; transform:translateY(-50%); font-size:clamp(8px,1.15vw,14px); line-height:1.5; }
+    .layer-copy-top { top:29%; }
+    .layer-copy-mid { top:50%; }
+    .layer-copy-deep { top:71%; }
+    .layer-copy strong { color:#2283e2; font-size:clamp(8px,1.15vw,14px); font-weight:600; white-space:nowrap; }
+    .layer-copy span { color:rgba(75,85,99,.72); transform:translateX(-32px); }
+    .rule-row { display:grid; grid-template-columns:132px 1fr; gap:18px; padding:18px 0; border-top:1px solid rgba(15,23,42,.08); }
+    .rule-row > div:first-child { color:#1D1D1F; }
+    .check-card { border-top:3px solid var(--brand); }
+    .check-card h3 { color:var(--brand); }
+    .must-list li::before { content:"✓"; color:var(--brand); font-weight:700; margin-right:.65rem; }
+    .dont-list li::before { content:"×"; color:#E5484D; font-weight:700; margin-right:.65rem; }
+    @media (max-width:767px) { .rule-row{grid-template-columns:1fr;gap:6px}.axis-mark{font-size:5rem} }
+    main section.glass-panel{padding:2.5rem!important;margin-bottom:2rem!important}
+    main section.glass-panel h2{font-size:1.5rem!important;line-height:2rem!important;color:#1d1d1f!important}
+    @media(max-width:767px){main section.glass-panel{padding:1.5rem!important}}
+</style>
+</head>
+<body class="antialiased">
+  <div class="aura-background"></div>
+  <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开导航"><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700"></span></button></header>
+  <div class="flex h-screen pt-16 md:pt-0">
+    <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+    <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
+      <div class="max-w-[1200px] mx-auto pb-24">
+        <section class="mb-12">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">信息架构</h1>
+          <p class="text-lg text-gray-500 max-w-3xl leading-relaxed">在海尔设备界面中，X 决定内容放在哪里，Y 决定一次展示多少信息，Z 决定什么内容应该来到用户面前。三条轴共同定义页面结构与交互节奏。</p>
+        </section>
+
+        <section id="xyz-model" class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+          <div class="mb-8"><h2 class="text-2xl font-bold text-gray-900 mb-3">XYZ 三轴</h2><p class="text-sm text-gray-500 max-w-3xl leading-6">XYZ 不是界面样式，而是用户理解信息、移动注意力和进入任务的结构。</p></div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <article class="axis-card bg-white/70 rounded-2xl border border-white"><img class="axis-image" src="assets/examples/layout/xyz-x-axis-v2.png" alt="X 轴横向导航与切换示意"><div class="axis-content p-6"><div class="axis-mark">X</div><div class="brand-text text-sm font-semibold mb-4">X · 位置与情境</div><h3 class="text-base font-semibold mb-3">我在哪里操作？</h3><p class="text-sm text-gray-500 leading-6 mb-7">组织内容、设备与服务之间的位置和流转，保持关键对象与操作锚点稳定。</p><div class="axis-line"></div><p class="mt-4 text-xs text-gray-500">位置 · 导航 · 空间迁移 · 跨设备连续性</p></div></article>
+            <article class="axis-card bg-white/70 rounded-2xl border border-white"><img class="axis-image" src="assets/examples/layout/xyz-y-axis-v2.png" alt="Y 轴纵向浏览与参数调节示意"><div class="axis-content p-6"><div class="axis-mark">Y</div><div class="brand-text text-sm font-semibold mb-4">Y · 信息跨度与节奏</div><h3 class="text-base font-semibold mb-3">此刻需要看到多少？</h3><p class="text-sm text-gray-500 leading-6 mb-7">控制从总览到细节的信息密度、纵向展开与阅读节奏，让复杂内容按需出现。</p><div class="axis-line"></div><p class="mt-4 text-xs text-gray-500">概览 · 展开 · 纵向层次 · 渐进披露</p></div></article>
+            <article class="axis-card bg-white/70 rounded-2xl border border-white"><img class="axis-image" src="assets/examples/layout/xyz-z-axis-v2.png" alt="Z 轴界面深度与任务层级示意"><div class="axis-content p-6"><div class="axis-mark">Z</div><div class="brand-text text-sm font-semibold mb-4">Z · 深度与优先级</div><h3 class="text-base font-semibold mb-3">什么应该来到面前？</h3><p class="text-sm text-gray-500 leading-6 mb-7">通过遮挡、材质、阴影和前后关系表达任务优先级。深度只用于分离重要内容。</p><div class="axis-line"></div><p class="mt-4 text-xs text-gray-500">前后景 · 焦点 · 临时浮层 · 注意力引导</p></div></article>
+          </div>
+        </section>
+
+        <section id="layer-architecture" class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-3" data-i18n-zh="三层信息架构" data-i18n-en="Three-Layer Information Architecture">三层信息架构</h2>
+          <p class="text-sm text-gray-500 leading-6 mb-6" data-i18n-zh="随着用户在交互中的深入，内容在视觉与概念层面上逐层展开更深的层次。" data-i18n-en="As users move deeper into an interaction, content unfolds through progressively deeper visual and conceptual layers.">随着用户在交互中的深入，内容在视觉与概念层面上逐层展开更深的层次。</p>
+          <figure class="layer-stage">
+            <img src="assets/examples/layout/information-layer-architecture-v2.png" alt="顶层、中层与深层的三层信息架构示意">
+            <div class="layer-copy layer-copy-top"><strong data-i18n-zh="顶层 Top:" data-i18n-en="Top Layer:">顶层 Top:</strong><span data-i18n-zh="清晰、极简、开放；带来定位感与平静感。" data-i18n-en="Clear, minimal, and open; creating a sense of orientation and calm.">清晰、极简、开放；带来定位感与平静感。</span></div>
+            <div class="layer-copy layer-copy-mid"><strong data-i18n-zh="中层 Mid:" data-i18n-en="Middle Layer:">中层 Mid:</strong><span data-i18n-zh="略有深度、柔和模糊；带来参与感与好奇心。" data-i18n-en="Gently layered with soft blur; inviting engagement and curiosity.">略有深度、柔和模糊；带来参与感与好奇心。</span></div>
+            <div class="layer-copy layer-copy-deep"><strong data-i18n-zh="深层 Deep:" data-i18n-en="Deep Layer:">深层 Deep:</strong><span data-i18n-zh="高对比、结构明确；承载核心内容或关键操作。" data-i18n-en="High contrast and clearly structured; carrying core content or critical actions.">高对比、结构明确；承载核心内容或关键操作。</span></div>
+          </figure>
+        </section>
+
+        <section id="spatial-rules" class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-7">空间深度规则</h2>
+          <div>
+            <div class="rule-row"><div class="font-semibold">聚焦视场</div><p class="text-sm text-gray-500 leading-6">将关键状态与主操作放在用户自然视线和首屏核心区域；边缘区域不放置高对比动态干扰。</p></div>
+            <div class="rule-row"><div class="font-semibold">准确提示深度</div><p class="text-sm text-gray-500 leading-6">遮挡、阴影、材质和缩放必须共同指向同一前后关系；禁止用冲突的视觉提示伪造层级。</p></div>
+            <div class="rule-row"><div class="font-semibold">用 Z 轴表达优先级</div><p class="text-sm text-gray-500 leading-6">弹窗或关键任务来到前景时，背景应退后并降低竞争；关闭后恢复原有层级和焦点。</p></div>
+            <div class="rule-row"><div class="font-semibold">克制使用深度</div><p class="text-sm text-gray-500 leading-6">深度适合分离大型且重要的元素，不用于装饰小图标或普通文本；避免频繁切换焦点距离。</p></div>
+            <div class="rule-row"><div class="font-semibold">保留交互间距</div><p class="text-sm text-gray-500 leading-6">控件之间不得重叠，悬停、选中与聚焦效果出现后仍需保持可辨识和可操作。</p></div>
+          </div>
+        </section>
+
+        <section id="checklist" class="glass-panel p-6 md:p-10 scroll-mt-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">层级验收</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm">
+            <div class="check-card bg-white/65 rounded-2xl p-6 border border-white"><h3 class="font-bold mb-4">必须满足</h3><ul class="must-list space-y-3 text-gray-600"><li>1 秒内识别当前状态与主任务</li><li>X / Y / Z 每次变化都有明确目的</li><li>前景出现时，背景降低竞争且焦点唯一</li><li>深层内容有清晰、可逆的召回路径</li><li>不同设备保持信息顺序和操作锚点一致</li></ul></div>
+            <div class="check-card bg-white/65 rounded-2xl p-6 border border-white"><h3 class="font-bold mb-4">禁止做法</h3><ul class="dont-list space-y-3 text-gray-600"><li>用阴影数量代替信息层级</li><li>让文本悬浮或制造无意义的 3D 效果</li><li>同时显示多个竞争焦点的浮层</li><li>因屏幕尺寸变化打乱任务结构</li><li>控件、悬停效果或视图互相重叠</li></ul></div>
+          </div>
+        </section>
+        <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+      </div>
+    </main>
+  </div>
+  <script src="haier-nav.js"></script>
+</body>
+</html>

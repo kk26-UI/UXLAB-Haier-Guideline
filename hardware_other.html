@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haier Design | 其它屏幕形态设计标准</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#2283E2;--ink:#1D1D1F;--muted:#667085}
+    body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#F4F7FB;color:var(--ink);overflow-x:hidden}
+    .aura{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 8% 6%,#C4E0FF 0,transparent 36%),radial-gradient(circle at 92% 82%,#E0E8FF 0,transparent 42%),#F4F7FB}
+    .glass{background:rgba(255,255,255,.72);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.7);box-shadow:0 12px 40px rgba(30,64,175,.06);border-radius:24px}
+    .haier-logo{display:flex;align-items:center;justify-content:center;background:#2283E2;color:#fff;font-weight:700;border-radius:8px}
+    .chip{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;background:#E5F0FF;color:#1769B0;font-size:12px;font-weight:600}
+    .rule{border-left:3px solid rgba(34,131,226,.38);padding-left:1.25rem}
+    .rule-card{background:rgba(255,255,255,.62);border:1px solid rgba(190,202,216,.58);border-radius:18px}.do-card,.dont-card{position:relative;overflow:hidden}.do-card:before,.dont-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}.do-card:before{background:#23A36D}.dont-card:before{background:#E05252}
+    .screen{position:relative;overflow:hidden;background:linear-gradient(145deg,#18283e,#0b1220);box-shadow:inset 0 0 0 1px #ffffff22,0 18px 45px #16365f24}
+    .safe{position:absolute;border:1px dashed #66b5ff;background:#2283e212;color:white;display:flex;align-items:center;justify-content:center;font-size:11px}
+    .spec-table th{font-size:12px;color:#667085;font-weight:600;text-align:left;padding:12px 16px;border-bottom:1px solid #E5E7EB}.spec-table td{padding:14px 16px;border-bottom:1px solid #EEF2F6;font-size:14px;vertical-align:top}.spec-table tr:last-child td{border-bottom:0}.metric{background:rgba(255,255,255,.62);border-radius:16px;padding:20px}.principle-grid{column-gap:2.5rem;row-gap:2.25rem}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:#D0D5DD;border-radius:8px}
+  </style>
+</head>
+<body class="antialiased"><div class="aura"></div>
+  <header class="md:hidden glass rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo w-10 h-10 mr-3 text-sm">Haier</div><h1 class="font-bold">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开导航"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button></header>
+  <div class="flex h-screen pt-16 md:pt-0">
+    <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden"></div>
+    <main class="flex-1 md:ml-72 p-6 md:p-12 lg:p-20 overflow-y-auto h-full">
+      <article id="hw-other" class="max-w-6xl mx-auto pb-20">
+        <header class="mb-10">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">其它屏幕形态</h1>
+          <p class="text-lg text-gray-500 max-w-3xl leading-8">面向异形屏、透明屏、投影、镜面屏、超宽与窄条屏等非标准显示载体，在真实空间中建立清晰、舒适、可控且可降级的体验。</p>
+        </header>
+
+        <section class="glass p-7 md:p-9 mb-8">
+          <h2 class="text-2xl font-bold mb-2">屏幕适应环境，内容服务任务</h2>
+          <p class="text-gray-600 leading-7 max-w-4xl">其它屏幕通常与家具、空间、材质和环境光共同构成体验。界面应根据真实使用环境控制亮度、对比度、信息密度和显示范围，优先呈现当前任务所需内容；进入更强视觉模式前须由用户主动触发，并始终提供明确退出路径。</p>
+          <div class="grid md:grid-cols-3 principle-grid mt-7">
+            <div class="rule"><h3 class="font-semibold mb-2">环境共存</h3><p class="text-sm text-gray-600 leading-6">信息轻量出现，不遮蔽环境，不抢占持续注意力。</p></div>
+            <div class="rule"><h3 class="font-semibold mb-2">局部聚焦</h3><p class="text-sm text-gray-600 leading-6">通过遮罩、亮度或声效，短时强调关键任务。</p></div>
+            <div class="rule"><h3 class="font-semibold mb-2">全幅沉浸</h3><p class="text-sm text-gray-600 leading-6">仅用于内容消费、演示等明确场景，可随时恢复环境视图。</p></div>
+          </div>
+        </section>
+
+        <section class="glass p-7 md:p-9 mb-8">
+          <div class="mb-7"><h2 class="text-2xl font-bold mb-2">屏幕形态与首要约束</h2><p class="text-sm text-gray-500">先识别显示载体与真实环境限制，再选择合适的内容和交互模式。</p></div>
+          <div class="overflow-x-auto"><table class="spec-table w-full bg-white/60 rounded-2xl overflow-hidden"><thead><tr><th>屏幕形态</th><th>首要约束</th><th>验收重点</th></tr></thead><tbody>
+            <tr><td class="font-medium">异形与曲面屏</td><td>建立可见区、内容安全区与触达区，关键信息避开圆角、开孔和强曲率区域。</td><td>结构遮挡与不同视角下，核心内容完整可见。</td></tr>
+            <tr><td class="font-medium">透明与镜面屏</td><td>使用局部底板、描边和明暗自适应，不仅依赖颜色表达状态。</td><td>在明暗、纹理和动态背景上验证可读性。</td></tr>
+            <tr><td class="font-medium">投影界面</td><td>将表面纹理、环境光、投射角度和人体遮挡纳入布局。</td><td>投影偏移或被遮挡时，关键任务仍可完成。</td></tr>
+            <tr><td class="font-medium">超宽与窄条屏</td><td>按视线与任务分段重排内容，不整体缩小标准页面。</td><td>单一主任务清晰，跨区操作路径不过长。</td></tr>
+            <tr><td class="font-medium">低刷新与电子纸</td><td>减少连续动画和频繁刷新，用版式、图形与文字共同表达变化。</td><td>刷新过程中不产生可误解的残影或状态。</td></tr>
+            <tr><td class="font-medium">多屏与拼接屏</td><td>明确主次屏与跨屏连续性，关键控件避开拼缝。</td><td>断连时每块屏仍能表达必要状态。</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section class="glass p-7 md:p-9 mb-8">
+          <div class="grid lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <h2 class="text-2xl font-bold mb-4">边界与安全区</h2>
+              <ol class="space-y-4 text-sm text-gray-600 leading-6">
+                <li><b class="text-gray-900">1. 可见区</b>：以量产结构件、装配公差与典型观看角度测量实际可见范围。</li>
+                <li><b class="text-gray-900">2. 内容安全区</b>：在可见区内再次留白，承载标题、数值、告警与核心状态。</li>
+                <li><b class="text-gray-900">3. 交互安全区</b>：依据输入方式单独定义；可看见不代表可触达或可准确点击。</li>
+              </ol>
+              <div class="rule rounded-r-xl p-4 mt-5 text-sm text-gray-600">所有安全区尺寸必须由真实硬件样机验证，不可仅依据渲染图推算。</div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="screen aspect-square rounded-[38%_16%_38%_16%]"><div class="safe inset-[18%] rounded-2xl">关键内容区</div></div>
+              <div class="screen aspect-square rounded-full"><div class="safe inset-[21%] rounded-full">关键内容区</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="glass p-7 md:p-9 mb-8">
+          <h2 class="text-2xl font-bold mb-7">使用边界</h2>
+          <div class="grid md:grid-cols-2 gap-5">
+            <div class="rule-card do-card p-6 pl-7"><p class="text-xs font-bold text-emerald-600 mb-4">DO</p><ul class="space-y-3 text-sm text-gray-600"><li>• 根据屏幕形态重新组织信息层级与阅读方向。</li><li>• 优先保留当前状态、核心任务和必要操作。</li><li>• 为边缘、拼缝、开孔和结构遮挡保留安全距离。</li><li>• 在真实材质、角度与环境光下验证设计。</li></ul></div>
+            <div class="rule-card dont-card p-6 pl-7"><p class="text-xs font-bold text-red-500 mb-4">DON’T</p><ul class="space-y-3 text-sm text-gray-600"><li>• 不要将标准页面直接等比缩小后套用。</li><li>• 不要为了填满画布而增加无关信息和装饰。</li><li>• 不要让边缘内容、高亮或动效持续争抢注意力。</li><li>• 不要假设可显示区域同时也是可触达区域。</li></ul></div>
+          </div>
+        </section>
+
+        <section class="glass p-7 md:p-9 mb-8">
+          <div class="mb-7"><h2 class="text-2xl font-bold mb-2">舒适度与用户控制</h2><p class="text-sm text-gray-500">视觉表现不得妨碍用户理解环境、设备状态或退出当前体验。</p></div>
+          <div class="overflow-x-auto"><table class="spec-table w-full bg-white/60 rounded-2xl overflow-hidden"><thead><tr><th>原则</th><th>设计要求</th><th>验收重点</th></tr></thead><tbody>
+            <tr><td class="font-medium">温和提示</td><td>优先使用轻微亮度、局部遮罩、尺寸和声音提示引导注意。</td><td>仅在告警等必要情境中增强提示强度。</td></tr>
+            <tr><td class="font-medium">安全姿态</td><td>避免要求用户持续抬头、追逐信息或跨越障碍完成操作。</td><td>不同身高、站坐姿与移动状态下均可安全使用。</td></tr>
+            <tr><td class="font-medium">可预测转换</td><td>模式、亮度和显示区域变化应平滑且可追踪。</td><td>无突发全屏、高亮闪烁或方向跳变。</td></tr>
+            <tr><td class="font-medium">明确进退</td><td>沉浸、投影扩展或隐私显示由用户主动开启，并提供常驻退出控制。</td><td>返回、暂停和关闭的结果清晰且可恢复。</td></tr>
+            <tr><td class="font-medium">减少动态</td><td>为视敏感用户提供静态替代，信息不依赖动画过程或单一感官。</td><td>关闭动效后仍能完整理解状态和结果。</td></tr>
+            <tr><td class="font-medium">真实状态可见</td><td>不得隐藏门体、加热、制冷、运转或安全等设备关键状态。</td><td>任何视觉模式下均能识别安全相关反馈。</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section class="glass overflow-hidden mb-8">
+          <div class="p-7 md:p-9 pb-4"><h2 class="text-2xl font-bold">环境与可读性基线</h2></div>
+          <div class="overflow-x-auto px-7 md:px-9 pb-8"><table class="spec-table w-full bg-white/60 rounded-2xl overflow-hidden"><thead><tr><th>验证维度</th><th>最低要求</th><th>推荐检查</th></tr></thead><tbody>
+            <tr><td><b>环境光</b></td><td>明暗环境中均能识别核心状态</td><td>逆光、反射、夜间与局部强光</td></tr>
+            <tr><td><b>观看位置</b></td><td>典型距离与偏角下信息层级稳定</td><td>站姿、坐姿、儿童视线与侧视角</td></tr>
+            <tr><td><b>背景变化</b></td><td>透明/投影内容在复杂背景上可辨</td><td>浅色、深色、纹理与移动背景</td></tr>
+            <tr><td><b>输入反馈</b></td><td>每次操作都有即时、可感知的确认</td><td>触控失败、误触、遮挡和戴手套</td></tr>
+            <tr><td><b>能力降级</b></td><td>断网、低亮、低刷新时保留核心任务</td><td>传感器异常、多屏断连与性能下降</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section class="glass p-7 md:p-9 mb-8">
+          <h2 class="text-2xl font-bold mb-4">感知、隐私与空间数据</h2>
+          <p class="text-sm text-gray-600 leading-6 max-w-4xl">当屏幕体验使用人体存在、视线、手势、房间结构、摄像头或麦克风数据时，只在功能确需时请求权限，并说明用途。公共或半公共空间默认隐藏个人信息；感知中断时不得让虚拟控件停留在可误解的状态，应平滑降级为明确的基础交互。</p>
+        </section>
+
+        <section class="glass p-7 md:p-9">
+          <h2 class="text-2xl font-bold mb-6">设计与验收流程</h2>
+          <div class="grid md:grid-cols-5 gap-4">
+            <div class="bg-white/70 rounded-xl p-4"><b>01 边界建模</b><p class="text-xs text-gray-500 mt-2">可见区、触达区、安全区</p></div>
+            <div class="bg-white/70 rounded-xl p-4"><b>02 场景分级</b><p class="text-xs text-gray-500 mt-2">共存、聚焦、全幅模式</p></div>
+            <div class="bg-white/70 rounded-xl p-4"><b>03 重排与降级</b><p class="text-xs text-gray-500 mt-2">保留主任务和替代反馈</p></div>
+            <div class="bg-white/70 rounded-xl p-4"><b>04 样机验证</b><p class="text-xs text-gray-500 mt-2">真实材质、光照和角度</p></div>
+            <div class="bg-white/70 rounded-xl p-4"><b>05 极端验收</b><p class="text-xs text-gray-500 mt-2">断连、遮挡、误触与无障碍</p></div>
+          </div>
+        </section>
+      </article>
+      <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+    </main>
+  </div>
+  <script src="hardware-i18n.js"></script><script src="haier-nav.js"></script>
+</body>
+</html>

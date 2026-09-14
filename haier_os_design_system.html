@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haier Design | 多模态与跨端设计规范</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-primary: #2283E2;
+            --brand-light: #E5F0FF;
+            --text-main: #1D1D1F;
+            --text-secondary: #86868B;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #F5F7FA;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* 弥散光晕动画背景 */
+        .aura-background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: #F4F7FB;
+        }
+        .aura-blob {
+            position: absolute;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .aura-blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #C4E0FF; animation-delay: 0s; }
+        .aura-blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: #E0E8FF; animation-delay: -5s; }
+        .aura-blob-3 { top: 40%; left: 60%; width: 40vw; height: 40vw; background: #E8F4FF; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
+        }
+
+        /* 磨玻璃质感卡片核心类 */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            border-radius: 24px;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar-nav-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-nav-item.active {
+            color: var(--brand-primary);
+            font-weight: 600;
+            border-left-color: var(--brand-primary);
+            background: linear-gradient(90deg, var(--brand-light) 0%, transparent 100%);
+        }
+
+        /* 代码与Token块 */
+        .token-block {
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        
+        /* 隐藏原生滚动条，美化 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+        /* Haier 纯文本 Logo 的基础样式 */
+        .haier-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2283E2; /* 海尔蓝 */
+            color: white;
+            font-family: Arial, Helvetica, sans-serif; /* 使用最基础的无衬线字体 */
+            font-weight: bold;
+            border-radius: 8px; /* 轻微圆角 */
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="aura-background">
+        <div class="aura-blob aura-blob-1"></div>
+        <div class="aura-blob aura-blob-2"></div>
+        <div class="aura-blob aura-blob-3"></div>
+    </div>
+    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">
+                Haier
+            </div>
+            <h1 class="font-bold text-lg">Haier Design</h1>
+        </div>
+        <button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </header>
+
+    <div class="flex h-screen pt-16 md:pt-0">
+<aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+        <main class="flex-1 md:ml-72 p-6 md:p-12 lg:p-20 overflow-y-auto h-full scroll-smooth" id="main-content">
+            <section class="mb-20 pt-10">
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-gray-900 leading-tight">NEXT UX <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500" data-i18n-zh="设计规范" data-i18n-en="Guideline">设计规范</span></h1>
+                <p class="text-xl text-text-secondary max-w-3xl leading-relaxed">
+                    <span data-i18n-zh="Haier UX Guideline 不仅是一套跨设备的 UI 库，更是一套连接屏幕显示、物理触觉、环境灯光与三维声音的“多感官编排系统”。我们以简约、清爽为基调，通过高度模块化的工程手段，赋能全品类家电产品的智能化进化。" data-i18n-en="Haier Design 1.0.0 is more than a cross-device UI library. It is a multisensory orchestration system connecting screen display, physical haptics, ambient lighting, and spatial audio for intelligent product experiences.">Haier Design 1.0.0 不仅是一套跨设备的 UI 库，更是一套连接屏幕显示、物理触觉、环境灯光与三维声音的“多感官编排系统”。我们以简约、清爽为基调，通过高度模块化的工程手段，赋能全品类家电产品的智能化进化。</span>
+                </p>
+            </section>
+
+            <hr class="border-t border-black/5 mb-16">
+
+            <section class="mb-20">
+    <h2 class="text-3xl font-bold mb-8" data-i18n-zh="规范目录" data-i18n-en="Guideline Catalog">规范目录</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <a href="design_principles.html" class="glass-panel p-6 hover:shadow-lg transition block"><span class="text-sm text-blue-600 font-semibold">01</span><h3 class="text-xl font-bold mt-2 mb-2" data-i18n-zh="设计体验原则" data-i18n-en="UX Principles">设计体验原则</h3><p class="text-sm text-gray-500" data-i18n-zh="设计决策的最高原则与体验取舍依据。" data-i18n-en="Top-level principles for experience decisions.">设计决策的最高原则与体验取舍依据。</p></a>
+        <a href="foundations.html" class="glass-panel p-6 hover:shadow-lg transition block"><span class="text-sm text-blue-600 font-semibold">02</span><h3 class="text-xl font-bold mt-2 mb-2" data-i18n-zh="基础" data-i18n-en="Foundations">基础</h3><p class="text-sm text-gray-500" data-i18n-zh="视觉基础、色彩、字体与布局基础。" data-i18n-en="Visual foundations, color, typography, and layout basics.">视觉基础、色彩、字体与布局基础。</p></a>
+        <a href="components.html" class="glass-panel p-6 hover:shadow-lg transition block"><span class="text-sm text-blue-600 font-semibold">03</span><h3 class="text-xl font-bold mt-2 mb-2" data-i18n-zh="组件" data-i18n-en="Components">组件</h3><p class="text-sm text-gray-500" data-i18n-zh="操作、输入、导航、数据与反馈组件。" data-i18n-en="Action, input, navigation, data, and feedback components.">操作、输入、导航、数据与反馈组件。</p></a>
+        <a href="hardware_tft.html" class="glass-panel p-6 hover:shadow-lg transition block"><span class="text-sm text-blue-600 font-semibold">04</span><h3 class="text-xl font-bold mt-2 mb-2" data-i18n-zh="硬件" data-i18n-en="Hardware">硬件</h3><p class="text-sm text-gray-500" data-i18n-zh="TFT、LED 与其它屏幕形态规范。" data-i18n-en="TFT, LED, and other screen form-factor guidelines.">TFT、LED 与其它屏幕形态规范。</p></a>
+        <a href="motion.html" class="glass-panel p-6 hover:shadow-lg transition block"><span class="text-sm text-blue-600 font-semibold">05</span><h3 class="text-xl font-bold mt-2 mb-2" data-i18n-zh="动效" data-i18n-en="Motion">动效</h3><p class="text-sm text-gray-500" data-i18n-zh="背景动效、转场与微交互。" data-i18n-en="Background motion, transitions, and micro-interactions.">背景动效、转场与微交互。</p></a>
+        <a href="lighting.html" class="glass-panel p-6 hover:shadow-lg transition block"><span class="text-sm text-blue-600 font-semibold">06</span><h3 class="text-xl font-bold mt-2 mb-2" data-i18n-zh="多感官" data-i18n-en="Sensory">多感官</h3><p class="text-sm text-gray-500" data-i18n-zh="灯光、触摸与音效反馈规范。" data-i18n-en="Lighting, touch, and audio feedback guidelines.">灯光、触摸与音效反馈规范。</p></a>
+        <a href="ai.html" class="glass-panel p-6 hover:shadow-lg transition block"><span class="text-sm text-blue-600 font-semibold">07</span><h3 class="text-xl font-bold mt-2 mb-2" data-i18n-zh="AI" data-i18n-en="AI">AI</h3><p class="text-sm text-gray-500" data-i18n-zh="AI 视觉标准与使用标准。" data-i18n-en="AI visual standards and usage guidelines.">AI 视觉标准与使用标准。</p></a>
+        <a href="assets.html" class="glass-panel p-6 hover:shadow-lg transition block"><span class="text-sm text-blue-600 font-semibold">08</span><h3 class="text-xl font-bold mt-2 mb-2" data-i18n-zh="资产与推行" data-i18n-en="Assets & Governance">资产与推行</h3><p class="text-sm text-gray-500" data-i18n-zh="强制标准、UT、Figma 与验收机制。" data-i18n-en="Mandatory standards, UT, Figma assets, and QA governance.">强制标准、UT、Figma 与验收机制。</p></a>
+    </div>
+</section>
+
+            <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+
+        </main>
+    </div>
+
+    <script src="haier-nav.js"></script>
+    <script>
+        // 左侧导航由 haier-nav.js 统一渲染与管理。
+    </script>
+</body>
+</html>

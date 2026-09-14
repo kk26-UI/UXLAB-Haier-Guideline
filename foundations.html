@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-zh="Haier Design | 基础" data-i18n-en="Haier Design | Foundations">Haier Design | 基础</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-primary: #2283E2;
+            --brand-light: #E5F0FF;
+            --text-main: #1D1D1F;
+            --text-secondary: #86868B;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #F5F7FA;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* 弥散光晕动画背景 */
+        .aura-background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: #F4F7FB;
+        }
+        .aura-blob {
+            position: absolute;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .aura-blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #C4E0FF; animation-delay: 0s; }
+        .aura-blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: #E0E8FF; animation-delay: -5s; }
+        .aura-blob-3 { top: 40%; left: 60%; width: 40vw; height: 40vw; background: #E8F4FF; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
+        }
+
+        /* 磨玻璃质感卡片核心类 */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            border-radius: 24px;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar-nav-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-nav-item.active {
+            color: var(--brand-primary);
+            font-weight: 600;
+            border-left-color: var(--brand-primary);
+            background: linear-gradient(90deg, var(--brand-light) 0%, transparent 100%);
+        }
+
+        /* 代码与Token块 */
+        .token-block {
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        
+        /* 隐藏原生滚动条，美化 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+        /* Haier 纯文本 Logo 的基础样式 */
+        .haier-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2283E2; /* 海尔蓝 */
+            color: white;
+            font-family: Arial, Helvetica, sans-serif; /* 使用最基础的无衬线字体 */
+            font-weight: bold;
+            border-radius: 8px; /* 轻微圆角 */
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="aura-background">
+        <div class="aura-blob aura-blob-1"></div>
+        <div class="aura-blob aura-blob-2"></div>
+        <div class="aura-blob aura-blob-3"></div>
+    </div>
+    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">
+                Haier
+            </div>
+            <h1 class="font-bold text-lg">Haier Design</h1>
+        </div>
+        <button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </header>
+
+    <div class="flex h-screen pt-16 md:pt-0">
+<aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+        <main class="flex-1 md:ml-72 p-6 md:p-12 lg:p-20 overflow-y-auto h-full scroll-smooth" id="main-content">
+            <section id="foundations" class="mb-20 scroll-mt-10">
+                <h2 class="text-3xl font-bold mb-2" data-i18n-zh="2. 基础" data-i18n-en="2. Foundations">2. 基础</h2>
+                <p class="text-gray-500 mb-8">确保全品类达到 90% 统一度的物理底座，要求极度严谨。</p>
+                
+                <div id="foundations-visual" class="glass-panel p-8 md:p-10 mb-8 scroll-mt-10">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900" data-i18n-zh="2.1 视觉基础" data-i18n-en="2.1 Visual Foundations">2.1 视觉基础</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <a href="color_details.html" class="bg-white/60 rounded-xl p-5 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer group block relative overflow-hidden">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 group-hover:text-blue-700 transition-colors" data-i18n-zh="2.1.1 色彩" data-i18n-en="2.1.1 Color">2.1.1 色彩</h4>
+                                <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </div>
+                            <p class="text-xs text-gray-500 group-hover:text-blue-600/70 transition-colors leading-relaxed">主色调、警告色及深浅模式色阶定义。</p>
+                        </a>
+
+                        <a href="typography_details.html" class="bg-white/60 rounded-xl p-5 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer group block relative overflow-hidden">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 group-hover:text-blue-700 transition-colors" data-i18n-zh="2.1.2 字体" data-i18n-en="2.1.2 Typography">2.1.2 字体</h4>
+                                <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </div>
+                            <p class="text-xs text-gray-500 group-hover:text-blue-600/70 transition-colors leading-relaxed">远距离阅读大字号规范与等宽数字字体规范。</p>
+                        </a>
+
+                        <a href="iconography_details.html" class="bg-white/60 rounded-xl p-5 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer group block relative overflow-hidden">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 group-hover:text-blue-700 transition-colors">2.1.3 图标</h4>
+                                <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </div>
+                            <p class="text-xs text-gray-500 group-hover:text-blue-600/70 transition-colors leading-relaxed">线/面性图标基准及不可更改的强约束图标。</p>
+                        </a>
+
+                        <a href="materials_lighting_details.html" class="bg-white/60 rounded-xl p-5 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer group block relative overflow-hidden">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-gray-800 group-hover:text-blue-700 transition-colors">2.1.4 材质</h4>
+                                <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </div>
+                            <p class="text-xs text-gray-500 group-hover:text-blue-600/70 transition-colors leading-relaxed">材质、模糊、投影与高光 Token。</p>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="foundations-layout" class="glass-panel p-8 md:p-10 mb-10 scroll-mt-10">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900" data-i18n-zh="2.2 布局基础" data-i18n-en="2.2 Layout Foundations">2.2 布局基础</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <a href="spatial_depth_details.html" class="bg-white/60 rounded-xl p-5 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer group block relative overflow-hidden">
+                            <h4 class="font-bold text-gray-800 group-hover:text-blue-700 transition-colors mb-2">2.2.1 信息架构</h4>
+                            <p class="text-xs text-gray-500 group-hover:text-blue-600/70 transition-colors leading-relaxed">用 X、Y、Z 三个轴组织位置、信息跨度与前后层级。</p>
+                        </a>
+                        <a href="hero_element_details.html" class="bg-white/60 rounded-xl p-5 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer group block relative overflow-hidden">
+                            <h4 class="font-bold text-gray-800 group-hover:text-blue-700 transition-colors mb-2">2.2.2 核心要素</h4>
+                            <p class="text-xs text-gray-500 group-hover:text-blue-600/70 transition-colors leading-relaxed">主视觉对齐方式与核心操作区热区。</p>
+                        </a>
+                        <a href="spacing_layout_details.html" class="bg-white/60 rounded-xl p-5 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer group block relative overflow-hidden">
+                            <h4 class="font-bold text-gray-800 group-hover:text-blue-700 transition-colors mb-2">2.2.3 排版</h4>
+                            <p class="text-xs text-gray-500 group-hover:text-blue-600/70 transition-colors leading-relaxed">8pt、12pt 等基础间距体系规范。</p>
+                        </a>
+                        <a href="grid_system_details.html" class="bg-white/60 rounded-xl p-5 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer group block relative overflow-hidden">
+                            <h4 class="font-bold text-gray-800 group-hover:text-blue-700 transition-colors mb-2">2.2.4 栅格系统</h4>
+                            <p class="text-xs text-gray-500 group-hover:text-blue-600/70 transition-colors leading-relaxed">指导不同硬件、分辨率与屏幕方向的响应式栅格规范。</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            
+            
+            <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+
+        </main>
+    </div>
+
+    <script src="haier-nav.js"></script>
+    <script>
+        // 左侧导航由 haier-nav.js 统一渲染与管理。
+    </script>
+</body>
+</html>
