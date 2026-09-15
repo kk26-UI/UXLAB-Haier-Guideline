@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haier Design | 组件</title>
+    <title>Haier Design | 菜单</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @font-face { font-family:'HIDC Numeral'; src:url('assets/fonts/HIDC-Numeral-Medium.ttf') format('truetype'); font-display:swap; }
-        .hidc-numeral { font-family:'HIDC Numeral','Inter',sans-serif; }
-        .fz-lanting-numeral { font-family:'FZLanTingHeiS-R-GB','FZLanTingHei-R-GBK','方正兰亭黑','Lantinghei SC','Inter',sans-serif; }
         :root { --brand-primary:#2283E2; --brand-light:#E5F0FF; --text-main:#1D1D1F; --text-secondary:#86868B; --glass-bg:rgba(255,255,255,.6); --glass-border:rgba(255,255,255,.4); }
         body { font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; background:#F5F7FA; color:var(--text-main); overflow-x:hidden; }
         .aura-background { position:fixed; inset:0; z-index:-1; overflow:hidden; background:#F4F7FB; }
@@ -30,12 +27,7 @@
     <div class="flex h-screen pt-16 md:pt-0">
         <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
         <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
-        <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
-            <div class="max-w-[1200px] mx-auto pb-24">
-                <div id="component-page"></div>
-                <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
-            </div>
-        </main>
+        <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content"><div class="max-w-[1200px] mx-auto pb-24"><div id="component-page"></div><footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer></div></main>
     </div>
     <script src="component-page.js"></script>
     <script src="haier-nav.js"></script>

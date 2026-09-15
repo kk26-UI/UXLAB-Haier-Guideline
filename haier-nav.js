@@ -35,11 +35,11 @@ const HAIER_NAV_GROUPS = [
       { label: '复选框', href: 'component_checkbox.html', page: 'component_checkbox.html', child: true },
       { label: '选择器', href: 'component_wheel_picker.html', page: 'component_wheel_picker.html', child: true },
       { label: '3.3 输入类', id: 'components-input', disabled: true },
-      { label: '文本框', href: 'component_text_field.html', page: 'component_text_field.html', child: true },
+      { label: '输入框', href: 'component_text_field.html', page: 'component_text_field.html', child: true },
       { label: '调控', href: 'component_slider.html', page: 'component_slider.html', child: true },
       { label: '键盘', href: 'component_keyboard.html', page: 'component_keyboard.html', child: true },
       { label: '3.4 导航类', id: 'components-nav', disabled: true },
-      { label: '应用栏', href: 'component_app_bar.html', page: 'component_app_bar.html', child: true },
+      { label: '菜单', href: 'component_menu.html', page: 'component_menu.html', child: true },
       { label: '导航', href: 'component_navigation.html', page: 'component_navigation.html', child: true },
       { label: '标签页', href: 'component_tabs.html', page: 'component_tabs.html', child: true },
       { label: '面包屑', href: 'component_breadcrumbs.html', page: 'component_breadcrumbs.html', child: true },
@@ -137,11 +137,11 @@ const HAIER_NAV_LABEL_EN = {
   '3.2.2 复选框': '3.2.2 Checkbox',
   '3.2.3 选择器': '3.2.3 Wheel Picker',
   '3.3 输入类': '3.3 Inputs',
-  '3.3.1 文本框': '3.3.1 Text Field',
+  '3.3.1 输入框': '3.3.1 Input',
   '3.3.2 调控': '3.3.2 Control',
   '3.3.3 键盘': '3.3.3 Keyboard',
   '3.4 导航类': '3.4 Navigation',
-  '3.4.1 应用栏': '3.4.1 App Bar',
+  '3.4.1 菜单': '3.4.1 Menu',
   '3.4.2 导航': '3.4.2 Navigation',
   '3.4.3 标签页': '3.4.3 Tabs',
   '3.4.4 面包屑': '3.4.4 Breadcrumbs',
@@ -164,10 +164,10 @@ const HAIER_NAV_LABEL_EN = {
   '单选框': 'Radio Button',
   '复选框': 'Checkbox',
   '选择器': 'Wheel Picker',
-  '文本框': 'Text Field',
+  '输入框': 'Input',
   '调控': 'Control',
   '键盘': 'Keyboard',
-  '应用栏': 'App Bar',
+  '菜单': 'Menu',
   '导航': 'Navigation',
   '标签页': 'Tabs',
   '面包屑': 'Breadcrumbs',
@@ -214,7 +214,7 @@ const HAIER_NAV_LABEL_EN = {
 
   if (!sidebar) return;
 
-  const currentPage = window.location.pathname.split('/').pop() || 'haier_os_design_system.html';
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   const currentLanguage = localStorage.getItem('haier-guideline-language') || 'zh';
   const sensorySubpages = new Set(['lighting.html', 'touch.html', 'audio.html']);
   let scrollSpyPausedUntil = 0;
@@ -228,8 +228,8 @@ const HAIER_NAV_LABEL_EN = {
     : stripNavNumber(HAIER_NAV_LABEL_EN[label] || label);
   const normalizeHref = (href) =>
     href.replace(
-      /^haier_os_design_system\.html(?=#)/,
-      currentPage === 'haier_os_design_system.html' ? '' : 'haier_os_design_system.html'
+      /^(?:haier_os_design_system|Haier_Guideline|index)\.html(?=#)/,
+      currentPage === 'index.html' ? '' : 'index.html'
     );
   const currentHash = window.location.hash.replace('#', '');
   const currentGroup = HAIER_NAV_GROUPS.find((group) =>
@@ -783,8 +783,7 @@ const HAIER_NAV_LABEL_EN = {
   Object.assign(FALLBACK_I18N_EN, window.HAIER_HARDWARE_I18N_EN || {});
 
   const PAGE_TITLE_EN = {
-    'haier_os_design_system.html': 'Haier Design | Multimodal & Cross-device Design Guidelines',
-    'principles.html': 'Haier Design | User Experience Principles',
+    'index.html': 'Haier Design | Multimodal & Cross-device Design Guidelines',
     'design_principles.html': 'Haier Design | User Experience Principles',
     'brand.html': 'Haier Design | Brand',
     'foundations.html': 'Haier Design | Foundations',
@@ -799,7 +798,6 @@ const HAIER_NAV_LABEL_EN = {
     'components.html': 'Haier Design | Components',
     'hardware.html': 'Haier Design | Hardware',
     'motion.html': 'Haier Design | Motion',
-    'sensory.html': 'Haier Design | Sensory Interaction',
     'lighting.html': 'Haier Design | Lighting',
     'touch.html': 'Haier Design | Touch',
     'audio.html': 'Haier Design | Audio',
@@ -809,7 +807,7 @@ const HAIER_NAV_LABEL_EN = {
   };
 
   const normalizeTopHomeLink = () => {
-    if (!mainContent || currentPage === 'haier_os_design_system.html') return;
+    if (!mainContent || currentPage === 'index.html') return;
 
     const pageTitle = mainContent.querySelector('h1');
     const isSensorySubpage = sensorySubpages.has(currentPage);
@@ -829,18 +827,18 @@ const HAIER_NAV_LABEL_EN = {
       mainContent.classList.add('guideline-sensory-main');
       container?.classList.add('guideline-sensory-page');
     }
-    let link = mainContent.querySelector('a[href="haier_os_design_system.html"], a[href="foundations.html"]');
+    let link = mainContent.querySelector('a[href="index.html"], a[href="haier_os_design_system.html"], a[href="Haier_Guideline.html"], a[href="foundations.html"]');
 
     if (!link && container) {
       const wrapper = document.createElement('div');
       wrapper.className = 'guideline-top-actions flex items-center justify-between mb-8';
-      wrapper.innerHTML = '<a href="haier_os_design_system.html" class="px-4 py-2 bg-white/50 hover:bg-white/90 rounded-full transition-colors flex items-center text-gray-700 shadow-sm border border-gray-200/50 backdrop-blur-md"><span class="text-sm font-semibold"></span></a>';
+      wrapper.innerHTML = '<a href="index.html" class="px-4 py-2 bg-white/50 hover:bg-white/90 rounded-full transition-colors flex items-center text-gray-700 shadow-sm border border-gray-200/50 backdrop-blur-md"><span class="text-sm font-semibold"></span></a>';
       container.prepend(wrapper);
       link = wrapper.querySelector('a');
     }
 
     if (!link) return;
-    link.href = 'haier_os_design_system.html';
+    link.href = 'index.html';
     link.className = 'guideline-home-link px-4 py-2 bg-white/50 hover:bg-white/90 rounded-full transition-colors flex items-center text-gray-700 shadow-sm border border-gray-200/50 backdrop-blur-md';
     const label = link.querySelector('span') || link;
     if (label !== link) label.className = 'text-sm font-semibold';
@@ -1231,7 +1229,7 @@ const HAIER_NAV_LABEL_EN = {
       <button type="button" class="hidden md:flex absolute top-6 right-5" aria-label="收起左侧导航" title="收起导航" data-sidebar-collapse>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
       </button>
-      <a href="haier_os_design_system.html" class="inline-block" aria-label="Haier NEXT UX Guideline 首页"><img class="haier-brand-lockup" src="assets/brand/haier-logo.svg" alt="Haier"></a>
+      <a href="index.html" class="inline-block" aria-label="Haier NEXT UX Guideline 首页"><img class="haier-brand-lockup" src="assets/brand/haier-logo.svg" alt="Haier"></a>
       <p class="haier-brand-tagline text-sm">NEXT UX Guideline 1.0.0</p>
     </div>
     <nav class="flex-1 px-4 pb-12 space-y-1" aria-label="章节目录">
