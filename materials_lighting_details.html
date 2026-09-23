@@ -22,7 +22,7 @@
     .surface-focus{background:rgba(255,255,255,.68);backdrop-filter:blur(24px) saturate(120%);-webkit-backdrop-filter:blur(24px) saturate(120%)}
     .surface-media{background:rgba(255,255,255,.34);backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%);border-color:rgba(255,255,255,.62);box-shadow:inset 0 1px rgba(255,255,255,.72),0 4px 12px rgba(16,24,40,.08)}
     .principle-card{background:none;border:0;border-radius:0;padding:0;box-shadow:none}
-    .principle-number{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#2283E2;color:#fff;font-size:12px;font-weight:700;margin-bottom:14px}
+    .principle-number{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#2283E2;color:#fff;font-size:12px;font-weight:700;flex:0 0 auto}.principle-heading{display:flex;align-items:center;gap:10px;margin-bottom:10px}
     .spec-row{display:grid;grid-template-columns:128px 1fr;gap:20px;padding:18px 0;border-top:1px solid var(--line)}.spec-row:first-child{border-top:0}
     .token{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;color:#475467;background:#F2F4F7;border:1px solid #EAECF0;border-radius:7px;padding:.24rem .46rem;white-space:nowrap}
     .shadow-stage{background:linear-gradient(#f9fbfd,#eef3f8)}.shadow-swatch{min-height:108px;background:#fff;border:1px solid rgba(15,23,42,.04)}
@@ -46,9 +46,9 @@
         <section id="principles" class="glass-panel scroll-mt-8">
           <div class="mb-8"><h2 class="font-bold mb-3">设计原则</h2><p class="text-sm text-gray-500 leading-6 max-w-3xl">材质不是装饰滤镜。先确定元素在任务中的语义与层级，再选择视觉表现；任何效果都不能牺牲状态识别、文本对比度和操作确定性。</p></div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <article class="principle-card"><div class="principle-number">01</div><h3 class="font-bold text-gray-900 mb-2">内容优先</h3><p class="text-sm text-gray-600 leading-relaxed">设备状态、环境数据和主任务始终清晰。材质只能帮助理解，不得与内容争夺注意力。</p></article>
-            <article class="principle-card"><div class="principle-number">02</div><h3 class="font-bold text-gray-900 mb-2">语义选材</h3><p class="text-sm text-gray-600 leading-relaxed">同一用途跨端使用同一材质角色，不以“更亮、更透明、更科技”作为选择依据。</p></article>
-            <article class="principle-card"><div class="principle-number">03</div><h3 class="font-bold text-gray-900 mb-2">克制分层</h3><p class="text-sm text-gray-600 leading-relaxed">内容层保持稳定，功能层按需浮现。一个视图原则上只保留一个最高悬浮层级。</p></article>
+            <article class="principle-card"><div class="principle-heading"><div class="principle-number">01</div><h3 class="font-bold text-gray-900">内容优先</h3></div><p class="text-sm text-gray-600 leading-relaxed">设备状态、环境数据和主任务始终清晰。材质只能帮助理解，不得与内容争夺注意力。</p></article>
+            <article class="principle-card"><div class="principle-heading"><div class="principle-number">02</div><h3 class="font-bold text-gray-900">语义选材</h3></div><p class="text-sm text-gray-600 leading-relaxed">同一用途跨端使用同一材质角色，不以“更亮、更透明、更科技”作为选择依据。</p></article>
+            <article class="principle-card"><div class="principle-heading"><div class="principle-number">03</div><h3 class="font-bold text-gray-900">克制分层</h3></div><p class="text-sm text-gray-600 leading-relaxed">内容层保持稳定，功能层按需浮现。一个视图原则上只保留一个最高悬浮层级。</p></article>
           </div>
         </section>
 
