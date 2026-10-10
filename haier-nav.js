@@ -91,8 +91,8 @@ const HAIER_NAV_GROUPS = [
     id: 'ai',
     label: '7. AI',
     items: [
-      { label: '7.1 AI 视觉标准', href: 'ai.html#ai-visual', id: 'ai-visual' },
-      { label: '7.2 AI 使用标准', href: 'ai.html#ai-usage', id: 'ai-usage' },
+      { label: '7.1 AI 使用标准', href: 'ai_usage.html', page: 'ai_usage.html', id: 'ai-usage' },
+      { label: '7.2 AI 视觉标准', href: 'ai_visual.html', page: 'ai_visual.html', id: 'ai-visual' },
     ],
   },
   {
@@ -198,8 +198,8 @@ const HAIER_NAV_LABEL_EN = {
   '触摸 Touch': 'Touch',
   '音效 Audio': 'Audio',
   '7. AI': '7. AI',
-  '7.1 AI 视觉标准': '7.1 AI Visual Standards',
-  '7.2 AI 使用标准': '7.2 AI Usage Guidelines',
+  '7.1 AI 使用标准': '7.1 AI Usage Guidelines',
+  '7.2 AI 视觉标准': '7.2 AI Visual Standards',
   '8. 资产与推行 Assets': '8. Assets & Governance',
   '8.1 强制规范标准': '8.1 Mandatory Standards',
   '8.2 UT数据推导与沉淀': '8.2 UT Data',

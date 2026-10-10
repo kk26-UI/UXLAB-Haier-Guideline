@@ -12,9 +12,11 @@
     .glass-panel{background:rgba(255,255,255,.68);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.5);box-shadow:0 8px 32px rgba(0,0,0,.04);border-radius:24px}
     .sidebar-nav-item{transition:all .3s ease;border-left:3px solid transparent}.sidebar-nav-item.active{color:#2283e2;font-weight:600;border-left-color:#2283e2;background:linear-gradient(90deg,#e5f0ff,transparent)}
     .haier-logo-container{display:flex;align-items:center;justify-content:center;background:#2283e2;color:#fff;font-family:Arial,sans-serif;font-weight:bold;border-radius:8px}
-    .rule{border-top:1px solid rgba(15,23,42,.09);padding:18px 0}.rule:first-child{border-top:0}
+    .rule{padding:18px 0}
     .example-image{display:block;width:100%;height:auto;border-radius:12px}
     .example-card{background:#fff;border:1px solid #e5eaf1;border-radius:18px;padding:16px}
+    .static-examples .example-card{border:0}
+    .led-examples .example-card{border:0}
     .mode-video{display:block;width:100%;aspect-ratio:3.166/1;object-fit:cover;object-position:center;border-radius:12px;background:#071b31}
     .led-glow-card{display:flex;flex-direction:column;height:100%}
     .led-glow-stage{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1/1;overflow:hidden;border-radius:12px;background:#000}
@@ -42,13 +44,15 @@
 
         <section class="glass-panel p-6 md:p-10 mb-8"><h2 class="text-2xl font-bold mb-3">TFT 屏幕背景</h2><p class="text-sm text-gray-500 mb-8">依据交互模式选择背景语义；动态与静态是实现形式，不能替代 AI / 常规模式的区分。</p>
           <div class="grid md:grid-cols-2 gap-5 mb-8">
-            <article class="rounded-2xl bg-[#E8F3FF]/50 p-6 md:p-8"><h3 class="text-xl font-bold mb-4">AI 模式 · 抽象感知</h3><p class="text-sm text-gray-700 leading-7 mb-6">强调算法介入、意图预判与科技感知。以无具体形态的流体光晕表达计算与感知，避免具象实物；以低干扰暗场承载主控大数字与 AI 推荐标签，让前景获得最高视觉优先级。</p><figure><video class="mode-video" autoplay muted loop playsinline preload="metadata" aria-label="AI 智能模式动态背景示例"><source src="assets/examples/background/video/ai-mode.mp4" type="video/mp4"></video><figcaption class="pt-4"><p class="text-xs text-gray-600 leading-6">突出算法感知；摒弃具象衣物，以蓝色渐变为基底的深邃抽象流光，为核心参数与 AI 推荐标签提供高对比度暗场。</p></figcaption></figure></article>
-            <article class="rounded-2xl bg-[#E8F3FF]/50 p-6 md:p-8"><h3 class="text-xl font-bold mb-4">常规模式 · 物理环境</h3><p class="text-sm text-gray-700 leading-7 mb-6">强化水、冰、温度、气流等物理直觉与环境沉浸感。采用具象化物理环境并遵循品牌语义色彩；前景卡片与背景物理元素形成明确的 Z 轴前后叠层，不能让主体图像穿透信息区域。</p><figure><video class="mode-video" autoplay muted loop playsinline preload="metadata" aria-label="常规场景模式动态背景示例"><source src="assets/examples/background/video/standard-mode.mp4" type="video/mp4"></video><figcaption class="pt-4"><p class="text-xs text-gray-600 leading-6">以洗衣机为例，用水与空气语义色调、悬浮衣物和水流强化物理直觉；前景 Soft / Focus 卡片与背景形成前后空间。</p></figcaption></figure></article>
+            <article class="rounded-2xl bg-[#E8F3FF]/50 p-6 md:p-8"><h3 class="text-xl font-bold mb-4">AI 模式 · 抽象感知</h3><p class="text-sm text-gray-700 leading-7 mb-6">强调算法介入、意图预判与科技感知。以无具体形态的流体光晕表达计算与感知，避免具象实物；以低干扰暗场承载主控大数字与 AI 推荐标签，让前景获得最高视觉优先级。</p><figure><video class="mode-video" autoplay muted loop playsinline preload="metadata" aria-label="AI 智能模式动态背景示例"><source src="assets/examples/background/video/ai-mode.mp4" type="video/mp4"></video></figure></article>
+            <article class="rounded-2xl bg-[#E8F3FF]/50 p-6 md:p-8"><h3 class="text-xl font-bold mb-4">常规模式 · 物理环境</h3><p class="text-sm text-gray-700 leading-7 mb-6">强化水、冰、温度、气流等物理直觉与环境沉浸感。采用具象化物理环境并遵循品牌语义色彩；前景卡片与背景物理元素形成明确的 Z 轴前后叠层，不能让主体图像穿透信息区域。</p><figure><video class="mode-video" autoplay muted loop playsinline preload="metadata" aria-label="常规场景模式动态背景示例"><source src="assets/examples/background/video/standard-mode.mp4" type="video/mp4"></video></figure></article>
           </div>
-          <h3 class="font-bold mb-4">高中低端背景策略</h3><div class="overflow-x-auto"><table class="w-full min-w-[720px] text-left text-sm"><colgroup><col class="w-[140px]"><col class="w-[38%]"><col></colgroup><thead class="text-gray-500 border-b border-gray-200"><tr><th class="py-3 pr-2">设备能力</th><th class="py-3 pr-4">呈现方式</th><th class="py-3">保留与降级边界</th></tr></thead><tbody class="text-gray-600"><tr class="border-b border-gray-200"><td class="py-4 pr-2 font-semibold text-gray-900">高端</td><td class="py-4 pr-4">可使用克制的动态流体光晕或物理环境动态</td><td class="py-4">保持缓动、低频变化与前景暗场；以实机帧率和亮度验收。</td></tr><tr class="border-b border-gray-200"><td class="py-4 pr-2 font-semibold text-gray-900">中端</td><td class="py-4 pr-4">预渲染短循环、低频轻动效或静态关键帧</td><td class="py-4">保留模式语义和明暗结构，减少粒子、细节与实时效果。</td></tr><tr><td class="py-4 pr-2 font-semibold text-gray-900">低端</td><td class="py-4 pr-4">静态渐变或简化的单张背景</td><td class="py-4">优先文字可读与性能稳定；不用高频纹理、闪烁或计算密集的模糊。</td></tr></tbody></table></div>
-          <div class="callout rounded-r-xl p-4 text-sm text-gray-700 leading-6 mt-6"><strong>提示：</strong>以上为能力分级原则，具体动效与资源规格需结合目标硬件实测确定。</div>
-          <div class="mt-8"><h3 class="font-bold text-lg mb-5">静态背景示例</h3>
-            <div class="grid md:grid-cols-2 gap-4">
+          <div class="ml-4">
+            <h3 class="font-bold mb-4">高中低端背景策略</h3><div class="overflow-x-auto"><table class="w-full min-w-[720px] text-left text-sm"><colgroup><col class="w-[140px]"><col class="w-[38%]"><col></colgroup><thead class="text-gray-500 border-b border-gray-200"><tr><th class="py-3 pr-2">设备能力</th><th class="py-3 pr-4">呈现方式</th><th class="py-3">保留与降级边界</th></tr></thead><tbody class="text-gray-600"><tr class="border-b border-gray-200"><td class="py-4 pr-2 font-semibold text-gray-900">高端</td><td class="py-4 pr-4">可使用克制的动态流体光晕或物理环境动态</td><td class="py-4">保持缓动、低频变化与前景暗场；以实机帧率和亮度验收。</td></tr><tr class="border-b border-gray-200"><td class="py-4 pr-2 font-semibold text-gray-900">中端</td><td class="py-4 pr-4">预渲染短循环、低频轻动效或静态关键帧</td><td class="py-4">保留模式语义和明暗结构，减少粒子、细节与实时效果。</td></tr><tr><td class="py-4 pr-2 font-semibold text-gray-900">低端</td><td class="py-4 pr-4">静态渐变或简化的单张背景</td><td class="py-4">优先文字可读与性能稳定；不用高频纹理、闪烁或计算密集的模糊。</td></tr></tbody></table></div>
+            <div class="callout rounded-r-xl p-4 text-sm text-gray-700 leading-6 mt-6"><strong>提示：</strong>以上为能力分级原则，具体动效与资源规格需结合目标硬件实测确定。</div>
+          </div>
+          <div class="mt-8"><h3 class="ml-4 font-bold mb-4">静态背景示例</h3>
+            <div class="static-examples grid md:grid-cols-2 gap-4">
               <figure class="example-card"><img class="example-image" src="assets/examples/background/tft-ai-dynamic.png" alt="AI 模式深蓝色抽象流光静态示意图" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3">AI 模式 · 抽象流光</figcaption></figure>
               <figure class="example-card"><img class="example-image" src="assets/examples/background/tft-standard-dynamic.png" alt="常规模式水流与悬浮衣物静态示意图" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3">常规模式 · 水流与悬浮衣物</figcaption></figure>
               <figure class="example-card"><img class="example-image" src="assets/examples/background/tft-ai-static-soft.png" alt="AI 模式柔和蓝色静态背景" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3">AI 模式 · 抽象柔光</figcaption></figure>
@@ -63,7 +67,7 @@
           <div class="rule md:grid md:grid-cols-[200px_1fr] gap-6"><h3 class="font-bold">A · 圆形弥散光</h3><p class="text-sm text-gray-600 leading-7">柔和、无明确边界的单点球形渐变光晕。用于单点聚焦与基础状态提示，突出单一模式图标或设备基本运行状态。</p></div>
           <div class="rule md:grid md:grid-cols-[200px_1fr] gap-6"><h3 class="font-bold">B · 暗心菱形光环</h3><p class="text-sm text-gray-600 leading-7">闭合的圆角菱形轮廓，内部完全留为暗场。作为核心数据容器包裹全屏最重要的参数，以纯黑内腔保障信息对比度。</p></div>
           <div class="rule md:grid md:grid-cols-[200px_1fr] gap-6"><h3 class="font-bold">C · 横向展宽光</h3><p class="text-sm text-gray-600 leading-7">沿水平 X 轴展开的大面积弥散光带。适用于宽屏比例、多个并列参数或全局状态；光带不能冲淡信息区域的暗场。</p></div>
-          <div class="mt-8"><h3 class="font-bold text-lg mb-2">LED 视觉示例</h3><p class="text-xs text-gray-500 mb-5">A / B / C 光形及对应的界面适配效果，均裁取自 LED 附件；图片内容未重绘。</p>
+          <div class="led-examples mt-8"><h3 class="font-bold text-lg mb-2">LED 视觉示例</h3><p class="text-xs text-gray-500 mb-5">A / B / C 光形及对应的界面适配效果，均裁取自 LED 附件；图片内容未重绘。</p>
             <div class="grid md:grid-cols-3 gap-5 mb-5">
               <figure class="example-card led-glow-card"><div class="led-glow-stage"><img src="assets/examples/background/led-glow-a.png" alt="A 圆形弥散光背景元素" loading="lazy"></div><figcaption class="text-sm font-semibold pt-3">A · 圆形弥散光</figcaption></figure>
               <figure class="example-card led-glow-card"><div class="led-glow-stage"><img src="assets/examples/background/led-glow-b.png" alt="B 暗心菱形光环背景元素" loading="lazy"></div><figcaption class="text-sm font-semibold pt-3">B · 暗心菱形光环</figcaption></figure>
