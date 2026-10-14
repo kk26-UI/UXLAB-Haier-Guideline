@@ -18,11 +18,16 @@
     .static-examples .example-card{border:0}
     .led-examples .example-card{border:0}
     .mode-video{display:block;width:100%;aspect-ratio:3.166/1;object-fit:cover;object-position:center;border-radius:12px;background:#071b31}
-    .led-glow-card{display:flex;flex-direction:column;height:100%}
+    .led-rule-layout{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+    .led-rule-layout .led-glow-stage{max-width:180px}
     .led-glow-stage{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1/1;overflow:hidden;border-radius:12px;background:#000}
     .led-glow-stage img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
-    .principle-title{display:flex;align-items:center;gap:10px}
-    .principle-number{display:grid;place-items:center;width:28px;height:28px;flex:0 0 auto;border-radius:9px;background:#2283E2;color:#fff;font-size:12px;font-weight:700}
+    @font-face{font-family:'Montserrat Local';src:url('assets/fonts/Montserrat-Regular.otf') format('opentype');font-display:swap}
+    .design-principles h2{font-size:20px;font-weight:500}
+    .design-principles article{padding:18px 18px 0 0;border-top:1px solid rgba(148,163,184,.28)}
+    .principle-title{display:block}
+    .principle-number{display:block;color:#86909C;font-family:'Montserrat Local',sans-serif;font-size:11px;font-weight:600;letter-spacing:.08em;margin-bottom:12px}
+    .design-principles h3{font-size:14px;font-weight:500;color:#344054}.design-principles article p{font-size:13px;line-height:1.75;color:#667085}
     .callout{border-left:3px solid #2283E2;background:rgba(229,240,255,.65)}
   </style>
 </head>
@@ -36,7 +41,7 @@
       <div class="max-w-[1200px] mx-auto pb-24">
         <section class="mb-12"><h1 class="text-4xl md:text-5xl font-bold mb-4">背景</h1><p class="text-lg text-gray-600 max-w-4xl leading-relaxed">背景是界面的情境感知层：建立空间纵深，辅助状态表达，同时绝不干扰前景任务、组件与文字。</p></section>
 
-        <section class="glass-panel p-6 md:p-10 mb-8"><h2 class="text-2xl font-bold mb-6">核心设计原则</h2><div class="grid md:grid-cols-3 gap-6 text-sm leading-7 text-gray-600">
+        <section class="design-principles glass-panel p-6 md:p-10 mb-10"><h2 class="text-2xl font-bold mb-8">核心设计原则</h2><div class="grid grid-cols-1 md:grid-cols-3 gap-x-7 gap-y-8">
           <article><div class="principle-title mb-2"><span class="principle-number">01</span><h3 class="font-bold text-gray-900">品牌一致性</h3></div><p>背景构建产品的数字环境，从旗舰 TFT 到基础 LED，均遵循统一的 Haier 品牌语言；不同设备的表达能力可以不同，品牌感知应一致。</p></article>
           <article><div class="principle-title mb-2"><span class="principle-number">02</span><h3 class="font-bold text-gray-900">辅助而非装饰</h3></div><p>避免复杂纹理、强对比材质和高频细节；资源受限时进一步简化。动态背景采用平滑缓动，不出现突变或剧烈闪烁。</p></article>
           <article><div class="principle-title mb-2"><span class="principle-number">03</span><h3 class="font-bold text-gray-900">前景始终可读</h3></div><p>光影和色彩变化不得遮蔽文字、图标与关键操作。画面过亮或过于复杂时，压暗背景（如底部深色渐变遮罩），或把透明毛玻璃卡片切换为不透明实色。</p></article>
@@ -64,20 +69,35 @@
         </section>
 
         <section class="glass-panel p-6 md:p-10 mb-8"><h2 class="text-2xl font-bold mb-3">LED 背景</h2><p class="text-sm text-gray-500 mb-6">LED 以少量低频光形表达状态；暗场保留关键参数的稳定对比度。三种样式按信息结构选择，不叠加为装饰。</p>
-          <div class="rule md:grid md:grid-cols-[200px_1fr] gap-6"><h3 class="font-bold">A · 圆形弥散光</h3><p class="text-sm text-gray-600 leading-7">柔和、无明确边界的单点球形渐变光晕。用于单点聚焦与基础状态提示，突出单一模式图标或设备基本运行状态。</p></div>
-          <div class="rule md:grid md:grid-cols-[200px_1fr] gap-6"><h3 class="font-bold">B · 暗心菱形光环</h3><p class="text-sm text-gray-600 leading-7">闭合的圆角菱形轮廓，内部完全留为暗场。作为核心数据容器包裹全屏最重要的参数，以纯黑内腔保障信息对比度。</p></div>
-          <div class="rule md:grid md:grid-cols-[200px_1fr] gap-6"><h3 class="font-bold">C · 横向展宽光</h3><p class="text-sm text-gray-600 leading-7">沿水平 X 轴展开的大面积弥散光带。适用于宽屏比例、多个并列参数或全局状态；光带不能冲淡信息区域的暗场。</p></div>
-          <div class="led-examples mt-8"><h3 class="font-bold text-lg mb-2">LED 视觉示例</h3><p class="text-xs text-gray-500 mb-5">A / B / C 光形及对应的界面适配效果，均裁取自 LED 附件；图片内容未重绘。</p>
-            <div class="grid md:grid-cols-3 gap-5 mb-5">
-              <figure class="example-card led-glow-card"><div class="led-glow-stage"><img src="assets/examples/background/led-glow-a.png" alt="A 圆形弥散光背景元素" loading="lazy"></div><figcaption class="text-sm font-semibold pt-3">A · 圆形弥散光</figcaption></figure>
-              <figure class="example-card led-glow-card"><div class="led-glow-stage"><img src="assets/examples/background/led-glow-b.png" alt="B 暗心菱形光环背景元素" loading="lazy"></div><figcaption class="text-sm font-semibold pt-3">B · 暗心菱形光环</figcaption></figure>
-              <figure class="example-card led-glow-card"><div class="led-glow-stage"><img src="assets/examples/background/led-glow-c.png" alt="C 横向展宽光背景元素" loading="lazy"></div><figcaption class="text-sm font-semibold pt-3">C · 横向展宽光</figcaption></figure>
-            </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-7 mb-8">
+            <article><h3 class="text-sm font-semibold mb-3">A · 圆形弥散光</h3><div class="led-rule-layout"><div class="led-glow-stage"><img src="assets/examples/background/led-glow-a.png" alt="A · 圆形弥散光背景元素" loading="lazy"></div><p class="text-sm text-gray-600 leading-7">柔和、无明确边界的单点球形渐变光晕。用于单点聚焦与基础状态提示，突出单一模式图标或设备基本运行状态。</p></div></article>
+            <article><h3 class="text-sm font-semibold mb-3">B · 暗心菱形光环</h3><div class="led-rule-layout"><div class="led-glow-stage"><img src="assets/examples/background/led-glow-b.png" alt="B · 暗心菱形光环背景元素" loading="lazy"></div><p class="text-sm text-gray-600 leading-7">闭合的圆角菱形轮廓，内部完全留为暗场。作为核心数据容器包裹全屏最重要的参数，以纯黑内腔保障信息对比度。</p></div></article>
+            <article><h3 class="text-sm font-semibold mb-3">C · 横向展宽光</h3><div class="led-rule-layout"><div class="led-glow-stage"><img src="assets/examples/background/led-glow-c.png" alt="C · 横向展宽光背景元素" loading="lazy"></div><p class="text-sm text-gray-600 leading-7">沿水平 X 轴展开的大面积弥散光带。适用于宽屏比例、多个并列参数或全局状态；光带不能冲淡信息区域的暗场。</p></div></article>
+          </div>
+          <div class="led-examples mt-8">
             <h4 class="font-semibold text-sm mb-3">界面适配效果</h4><div class="space-y-4">
               <figure class="example-card"><img class="example-image" src="assets/examples/background/led-adaptation-a.png" alt="圆形弥散光在 LED 界面中的适配效果" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3">A · 单点光晕提示核心状态</figcaption></figure>
               <figure class="example-card"><img class="example-image" src="assets/examples/background/led-adaptation-b.png" alt="暗心菱形光环在 LED 界面中的适配效果" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3">B · 菱形暗心包裹核心参数</figcaption></figure>
               <figure class="example-card"><img class="example-image" src="assets/examples/background/led-adaptation-c.png" alt="横向展宽光在 LED 界面中的适配效果" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3">C · 横向光带覆盖并列参数</figcaption></figure>
             </div>
+            <section class="mt-10" aria-labelledby="background-variations">
+              <h4 id="background-variations" class="font-semibold text-sm mb-3" data-i18n-zh="背景发散设计案例" data-i18n-en="Background Design Variations">背景发散设计案例</h4>
+              <p class="text-sm text-gray-600 leading-7 mb-6" data-i18n-zh="一致的元素，可以形成不同的表达。在保留品牌色彩、光形语义与信息层级的前提下，调整光的分布、轮廓与呈现方式，探索适合不同产品的背景方案。" data-i18n-en="Shared elements can support different expressions. Preserve brand colors, the meaning of each light form, and the information hierarchy while varying light distribution, outlines, and rendering to suit different products.">一致的元素，可以形成不同的表达。在保留品牌色彩、光形语义与信息层级的前提下，调整光的分布、轮廓与呈现方式，探索适合不同产品的背景方案。</p>
+              <div class="space-y-8">
+                <div><div class="px-4 mb-3"><h5 class="font-semibold text-sm mb-2" data-i18n-zh="A · 聚焦的不同表达" data-i18n-en="A · Variations on Focus">A · 聚焦的不同表达</h5><p class="text-xs text-gray-500 leading-6" data-i18n-zh="从多点柔光到点阵聚合，围绕核心参数建立视觉焦点。" data-i18n-en="From multiple soft glows to a clustered dot pattern, establish a visual focus around the key value.">从多点柔光到点阵聚合，围绕核心参数建立视觉焦点。</p></div><div class="space-y-4">
+                  <figure class="example-card"><img class="example-image" src="assets/examples/background/led-variation-a-2.png" alt="A 多点柔光背景案例" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3" data-i18n-zh="A · 多点柔光" data-i18n-en="A · Multiple Soft Glows">A · 多点柔光</figcaption></figure>
+                  <figure class="example-card"><img class="example-image" src="assets/examples/background/led-variation-a-3.png" alt="A 点阵聚焦背景案例" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3" data-i18n-zh="A · 点阵聚焦" data-i18n-en="A · Dot-pattern Focus">A · 点阵聚焦</figcaption></figure>
+                </div></div>
+                <div><div class="px-4 mb-3"><h5 class="font-semibold text-sm mb-2" data-i18n-zh="B · 轮廓的不同表达" data-i18n-en="B · Variations on Outline">B · 轮廓的不同表达</h5><p class="text-xs text-gray-500 leading-6" data-i18n-zh="从柔化光环到多重线框，延续菱形包裹与中心暗场。" data-i18n-en="From a softened halo to layered outlines, retain the diamond enclosure and dark center.">从柔化光环到多重线框，延续菱形包裹与中心暗场。</p></div><div class="space-y-4">
+                  <figure class="example-card"><img class="example-image" src="assets/examples/background/led-variation-b-2.png" alt="B 柔化光环背景案例" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3" data-i18n-zh="B · 柔化光环" data-i18n-en="B · Softened Halo">B · 柔化光环</figcaption></figure>
+                  <figure class="example-card"><img class="example-image" src="assets/examples/background/led-variation-b-3.png" alt="B 多重线框背景案例" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3" data-i18n-zh="B · 多重线框" data-i18n-en="B · Layered Outlines">B · 多重线框</figcaption></figure>
+                </div></div>
+                <div><div class="px-4 mb-3"><h5 class="font-semibold text-sm mb-2" data-i18n-zh="C · 展宽的不同表达" data-i18n-en="C · Variations on Horizontal Spread">C · 展宽的不同表达</h5><p class="text-xs text-gray-500 leading-6" data-i18n-zh="从弥散光带到横向点阵，保持宽幅氛围与中央信息空间。" data-i18n-en="From diffused light bands to horizontal dot patterns, preserve a wide ambient field and central space for information.">从弥散光带到横向点阵，保持宽幅氛围与中央信息空间。</p></div><div class="space-y-4">
+                  <figure class="example-card"><img class="example-image" src="assets/examples/background/led-variation-c-2.png" alt="C 弥散光带背景案例" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3" data-i18n-zh="C · 弥散光带" data-i18n-en="C · Diffused Light Bands">C · 弥散光带</figcaption></figure>
+                  <figure class="example-card"><img class="example-image" src="assets/examples/background/led-variation-c-3.png" alt="C 横向点阵背景案例" loading="lazy"><figcaption class="text-xs text-gray-600 pt-3" data-i18n-zh="C · 横向点阵" data-i18n-en="C · Horizontal Dot Patterns">C · 横向点阵</figcaption></figure>
+                </div></div>
+              </div>
+            </section>
           </div>
         </section>
         <section class="glass-panel p-6 md:p-10"><h2 class="text-2xl font-bold mb-7">验收要点</h2>
