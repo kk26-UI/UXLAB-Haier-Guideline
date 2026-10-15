@@ -1,0 +1,3193 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haier Design | TFT 布局</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --brand:#2283E2; --ink:#1D1D1F; --muted:#667085; --glass:rgba(255,255,255,.66); }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#F5F7FA; color:var(--ink); overflow-x:hidden; }
+    .aura-background { position:fixed; inset:0; z-index:-1; background:radial-gradient(circle at 12% 4%,#c9e3ff 0,transparent 32%),radial-gradient(circle at 88% 70%,#dfe7ff 0,transparent 38%),#f5f7fa; }
+    .glass-panel { background:var(--glass); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid rgba(255,255,255,.4); box-shadow:0 8px 32px rgba(0,0,0,.04); border-radius:24px; }
+    .sidebar-nav-item { transition:all .3s ease; border-left:3px solid transparent; }
+    .sidebar-nav-item.active { color:var(--brand); font-weight:600; border-left-color:var(--brand); background:linear-gradient(90deg,#E5F0FF 0%,transparent 100%); }
+    .haier-logo-container { display:flex; align-items:center; justify-content:center; background:var(--brand); color:#fff; font-family:Arial,sans-serif; font-weight:bold; border-radius:8px; }
+    .brand-text { color:var(--brand); }
+    .axis-card { position:relative; overflow:hidden; }
+    .axis-image { width:100%; aspect-ratio:2.36/1; display:block; object-fit:cover; background:#000; }
+    .axis-content { position:relative; min-height:230px; }
+    .axis-mark { position:absolute; right:18px; top:8px; font-size:7rem; line-height:1; font-weight:700; color:rgba(34,131,226,.08); }
+    .axis-line { height:2px; background:linear-gradient(90deg,var(--brand),rgba(34,131,226,.08)); position:relative; }
+    .axis-line::after { content:""; position:absolute; right:0; top:-4px; border-left:8px solid var(--brand); border-top:5px solid transparent; border-bottom:5px solid transparent; }
+    .layer-stage { position:relative; overflow:hidden; border-radius:20px; background:#eef6ff; }
+    .layer-stage img { width:100%; height:auto; display:block; }
+    .layer-copy { position:absolute; left:8%; width:48%; display:grid; grid-template-columns:minmax(72px,24%) 1fr; gap:clamp(8px,1.6vw,24px); align-items:center; transform:translateY(-50%); font-size:clamp(8px,1.15vw,14px); line-height:1.5; }
+    .layer-copy-top { top:29%; }
+    .layer-copy-mid { top:50%; }
+    .layer-copy-deep { top:71%; }
+    .layer-copy strong { color:#2283e2; font-size:clamp(8px,1.15vw,14px); font-weight:600; white-space:nowrap; }
+    .layer-copy span { color:rgba(75,85,99,.72); transform:translateX(-32px); }
+    .rule-row { display:grid; grid-template-columns:132px 1fr; gap:18px; padding:18px 0; border-top:1px solid rgba(15,23,42,.08); }
+    .rule-row > div:first-child { color:#1D1D1F; }
+    .check-card { border-top:3px solid var(--brand); }
+    .check-card h3 { color:var(--brand); }
+    .must-list li::before { content:"✓"; color:var(--brand); font-weight:700; margin-right:.65rem; }
+    .dont-list li::before { content:"×"; color:#E5484D; font-weight:700; margin-right:.65rem; }
+    @media (max-width:767px) { .rule-row{grid-template-columns:1fr;gap:6px}.axis-mark{font-size:5rem} }
+    main section.glass-panel{padding:2.5rem!important;margin-bottom:2rem!important}
+    main section.glass-panel h2{font-size:1.5rem!important;line-height:2rem!important;color:#1d1d1f!important}
+    @media(max-width:767px){main section.glass-panel{padding:1.5rem!important}}
+/* 信息架构七原则：与原页面的浅蓝、玻璃面板风格统一 */
+.ia-seven-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 32px;
+}
+
+.ia-seven-item {
+  min-width: 0;
+}
+
+.ia-seven-item h3 {
+  min-height: 48px;
+  margin-bottom: 6px;
+  color: #344054;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.ia-image-box {
+  width: 100%;
+  aspect-ratio: 1.7 / 1;
+  overflow: hidden;
+  border: 1px solid #D8E5F1;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #F8FBFF, #EDF6FF);
+}
+
+.ia-image-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 屏幕变窄时调整列数 */
+@media (max-width: 1050px) {
+  .ia-seven-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ia-seven-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ia-seven-item h3 {
+    min-height: 0;
+  }
+}
+/* ========================================
+   LED 信息分类：七类信息卡片
+   ======================================== */
+
+/* 七张卡片：电脑端第一行4张，第二行3张 */
+.info-category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* 单张分类卡片 */
+.info-category-card {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+
+  min-width: 0;
+  min-height: 142px;
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.92),
+      rgba(238, 247, 255, 0.78)
+    );
+
+  border: 1px solid #D4E6F7;
+  border-radius: 18px;
+}
+
+/* 卡片左上角的蓝色标识 */
+.info-category-mark {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #3B98EC,
+      #1471CA
+    );
+
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+
+  box-shadow:
+    0 5px 12px rgba(34, 131, 226, 0.20);
+}
+
+/* 双八数值类的标识需要稍小一点 */
+.info-category-mark.is-88 {
+  font-size: 10px;
+}
+
+/* 卡片标题 */
+.info-category-card h3 {
+  margin: 2px 0 6px;
+
+  color: #1D1D1F;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* 卡片说明文字 */
+.info-category-card p {
+  margin: 0;
+
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 底部蓝色总结条 */
+.info-category-summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+
+  margin-top: 24px;
+  padding: 20px 24px;
+
+  color: #FFFFFF;
+
+  background:
+    linear-gradient(
+      90deg,
+      #1269BD,
+      #2C91E9
+    );
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 12px 26px rgba(34, 131, 226, 0.18);
+}
+
+/* 总结条左侧标题 */
+.info-category-summary-title {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* 总结条右侧流程 */
+.info-category-summary-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 总结条中的箭头 */
+.info-category-arrow {
+  color: #A8D4FA;
+  font-weight: 700;
+}
+
+/* 平板端：每行两张 */
+@media (max-width: 1050px) {
+  .info-category-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 手机端：每行一张 */
+@media (max-width: 640px) {
+  .info-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-category-card {
+    min-height: auto;
+  }
+
+  .info-category-summary {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+.title-blue-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-blue-line::before {
+  content: "";
+  width: 4px;
+  height: 24px;
+  flex-shrink: 0;
+  background: #2283E2;
+  border-radius: 4px;
+}
+/* TFT核心体验规则：三列图文规则卡片 */
+.tft-rule-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.tft-rule-card {
+  min-height: 410px;
+  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid #D4E6F7;
+  border-radius: 18px;
+}
+
+.tft-rule-demo {
+  min-height: 188px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  background: linear-gradient(145deg, #F7FBFF, #EAF5FF);
+  border-bottom: 1px solid #D9E8F5;
+}
+
+.tft-rule-copy {
+  padding: 20px 20px 24px;
+}
+
+.tft-rule-index {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  color: #2283E2;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.tft-rule-index::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #C7DDF2;
+}
+
+.tft-rule-card h3 {
+  margin: 15px 0 8px;
+  color: #344054;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.tft-rule-card p {
+  margin: 0;
+  color: #475467;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* 原则01：焦点式交互 */
+.focus-flow {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.focus-flow span {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #B7C2CE;
+  box-shadow: 0 0 0 8px rgba(183, 194, 206, 0.09);
+}
+
+.focus-flow span:first-child,
+.focus-flow span:last-child {
+  width: 30px;
+  height: 30px;
+  opacity: 0.55;
+}
+
+.focus-flow .is-active {
+  width: 68px;
+  height: 68px;
+  background: #2283E2;
+  box-shadow:
+    0 0 0 12px rgba(34, 131, 226, 0.13),
+    0 10px 20px rgba(34, 131, 226, 0.22);
+}
+
+/* 原则02：扁平化弱层级 */
+.layer-demo {
+  position: relative;
+  width: 260px;
+  height: 115px;
+}
+
+.layer-demo i {
+  position: absolute;
+  left: 23px;
+  display: block;
+  width: 210px;
+  height: 45px;
+
+  border: 1px solid #91BDE7;
+  transform: skewX(-30deg);
+}
+
+.layer-demo i:nth-child(1) {
+  top: 10px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.layer-demo i:nth-child(2) {
+  top: 35px;
+  left: 9px;
+  background: rgba(174, 216, 249, 0.60);
+}
+
+.layer-demo i:nth-child(3) {
+  top: 60px;
+  left: -5px;
+  background: rgba(34, 131, 226, 0.76);
+  border-color: #2283E2;
+}
+
+.layer-demo b {
+  position: absolute;
+  right: -2px;
+  bottom: 4px;
+
+  display: grid;
+  place-items: center;
+
+  width: 32px;
+  height: 32px;
+
+  color: #2283E2;
+  font-size: 18px;
+  font-weight: 400;
+
+  background: #FFFFFF;
+  border: 1px solid #A9D0F3;
+  border-radius: 10px;
+}
+
+/* 原则03：方向一致性 */
+.cross-demo {
+  position: relative;
+  width: 180px;
+  height: 150px;
+}
+
+.cross-demo::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 89px;
+
+  height: 142px;
+  border-left: 2px dashed #77B9F2;
+}
+
+.cross-demo::after {
+  content: "";
+  position: absolute;
+  top: 73px;
+  left: 5px;
+
+  width: 170px;
+  border-top: 2px dashed #77B9F2;
+}
+
+.cross-item {
+  position: absolute;
+  width: 56px;
+  height: 42px;
+
+  background: #FFFFFF;
+  border: 1px solid #9CBEDC;
+  border-radius: 7px;
+}
+
+.cross-item.active {
+  top: 54px;
+  left: 62px;
+
+  background: #2283E2;
+  border-color: #2283E2;
+  box-shadow: 0 8px 16px rgba(34, 131, 226, 0.20);
+}
+
+.cross-item.top {
+  top: 4px;
+  left: 62px;
+}
+
+.cross-item.left {
+  top: 54px;
+  left: 0;
+}
+
+.cross-item.right {
+  top: 54px;
+  right: 0;
+}
+
+.cross-item.bottom {
+  bottom: 4px;
+  left: 62px;
+}
+
+/* 屏幕变窄时自动换行 */
+@media (max-width: 900px) {
+  .tft-rule-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .tft-rule-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .focus-flow {
+    gap: 17px;
+  }
+
+  .focus-flow span {
+    width: 30px;
+    height: 30px;
+  }
+
+  .focus-flow .is-active {
+    width: 54px;
+    height: 54px;
+  }
+}
+/* ========================================
+   TFT 主交互方式规则：XYZ交互结构
+   ======================================== */
+
+.xyz-stage {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+
+  border-top: none;
+  background: linear-gradient(145deg, #F9FCFF, #EEF7FF);
+}
+
+/* X、Y、Z 三个虚线方向轴 */
+.xyz-axis {
+  position: absolute;
+  z-index: 1;
+}
+
+.xyz-axis-x {
+  top: 53%;
+  left: 10%;
+  width: 80%;
+  border-top: 2px dashed #76B9F4;
+  transform: rotate(28deg);
+}
+
+.xyz-axis-y {
+  top: 8%;
+  bottom: 8%;
+  left: 50%;
+  border-left: 2px dashed #76B9F4;
+}
+
+.xyz-axis-z {
+  top: 53%;
+  left: 17%;
+  width: 66%;
+  border-top: 2px dashed #76B9F4;
+  transform: rotate(-31deg);
+}
+
+/* 轴标签 */
+.xyz-label {
+  position: absolute;
+
+  color: #F04438;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.label-x-left {
+  top: -27px;
+  left: -18px;
+}
+
+.label-x-right {
+  right: -18px;
+  bottom: -28px;
+}
+
+.label-y-top {
+  top: -26px;
+  left: -8px;
+}
+
+.label-y-bottom {
+  bottom: -28px;
+  left: -8px;
+}
+
+.label-z-left {
+  top: 18px;
+  left: -16px;
+}
+
+.label-z-right {
+  right: -15px;
+  top: -26px;
+}
+
+/* X轴横向模块 */
+.xyz-horizontal-cards {
+  position: absolute;
+  top: -58px;
+  left: 8%;
+
+  display: flex;
+  gap: 10px;
+
+  transform: rotate(-28deg);
+}
+
+.xyz-horizontal-cards i {
+  display: block;
+  width: 76px;
+  height: 46px;
+
+  background: #FFFFFF;
+  border: 1px solid #9CBEDC;
+  border-radius: 4px;
+}
+
+.xyz-horizontal-cards i.is-active {
+  background: #2283E2;
+  border-color: #2283E2;
+  box-shadow: 0 8px 16px rgba(34, 131, 226, 0.18);
+}
+
+/* Y轴纵向模块 */
+.xyz-vertical-cards {
+  position: absolute;
+  top: 26px;
+  left: -38px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.xyz-vertical-cards i {
+  display: block;
+  width: 76px;
+  height: 52px;
+
+  background: #FFFFFF;
+  border: 1px solid #9CBEDC;
+  border-radius: 4px;
+}
+
+.xyz-vertical-cards i.is-active {
+  background: #2283E2;
+  border-color: #2283E2;
+  box-shadow: 0 8px 16px rgba(34, 131, 226, 0.18);
+}
+
+/* 三轴交汇的焦点 */
+.xyz-focus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+
+  width: 58px;
+  height: 58px;
+
+  background: #2283E2;
+  border: 8px solid #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 10px 22px rgba(34, 131, 226, 0.24);
+
+  transform: translate(-50%, -50%);
+}
+
+
+/* ========================================
+   TFT 一致性步骤逻辑层
+   ======================================== */
+
+.tft-flow-list {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+
+  max-width: 930px;
+  margin: 8px auto 0;
+}
+
+.tft-flow-row {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 56px;
+  align-items: center;
+  gap: 18px;
+}
+
+.tft-flow-step {
+  color: #667085;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.tft-flow-card {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px 52px;
+
+  color: #1D1D1F;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+
+  background: linear-gradient(135deg, #EAF4FF, #CFE7FF);
+  border: 1px solid #A9D0F3;
+
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+}
+
+.tft-flow-arrow {
+  color: #2283E2;
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.flow-row-second {
+  padding-left: 60px;
+}
+
+.flow-row-third {
+  padding-left: 140px;
+}
+
+
+/* 屏幕变窄时自动适配 */
+@media (max-width: 767px) {
+  .xyz-stage {
+    min-height: 340px;
+  }
+
+  .xyz-horizontal-cards i {
+    width: 46px;
+    height: 36px;
+  }
+
+  .xyz-vertical-cards i {
+    width: 52px;
+    height: 38px;
+  }
+
+  .xyz-horizontal-cards {
+    gap: 6px;
+  }
+
+  .xyz-vertical-cards {
+    left: -26px;
+    gap: 6px;
+  }
+
+  .tft-flow-row,
+  .flow-row-second,
+  .flow-row-third {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-left: 0;
+  }
+
+  .tft-flow-card {
+    padding: 16px 32px;
+    font-size: 14px;
+  }
+
+  .tft-flow-arrow {
+    display: none;
+  }
+}
+/* ========================================
+   五、主界面布局基础框架
+   ======================================== */
+
+
+.layout-framework-grid {
+    display: grid;
+
+    /* 左侧宽一些，右侧窄一些 */
+    grid-template-columns: minmax(0, 600px) minmax(0, 460px);
+
+    /* 两张图片之间的距离 */
+    gap: 80px;
+
+    /* 整组图片水平居中 */
+    justify-content: center;
+
+    /* 顶部对齐 */
+    align-items: start;
+
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.framework-name {
+  margin-bottom: 20px;
+  color: #344054;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.landscape-framework {
+  position: relative;
+  width: min(100%, 520px);
+  aspect-ratio: 2.5 / 1;
+  margin: 52px auto 62px;
+
+  overflow: visible;
+  background: #FFFFFF;
+  border: 3px solid #2283E2;
+}
+
+.land-topbar {
+  position: absolute;
+  top: 0;
+  left: 7%;
+  right: 7%;
+  height: 15%;
+
+  background: #8FC4F5;
+}
+
+.land-sidebar {
+  position: absolute;
+  top: 0;
+  bottom: 14%;
+  left: 0;
+  width: 7%;
+
+  background: #438CCC;
+}
+
+.land-content {
+  position: absolute;
+  top: 15%;
+  right: 7%;
+  bottom: 14%;
+  left: 7%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255, 255, 255, 0.30);
+  font-size: 20px;
+  font-weight: 700;
+
+  background: #2173C7;
+}
+
+.land-toolbar {
+  position: absolute;
+  top: 15%;
+  right: 0;
+  bottom: 14%;
+  width: 7%;
+
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 10px;
+  writing-mode: vertical-rl;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #438CCC;
+}
+
+.land-bottom {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 7%;
+  height: 14%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(29, 29, 31, 0.42);
+  font-size: 11px;
+
+  background: #8FC4F5;
+}
+
+/* 结构说明文字 */
+.layout-note {
+  position: absolute;
+  z-index: 3;
+
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.note-top {
+  top: -48px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.note-left {
+  top: 42%;
+  left: -94px;
+  text-align: right;
+}
+
+.note-right-top {
+  top: 32%;
+  right: -58px;
+}
+
+.note-right-bottom {
+  top: 55%;
+  right: -95px;
+}
+
+.note-bottom {
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* 竖向屏幕 */
+.portrait-framework {
+  position: relative;
+  width: 170px;
+  height: 430px;
+  margin: 52px auto 52px;
+
+  overflow: visible;
+  background: #FFFFFF;
+  border: 3px solid #2283E2;
+}
+
+.port-topbar {
+  height: 9%;
+  background: #8FC4F5;
+}
+
+.port-category {
+  height: 8%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 10px;
+
+  background: #438CCC;
+}
+
+.port-content {
+  height: 74%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255, 255, 255, 0.30);
+  font-size: 18px;
+  font-weight: 700;
+
+  background: #2173C7;
+}
+
+.port-bottom {
+  height: 9%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(29, 29, 31, 0.42);
+  font-size: 9px;
+
+  background: #8FC4F5;
+}
+
+.port-note-top {
+  top: -4px;
+  left: -132px;
+}
+
+.port-note-category {
+  top: 46px;
+  left: -72px;
+}
+
+.port-note-content {
+  top: 50%;
+  right: -55px;
+}
+
+.port-note-bottom {
+  bottom: -2px;
+  right: -128px;
+}
+
+
+/* ========================================
+   六、屏幕与产品的位置关系
+   ======================================== */
+
+.product-screen-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.product-screen-item {
+  min-width: 0;
+  text-align: center;
+}
+
+.product-screen-item p {
+  margin: 14px 0 0;
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* 产品轮廓通用样式 */
+.appliance {
+  position: relative;
+  margin: 0 auto;
+
+  background: #FFFFFF;
+  border: 1.5px solid #475467;
+}
+
+.appliance-window {
+  position: absolute;
+  right: 13%;
+  bottom: 14%;
+  left: 13%;
+  height: 58%;
+
+  border: 1.5px solid #667085;
+}
+
+/* 中轴线 */
+.axis-line {
+  position: absolute;
+  top: 4%;
+  bottom: 4%;
+  left: 50%;
+
+  z-index: 3;
+  border-left: 1.5px dashed #F04438;
+}
+
+/* 屏幕通用 */
+.screen {
+  position: absolute;
+  z-index: 4;
+
+  background: rgba(71, 84, 103, 0.55);
+  border: 1px solid #475467;
+}
+
+.screen-top-center {
+  top: 4px;
+  left: 50%;
+
+  width: 42%;
+  height: 12px;
+
+  transform: translateX(-50%);
+}
+
+.screen-vertical-center {
+  top: 13%;
+  left: 50%;
+
+  width: 12px;
+  height: 34%;
+
+  transform: translateX(-50%);
+}
+
+.screen-top-left {
+  top: 9%;
+  left: 8%;
+
+  width: 34%;
+  height: 13px;
+}
+
+.screen-large-side {
+  top: 12%;
+  right: 10%;
+
+  width: 47%;
+  height: 58%;
+}
+
+
+/* 各品类轮廓尺寸 */
+.appliance-wide {
+  width: 112px;
+  height: 98px;
+}
+
+.appliance-washer {
+  width: 106px;
+  height: 112px;
+}
+
+.washer-door {
+  position: absolute;
+  top: 31%;
+  left: 50%;
+
+  width: 65px;
+  height: 65px;
+
+  border: 1.5px solid #475467;
+  border-radius: 50%;
+
+  transform: translateX(-50%);
+}
+
+.appliance-slim {
+  width: 42px;
+  height: 156px;
+}
+
+.appliance-tall {
+  width: 50px;
+  height: 156px;
+}
+
+.appliance-double {
+  width: 76px;
+  height: 156px;
+}
+
+.appliance-double::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+
+  border-left: 1px solid #667085;
+}
+
+.appliance-large {
+  width: 92px;
+  height: 156px;
+}
+
+
+/* 响应式适配 */
+@media (max-width: 1050px) {
+  .product-screen-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 34px;
+  }
+}
+
+@media (max-width: 767px) {
+  .layout-framework-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landscape-framework {
+    margin-top: 54px;
+    margin-bottom: 68px;
+  }
+
+  .portrait-framework {
+    margin-top: 54px;
+  }
+
+  .product-screen-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .note-left,
+  .note-right-bottom,
+  .port-note-top,
+  .port-note-category,
+  .port-note-bottom {
+    font-size: 10px;
+  }
+}
+/* TFT 核心体验规则：插图 */
+.tft-rule-image {
+  display: block;
+  width: 100%;
+  height: 188px;
+  object-fit: contain;
+}
+
+
+/* XYZ 主交互方式规则：背景容器 */
+.xyz-stage {
+    position: relative;
+    width: 100%;
+    height: 500px; /* 控制浅蓝背景高度 */
+    min-height: 0;
+    overflow: hidden;
+
+    background: linear-gradient(145deg, #F9FCFF, #EEF7FF);
+
+    display: flex;
+    align-items: center;      /* 图片垂直居中 */
+    justify-content: center;  /* 图片水平居中 */
+}
+
+/* XYZ 示意图本身 */
+.xyz-rule-image {
+    display: block;
+    width: 40%;
+    height: auto;
+    max-height: 90%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+
+/* 核心交互流程步骤逻辑图 */
+.tft-flow-figure {
+  width: 100%;
+  margin-top: 26px;
+}
+
+.tft-flow-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 屏幕与产品位置关系：图片上方的品类标题 */
+.product-screen-item .product-position-copy {
+  margin: 0 0 16px;
+  color: #344054;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* 清除 figure 默认间距，间距由上方标题统一控制 */
+.product-screen-item .product-position-image {
+  margin: 0;
+}
+
+/* 信息分类卡片：统一说明文字样式 */
+.info-card-desc {
+  margin: 0;
+  color: #667085;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+/* LED 场景细分：增强页面节奏与内容层级 */
+.scene-hero {
+  display: block;
+}
+.scene-kicker { color:var(--brand); font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.scene-map { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+.scene-map span { padding:12px 8px; border:1px solid #d4e6f7; border-radius:12px; color:#667085; background:rgba(255,255,255,.58); text-align:center; font-size:12px; }
+.scene-map b { display:block; margin-bottom:3px; color:#2283e2; font-size:14px; }
+.scene-heading { display:flex; align-items:flex-start; gap:16px; margin-bottom:28px; }
+.scene-heading-num { flex:0 0 48px; height:48px; display:grid; place-items:center; border-radius:14px; color:#176fc4; background:#e5f2ff; font-weight:700; font-size:18px; }
+.scene-heading p { margin-top:6px; color:#667085; font-size:13px; line-height:1.7; }
+.scene-chip-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.scene-chip { padding:7px 11px; border:1px solid #d7e7f6; border-radius:999px; color:#52657a; background:rgba(255,255,255,.7); font-size:12px; }
+.scene-compare { display:grid; grid-template-columns:1fr; gap:18px; }
+.scene-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:24px; align-items:center; min-width:0; padding:18px; border:1px solid #d8e8f7; border-radius:18px; background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(237,246,255,.68)); }
+.scene-card-head { display:flex; gap:12px; align-items:flex-start; margin:0; padding-left:4px; }
+.scene-index { flex:0 0 auto; min-width:34px; height:34px; padding:0 8px; display:grid; place-items:center; border-radius:10px; color:#fff; background:linear-gradient(145deg,#3b98ec,#1471ca); font-size:12px; font-weight:700; box-shadow:0 6px 14px rgba(34,131,226,.18); }
+.scene-card h3,.scene-rule h3 { color:#1d1d1f; font-size:16px; font-weight:700; line-height:1.6; }
+.scene-card .meta,.scene-rule .meta { margin-top:4px; color:#667085; font-size:12px; line-height:1.6; }
+.scene-card figure { min-width:0; padding:8px; border-radius:13px; background:rgba(255,255,255,.56); }
+.scene-card img,.scene-rule img { width:100%; height:auto; display:block; }
+.scene-rule-list { display:grid; gap:16px; }
+.scene-rule { display:grid; grid-template-columns:220px minmax(0,1fr); gap:24px; align-items:center; padding:18px; border:1px solid #dbe8f4; border-radius:18px; background:rgba(255,255,255,.52); }
+.scene-rule-copy { padding:6px 0 6px 4px; }
+.scene-rule figure { min-width:0; margin:0; padding:8px; border-radius:13px; background:linear-gradient(145deg,#fbfdff,#eef6ff); }
+.scene-rule.is-featured .scene-index { background:linear-gradient(145deg,#1269bd,#2c91e9); }
+.scene-mini-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.scene-mini-grid > section { margin-bottom:0!important; }
+.scene-vertical-card { display:flex; flex-direction:column; min-height:100%; padding:24px; border:1px solid #d8e8f7; border-radius:18px; background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(237,246,255,.68)); }
+.scene-vertical-card figure { flex:1; display:grid;align-items: start;
+justify-items: center; min-height:300px; margin:0; border-radius:14px; background:rgba(255,255,255,.55); }
+@media(max-width:1050px){.scene-hero{grid-template-columns:1fr}.scene-map{max-width:620px}.scene-card,.scene-rule{grid-template-columns:1fr}.scene-mini-grid{grid-template-columns:1fr}.scene-card-head{padding:2px 0 0}}
+@media(max-width:640px){.scene-map{grid-template-columns:repeat(2,1fr)}.scene-heading-num{flex-basis:42px;height:42px}.scene-card{padding:15px}.scene-rule{padding:15px}.scene-vertical-card figure{min-height:220px}}
+.scene-heading {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 20px;
+  row-gap: 10px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+/* 让标题和说明文字进入外层网格 */
+.scene-heading > div:nth-child(2) {
+  display: contents;
+}
+
+/* 第一行左侧：数字矩形 */
+.scene-heading-num {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
+
+/* 第一行右侧：标题 */
+.scene-heading h2 {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  margin: 0;
+}
+
+/* 第二行：从数字矩形左侧开始，占满整行 */
+.scene-heading p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.7;
+}
+/* 类型一：统一左侧文字形式 */
+.scene-rule-list {
+  display: grid;
+  gap: 18px;
+}
+
+.scene-rule {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+
+  padding: 18px;
+
+  /* 绿色标注框里的浅蓝渐变 */
+  background: linear-gradient(
+    120deg,
+    rgba(234, 245, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.68) 100%
+  );
+
+  border: 1px solid #ACD2F4;
+  border-radius: 18px;
+}
+
+/* 左侧文字区域 */
+.scene-rule-copy {
+  padding: 8px 4px;
+}
+
+/* 第一行标题 */
+.scene-rule-copy h3 {
+  margin: 0 0 8px;
+
+  color: #1D1D1F;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+/* 第二行说明 */
+.scene-rule-copy .meta {
+  margin: 0;
+
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 右侧图片 */
+.scene-rule figure {
+  min-width: 0;
+  margin: 0;
+  padding: 8px;
+
+  border-radius: 13px;
+  background: linear-gradient(145deg, #FBFDFF, #EEF6FF);
+}
+
+.scene-rule figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 手机和平板端改成上下排列 */
+@media (max-width: 900px) {
+  .scene-rule {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* 机头类型标题 */
+.scene-category-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 8px 0 18px;
+  padding: 2px 0;
+}
+
+/* 左侧蓝色线段 */
+.scene-category-header::before {
+  content: "";
+
+  width: 4px;
+  height: 24px;
+  flex-shrink: 0;
+
+  background: #2283E2;
+  border-radius: 4px;
+}
+
+/* 高机头文字 */
+.scene-category-header h3 {
+  margin: 0;
+
+  color: #1D1D1F;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+
+/* 统一分隔线样式：浅灰色 */
+.scene-category-divider {
+    height: 1px;
+    margin: 36px 0;
+    background: #E5E7EB;
+}
+
+/* ========================================
+   TFT：通用主页框架双图卡片
+   ======================================== */
+
+.tft-framework-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.tft-image-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid #D8E8F7;
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.86),
+    rgba(237, 246, 255, 0.70)
+  );
+  box-shadow: 0 8px 20px rgba(34, 131, 226, 0.06);
+}
+
+/* 图片说明文字：在图片上方 */
+.tft-image-card h3 {
+  margin: 0 0 8px;
+  color: #1D1D1F;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.tft-image-card p {
+  min-height: 44px;
+  margin: 0 0 16px;
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 图片容器 */
+.tft-image-card figure {
+  margin: 0;
+  padding: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(172, 210, 244, 0.75);
+  border-radius: 13px;
+  background: linear-gradient(145deg, #FBFDFF, #EEF6FF);
+}
+
+.tft-image-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* 窄屏时由左右两张，改为上下排列 */
+@media (max-width: 760px) {
+  .tft-framework-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tft-image-card p {
+    min-height: 0;
+  }
+}
+/* ========================================
+   TFT 第二板块：两列图片排布
+   ======================================== */
+
+/* ========================================
+   TFT 第二板块：标题、说明与无边框图片排布
+   ======================================== */
+
+/* 2.1 小标题：蓝色短线 + 标题 */
+.tft-subsection-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 10px;
+}
+
+.tft-subsection-title::before {
+  content: "";
+  width: 4px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background: #2283E2;
+}
+
+/* 不显示 2.1、2.2、2.3 的编号 */
+.tft-subsection-title span {
+  display: none;
+}
+
+.tft-subsection-title h3 {
+  margin: 0;
+  color: #1D1D1F;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* 小标题下方说明文字 */
+.tft-subsection-copy {
+  margin: 0 0 8px;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* 说明文字上方的小标题 */
+
+.tft-description-title {
+    margin: 28px 0 4px;
+    color: #344054;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+/* 小标题与下方说明文字的间距 */
+.tft-description-title + .tft-ai-note {
+    margin-top: 0;
+}
+
+
+
+/* 四张图片：一行左右两张 */
+.tft-screen-example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 28px;
+}
+
+/* 不再创建图片卡片 */
+.tft-screen-example {
+  min-width: 0;
+}
+
+/* 图片本身不加边框、不加背景、不加内边距 */
+.tft-screen-example figure,
+.tft-wide-example {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.tft-screen-example img,
+.tft-wide-example img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 手机端改为一行一张 */
+@media (max-width: 760px) {
+  .tft-screen-example-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+/* TFT：AI 板块的说明文字 */
+.tft-ai-note {
+  margin: 32px 0 24px;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* 最后一张单图：占两列布局中的左半边 */
+.tft-ai-single-example {
+  width: calc((100% - 28px) / 2);
+}
+
+.tft-ai-single-example figure {
+  margin: 0;
+}
+
+.tft-ai-single-example img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 760px) {
+  .tft-ai-single-example {
+    width: 100%;
+  }
+}
+/* 第一板块：移除两张图片及文字区域的卡片框 */
+.tft-image-card {
+  min-width: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 第一板块：移除图片外层的浅蓝框、底色和内边距 */
+.tft-image-card figure {
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* 图片本身不使用圆角 */
+.tft-image-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+/* 蒸烤一体机板块：AI 三张图一行 */
+.tft-three-example-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+@media (max-width: 900px) {
+  .tft-three-example-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .tft-three-example-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+/* 蒸烤一体机板块：AI 三张图一行 */
+.tft-three-example-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+@media (max-width: 900px) {
+  .tft-three-example-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .tft-three-example-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+/* 竖屏 TFT 示例图片 */
+.tft-vertical-single {
+  width: min(180px, 100%);
+  margin: 0;
+}
+
+.tft-vertical-single img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+/* 竖屏图片：四张一行 + 整体填充背景 */
+.tft-portrait-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+
+  /* 新增：整体背景 */
+  background: #F5F8FC;
+
+  /* 新增：圆角 */
+  border-radius: 8px;
+
+  /* 新增：四周内边距 */
+  padding: 20px;
+
+  /* 新增：浅蓝色边框 */
+  border: 1px solid #aed8ff;
+}
+
+
+/* 竖屏图片：三张一行 */
+.tft-portrait-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+
+/* TFT 竖屏原型图片组：统一背景矩形 */
+.wm-ai-background,
+.tft-prototype-background {
+  background: #F5F8FC;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #aed8ff;
+}
+
+
+
+/* 每张竖屏示例图 */
+.tft-portrait-grid-4 figure,
+.tft-portrait-grid-3 figure {
+  margin: 0;
+}
+
+.tft-portrait-grid-4 img,
+.tft-portrait-grid-3 img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
+/* 图片组标题 */
+.tft-example-group-title {
+  margin: 34px 0 18px;
+  color: #344054;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .tft-portrait-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tft-portrait-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .tft-portrait-grid-4,
+  .tft-portrait-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+/* 蒸烤箱常规模式：桌面端一行六张 */
+.tft-portrait-grid-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* 屏幕变窄时自动改为三张一行 */
+@media (max-width: 1100px) {
+  .tft-portrait-grid-6 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* 手机端改为两张一行 */
+@media (max-width: 640px) {
+  .tft-portrait-grid-6 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 蒸烤箱 AI 模式：与常规模式图片位置对齐 */
+.tft-ai-align-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+/* 三张图片分别对应上方第1、3、5列 */
+.tft-ai-align-grid figure:nth-child(1) {
+  grid-column: 1;
+}
+
+.tft-ai-align-grid figure:nth-child(2) {
+  grid-column: 2;
+}
+
+.tft-ai-align-grid figure:nth-child(3) {
+  grid-column: 3;
+}
+
+/* 保持与上方常规模式一致的图片宽度 */
+.tft-ai-align-grid img {
+  width: 90% !important;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* 平板适配 */
+@media (max-width: 1100px) {
+  .tft-ai-align-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tft-ai-align-grid figure:nth-child(n) {
+    grid-column: auto;
+  }
+}
+
+/* 手机适配 */
+@media (max-width: 640px) {
+  .tft-ai-align-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+
+/* ======================================
+   TFT 布局页签
+====================================== */
+.tft-tabs {
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  border-bottom: 1px solid #E5E6EB;
+  scrollbar-width: none;
+}
+
+.tft-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tft-tab {
+  flex: 0 0 auto;
+  padding: 0 0 14px;
+  color: #86909C;
+  font-size: 14px;
+  font-weight: 500;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tft-tab:hover {
+  color: var(--brand);
+}
+
+.tft-tab.active {
+  color: var(--brand);
+  border-bottom-color: var(--brand);
+  font-weight: 600;
+}
+
+.tft-pane {
+  display: none;
+}
+
+.tft-pane.active {
+  display: block;
+  animation: tft-pane-in 0.24s ease-out;
+}
+
+@keyframes tft-pane-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* 横向屏幕图片 */
+.tft-layout-figure-landscape {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.tft-layout-figure-landscape .tft-layout-image {
+    display: block;
+
+    /* 图片填满左侧容器 */
+    width: 100%;
+
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+
+/* 两张图片的容器 */
+.layout-framework-grid .framework-item {
+    min-width: 0;
+    width: 100%;
+}
+
+/* 右侧竖向图片居中 */
+.tft-layout-figure-portrait {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* 窄屏时改为上下排列 */
+@media (max-width: 1050px) {
+    .layout-framework-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+        justify-items: center;
+    }
+
+    .layout-framework-grid .framework-item {
+        max-width: 400px;
+    }
+}
+
+/* 平板端：自动换行 */
+@media (max-width: 1050px) {
+    .product-screen-grid {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 34px 24px;
+    }
+}
+
+/* 手机端：两列布局 */
+@media (max-width: 767px) {
+    .product-screen-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 16px;
+        padding: 0;
+    }
+
+    .product-screen-item {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .product-screen-item img {
+        max-width: 100% !important;
+    }
+}
+
+
+/* 六组产品：统一网格宽度与居中方式 */
+.product-screen-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+
+    text-align: center;
+}
+/* 六张产品示意图均匀排列 */
+.product-screen-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+    align-items: start;
+    justify-items: center;
+}
+
+/* 产品标题 */
+.product-screen-item .product-position-copy {
+    width: 100%;
+    margin: 0 0 16px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 图片容器 */
+.product-screen-item .product-position-image {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+}
+
+/* 产品图片 */
+.product-screen-item .product-position-image img {
+    display: block;
+    flex-shrink: 0;
+    max-width: none;
+    margin: 0 auto;
+}
+
+/* 统一说明文字与下方图片的间距 */
+.tft-subsection-copy,
+.tft-ai-note {
+    margin-bottom: 12px;
+}
+
+
+/* 两行标题整体容器 */
+.tft-example-heading {
+  margin: 30px 0 18px;
+}
+
+/* 第一行：蓝色竖线 + 标题 */
+.tft-example-main-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #1D1D1F;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+/* 蓝色竖线 */
+.tft-example-main-title::before {
+  content: "";
+  width: 4px;
+  height: 24px;
+  flex-shrink: 0;
+  background: #2283E2;
+  border-radius: 4px;
+}
+
+/* 第二行：小标题 */
+.tft-example-heading .tft-example-group-title {
+  margin: 14px 0 0;
+  color: #344054;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+
+
+
+/* 左侧标题 + 右侧图片 */
+.tft-vertical-framework-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+/* 左侧标题保持垂直居中 */
+.tft-vertical-framework-row .tft-subsection-title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+/* 图片移动到整个容器的水平中心 */
+.tft-vertical-framework-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  min-width: 0;
+
+  /* 向左移动右侧半列宽度 */
+  transform: translateX(-50%);
+}
+
+/* 图片大小由 HTML 单独控制 */
+.tft-vertical-framework-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+/* 洗衣机AI模式：与下方蒸烤箱六图对齐 */
+.tft-portrait-grid-3.wm-ai-background {
+  display: grid;
+
+  /* 与下方六张图片使用相同的六列网格 */
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+
+  /* 与下方六图的间距保持一致 */
+  gap: 28px;
+
+  align-items: start;
+}
+
+/* 上方图1：对应下方图1 */
+.wm-ai-background figure:nth-child(1) {
+  grid-column: 1;
+}
+
+/* 上方图2：对应下方图2 */
+.wm-ai-background figure:nth-child(2) {
+  grid-column: 2 / span 2;
+}
+
+/* 上方图3：对应下方图4 */
+.wm-ai-background figure:nth-child(3) {
+  grid-column: 4;
+}
+
+/* 让图片从各自网格的左侧开始 */
+.wm-ai-background figure img {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* 蒸烤箱常规模式：统一六列 */
+.tft-portrait-grid-6.tft-prototype-background {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+/* 仅针对蒸烤箱常规模式的六张图片 */
+.tft-portrait-grid-6.tft-prototype-background figure img {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* ========================================
+   洗衣机常规模式：对齐蒸烤箱常规模式前四张图
+   ======================================== */
+
+/* 让洗衣机使用与蒸烤箱相同的六列网格 */
+.tft-portrait-grid-4.wm-com-align-grid {
+  display: grid;
+
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+
+  /* 与蒸烤箱六张图的间距一致 */
+  gap: 28px;
+
+  align-items: start;
+}
+
+/* 洗衣机图1：对应蒸烤箱图1 */
+.wm-com-align-grid figure:nth-child(1) {
+  grid-column: 1;
+}
+
+/* 洗衣机图2：对应蒸烤箱图2 */
+.wm-com-align-grid figure:nth-child(2) {
+  grid-column: 2;
+}
+
+/* 洗衣机图3：对应蒸烤箱图3 */
+.wm-com-align-grid figure:nth-child(3) {
+  grid-column: 3;
+}
+
+/* 洗衣机图4：对应蒸烤箱图4 */
+.wm-com-align-grid figure:nth-child(4) {
+  grid-column: 4;
+}
+
+/* 图片左对齐，覆盖HTML里的居中设置 */
+.wm-com-align-grid figure img {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* 窄屏时恢复自动排列，避免六列太拥挤 */
+@media (max-width: 900px) {
+  .tft-portrait-grid-4.wm-com-align-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wm-com-align-grid figure {
+    grid-column: auto !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .tft-portrait-grid-4.wm-com-align-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+/* TFT 页面：统一留白、弱化装饰，并保证窄屏阅读顺序。 */
+#main-content { min-width: 0; }
+#main-content > div { width: 100%; }
+#main-content section.glass-panel { background: rgba(255,255,255,.8); border: 1px solid #e9eff6; box-shadow: 0 4px 20px rgba(15,23,42,.025); }
+#main-content p { overflow-wrap: anywhere; }
+.tft-rule-card, .info-category-card, .tft-image-card { box-shadow: none; border-color: #e5ecf3; }
+.tft-rule-card { min-height: 0; }
+.tft-rule-demo { background: #f7faff; }
+.tft-tab:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; border-radius: 4px; }
+.tft-tabs { gap: 28px; }
+.tft-prototype-background, .wm-ai-background { border-radius: 16px; }
+@media (max-width: 1100px) {
+ .product-screen-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px 16px; }
+ .tft-portrait-grid-6.tft-prototype-background,
+ .tft-portrait-grid-3.wm-ai-background,
+ .tft-portrait-grid-4.wm-com-align-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+ .wm-ai-background figure, .wm-com-align-grid figure { grid-column: auto !important; }
+}
+@media (max-width: 767px) {
+ .product-screen-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .tft-portrait-grid-6.tft-prototype-background,
+ .tft-portrait-grid-3.wm-ai-background,
+ .tft-portrait-grid-4.wm-com-align-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+ .tft-vertical-framework-row { grid-template-columns: 1fr; gap: 24px; }
+ .tft-vertical-framework-image { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .tft-pane.active { animation: none; }
+}
+
+</style>
+  <link rel="stylesheet" href="assets/styles/information-pages.css">
+  <link rel="stylesheet" href="assets/styles/tft-rules.css?v=20261014-framework-copy-3">
+</head>
+<body class="antialiased">
+  <div class="aura-background"></div>
+  <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开导航"><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700"></span></button></header>
+  <div class="flex h-screen pt-16 md:pt-0">
+    <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+    <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
+      <div class="max-w-[1200px] mx-auto pb-24">
+        <section class="mb-12">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">TFT 布局</h1>
+<p class="text-lg text-gray-500 max-w-3xl leading-relaxed mb-5">
+   统一 TFT 载体下的信息分类、界面框架与场景交互布局规则，建立跨品类清晰、一致且易理解的智能屏体验。
+</p>
+
+        </section>
+
+        <!-- TFT 布局页签 -->
+<nav class="tft-tabs mb-12" role="tablist" aria-label="TFT 布局分类">
+
+  <button
+    class="tft-tab active"
+    type="button"
+    role="tab"
+    aria-selected="true"
+    id="tab-classification" aria-controls="pane-classification" tabindex="0" data-tft-tab="classification">
+    信息组织
+  </button>
+
+  <button
+    class="tft-tab"
+    type="button"
+    role="tab"
+    aria-selected="false"
+    id="tab-scene" aria-controls="pane-scene" tabindex="-1" data-tft-tab="scene">
+    交互原型
+  </button>
+
+
+</nav>
+
+<!-- 页签 1：信息分类与组织 -->
+<div class="tft-pane active" id="pane-classification" role="tabpanel" aria-labelledby="tab-classification" tabindex="0" data-tft-pane="classification">
+
+
+<!-- ======================================
+     信息分类：七类信息
+     桌面端 4 + 3，平板端 2 列，手机端 1 列
+     ====================================== -->
+<section id="information-category"
+         class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+
+  <!-- 标题与右侧标签 -->
+  <div class="flex flex-col lg:flex-row lg:items-end
+              lg:justify-between gap-4 mb-8">
+
+    <div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-3">
+        信息分类
+      </h2>
+
+      <p class="text-base text-gray-500 leading-7">
+        各品类 TFT 屏幕的信息统一分为以下七类，便于组织内容并保持一致的操作逻辑。
+      </p>
+    </div>
+
+  </div>
+
+  <!-- 七类信息卡片 -->
+  <div class="grid grid-cols-1
+              md:grid-cols-2
+              xl:grid-cols-4
+              gap-4">
+
+    <!-- 01 电源启动类 -->
+    <article class="min-h-[150px] p-5
+                    grid grid-cols-[32px_minmax(0,1fr)]
+                    items-start gap-3
+                    rounded-[18px]
+                    border border-[#D4E6F7]
+                    bg-gradient-to-br
+                    from-white/95 to-[#EEF7FF]/80">
+
+      <div class="w-8 h-8 rounded-lg
+                  grid place-items-center
+                  bg-gradient-to-br
+                  from-[#3B98EC] to-[#1471CA]
+                  text-white text-xs font-bold
+                  shadow-[0_5px_12px_rgba(34,131,226,0.20)]">
+        01
+      </div>
+
+      <div>
+        <h3 class="text-base font-bold text-gray-900 mb-2">
+          电源启动类
+        </h3>
+
+        <p class="info-card-desc">
+          承载设备开关机、启停等核心控制。
+        </p>
+      </div>
+
+    </article>
+
+    <!-- 02 模式选择类 -->
+    <article class="min-h-[150px] p-5
+                    grid grid-cols-[32px_minmax(0,1fr)]
+                    items-start gap-3
+                    rounded-[18px]
+                    border border-[#D4E6F7]
+                    bg-gradient-to-br
+                    from-white/95 to-[#EEF7FF]/80">
+
+      <div class="w-8 h-8 rounded-lg
+                  grid place-items-center
+                  bg-gradient-to-br
+                  from-[#3B98EC] to-[#1471CA]
+                  text-white text-xs font-bold
+                  shadow-[0_5px_12px_rgba(34,131,226,0.20)]">
+        02
+      </div>
+
+      <div>
+        <h3 class="text-base font-bold text-gray-900 mb-2">
+          模式选择类
+        </h3>
+
+        <p class="info-card-desc">
+          用于切换设备的工作模式、使用场景或任务类型。
+        </p>
+      </div>
+
+    </article>
+
+    <!-- 03 功能程序类 -->
+    <article class="min-h-[150px] p-5
+                    grid grid-cols-[32px_minmax(0,1fr)]
+                    items-start gap-3
+                    rounded-[18px]
+                    border border-[#D4E6F7]
+                    bg-gradient-to-br
+                    from-white/95 to-[#EEF7FF]/80">
+
+      <div class="w-8 h-8 rounded-lg
+                  grid place-items-center
+                  bg-gradient-to-br
+                  from-[#3B98EC] to-[#1471CA]
+                  text-white text-xs font-bold
+                  shadow-[0_5px_12px_rgba(34,131,226,0.20)]">
+        03
+      </div>
+
+      <div>
+        <h3 class="text-base font-bold text-gray-900 mb-2">
+          功能模块/程序类
+        </h3>
+
+        <p class="info-card-desc">
+          承载用户主要任务，是程序选择和功能操作的核心区域。
+        </p>
+      </div>
+
+    </article>
+
+    <!-- 04 附加功能类 -->
+    <article class="min-h-[150px] p-5
+                    grid grid-cols-[32px_minmax(0,1fr)]
+                    items-start gap-3
+                    rounded-[18px]
+                    border border-[#D4E6F7]
+                    bg-gradient-to-br
+                    from-white/95 to-[#EEF7FF]/80">
+
+      <div class="w-8 h-8 rounded-lg
+                  grid place-items-center
+                  bg-gradient-to-br
+                  from-[#3B98EC] to-[#1471CA]
+                  text-white text-xs font-bold
+                  shadow-[0_5px_12px_rgba(34,131,226,0.20)]">
+        04
+      </div>
+
+      <div>
+        <h3 class="text-base font-bold text-gray-900 mb-2">
+          参数调节类
+        </h3>
+
+        <p class="info-card-desc">
+          用于调节温度、时间、档位、转速等任务参数。
+        </p>
+      </div>
+
+    </article>
+
+    <!-- 05 参数调节项类 -->
+    <article class="min-h-[150px] p-5
+                    grid grid-cols-[32px_minmax(0,1fr)]
+                    items-start gap-3
+                    rounded-[18px]
+                    border border-[#D4E6F7]
+                    bg-gradient-to-br
+                    from-white/95 to-[#EEF7FF]/80">
+
+      <div class="w-8 h-8 rounded-lg
+                  grid place-items-center
+                  bg-gradient-to-br
+                  from-[#3B98EC] to-[#1471CA]
+                  text-white text-xs font-bold
+                  shadow-[0_5px_12px_rgba(34,131,226,0.20)]">
+        05
+      </div>
+
+      <div>
+        <h3 class="text-base font-bold text-gray-900 mb-2">
+          状态提示类
+        </h3>
+
+        <p class="info-card-desc">
+          显示运行状态、任务阶段、异常提醒及操作反馈。
+        </p>
+      </div>
+
+    </article>
+
+    <!-- 06 状态提示类 -->
+    <article class="min-h-[150px] p-5
+                    grid grid-cols-[32px_minmax(0,1fr)]
+                    items-start gap-3
+                    rounded-[18px]
+                    border border-[#D4E6F7]
+                    bg-gradient-to-br
+                    from-white/95 to-[#EEF7FF]/80">
+
+      <div class="w-8 h-8 rounded-lg
+                  grid place-items-center
+                  bg-gradient-to-br
+                  from-[#3B98EC] to-[#1471CA]
+                  text-white text-xs font-bold
+                  shadow-[0_5px_12px_rgba(34,131,226,0.20)]">
+        06
+      </div>
+
+      <div>
+        <h3 class="text-base font-bold text-gray-900 mb-2">
+          语音助手
+        </h3>
+
+        <p class="info-card-desc">
+          通过语音指令完成设备控制、参数调节及信息查询。
+        </p>
+      </div>
+
+    </article>
+
+    <!-- 07 双八数值类 -->
+    <article class="min-h-[150px] p-5
+                    grid grid-cols-[32px_minmax(0,1fr)]
+                    items-start gap-3
+                    rounded-[18px]
+                    border border-[#D4E6F7]
+                    bg-gradient-to-br
+                    from-white/95 to-[#EEF7FF]/80">
+
+      <div class="w-8 h-8 rounded-lg
+                  grid place-items-center
+                  bg-gradient-to-br
+                  from-[#3B98EC] to-[#1471CA]
+                  text-white text-[10px] font-bold
+                  shadow-[0_5px_12px_rgba(34,131,226,0.20)]">
+        07
+      </div>
+
+      <div>
+        <h3 class="text-base font-bold text-gray-900 mb-2">
+          附加功能类
+        </h3>
+
+        <p class="info-card-desc">
+          为主程序提供增强、辅助或个性化能力，可按需选择。
+        </p>
+      </div>
+
+    </article>
+
+  </div>
+
+  <!-- 底部蓝色总结条 -->
+  <div class="hidden mt-6 p-5
+              rounded-2xl
+              bg-gradient-to-r
+              from-[#1269BD] to-[#2C91E9]
+              text-white
+              grid grid-cols-1
+              md:grid-cols-[auto_minmax(0,1fr)]
+              items-center gap-4
+              shadow-[0_12px_26px_rgba(34,131,226,0.18)]">
+
+    <div class="text-sm font-bold whitespace-nowrap">
+      组织逻辑
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2
+                text-sm leading-6">
+
+      <span>任务控制</span>
+      <span class="text-[#A8D4FA] font-bold">→</span>
+
+      <span>模式与程序</span>
+      <span class="text-[#A8D4FA] font-bold">→</span>
+
+      <span>参数与附加功能</span>
+      <span class="text-[#A8D4FA] font-bold">→</span>
+
+      <span>状态与数值反馈</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- TFT屏交互核心体验规则 -->
+<section id="tft-experience-rules"
+         class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+
+  <!-- 标题与说明 -->
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-3">
+      核心原则
+    </h2>
+
+    <p class="text-base text-gray-500 leading-7">
+      基于易用性建立 TFT 屏交互的核心体验规则，保障用户体验轻便高效、学习成本更低，并建立跨品类一致的操作体验。
+    </p>
+  </div>
+
+  <!-- 三张规则卡片 -->
+  <div class="tft-rule-grid">
+
+    <!-- 原则01 -->
+    <article class="tft-rule-card">
+      <div class="tft-rule-demo">
+  <img
+    class="tft-rule-image"
+    src="assets/tft_Information_classification/focus.png"
+    alt="焦点式交互，单屏聚焦单任务示意图"
+    style="width: 100%; height: auto; margin: 0 auto;">
+</div>
+
+      <div class="tft-rule-copy">
+        <div class="tft-rule-index">原则 01</div>
+
+        <h3>焦点式交互，单屏聚焦单任务</h3>
+
+        <p>
+          当前操作对象应始终具有明确视觉焦点；同一时刻只突出一个主任务，减少信息竞争和用户判断负担。
+        </p>
+      </div>
+    </article>
+
+    <!-- 原则02 -->
+    <article class="tft-rule-card">
+      <div class="tft-rule-demo">
+  <img
+    class="tft-rule-image"
+    src="assets/tft_Information_classification/directly.png"
+    alt="扁平化弱层级交互，直达触发示意图"
+    style="width: 80%; height: auto; margin: 0 auto;">
+</div>
+
+      <div class="tft-rule-copy">
+        <div class="tft-rule-index">原则 02</div>
+
+        <h3>减少页面层级，高频操作直接触达</h3>
+
+        <p>
+          通过转场动效和视觉层次表达上下文关系，减少不必要的层层进入；高频任务应从当前页面直接触发或快速返回。
+        </p>
+      </div>
+    </article>
+
+    <!-- 原则03 -->
+    <article class="tft-rule-card">
+      <div class="tft-rule-demo">
+  <img
+    class="tft-rule-image"
+    src="assets/tft_Information_classification/consistent interaction.png"
+    alt="跨品类同一属性的信息模块交互方式一致示意图"
+    style="width: 65%; height: auto; margin: 0 auto;">
+</div>
+
+      <div class="tft-rule-copy">
+        <div class="tft-rule-index">原则 03</div>
+
+        <h3>同类信息模块采用一致的交互方式</h3>
+
+        <p>
+          同类程序与功能模块应保持相同的选择方式和调节方向：横向选择优先左右切换，详情参数优先上下调节；竖屏场景可作相应转置。
+        </p>
+      </div>
+    </article>
+
+  </div>
+
+</section>
+<!-- 三、主交互方式规则 -->
+<section id="tft-main-interaction"
+         class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-3">
+      交互方式
+    </h2>
+
+    <p class="text-base text-gray-500 leading-7">
+      横屏中，左右切换程序或功能，上下选择其详情调节项；竖屏中，两者的操作方向相应对调。
+    </p>
+
+    <p class="text-base text-gray-500 leading-7 mt-1">
+      选择选项时，始终突出当前选中项。通过选择、调节与进入详情三个方向，建立统一的 XYZ 交互方式（见下图）。
+    </p>
+  </div>
+
+  
+<!-- XYZ交互方式示意图 -->
+<div class="xyz-stage">
+    <img
+        class="xyz-rule-image"
+        src="assets/tft_Information_classification/xyz.png"
+        alt="XYZ主交互方式规则示意图">
+</div>
+
+
+</section>
+
+
+<!-- 四、一致性的步骤逻辑层 -->
+<section id="tft-flow-logic"
+         class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-3">
+      交互步骤
+    </h2>
+
+    <p class="text-base text-gray-500 leading-7">
+      统筹各品类 TFT 载体下的产品信息与核心交互流程，建立从功能选择到任务执行的一致性步骤逻辑，降低跨产品学习成本。
+    </p>
+  </div>
+
+  <!-- 核心交互流程步骤逻辑图 -->
+<ol class="tft-step-flow" aria-label="核心交互步骤">
+  <li class="tft-step-card">
+    <span class="tft-step-number">01</span>
+    <div><span class="tft-step-label" data-i18n-zh="第一步" data-i18n-en="Step 1">第一步</span>
+    <h3 data-i18n-zh="选择程序或功能" data-i18n-en="Select a program or function">选择程序或功能</h3>
+    <p data-i18n-zh="程序选择 / 功能模块选择页" data-i18n-en="Program / function selection screen">程序选择 / 功能模块选择页</p></div>
+  </li>
+  <li class="tft-step-card">
+    <span class="tft-step-number">02</span>
+    <div><span class="tft-step-label" data-i18n-zh="第二步" data-i18n-en="Step 2">第二步</span>
+    <h3 data-i18n-zh="查看详情与调节参数" data-i18n-en="Review details and adjust parameters">查看详情与调节参数</h3>
+    <p data-i18n-zh="程序或功能模块的详情 / 调节页" data-i18n-en="Program / function details and adjustment screen">程序或功能模块的详情 / 调节页</p></div>
+  </li>
+  <li class="tft-step-card">
+    <span class="tft-step-number">03</span>
+    <div><span class="tft-step-label" data-i18n-zh="第三步" data-i18n-en="Step 3">第三步</span>
+    <h3 data-i18n-zh="启动并查看运行状态" data-i18n-en="Start and monitor progress">启动并查看运行状态</h3>
+    <p data-i18n-zh="程序或子模块功能运行页" data-i18n-en="Program / sub-function running screen">程序或子模块功能运行页</p></div>
+  </li>
+</ol>
+
+</section>
+<!-- 五、主界面布局基础框架 -->
+<section id="tft-layout-framework"
+         class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-3">
+      布局框架
+    </h2>
+
+    <p class="text-base text-gray-500 leading-7">
+      根据横向与竖向屏幕比例，建立一致的系统状态、模式分类、内容区与辅助操作区域。
+    </p>
+  </div>
+
+  <div class="layout-framework-grid">
+    <div class="framework-item framework-portrait">
+      <div class="framework-name">竖向屏幕布局</div>
+      <figure class="tft-layout-figure tft-layout-figure-portrait">
+        <img src="./assets/tft_Information_classification/vertical screen.png"
+             alt="竖向屏幕主界面布局基础框架" class="tft-layout-image"
+             style="width: 28%; height: auto; margin: 0 auto;">
+      </figure>
+    </div>
+    <div class="framework-item framework-landscape">
+      <div class="framework-name">横向屏幕布局</div>
+      <figure class="tft-layout-figure tft-layout-figure-landscape">
+        <img src="./assets/tft_Information_classification/horizontal screen.png"
+             alt="横向屏幕主界面布局基础框架" class="tft-layout-image">
+      </figure>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- 六、屏幕与产品的位置关系 -->
+<section id="tft-screen-product"
+         class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-3">
+      位置关系
+    </h2>
+
+    <p class="text-base text-gray-500 leading-7">
+      TFT 屏幕及 TFT+LED 组合屏幕的位置，应与产品中心轴、核心结构或主要操作区域相对应。
+    </p>
+  </div>
+
+ <div class="product-screen-grid">
+
+  <!-- 01 横向品类 -->
+  <div class="product-screen-item">
+    <p class="product-position-copy">
+      蒸烤箱
+    </p>
+
+    <figure class="product-position-image">
+      <img
+        src="./assets/tft_Information_classification/oven.png"
+        alt="横向品类屏幕与产品中心轴对齐示意"
+        style="width: 110px; height: auto;">
+    </figure>
+  </div>
+
+  <!-- 02 洗衣机 -->
+  <div class="product-screen-item">
+    <p class="product-position-copy">
+      洗衣机
+    </p>
+
+    <figure class="product-position-image">
+      <img
+        src="./assets/tft_Information_classification/wm.png"
+        alt="洗衣机屏幕与筒心对齐示意"
+        style="width: 120px; height: auto;">
+    </figure>
+  </div>
+
+  <!-- 03 窄竖向品类 -->
+  <div class="product-screen-item">
+    <p class="product-position-copy">
+     空调竖屏
+    </p>
+
+    <figure class="product-position-image">
+      <img
+        src="./assets/tft_Information_classification/air conditioner_1.png"
+        alt="窄竖向品类屏幕布局示意"
+        style="width: 80px; height: auto;">
+    </figure>
+  </div>
+
+  <!-- 04 高竖向品类 -->
+  <div class="product-screen-item">
+    <p class="product-position-copy">
+      空调横屏
+    </p>
+
+    <figure class="product-position-image">
+      <img
+        src="./assets/tft_Information_classification/air conditioner_2.png"
+        alt="高竖向品类屏幕布局示意"
+        style="width: 80px; height: auto;">
+    </figure>
+  </div>
+
+  <!-- 05 双门品类 -->
+  <div class="product-screen-item">
+    <p class="product-position-copy">
+      双塔式空调
+    </p>
+
+    <figure class="product-position-image">
+      <img
+        src="./assets/tft_Information_classification/2 towers.png"
+        alt="双门品类屏幕布局示意"
+        style="width: 80px; height: auto;">
+    </figure>
+  </div>
+
+  <!-- 06 大屏品类 -->
+  <div class="product-screen-item">
+    <p class="product-position-copy">
+      冰箱
+    </p>
+
+    <figure class="product-position-image">
+      <img
+        src="./assets/tft_Information_classification/refrigerator.png"
+        alt="大屏品类屏幕布局示意"
+        style="width: 120px; height: auto;">
+    </figure>
+  </div>
+
+</div>
+
+</section>
+</div>
+
+<!-- 页签 2：场景细分交互与布局 -->
+<div class="tft-pane" id="pane-scene" role="tabpanel" aria-labelledby="tab-scene" tabindex="0" data-tft-pane="scene">
+
+  <!-- ==================================================
+     板块一：跨品类通用主页框架
+================================================== -->
+<section id="tft-home-framework"
+         class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+
+  <div class="scene-heading">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-900">
+        信息框架
+      </h2>
+      <p class="tft-framework-intro">
+        以 AI 和标准模式作为首层入口，建立一致的交互起点。
+      </p>
+    </div>
+  </div>
+
+  <!-- 主界面信息框架 -->
+  <div class="tft-framework-grid">
+  <article class="tft-image-card">
+    <h3>信息分区</h3>
+    <figure>
+      <img src="./assets/tft_scene/information-areas.png" alt="跨品类 TFT 信息分区示意">
+    </figure>
+  </article>
+  <article class="tft-image-card">
+    <h3>主页示例</h3>
+    <figure>
+      <img src="./assets/tft_scene/home-example-v2.png" alt="AI 与标准双模式主页示例">
+    </figure>
+  </article>
+  </div>
+</section>
+
+<!-- ==================================================
+     板块二：洗衣机横屏交互与布局规则
+================================================== -->
+<section id="tft-washer-landscape" class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+  <div class="scene-heading"><h2 class="text-2xl font-bold text-gray-900">横屏示例</h2></div>
+  <div class="tft-subsection">
+    <h4 class="tft-description-title">首页</h4>
+    <div class="tft-screen-example-grid">
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/首页a类-二层级分类.png" alt="多层级"><figcaption>多层级</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/首页b类-一层级分类.png" alt="单层级"><figcaption>单层级</figcaption></figure></article>
+    </div>
+  </div>
+  <div class="scene-category-divider"></div>
+  <div class="tft-subsection">
+    <h4 class="tft-description-title">设置页</h4>
+    <div class="tft-screen-example-grid">
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/设置.png" alt="设置"></figure></article>
+    </div>
+  </div>
+  <div class="scene-category-divider"></div>
+  <div class="tft-subsection">
+    <h4 class="tft-description-title">二级页</h4>
+    <div class="tft-screen-example-grid">
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/二级分类页面.png" alt="二级分类页面"><figcaption>二级分类页面</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/参数调节.png" alt="参数调节"><figcaption>参数调节</figcaption></figure></article>
+    </div>
+  </div>
+  <div class="scene-category-divider"></div>
+  <div class="tft-subsection">
+    <h4 class="tft-description-title">进程页</h4>
+    <div class="tft-screen-example-grid">
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/程序运行.png" alt="程序运行"><figcaption>程序运行</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/程序完成.png" alt="程序完成"><figcaption>程序完成</figcaption></figure></article>
+    </div>
+  </div>
+  <div class="scene-category-divider"></div>
+  <div class="tft-subsection">
+    <h4 class="tft-description-title">AI模式</h4>
+    <div class="tft-screen-example-grid">
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/AI模式.png?v=8a133c93d9c3" alt="AI模式"><figcaption>待机</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/AI模式-识别.png?v=cdf012cc7d92" alt="识别"><figcaption>识别</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/AI模式-结果.png?v=30fd89348452" alt="结果"><figcaption>结果</figcaption></figure></article>
+    </div>
+  </div>
+  <div class="scene-category-divider"></div>
+  <div class="tft-subsection">
+    <h4 class="tft-description-title">设备页</h4>
+    <div class="tft-screen-example-grid">
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/设备-耗材 右滑进入.png" alt="耗材"><figcaption>耗材</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/landscape/设备-能源-右滑进入.png" alt="能源"><figcaption>能源</figcaption></figure></article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================
+     板块三：竖屏交互与布局规则
+================================================== -->
+<section id="tft-vertical-layout" class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
+  <div class="scene-heading"><h2 class="text-2xl font-bold text-gray-900">竖屏示例</h2></div>
+  <div class="tft-portrait-category-row">
+    <div class="tft-subsection tft-portrait-category" style="--portrait-count: 2">
+      <h4 class="tft-description-title">首页</h4>
+      <div class="tft-portrait-example-grid tft-portrait-home-grid">
+<article class="tft-screen-example"><figure><img src="./assets/tft_scene/portrait/首页-单层级.png" alt="多层级"><figcaption>多层级</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/portrait/首页-多层级.png" alt="单层级"><figcaption>单层级</figcaption></figure></article>
+      </div>
+    </div>
+    <div class="tft-subsection tft-portrait-category" style="--portrait-count: 2">
+      <h4 class="tft-description-title">二级页</h4>
+      <div class="tft-portrait-example-grid">
+<article class="tft-screen-example"><figure><img src="./assets/tft_scene/portrait/分类二级页面.png" alt="二级分类页面"><figcaption>二级分类页面</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/portrait/参数调节（浮层）.png" alt="参数调节"><figcaption>参数调节</figcaption></figure></article>
+      </div>
+    </div>
+  </div>
+  <div class="scene-category-divider"></div>
+  <div class="tft-portrait-category-row">
+    <div class="tft-subsection tft-portrait-category" style="--portrait-count: 2">
+      <h4 class="tft-description-title">进程页</h4>
+      <div class="tft-portrait-example-grid">
+<article class="tft-screen-example"><figure><img src="./assets/tft_scene/portrait/程序运行.png" alt="程序运行"><figcaption>程序运行</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/portrait/程序完成.png" alt="程序完成"><figcaption>程序完成</figcaption></figure></article>
+      </div>
+    </div>
+    <div class="tft-subsection tft-portrait-category" style="--portrait-count: 3">
+      <h4 class="tft-description-title">AI模式</h4>
+      <div class="tft-portrait-example-grid">
+<article class="tft-screen-example"><figure><img src="./assets/tft_scene/portrait/AI模式-待机.png?v=5e81ea1fcb1e" alt="待机"><figcaption>待机</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/portrait/AI模式-识别展示.png" alt="识别"><figcaption>识别</figcaption></figure></article>
+      <article class="tft-screen-example"><figure><img src="./assets/tft_scene/portrait/AI模式-结果.png" alt="结果"><figcaption>结果</figcaption></figure></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+        <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+      </div>
+    </main>
+  </div>
+  <script src="haier-nav.js"></script>
+  <script>
+  const tftTabs = [...document.querySelectorAll('[data-tft-tab]')];
+  const tftPanes = [...document.querySelectorAll('[data-tft-pane]')];
+  function selectTftTab(tab) {
+    tftTabs.forEach((item) => {
+      const selected = item === tab;
+      item.classList.toggle('active', selected);
+      item.setAttribute('aria-selected', String(selected));
+      item.tabIndex = selected ? 0 : -1;
+    });
+    tftPanes.forEach((pane) => {
+      const selected = pane.dataset.tftPane === tab.dataset.tftTab;
+      pane.classList.toggle('active', selected);
+      pane.hidden = !selected;
+    });
+  }
+  tftTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectTftTab(tab));
+    tab.addEventListener('keydown', (event) => {
+      let next;
+      if (event.key === 'ArrowRight') next = (index + 1) % tftTabs.length;
+      if (event.key === 'ArrowLeft') next = (index + tftTabs.length - 1) % tftTabs.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = tftTabs.length - 1;
+      if (next === undefined) return;
+      event.preventDefault();
+      selectTftTab(tftTabs[next]);
+      tftTabs[next].focus();
+    });
+  });
+  selectTftTab(tftTabs[0]);
+</script>
+
+
+
+<script>
+/* TFT page translations: supplements the shared haier-nav.js language switch. */
+(function () {
+  const translations = {
+  "以 AI 和标准模式作为首层入口，建立一致的交互起点。": "Use AI and Standard modes as top-level entry points for a consistent interaction flow.",
+  "扁平化架构": "Flat Architecture",
+  "在首页一键启动上次使用的程序或功能。": "Start the last-used program or function from the home screen with one tap.",
+  "聚焦式交互": "Focused Interaction",
+  "每屏聚焦一个任务或内容，通过通用底部滑轮快速定位目标选项。": "Focus each screen on one task or content area. Use the shared bottom carousel to quickly find the desired option.",
+  "信息分区": "Information Areas",
+  "主页示例": "Home Screen Example",
+
+  "信息框架": "Information Framework",
+  "主界面信息框架": "Main-Screen Information Framework",
+  "界面信息框架": "Interface Information Framework",
+  "TFT 布局": "TFT Layout",
+  "统一 TFT 载体下的信息分类、界面框架与场景交互布局规则，建立跨品类清晰、一致且易理解的智能屏体验。": "Standardize information categories, interface frameworks, and scenario-based interaction and layout rules for TFT displays to deliver a clear, consistent, and intuitive smart-screen experience across appliance categories.",
+  "信息组织": "Information Organization",
+  "交互原型": "Interaction Prototypes",
+  "信息分类": "Information Categories",
+  "各品类 TFT 屏幕的信息统一分为以下七类，便于组织内容并保持一致的操作逻辑。": "Across TFT-equipped product categories, information modules include the following:",
+  "电源启动类": "Power and Start",
+  "承载设备开关机、启停等核心控制。": "Provides core controls such as power on/off and start/stop.",
+  "模式选择类": "Mode Selection",
+  "用于切换设备的工作模式、使用场景或任务类型。": "Switches between operating modes, use scenarios, and task types.",
+  "功能模块/程序类": "Functions / Programs",
+  "承载用户主要任务，是程序选择和功能操作的核心区域。": "Supports primary user tasks and serves as the main area for selecting programs and operating functions.",
+  "参数调节类": "Parameter Adjustment",
+  "用于调节温度、时间、档位、转速等任务参数。": "Adjusts task parameters such as temperature, time, level, and spin speed.",
+  "状态提示类": "Status Feedback",
+  "显示运行状态、任务阶段、异常提醒及操作反馈。": "Displays operating status, task progress, alerts, and interaction feedback.",
+  "语音助手": "Voice Assistant",
+  "通过语音指令完成设备控制、参数调节及信息查询。": "Use voice commands to control the appliance, adjust parameters, and retrieve information.",
+  "附加功能类": "Additional Functions",
+  "为主程序提供增强、辅助或个性化能力，可按需选择。": "Offers optional enhancements, assistance, and personalization for the main program.",
+  "组织逻辑": "Organization Logic",
+  "任务控制": "Task Control",
+  "模式与程序": "Modes and Programs",
+  "参数与附加功能": "Parameters and Additional Functions",
+  "状态与数值反馈": "Status and Numeric Feedback",
+  "核心原则": "Core Principles",
+  "基于易用性建立 TFT 屏交互的核心体验规则，保障用户体验轻便高效、学习成本更低，并建立跨品类一致的操作体验。": "Define core TFT interaction rules around usability to support efficient operation, lower learning effort, and consistent experiences across product categories.",
+  "原则 01": "Principle 01",
+  "原则 02": "Principle 02",
+  "原则 03": "Principle 03",
+  "焦点式交互，单屏聚焦单任务": "Focus-Based Interaction: One Primary Task per Screen",
+  "当前操作对象应始终具有明确视觉焦点；同一时刻只突出一个主任务，减少信息竞争和用户判断负担。": "Keep the current interaction target visually prominent. Emphasize one primary task at a time to reduce visual competition and decision effort.",
+  "减少页面层级，高频操作直接触达": "Flat, Shallow Navigation with Direct Actions",
+  "通过转场动效和视觉层次表达上下文关系，减少不必要的层层进入；高频任务应从当前页面直接触发或快速返回。": "Use transitions and visual depth to communicate context while avoiding unnecessary navigation layers. Frequently used tasks should be directly accessible or easy to return to.",
+  "同类信息模块采用一致的交互方式": "Consistent Interaction for Equivalent Modules Across Categories",
+  "同类程序与功能模块应保持相同的选择方式和调节方向：横向选择优先左右切换，详情参数优先上下调节；竖屏场景可作相应转置。": "Keep selection methods and adjustment directions consistent for equivalent programs and modules: use left/right for horizontal selection and up/down for detailed parameter adjustment; transpose as appropriate for portrait screens.",
+  "交互方式": "Interaction Method",
+  "横屏中，左右切换程序或功能，上下选择其详情调节项；竖屏中，两者的操作方向相应对调。": "Select programs and functional modules horizontally, and adjust detailed settings vertically. Reverse these directions for portrait-screen scenarios.",
+  "选择选项时，始终突出当前选中项。通过选择、调节与进入详情三个方向，建立统一的 XYZ 交互方式（见下图）。": "Use focus-based selection consistently so users remain oriented toward the current task, forming a unified XYZ interaction model.",
+  "交互步骤": "Interaction Steps",
+  "统筹各品类 TFT 载体下的产品信息与核心交互流程，建立从功能选择到任务执行的一致性步骤逻辑，降低跨产品学习成本。": "Unify product information and core interaction flows across TFT devices, establishing a consistent sequence from function selection to task execution and reducing cross-product learning effort.",
+  "布局框架": "Layout Framework",
+  "根据横向与竖向屏幕比例，建立一致的系统状态、模式分类、内容区与辅助操作区域。": "Define consistent system-status, mode-category, content, and auxiliary-control areas for landscape and portrait screen proportions.",
+  "横向屏幕": "Landscape Screen",
+  "竖向屏幕": "Portrait Screen",
+  "横向屏幕布局": "Landscape Layout",
+  "竖向屏幕布局": "Portrait Layout",
+  "位置关系": "Placement",
+  "TFT 屏幕及 TFT+LED 组合屏幕的位置，应与产品中心轴、核心结构或主要操作区域相对应。": "For both TFT and TFT+LED configurations, align screen placement with the product centerline, key physical structures, or primary operating area.",
+  "蒸烤箱": "Steam Oven",
+  "洗衣机": "Washing Machine",
+  "空调竖屏": "Air Conditioner — Portrait Screen",
+  "空调横屏": "Air Conditioner — Landscape Screen",
+  "双塔式空调": "Dual-Tower Air Conditioner",
+  "冰箱": "Refrigerator",
+
+  "以AI和标准双模式为信息架构的首层和交互路径的出发点，扁平化架构，一键触发，首页即可启动上次使用程序或者功能；聚焦式交互，一屏聚焦单任务或者内容，同时通用性底部栏滑轮也可以快速找到目标选项": "Use AI and Standard modes as the top-level entry points. A flat architecture enables one-tap actions, including restarting the last-used program from the home screen. Focus each screen on one task or content area, while a shared bottom carousel provides quick access to other options.",
+
+  "横屏示例": "Landscape Examples",
+  "竖屏示例": "Portrait Examples",
+
+
+  "常规模式": "Standard Mode",
+  "AI模式": "AI Mode",
+  "左边栏": "Left Sidebar",
+  "顶部栏": "Top Bar",
+  "简约化层级": "Simplified Hierarchy",
+  "多筒洗衣场景": "Multi-Drum Washing Scenario",
+  "点击参数预览区后，以半透明浮层打开参数调节界面。保留底层页面的可见性，并通过转场动效说明页面关系，便于用户理解当前操作位置。": "On a parameter-adjustment screen, activating the parameter preview opens an overlay. Its translucent appearance and transition effects communicate the relationship to the underlying screen, creating a lightweight interaction.",
+  "多筒洗衣机中，用户为其他筒选择程序时，应仍能清晰查看已启动筒的运行状态。": "For multi-drum washers, the operating status of an active drum must remain clearly visible while selecting a program for another drum.",
+  "结合 AI 语音交互与衣物识别，根据识别结果推荐适合的洗护程序。": "Integrate AI voice interaction and recognition to recommend task-specific solutions.",
+  "左边栏向右滑动，带出产品状态信息页，可查看能耗和耗材状态；通过产品模块的3D表现与可交互方式，体现滤网、过滤器等的拆卸方式。": "Swipe the left sidebar right to open product status, including energy consumption and consumables. Interactive 3D modules illustrate how to remove filters and related components.",
+  "从顶部栏向下滑动，打开设置中心；展开后向上滑动，收起设置中心并返回主页。": "Swipe down from the top bar to open Settings, following familiar mobile interaction patterns. Swipe up anywhere to return to the home screen.",
+  "在菜谱选择场景中，当菜谱数量较多且存在不同分类时，层级结构至多增加一级；其余交互逻辑仍以浮层形式承载，以延续弱层级、扁平化的交互设计原则。": "When recipes are numerous and categorized, add no more than one navigation level. Use overlays for other interactions to preserve a shallow, flat interaction model.",
+  "集成语音交互与食材识别能力，根据用户当前任务推送目标解决方案，并推荐适合的蒸烤等程序。": "Combine voice interaction and ingredient recognition to suggest task-relevant solutions and appropriate cooking programs.",
+  "左边栏向右滑动，带出产品状态信息页，可查看能耗和耗材状态；通过产品模块的3D表现与可交互方式，体现水盒等的拆卸方式。": "Swipe the left sidebar right to view product status, energy use, and consumables. Interactive 3D modules demonstrate how to remove the water tank and related components.",
+  "需要进一步简化首页时，可移除顶部栏的功能分类。此方案仍符合信息架构规则，但分类切换的便利性会降低，应结合程序数量与使用频率选择。": "For a simpler information hierarchy, remove functional categories from the home-screen top bar. This sacrifices some convenience but remains consistent with the architecture rules.",
+
+  "洗衣机常规模式": "Washing Machine — Standard Mode",
+  "洗衣机 AI 模式": "Washing Machine — AI Mode",
+  "蒸烤箱常规模式": "Steam Oven — Standard Mode",
+  "蒸烤箱 AI 模式": "Steam Oven — AI Mode",
+  "01 横向品类": "01 Landscape Appliances",
+  "02 洗衣机": "02 Washing Machines",
+  "03 窄竖向品类": "03 Narrow Portrait Appliances",
+  "04 高竖向品类": "04 Tall Portrait Appliances",
+  "05 双门品类": "05 Double-Door Appliances",
+  "06 大屏品类": "06 Large-Screen Appliances"
+};
+  const lang = localStorage.getItem('haier-guideline-language') === 'en' ? 'en' : 'zh';
+  document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+  if (lang !== 'en') return;
+  document.title = 'Haier Design | TFT Layout';
+  const root = document.querySelector('main');
+  if (!root) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (node.parentElement && node.parentElement.closest('script,style,svg,[data-i18n-zh][data-i18n-en]')) continue;
+    nodes.push(node);
+  }
+  for (const node of nodes) {
+    const original = node.nodeValue;
+    const key = original.trim();
+    if (Object.prototype.hasOwnProperty.call(translations, key)) {
+      node.nodeValue = original.replace(key, translations[key]);
+    }
+  }
+  // Translate image alternative text for assistive technology.
+  for (const img of root.querySelectorAll('img[alt]')) {
+    img.alt = img.alt
+      .replaceAll('洗衣机', 'Washing Machine')
+      .replaceAll('蒸烤箱', 'Steam Oven')
+      .replaceAll('常规模式', 'Standard Mode')
+      .replaceAll('AI 模式', 'AI Mode')
+      .replaceAll('图片', 'Image')
+      .replaceAll('横向屏幕布局', 'Landscape Layout')
+      .replaceAll('竖向屏幕布局', 'Portrait Layout');
+  }
+})();
+</script>
+</body>
+</html>

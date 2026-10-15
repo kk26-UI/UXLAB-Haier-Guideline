@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-i18n-en="Haier Design | Combined Layout" data-i18n-zh="Haier Design | 组合布局">Haier Design | 组合布局</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root { --brand:#2283E2; --ink:#1D1D1F; --muted:#667085; --glass:rgba(255,255,255,.66); }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#F5F7FA; color:var(--ink); overflow-x:hidden; }
+    .aura-background { position:fixed; inset:0; z-index:-1; background:radial-gradient(circle at 12% 4%,#c9e3ff 0,transparent 32%),radial-gradient(circle at 88% 70%,#dfe7ff 0,transparent 38%),#f5f7fa; }
+    .glass-panel { background:var(--glass); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid rgba(255,255,255,.4); box-shadow:0 8px 32px rgba(0,0,0,.04); border-radius:24px; }
+    .sidebar-nav-item { transition:all .3s ease; border-left:3px solid transparent; }
+    .sidebar-nav-item.active { color:var(--brand); font-weight:600; border-left-color:var(--brand); background:linear-gradient(90deg,#E5F0FF 0%,transparent 100%); }
+    .haier-logo-container { display:flex; align-items:center; justify-content:center; background:var(--brand); color:#fff; font-family:Arial,sans-serif; font-weight:bold; border-radius:8px; }
+    .brand-text { color:var(--brand); }
+    .axis-card { position:relative; overflow:hidden; }
+    .axis-image { width:100%; aspect-ratio:2.36/1; display:block; object-fit:cover; background:#000; }
+    .axis-content { position:relative; min-height:230px; }
+    .axis-mark { position:absolute; right:18px; top:8px; font-size:7rem; line-height:1; font-weight:700; color:rgba(34,131,226,.08); }
+    .axis-line { height:2px; background:linear-gradient(90deg,var(--brand),rgba(34,131,226,.08)); position:relative; }
+    .axis-line::after { content:""; position:absolute; right:0; top:-4px; border-left:8px solid var(--brand); border-top:5px solid transparent; border-bottom:5px solid transparent; }
+    .layer-stage { position:relative; overflow:hidden; border-radius:20px; background:#eef6ff; }
+    .layer-stage img { width:100%; height:auto; display:block; }
+    .layer-copy { position:absolute; left:8%; width:48%; display:grid; grid-template-columns:minmax(72px,24%) 1fr; gap:clamp(8px,1.6vw,24px); align-items:center; transform:translateY(-50%); font-size:clamp(8px,1.15vw,14px); line-height:1.5; }
+    .layer-copy-top { top:29%; }
+    .layer-copy-mid { top:50%; }
+    .layer-copy-deep { top:71%; }
+    .layer-copy strong { color:#2283e2; font-size:clamp(8px,1.15vw,14px); font-weight:600; white-space:nowrap; }
+    .layer-copy span { color:rgba(75,85,99,.72); transform:translateX(-32px); }
+    .rule-row { display:grid; grid-template-columns:132px 1fr; gap:18px; padding:18px 0; border-top:1px solid rgba(15,23,42,.08); }
+    .rule-row > div:first-child { color:#1D1D1F; }
+    .check-card { border-top:3px solid var(--brand); }
+    .check-card h3 { color:var(--brand); }
+    .must-list li::before { content:"✓"; color:var(--brand); font-weight:700; margin-right:.65rem; }
+    .dont-list li::before { content:"×"; color:#E5484D; font-weight:700; margin-right:.65rem; }
+    @media (max-width:767px) { .rule-row{grid-template-columns:1fr;gap:6px}.axis-mark{font-size:5rem} }
+    main section.glass-panel{padding:2.5rem!important;margin-bottom:2rem!important}
+    main section.glass-panel h2{font-size:1.5rem!important;line-height:2rem!important;color:#1d1d1f!important}
+    @media(max-width:767px){main section.glass-panel{padding:1.5rem!important}}
+/* 信息架构七原则：与原页面的浅蓝、玻璃面板风格统一 */
+.ia-seven-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 32px;
+}
+
+.ia-seven-item {
+  min-width: 0;
+}
+
+.ia-seven-item h3 {
+  min-height: 48px;
+  margin-bottom: 6px;
+  color: #344054;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.ia-image-box {
+  width: 100%;
+  aspect-ratio: 1.7 / 1;
+  overflow: hidden;
+  border: 1px solid #D8E5F1;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #F8FBFF, #EDF6FF);
+}
+
+.ia-image-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 屏幕变窄时调整列数 */
+@media (max-width: 1050px) {
+  .ia-seven-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ia-seven-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ia-seven-item h3 {
+    min-height: 0;
+  }
+}
+/* ========================================
+   LED 信息分类：七类信息卡片
+   ======================================== */
+
+/* 七张卡片：电脑端第一行4张，第二行3张 */
+.info-category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* 单张分类卡片 */
+.info-category-card {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+
+  min-width: 0;
+  min-height: 142px;
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.92),
+      rgba(238, 247, 255, 0.78)
+    );
+
+  border: 1px solid #D4E6F7;
+  border-radius: 18px;
+}
+
+/* 卡片左上角的蓝色标识 */
+.info-category-mark {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #3B98EC,
+      #1471CA
+    );
+
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+
+  box-shadow:
+    0 5px 12px rgba(34, 131, 226, 0.20);
+}
+
+/* 双八数值类的标识需要稍小一点 */
+.info-category-mark.is-88 {
+  font-size: 10px;
+}
+
+/* 卡片标题 */
+.info-category-card h3 {
+  margin: 2px 0 6px;
+
+  color: #1D1D1F;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* 卡片说明文字 */
+.info-category-card p {
+  margin: 0;
+
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 底部蓝色总结条 */
+.info-category-summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+
+  margin-top: 24px;
+  padding: 20px 24px;
+
+  color: #FFFFFF;
+
+  background:
+    linear-gradient(
+      90deg,
+      #1269BD,
+      #2C91E9
+    );
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 12px 26px rgba(34, 131, 226, 0.18);
+}
+
+/* 总结条左侧标题 */
+.info-category-summary-title {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* 总结条右侧流程 */
+.info-category-summary-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 总结条中的箭头 */
+.info-category-arrow {
+  color: #A8D4FA;
+  font-weight: 700;
+}
+
+/* 平板端：每行两张 */
+@media (max-width: 1050px) {
+  .info-category-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 手机端：每行一张 */
+@media (max-width: 640px) {
+  .info-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-category-card {
+    min-height: auto;
+  }
+
+  .info-category-summary {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+/* LED 场景细分：增强页面节奏与内容层级 */
+.scene-hero {
+  display: block;
+}
+.scene-kicker { color:var(--brand); font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.scene-map { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+.scene-map span { padding:12px 8px; border:1px solid #d4e6f7; border-radius:12px; color:#667085; background:rgba(255,255,255,.58); text-align:center; font-size:12px; }
+.scene-map b { display:block; margin-bottom:3px; color:#2283e2; font-size:14px; }
+.scene-heading { display:flex; align-items:flex-start; gap:16px; margin-bottom:28px; }
+.scene-heading-num { flex:0 0 48px; height:48px; display:grid; place-items:center; border-radius:14px; color:#176fc4; background:#e5f2ff; font-weight:700; font-size:18px; }
+.scene-heading p { margin-top:6px; color:#667085; font-size:13px; line-height:1.7; }
+.scene-chip-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.scene-chip { padding:7px 11px; border:1px solid #d7e7f6; border-radius:999px; color:#52657a; background:rgba(255,255,255,.7); font-size:12px; }
+.scene-compare { display:grid; grid-template-columns:1fr; gap:18px; }
+.scene-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:24px; align-items:center; min-width:0; padding:18px; border:1px solid #d8e8f7; border-radius:18px; background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(237,246,255,.68)); }
+.scene-card-head { display:flex; gap:12px; align-items:flex-start; margin:0; padding-left:4px; }
+.scene-index { flex:0 0 auto; min-width:34px; height:34px; padding:0 8px; display:grid; place-items:center; border-radius:10px; color:#fff; background:linear-gradient(145deg,#3b98ec,#1471ca); font-size:12px; font-weight:700; box-shadow:0 6px 14px rgba(34,131,226,.18); }
+.scene-card h3,.scene-rule h3 { color:#1d1d1f; font-size:16px; font-weight:700; line-height:1.6; }
+.scene-card .meta,.scene-rule .meta { margin-top:4px; color:#667085; font-size:12px; line-height:1.6; }
+.scene-card figure { min-width:0; padding:8px; border-radius:13px; background:rgba(255,255,255,.56); }
+.scene-card img,.scene-rule img { width:100%; height:auto; display:block; }
+.scene-rule-list { display:grid; gap:16px; }
+.scene-rule { display:grid; grid-template-columns:220px minmax(0,1fr); gap:24px; align-items:center; padding:18px; border:1px solid #dbe8f4; border-radius:18px; background:rgba(255,255,255,.52); }
+.scene-rule-copy { padding:6px 0 6px 4px; }
+.scene-rule figure { min-width:0; margin:0; padding:8px; border-radius:13px; background:linear-gradient(145deg,#fbfdff,#eef6ff); }
+.scene-rule.is-featured .scene-index { background:linear-gradient(145deg,#1269bd,#2c91e9); }
+.scene-mini-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.scene-mini-grid > section { margin-bottom:0!important; }
+.scene-vertical-card { display:flex; flex-direction:column; min-height:100%; padding:24px; border:1px solid #d8e8f7; border-radius:18px; background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(237,246,255,.68)); }
+.scene-vertical-card figure { flex:1; display:grid;align-items: start;
+justify-items: center; min-height:300px; margin:0; border-radius:14px; background:rgba(255,255,255,.55); }
+@media(max-width:1050px){.scene-hero{grid-template-columns:1fr}.scene-map{max-width:620px}.scene-card,.scene-rule{grid-template-columns:1fr}.scene-mini-grid{grid-template-columns:1fr}.scene-card-head{padding:2px 0 0}}
+@media(max-width:640px){.scene-map{grid-template-columns:repeat(2,1fr)}.scene-heading-num{flex-basis:42px;height:42px}.scene-card{padding:15px}.scene-rule{padding:15px}.scene-vertical-card figure{min-height:220px}}
+.scene-heading {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 20px;
+  row-gap: 10px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+/* 让标题和说明文字进入外层网格 */
+.scene-heading > div:nth-child(2) {
+  display: contents;
+}
+
+/* 第一行左侧：数字矩形 */
+.scene-heading-num {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
+
+/* 第一行右侧：标题 */
+.scene-heading h2 {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  margin: 0;
+}
+
+/* 第二行：从数字矩形左侧开始，占满整行 */
+.scene-heading p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.7;
+}
+/* 类型一：统一左侧文字形式 */
+.scene-rule-list {
+  display: grid;
+  gap: 18px;
+}
+
+.scene-rule {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+
+  padding: 18px;
+
+  /* 绿色标注框里的浅蓝渐变 */
+  background: linear-gradient(
+    120deg,
+    rgba(234, 245, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.68) 100%
+  );
+
+  border: 1px solid #ACD2F4;
+  border-radius: 18px;
+}
+
+/* 左侧文字区域 */
+.scene-rule-copy {
+  padding: 8px 4px;
+}
+
+/* 第一行标题 */
+.scene-rule-copy h3 {
+  margin: 0 0 8px;
+
+  color: #1D1D1F;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+/* 第二行说明 */
+.scene-rule-copy .meta {
+  margin: 0;
+
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 右侧图片 */
+.scene-rule figure {
+  min-width: 0;
+  margin: 0;
+  padding: 8px;
+
+  border-radius: 13px;
+  background: linear-gradient(145deg, #FBFDFF, #EEF6FF);
+}
+
+.scene-rule figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 手机和平板端改成上下排列 */
+@media (max-width: 900px) {
+  .scene-rule {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* 机头类型标题 */
+.scene-category-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 8px 0 18px;
+  padding: 2px 0;
+}
+
+/* 左侧蓝色线段 */
+.scene-category-header::before {
+  content: "";
+
+  width: 4px;
+  height: 24px;
+  flex-shrink: 0;
+
+  background: #2283E2;
+  border-radius: 4px;
+}
+
+/* 高机头文字 */
+.scene-category-header h3 {
+  margin: 0;
+
+  color: #1D1D1F;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+/* 三类之间的分隔线 */
+.scene-category-divider {
+  height: 1px;
+  margin: 36px 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(34, 131, 226, 0.08),
+    rgba(34, 131, 226, 0.35),
+    rgba(34, 131, 226, 0.08)
+  );
+}
+
+/* TFT / LED 布局划分规则标题 */
+.layout-rule-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    color: #1D1D1F;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.layout-rule-title::before {
+    content: "";
+    width: 4px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #2283E2;
+}
+
+
+.layout-example-group {
+  margin-top: 30px;
+}
+
+.layout-example-group:first-of-type {
+  margin-top: 0;
+}
+
+.layout-example-name {
+  margin: 0 0 14px;
+  color: #344054;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* 横向布局图：上下排列 */
+.layout-horizontal-stack {
+  display: grid;
+  gap: 20px;
+}
+
+.layout-horizontal-stack figure {
+  margin: 0;
+}
+
+.layout-horizontal-stack img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 第二板块：左右两列，文字在上、图片在下 */
+.layout-vertical-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  margin-top: 28px;
+}
+
+.layout-vertical-compare-item {
+  min-width: 0;
+}
+
+.layout-vertical-compare-item p {
+  margin: 0 0 16px;
+  color: #344054;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.layout-vertical-compare-item figure {
+  margin: 0;
+}
+
+.layout-vertical-compare-item img {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+}
+
+@media (max-width: 760px) {
+  .layout-vertical-compare {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+/* 已清理：重复的基础 CSS 定义；保留后续原型与页签专用样式。 */
+.prototype-stack {
+  display: grid;
+  gap: 20px;
+}
+
+.prototype-image,
+.prototype-image img {
+  width: 100%;
+  display: block;
+}
+
+.prototype-copy {
+  margin: -4px 0 18px 16px;
+  max-width: 860px;
+  color: #6f7e8d;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.vertical-scheme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 78px;
+  margin-top: 32px;
+}
+
+
+.vertical-scheme-title {
+    margin: 0 0 16px;
+    color: #34495a;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+/* 两张竖向原型图的排列容器 */
+.vertical-image-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--image-gap, 8px);
+}
+
+/* 每张图片的独立容器 */
+.vertical-image-grid figure {
+    flex: 0 0 auto;
+    width: var(--image-width, 146.67px);
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+}
+
+/* 图片填满各自容器，保持原始比例 */
+.vertical-image-grid figure img {
+    display: block;
+    width: 100% !important;
+    max-width: none;
+    height: auto !important;
+    margin: 0 !important;
+}
+
+
+
+@media (max-width: 768px) {
+  .prototype-section {
+    padding: 38px 22px;
+  }
+
+  .vertical-scheme-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  .prototype-subtitle {
+    font-size: 18px;
+  }
+}
+/* 原型板块标题：数字圆角矩形 + 标题文字 */
+.prototype-section .scene-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 38px;
+}
+
+.prototype-section .scene-heading-num {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #e5f2ff;
+  color: #176fc4;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.prototype-section .scene-heading h2 {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+/* ======================================
+   组合布局页签
+====================================== */
+.tftled-tabs {
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  border-bottom: 1px solid #E5E6EB;
+  scrollbar-width: none;
+}
+
+.tftled-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tftled-tab {
+  flex: 0 0 auto;
+  padding: 0 0 14px;
+  color: #86909C;
+  font-size: 14px;
+  font-weight: 500;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tftled-tab:hover {
+  color: var(--brand);
+}
+
+.tftled-tab.active {
+  color: var(--brand);
+  border-bottom-color: var(--brand);
+  font-weight: 600;
+}
+
+.tftled-pane {
+  display: none;
+}
+
+.tftled-pane.active {
+  display: block;
+  animation: tftled-pane-in 0.24s ease-out;
+}
+
+@keyframes tftled-pane-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   TFT+LED 两个页签视觉样式统一
+   以「信息组织」页签为标准
+   ========================================== */
+
+/* 1. 统一一级章节标题 */
+.tftled-pane .scene-heading h2,
+.tftled-pane .prototype-section .scene-heading h2 {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 32px !important;
+    letter-spacing: normal !important;
+    color: #1D1D1F !important;
+    margin: 0 !important;
+}
+
+/* 2. 统一章节数字标签 */
+.tftled-pane .scene-heading-num,
+.tftled-pane .prototype-section .scene-heading-num {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #176FC4;
+    background: #E5F2FF;
+    border-radius: 14px;
+}
+
+/* 3. 统一二级小标题 */
+.tftled-pane .layout-rule-title,
+.tftled-pane .prototype-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #1D1D1F;
+}
+
+/* 4. 统一二级标题左侧蓝色竖线 */
+.tftled-pane .layout-rule-title::before,
+.tftled-pane .prototype-subtitle::before {
+    content: "";
+    display: block;
+
+    width: 4px;
+    height: 22px;
+    flex: 0 0 4px;
+
+    background: #2283E2;
+    border-radius: 4px;
+}
+
+/* 5. 统一二级标题与图片的距离 */
+.tftled-pane .layout-rule-title,
+.tftled-pane .prototype-subtitle {
+    margin: 32px 0 16px;
+}
+
+/* 6. 统一图片下方三级标题 */
+.tftled-pane .prototype-caption,
+.tftled-pane .layout-example-name {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #344054;
+}
+
+
+/* 8. 统一一级标题数字与文字的间距 */
+.tftled-pane .scene-heading {
+    column-gap: 20px;
+}
+
+
+/* ==========================================
+   TFT+LED 统一卡片与垂直间距
+   ========================================== */
+
+/* 1. 统一大卡片 */
+.tftled-pane > section.glass-panel,
+.tftled-pane > section.prototype-section {
+    padding: 40px !important;
+    margin-bottom: 40px !important;
+
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid #D9E2EA;
+    border-radius: 24px;
+
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+/* 2. 一级标题与下方内容 */
+.tftled-pane .scene-heading,
+.tftled-pane .prototype-section .scene-heading {
+    margin-bottom: 28px;
+}
+
+/* 3. 二级标题与图片 */
+.tftled-pane .layout-rule-title,
+.tftled-pane .prototype-subtitle {
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+
+/* 5. 三级标题与下方图片 */
+.tftled-pane .layout-example-name,
+.tftled-pane .vertical-scheme-title {
+    margin-top: 0;
+    margin-bottom: 14px;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #344054;
+}
+
+/* 6. 交互原型中的图片分组标题 */
+.tftled-pane .prototype-caption {
+    margin-top: 30px;
+    margin-bottom: 14px;
+}
+
+/* 7. 同一组上下排列的图片 */
+.tftled-pane .layout-horizontal-stack,
+.tftled-pane .prototype-stack {
+    gap: 20px;
+}
+
+/* 8. 信息组织中的示例分组 */
+.tftled-pane .layout-example-group {
+    margin-top: 30px;
+}
+
+/* 9. 手机端统一卡片内边距 */
+@media (max-width: 767px) {
+    .tftled-pane > section.glass-panel,
+    .tftled-pane > section.prototype-section {
+        padding: 24px !important;
+        margin-bottom: 24px !important;
+    }
+}
+
+/* ==========================================
+   修复两个页签一级标题与二级标题间距不一致
+   ========================================== */
+
+/* 1. 两个页签的一级标题统一采用 Flex 布局 */
+.tftled-pane .scene-heading,
+.tftled-pane .prototype-section .scene-heading {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+
+    margin-top: 0 !important;
+    margin-bottom: 28px !important;
+}
+
+/* 2. 取消信息组织页签原来的 Grid 定位 */
+.tftled-pane .scene-heading > div:nth-child(2) {
+    display: block !important;
+}
+
+.tftled-pane .scene-heading-num,
+.tftled-pane .scene-heading h2 {
+    grid-column: auto !important;
+    grid-row: auto !important;
+}
+
+/* 3. 统一一级标题下面第一个二级标题的上间距 */
+.tftled-pane .scene-heading + .layout-rule-title,
+.tftled-pane .scene-heading + .prototype-subtitle {
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
+}
+
+
+/* ======================================
+   TFT+LED 信息组织：新增说明文字
+   ====================================== */
+
+/* 01 一级标题下方的整体说明 */
+.tftled-pane .layout-framework-description {
+    margin: -12px 0 28px;
+    color: #667085;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    text-align: left;
+}
+
+/* A、B 图片上方的说明文字 */
+.tftled-pane .layout-image-description {
+    margin: 0 0 12px;
+    color: #667085;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    text-align: left;
+}
+
+/* C 方案说明文字：增加与上方图片的距离 */
+.tftled-pane .layout-image-description-c {
+    margin-top: 20px;
+}
+
+
+
+</style>
+</head>
+<body class="antialiased">
+<div class="aura-background"></div>
+<header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button aria-label="打开导航" class="p-2 bg-black/5 rounded-lg" id="mobile-menu-btn"><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700"></span></button></header>
+<div class="flex h-screen pt-16 md:pt-0">
+<aside aria-hidden="true" aria-label="Haier Design 设计规范导航" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" id="sidebar"></aside>
+<div aria-hidden="true" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" id="sidebar-backdrop"></div>
+<main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
+<div class="max-w-[1200px] mx-auto pb-24">
+<section class="mb-12 scene-hero">
+<div>
+<h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900" data-i18n-en="Combined Layout" data-i18n-zh="组合布局">组合布局</h1>
+<p class="text-lg text-gray-500 max-w-3xl leading-relaxed" data-i18n-en="Standardize design prototypes and scenario-based interaction layouts for TFT+LED interfaces, ensuring clear information presentation and consistent experiences across appliance categories and screen configurations." data-i18n-zh="统一 TFT+LED 显示载体下的方案原型与场景交互布局规则，确保不同品类、不同屏幕形态下的信息呈现清晰且体验一致。">统一 TFT+LED 显示载体下的方案原型与场景交互布局规则，确保不同品类、不同屏幕形态下的信息呈现清晰且体验一致。</p>
+</div>
+</section>
+<!-- 组合布局页签 -->
+<nav aria-label="组合布局分类" class="tftled-tabs mb-12" role="tablist">
+<button aria-selected="true" class="tftled-tab active" data-i18n-en="Information Organization" data-i18n-zh="信息组织" data-tftled-tab="prototype" role="tab" type="button">
+    信息组织
+  </button>
+<button aria-selected="false" class="tftled-tab" data-i18n-en="Interaction Prototypes" data-i18n-zh="交互示例" data-tftled-tab="scene" role="tab" type="button">
+    交互示例
+  </button>
+</nav>
+<!-- 页签 1：信息组织 -->
+<div class="tftled-pane active" data-tftled-pane="prototype">
+<!-- ==================================================
+     板块一：3.5 英寸横向信息布局划分规则
+================================================== -->
+<section class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8" id="layout-horizontal-rule">
+
+<!-- 01 横向界面信息框架：一级标题 -->
+<div class="scene-heading">
+    <div class="scene-heading-num">01</div>
+    <div>
+        <h2 class="text-2xl font-bold text-gray-900"
+            data-i18n-zh="横向布局示例"
+            data-i18n-en="Horizontal Interface Information Framework (3.5-inch Screen)">
+            横向布局示例
+        </h2>
+    </div>
+</div>
+
+<!-- 新增：一级标题下方的整体说明 -->
+<!-- 1.1 二级标题：保持不变 -->
+<div class="layout-rule-title">
+    垂直居中对称型
+</div>
+
+<!-- 原来的图片布局容器：保持不变 -->
+<div class="layout-horizontal-stack">
+
+    <!-- A方案 -->
+    <figure>
+        <p class="layout-image-description"
+           data-i18n-zh="A. 屏幕可触控，电源与启停按键聚合于中心区域"
+           data-i18n-en="A. Enter the description of the first layout diagram here.">
+            A. 屏幕可触控，电源与启停按键聚合于中心区域
+        </p>
+
+        <img
+            alt="垂直居中对称型，屏幕可触控，示例一"
+            data-alt-zh="垂直居中对称型，屏幕可触控，示例一"
+            data-alt-en="Vertically centered symmetry, touchscreen, example one"
+            src="./assets/tftled/symmetry_2.png"
+        />
+    </figure>
+
+    <!-- B方案 -->
+    <figure>
+        <p class="layout-image-description"
+           data-i18n-zh="B. 屏幕可触控，电源与启停按键置于右侧"
+           data-i18n-en="B. Enter the description of the second layout diagram here.">
+            B. 屏幕可触控，电源与启停按键置于右侧
+        </p>
+
+        <img
+            alt="垂直居中对称型，屏幕可触控，示例二"
+            data-alt-zh="垂直居中对称型，屏幕可触控，示例二"
+            data-alt-en="Vertically centered symmetry, touchscreen, example two"
+            src="./assets/tftled/symmetry_1.png"
+        />
+    </figure>
+
+</div>
+
+<!-- 1.2 -->
+<div class="layout-image-description layout-image-description-c">
+    C. 屏幕不可触控,屏幕交互按键区聚合于中心区域，电源与启停按键置于右侧
+  </div>
+<div class="layout-horizontal-stack">
+<figure>
+<img alt="垂直居中对称型，屏幕不可触控" data-alt-en="垂直居中对称型，Non-touchscreen" data-alt-zh="垂直居中对称型，屏幕不可触控" src="./assets/tftled/symmetry_3.png"/>
+</figure>
+</div>
+
+<!-- 1.3 屏幕垂直居中，整体右侧型 -->
+
+<div class="layout-rule-title"
+     data-i18n-zh="整体右侧型"
+     data-i18n-en="Vertically Centered Screen, Right-aligned Layout — Touchscreen">
+    整体右侧型
+</div>
+
+<div class="layout-horizontal-stack">
+
+    <!-- A方案：right_1.png -->
+    <figure>
+        <p class="layout-image-description"
+           data-i18n-zh="A. 屏幕垂直居中，屏幕可触控,电源与启停按键聚合于中心区域"
+           data-i18n-en="A. Description of layout diagram one.">
+            A. 屏幕垂直居中，屏幕可触控,电源与启停按键聚合于中心区域
+        </p>
+
+        <img
+            src="./assets/tftled/right_1.png"
+            alt="整体右侧型，屏幕可触控，示例一"
+            data-alt-zh="整体右侧型，屏幕可触控，示例一"
+            data-alt-en="Right-aligned layout, touchscreen, example one"
+        />
+    </figure>
+
+    <!-- B方案：right_2.png -->
+    <figure>
+        <p class="layout-image-description"
+           data-i18n-zh="B. 屏幕垂直居中，屏幕可触控,电源与启停按键置于右侧"
+           data-i18n-en="B. Description of layout diagram two.">
+            B. 屏幕垂直居中，屏幕可触控,电源与启停按键置于右侧
+        </p>
+
+        <img
+            src="./assets/tftled/right_2.png"
+            alt="整体右侧型，屏幕可触控，示例二"
+            data-alt-zh="整体右侧型，屏幕可触控，示例二"
+            data-alt-en="Right-aligned layout, touchscreen, example two"
+        />
+    </figure>
+
+    <!-- C方案：right_3.png -->
+    <figure>
+        <p class="layout-image-description"
+           data-i18n-zh="C. 屏幕垂直居中，屏幕不可触控,屏幕交互按键区聚合于中心区域"
+           data-i18n-en="C. Description of layout diagram three.">
+            C. 屏幕垂直居中，屏幕不可触控，屏幕交互按键区聚合于中心区域
+        </p>
+
+        <img
+            src="./assets/tftled/right_3.png"
+            alt="整体右侧型，屏幕不可触控"
+            data-alt-zh="整体右侧型，屏幕不可触控"
+            data-alt-en="Right-aligned layout, non-touchscreen"
+        />
+    </figure>
+
+</div>
+
+</section>
+<!-- ==================================================
+     板块二：3.5 英寸竖向信息布局划分规则
+================================================== -->
+<section class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8" id="layout-vertical-rule">
+<div class="scene-heading">
+<div class="scene-heading-num">02</div>
+<div>
+<h2 class="text-2xl font-bold text-gray-900" data-i18n-en="Vertical Interface Information Framework (3.5-inch Screen)" data-i18n-zh="竖向布局示例">
+        竖向布局示例
+      </h2>
+</div>
+</div>
+<!-- 新增：一级标题下方的整体说明 -->
+<div class="layout-vertical-compare">
+<!-- 左侧 -->
+<div class="layout-framework-description">
+<p class="text-center"
+   data-i18n-en="Touchscreen"
+   data-i18n-zh="屏幕可触控">
+    屏幕可触控
+</p>
+<figure>
+<img alt="竖向信息布局，屏幕可触控" data-alt-en="竖向信息布局，Touchscreen" data-alt-zh="竖向信息布局，屏幕可触控" src="./assets/tftled/vertical_1.png" style="width: 40%; height: auto; margin: 0 auto;"/>
+</figure>
+</div>
+<!-- 右侧 -->
+<div class="layout-framework-description">
+<p class="text-center"
+   data-i18n-en="Non-touchscreen"
+   data-i18n-zh="屏幕不可触控">
+    屏幕不可触控
+</p>
+<figure>
+<img alt="竖向信息布局，屏幕不可触控" data-alt-en="竖向信息布局，Non-touchscreen" data-alt-zh="竖向信息布局，屏幕不可触控" src="./assets/tftled/vertical_2.png" style="width: 40%; height: auto; margin: 0 auto;"/>
+</figure>
+</div>
+</div>
+</section>
+</div>
+<!-- 页签 2：场景细分交互与布局 -->
+<div class="tftled-pane" data-tftled-pane="scene">
+<!-- 01 横向屏幕设计原型 -->
+<section class="prototype-section" id="horizontal-screen-prototype">
+<div class="scene-heading">
+<span class="scene-heading-num">01</span>
+<h2 data-i18n-en="Horizontal Interaction Prototypes (3.5-inch Screen)" data-i18n-zh="横向交互示例">横向交互示例</h2>
+</div>
+<!-- 01 一级标题下方的整体说明文字 -->
+<!-- 1.1 -->
+<h3 class="prototype-subtitle" data-i18n-en="Centered Symmetry" data-i18n-zh="居中对称型">居中对称型</h3>
+<div class="prototype-stack">
+<figure class="prototype-image">
+  <p class="layout-image-description"
+           data-i18n-zh="A. 屏幕可触控，电源与启停按键聚合于中心区域"
+           data-i18n-en="A. Enter the description of the first diagram here.">
+            A. 屏幕可触控，电源与启停按键聚合于中心区域
+        </p>
+<img alt="居中对称型，屏幕可触控，布局示意图一" data-alt-en="居中对称型，Touchscreen，布局示意图一" data-alt-zh="居中对称型，屏幕可触控，布局示意图一" src="assets/tftled_prototype/垂直居中对称型A.png"/>
+</figure>
+
+<figure class="prototype-image">
+   <p class="layout-image-description"
+       data-i18n-zh="B. 屏幕可触控，电源与启停按键置于右侧"
+       data-i18n-en="B. Enter the description of the second diagram here.">
+        B. 屏幕可触控，电源与启停按键置于右侧
+    </p>
+<img alt="居中对称型，屏幕可触控，布局示意图二" data-alt-en="居中对称型，Touchscreen，布局示意图二" data-alt-zh="居中对称型，屏幕可触控，布局示意图二" src="assets/tftled_prototype/垂直居中对称型B.png"/>
+</figure>
+</div>
+<!-- C. 居中对称型，屏幕不可触控 -->
+<figure class="prototype-image" style="margin-top: 12px;">
+<p class="layout-image-description" data-i18n-zh="C. 居中对称型-屏幕不可触控" data-i18n-en="C. Centered Symmetry — Non-touchscreen">C. 居中对称型-屏幕不可触控</p>
+<img src="assets/tftled_prototype/整体右侧型A.png" alt="居中对称型，屏幕不可触控，布局示意图三" data-alt-zh="居中对称型，屏幕不可触控，布局示意图三" data-alt-en="Centered symmetrical non-touchscreen layout, diagram three"/>
+</figure>
+<!-- 交互示例：整体右侧型 -->
+<h3 class="prototype-subtitle" data-i18n-zh="整体右侧型" data-i18n-en="Right-aligned Layout">整体右侧型</h3>
+<div class="prototype-stack">
+<figure class="prototype-image">
+<p class="layout-image-description" data-i18n-zh="A. 屏幕垂直居中，屏幕可触控，电源与启停按键聚合于中心区域" data-i18n-en="A. Vertically centered touchscreen, with power and start/pause buttons grouped in the center.">A. 屏幕垂直居中，屏幕可触控，电源与启停按键聚合于中心区域</p>
+<img src="assets/tftled_prototype/right_interaction_a.png" alt="整体右侧型 A：屏幕垂直居中，屏幕可触控，电源与启停按键聚合于中心区域" data-alt-zh="整体右侧型 A：屏幕垂直居中，屏幕可触控，电源与启停按键聚合于中心区域" data-alt-en="Right-aligned layout A: Vertically centered touchscreen, with power and start/pause buttons grouped in the center."/>
+</figure>
+<figure class="prototype-image">
+<p class="layout-image-description" data-i18n-zh="B. 屏幕垂直居中，屏幕可触控，电源与启停按键置于右侧" data-i18n-en="B. Vertically centered touchscreen, with power and start/pause buttons on the right.">B. 屏幕垂直居中，屏幕可触控，电源与启停按键置于右侧</p>
+<img src="assets/tftled_prototype/right_interaction_b.png" alt="整体右侧型 B：屏幕垂直居中，屏幕可触控，电源与启停按键置于右侧" data-alt-zh="整体右侧型 B：屏幕垂直居中，屏幕可触控，电源与启停按键置于右侧" data-alt-en="Right-aligned layout B: Vertically centered touchscreen, with power and start/pause buttons on the right."/>
+</figure>
+<figure class="prototype-image">
+<p class="layout-image-description" data-i18n-zh="C. 屏幕垂直居中，屏幕不可触控，屏幕交互按键区聚合于中心区域" data-i18n-en="C. Vertically centered non-touchscreen, with screen interaction buttons grouped in the center.">C. 屏幕垂直居中，屏幕不可触控，屏幕交互按键区聚合于中心区域</p>
+<img src="assets/tftled_prototype/right_interaction_c.png" alt="整体右侧型 C：屏幕垂直居中，屏幕不可触控，屏幕交互按键区聚合于中心区域" data-alt-zh="整体右侧型 C：屏幕垂直居中，屏幕不可触控，屏幕交互按键区聚合于中心区域" data-alt-en="Right-aligned layout C: Vertically centered non-touchscreen, with screen interaction buttons grouped in the center."/>
+</figure>
+</div>
+
+<h3 class="prototype-subtitle" data-i18n-zh="屏内代表画面原型" data-i18n-en="Representative On-screen Interface Prototype">屏内代表画面原型</h3>
+<figure class="prototype-image">
+<img src="assets/tftled_prototype/on_screen_prototype.png" alt="屏内代表画面原型" data-alt-zh="屏内代表画面原型" data-alt-en="Representative on-screen interface prototype"/>
+</figure>
+
+</section>
+<!-- 02 竖向信息方案原型 -->
+<section class="prototype-section" id="vertical-screen-prototype">
+<div class="scene-heading">
+<span class="scene-heading-num">02</span>
+<h2 data-i18n-en="Vertical Interaction Examples" data-i18n-zh="竖向交互示例">竖向交互示例</h2>
+</div>
+<div class="vertical-scheme-grid">
+<!-- 左侧：图片1、图片2 -->
+<div>
+<p class="vertical-scheme-title" data-i18n-en="Touchscreen" data-i18n-zh="屏幕可触控">屏幕可触控</p>
+<div class="vertical-image-grid" style="--image-gap: 32px;">
+<figure>
+<img alt="竖向信息方案原型一" data-alt-en="Vertical Information Layout Prototype 1" data-alt-zh="竖向信息方案原型一" src="assets/tftled_prototype/竖向交互示例-屏幕可触控1.png" style="--image-width: 146.67px;"/>
+</figure>
+<figure>
+<img alt="竖向信息方案原型二" data-alt-en="Vertical Information Layout Prototype 2" data-alt-zh="竖向信息方案原型二" src="assets/tftled_prototype/竖向交互示例-屏幕可触控2.png" style="--image-width: 146.67px;"/>
+</figure>
+</div>
+</div>
+<!-- 右侧：图片3、图片4 -->
+<div>
+<p class="vertical-scheme-title" data-i18n-en="Non-touchscreen" data-i18n-zh="屏幕不可触控">屏幕不可触控</p>
+<div class="vertical-image-grid" style="--image-gap: 32px;">
+<figure>
+<img alt="竖向信息方案原型三" data-alt-en="Vertical Information Layout Prototype 3" data-alt-zh="竖向信息方案原型三" src="assets/tftled_prototype/竖向交互示例-屏幕不可触控1.png" style="--image-width: 146.67px;"/>
+</figure>
+<figure>
+<img alt="竖向信息方案原型四" data-alt-en="Vertical Information Layout Prototype 4" data-alt-zh="竖向信息方案原型四" src="assets/tftled_prototype/竖向交互示例-屏幕不可触控2.png" style="--image-width: 146.67px;"/>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">© 2026 Haier Design Lab. Internal Confidential.</p></footer>
+</div>
+</main>
+</div>
+<script src="haier-nav.js"></script>
+<script>
+  const tftledTabs = document.querySelectorAll("[data-tftled-tab]");
+  const tftledPanes = document.querySelectorAll("[data-tftled-pane]");
+
+  tftledTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.tftledTab;
+
+      tftledTabs.forEach((item) => {
+        const isSelected = item === tab;
+
+        item.classList.toggle("active", isSelected);
+        item.setAttribute("aria-selected", String(isSelected));
+      });
+
+      tftledPanes.forEach((pane) => {
+        pane.classList.toggle(
+          "active",
+          pane.dataset.tftledPane === target
+        );
+      });
+
+      document.getElementById("main-content").scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  });
+</script>
+
+<script>
+/* 页面正文双语同步：使用与 haier-nav.js 相同的语言设置。 */
+(function () {
+  function syncPageLanguage() {
+    var lang = localStorage.getItem('haier-guideline-language') === 'en' ? 'en' : 'zh';
+    document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+    document.querySelectorAll('[data-i18n-zh][data-i18n-en]').forEach(function (el) {
+      el.textContent = el.getAttribute('data-i18n-' + lang);
+    });
+    document.querySelectorAll('img[data-alt-zh][data-alt-en]').forEach(function (img) {
+      img.alt = img.getAttribute('data-alt-' + lang);
+    });
+    document.title = lang === 'en' ? 'Haier Design | Combined Layout' : 'Haier Design | 组合布局';
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncPageLanguage);
+  } else {
+    syncPageLanguage();
+  }
+  window.addEventListener('storage', function (event) {
+    if (event.key === 'haier-guideline-language') syncPageLanguage();
+  });
+})();
+</script></body>
+</html>

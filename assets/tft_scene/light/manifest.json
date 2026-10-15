@@ -1,0 +1,638 @@
+[
+  {
+    "original": "./assets/tft_scene/wm_home page.png",
+    "asset": "01-wm-home-page.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "程序选择",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      418
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_adjust parameters.png",
+    "asset": "02-wm-adjust-parameters.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "参数调节",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_in progress.png",
+    "asset": "03-wm-in-progress.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "运行中",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1516,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_done.png",
+    "asset": "04-wm-done.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "任务完成",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1518,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_operating status.png",
+    "asset": "05-wm-operating-status.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "运行状态",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      418
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_ai_home page.png",
+    "asset": "06-wm-ai-home-page.svg",
+    "title": "洗衣机 · AI 模式",
+    "state": "AI 洗护",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      430
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_ai_weighing.png",
+    "asset": "07-wm-ai-weighing.svg",
+    "title": "洗衣机 · AI 模式",
+    "state": "称重中",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      430
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_ai_material.png",
+    "asset": "08-wm-ai-material.svg",
+    "title": "洗衣机 · AI 模式",
+    "state": "材质识别",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      430
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_ai_color.png",
+    "asset": "09-wm-ai-color.svg",
+    "title": "洗衣机 · AI 模式",
+    "state": "混色识别",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      430
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_ai_program.png",
+    "asset": "10-wm-ai-program.svg",
+    "title": "洗衣机 · AI 模式",
+    "state": "推荐程序",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      418
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_consumables.png",
+    "asset": "11-wm-consumables.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "产品状态",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_energy consumption.png",
+    "asset": "12-wm-energy-consumption.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "能耗统计",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/wm_settings.png",
+    "asset": "13-wm-settings.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "设置中心",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_bake_home.png",
+    "asset": "14-ov-bake-home.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "程序选择",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_bake_adjust.png",
+    "asset": "15-ov-bake-adjust.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "参数调节",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_bake_in progress.png",
+    "asset": "16-ov-bake-in-progress.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "运行中",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1516,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_bake_done.png",
+    "asset": "17-ov-bake-done.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "任务完成",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1518,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_menu_home.png",
+    "asset": "18-ov-menu-home.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "菜谱选择",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_menu_choose.png",
+    "asset": "19-ov-menu-choose.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "食材选择",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_menu_adjust.png",
+    "asset": "20-ov-menu-adjust.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "参数调节",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_menu_in progress.png",
+    "asset": "21-ov-menu-in-progress.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "运行中",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      418
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_menu_done.png",
+    "asset": "22-ov-menu-done.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "任务完成",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1518,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_ai_home.png",
+    "asset": "23-ov-ai-home.svg",
+    "title": "蒸烤箱 · AI 模式",
+    "state": "AI 蒸烤",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      430
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_ai_identification.png",
+    "asset": "24-ov-ai-identification.svg",
+    "title": "蒸烤箱 · AI 模式",
+    "state": "智能识别",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      430
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_ai_program.png",
+    "asset": "25-ov-ai-program.svg",
+    "title": "蒸烤箱 · AI 模式",
+    "state": "推荐程序",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      418
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_ai_consumables.png",
+    "asset": "26-ov-ai-consumables.svg",
+    "title": "蒸烤箱 · AI 模式",
+    "state": "产品状态",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/ov_ai_energy consumption.png",
+    "asset": "27-ov-ai-energy-consumption.svg",
+    "title": "蒸烤箱 · AI 模式",
+    "state": "能耗统计",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_bake_home.png",
+    "asset": "28-sim-ov-bake-home.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "程序选择",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_bake_choose.png",
+    "asset": "29-sim-ov-bake-choose.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "程序选择",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_bake_adjust.png",
+    "asset": "30-sim-ov-bake-adjust.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "参数调节",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_bake_in progress.png",
+    "asset": "31-sim-ov-bake-in-progress.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "运行中",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1516,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_bake_done.png",
+    "asset": "32-sim-ov-bake-done.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "任务完成",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1516,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_menu_home.png",
+    "asset": "33-sim-ov-menu-home.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "菜谱选择",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_menu_choose.png",
+    "asset": "34-sim-ov-menu-choose.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "食材选择",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_menu_adjust.png",
+    "asset": "35-sim-ov-menu-adjust.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "参数调节",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_menu_in progress.png",
+    "asset": "36-sim-ov-menu-in-progress.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "运行中",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1514,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/simple/sim_ov_menu_done.png",
+    "asset": "37-sim-ov-menu-done.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "任务完成",
+    "portrait": false,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      1518,
+      416
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/wm_com_home.png",
+    "asset": "38-wm-com-home-portrait.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "程序选择",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      416,
+      1514
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/wm_com_adjust.png",
+    "asset": "39-wm-com-adjust-portrait.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "参数调节",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      416,
+      1514
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/wm_com_in progress.png",
+    "asset": "40-wm-com-in-progress-portrait.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "运行中",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      416,
+      1514
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/wm_com_done.png",
+    "asset": "41-wm-com-done-portrait.svg",
+    "title": "洗衣机 · 常规模式",
+    "state": "任务完成",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      416,
+      1514
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/wm_ai_home.png",
+    "asset": "42-wm-ai-home-portrait.svg",
+    "title": "洗衣机 · AI 模式",
+    "state": "AI 洗护",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      418,
+      1514
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/wm_ai_identify.png",
+    "asset": "43-wm-ai-identify-portrait.svg",
+    "title": "洗衣机 · AI 模式",
+    "state": "智能识别",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      874,
+      1514
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/wm_ai_done.png",
+    "asset": "44-wm-ai-done-portrait.svg",
+    "title": "洗衣机 · AI 模式",
+    "state": "推荐程序",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      416,
+      1514
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/ov_com_home.png",
+    "asset": "45-ov-com-home-portrait.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "程序选择",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      418,
+      1524
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/ov_com_adjust.png",
+    "asset": "46-ov-com-adjust-portrait.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "参数调节",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      418,
+      1524
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/ov_com_menu1.png",
+    "asset": "47-ov-com-menu1-portrait.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "菜谱分类",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      420,
+      1524
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/ov_com_menu2.png",
+    "asset": "48-ov-com-menu2-portrait.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "食材选择",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      418,
+      1524
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/ov_com_in progress.png",
+    "asset": "49-ov-com-in-progress-portrait.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "运行中",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      418,
+      1524
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/ov_com_done.png",
+    "asset": "50-ov-com-done-portrait.svg",
+    "title": "蒸烤箱 · 常规模式",
+    "state": "任务完成",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      418,
+      1524
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/ov_ai_home .png",
+    "asset": "51-ov-ai-home-portrait.svg",
+    "title": "蒸烤箱 · AI 模式",
+    "state": "AI 蒸烤",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      416,
+      1514
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/ov_ai_identify.png",
+    "asset": "52-ov-ai-identify-portrait.svg",
+    "title": "蒸烤箱 · AI 模式",
+    "state": "智能识别",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      416,
+      1514
+    ]
+  },
+  {
+    "original": "./assets/tft_scene/vertical/ov_ai_program.png",
+    "asset": "53-ov-ai-program-portrait.svg",
+    "title": "蒸烤箱 · AI 模式",
+    "state": "推荐程序",
+    "portrait": true,
+    "rendering": "clean-flat-original-glyph-regions-no-shadow",
+    "source_dimensions": [
+      416,
+      1514
+    ]
+  }
+]

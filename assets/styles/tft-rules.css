@@ -1,0 +1,176 @@
+/* TFT-specific layouts build on the shared Information & Interaction / LED style. */
+#main-content .tft-rule-grid {
+  display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; align-items: stretch;
+}
+#main-content .tft-rule-card {
+  display: flex; flex-direction: column; min-width: 0; min-height: 0;
+  border: 1px solid #e5e7eb; border-radius: 12px;
+  background: rgba(255,255,255,.6); box-shadow: none;
+}
+#main-content .tft-rule-demo {
+  aspect-ratio: 1.55 / 1; min-height: 0; flex: none;
+  background: #f8fafc; border-bottom: 1px solid #e5e7eb;
+}
+#main-content .tft-rule-demo img { max-height: 100%; object-fit: contain; }
+#main-content .tft-rule-copy { flex: 1; padding: 20px; }
+#main-content .tft-rule-index {
+  display: block; color: #2283e2; font-size: 12px; font-weight: 600;
+  line-height: 18px; letter-spacing: .03em; margin-bottom: 8px;
+}
+#main-content .tft-rule-index::after { display: none; }
+#main-content .tft-rule-card h3 {
+  margin: 0 0 8px; color: #4b5563; font-size: 14px; line-height: 1.75; font-weight: 500;
+}
+#main-content .tft-rule-card p { margin: 0; color: #6b7280; font-size: 13px; line-height: 1.7; }
+/* The source has no empty bitmap border: remove the oversized display frame instead. */
+#main-content .xyz-stage {
+  height: auto; min-height: 0; padding: 16px; border-radius: 12px;
+  background: #f8fafc; overflow: visible;
+}
+#main-content .xyz-rule-image {
+  width: 66.666667%; max-width: 440px; height: auto; max-height: none; object-fit: contain;
+}
+#main-content .tft-step-flow {
+  list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 36px; margin: 0; padding: 0;
+}
+#main-content .tft-step-card {
+  position: relative; display: flex; align-items: flex-start; gap: 14px;
+  padding: 24px 20px; min-width: 0; border: 1px solid #e5e7eb;
+  border-radius: 12px; background: rgba(255,255,255,.6);
+}
+#main-content .tft-step-card:not(:last-child)::after {
+  content: "→"; position: absolute; right: -29px; top: 50%; transform: translateY(-50%);
+  color: #2283e2; font-size: 22px; line-height: 1;
+}
+#main-content .tft-step-number {
+  flex: 0 0 32px; display: grid; place-items: center; width: 32px; height: 32px;
+  border-radius: 8px; background: #e5f0ff; color: #2283e2; font-size: 12px; font-weight: 600;
+}
+#main-content .tft-step-label { display: block; margin: 0 0 8px; color: #86868b; font-size: 12px; }
+#main-content .tft-step-card h3 { margin: 0 0 8px; color: #1d1d1f; font-size: 16px; font-weight: 600; line-height: 1.5; }
+#main-content .tft-step-card p { margin: 0; color: #6b7280; font-size: 13px; line-height: 1.7; }
+#main-content .layout-framework-grid {
+  display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: stretch; gap: 32px;
+}
+#main-content .layout-framework-grid .framework-item {
+  display: flex; flex-direction: column; width: 100%; max-width: none;
+}
+#main-content .layout-framework-grid .tft-layout-figure {
+  display: flex; flex: 1; align-items: center; justify-content: center; margin: 0;
+}
+#main-content .framework-name { margin-bottom: 20px; color: #667085; font-size: 14px; font-weight: 400; }
+@media (max-width: 1199px) {
+  #main-content .tft-step-flow { grid-template-columns: 1fr; gap: 32px; }
+  #main-content .tft-step-card:not(:last-child)::after {
+    content: "↓"; right: auto; left: 50%; top: auto; bottom: -27px; transform: translateX(-50%);
+  }
+}
+@media (max-width: 767px) {
+  /* Keep the requested three-card row, with readable horizontal scrolling on phones. */
+  #main-content .tft-rule-grid {
+    grid-template-columns: repeat(3,minmax(240px,1fr)); gap: 16px;
+    overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x proximity;
+  }
+  #main-content .tft-rule-card { scroll-snap-align: start; }
+  #main-content .xyz-stage { padding: 8px; }
+  #main-content .layout-framework-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* Move both layout illustrations together without changing their alignment. */
+#main-content .layout-framework-grid { transform: translateX(-80px); }
+@media (max-width: 767px) {
+  #main-content .layout-framework-grid { transform: none; }
+}
+
+/* Information framework: supporting copy and two borderless image rows. */
+#main-content #tft-home-framework > .scene-heading,
+#main-content #tft-washer-landscape > .scene-heading,
+#main-content #tft-vertical-layout > .scene-heading {
+  display: block;
+}
+#main-content #tft-home-framework > .scene-heading { margin-bottom: 24px; }
+#main-content #tft-home-framework .tft-framework-intro {
+  max-width: 720px; margin: 10px 0 0; color: #667085; line-height: 1.8;
+}
+#main-content #tft-home-framework .tft-framework-principles {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px; margin-bottom: 28px;
+}
+#main-content #tft-home-framework .tft-framework-principle {
+  min-width: 0; padding-left: 0; border-left: 0;
+}
+#main-content #tft-home-framework .tft-framework-principle p {
+  margin: 0; color: #667085; line-height: 1.8;
+}
+#main-content #tft-home-framework .tft-framework-grid {
+  grid-template-columns: 1fr; gap: 28px; align-items: start;
+}
+#main-content #tft-home-framework .tft-image-card {
+  padding: 0; border: 0; border-radius: 0;
+  background: transparent; box-shadow: none;
+}
+#main-content #tft-home-framework .tft-image-card h3 {
+  margin: 0 0 14px; font-size: 14px; font-weight: 600; line-height: 1.5;
+  color: #4b5563;
+}
+#main-content #tft-home-framework .tft-image-card figure {
+  margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none;
+}
+#main-content #tft-home-framework .tft-image-card img {
+  display: block; width: 100%; height: auto;
+}
+@media (max-width: 760px) {
+  #main-content #tft-home-framework .tft-framework-principles,
+  #main-content #tft-home-framework .tft-framework-grid {
+    grid-template-columns: 1fr; gap: 20px;
+  }
+  #main-content #tft-home-framework .tft-image-card { padding: 0; }
+}
+
+/* Landscape prototype categories keep two examples per row. */
+#tft-washer-landscape .tft-screen-example-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+#tft-washer-landscape figcaption {
+  margin-top: 10px; color: #667085; font-size: 13px; line-height: 1.6;
+}
+
+/* Portrait prototypes: three spacious columns with half-size images. */
+#tft-vertical-layout .tft-portrait-example-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px 24px; align-items: start;
+}
+#tft-vertical-layout .tft-screen-example figure {
+  width: calc(37.5% + 1.5px); margin: 0 auto;
+}
+#tft-vertical-layout .tft-screen-example img {
+  display: block; width: 100%; height: auto;
+}
+#tft-vertical-layout figcaption {
+  text-align: center; margin-top: 14px; color: #667085; font-size: 13px; line-height: 1.6;
+}
+
+/* Homepage variants share the same image frame and top alignment. */
+#tft-vertical-layout .tft-portrait-home-grid { align-items: start; }
+#tft-vertical-layout .tft-portrait-home-grid img {
+  width: 100%; height: auto; aspect-ratio: 210 / 762;
+  object-fit: fill; object-position: center top;
+}
+
+/* Two category rows, with capacity for five portrait examples per row. */
+#tft-vertical-layout .tft-portrait-category-row {
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  align-items: start; gap: 64px;
+}
+#tft-vertical-layout .tft-portrait-category {
+  flex: var(--portrait-count) 1 0; min-width: 0;
+}
+#tft-vertical-layout .tft-portrait-category-row .tft-portrait-example-grid {
+  grid-template-columns: repeat(var(--portrait-count), minmax(0, 110px));
+  gap: 24px; align-items: start;
+}
+#tft-vertical-layout .tft-portrait-category-row .tft-screen-example figure {
+  width: 100%; max-width: 110px; margin: 0;
+}
