@@ -150,6 +150,7 @@
 
         .usage-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
         .usage-card { background: rgba(255,255,255,.72); border: 1px solid rgba(203,213,225,.72); border-radius: 16px; padding: 18px; }
+        .hardware-usage-grid .usage-card { border:0; }
         .usage-card h4 { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; font-size: 14px; font-weight: 700; color: #1f2937; }
         .usage-card p { color: #667085; font-size: 13px; line-height: 1.65; }
         .color-dot { width: 12px; height: 12px; border-radius: 4px; flex: 0 0 auto; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
@@ -173,7 +174,7 @@
         .palette-guidance { min-height: 99px; padding: 12px 14px; background: rgba(255,255,255,.92); border-bottom: 1px solid #eef2f7; }
         .palette-guidance strong { display: block; margin-bottom: 6px; color: #27364a; font-size: 12px; line-height: 1.4; }
         .palette-guidance p { color: #667085; font-size: 11px; line-height: 1.55; }
-        .color-mode-row { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:18px; }
+        .color-mode-row { display:flex; align-items:center; justify-content:flex-end; gap:20px; margin-bottom:18px; }
         .color-mode-label { color:#667085; font-size:13px; font-weight:600; }
         .color-mode-selector { display:inline-flex; padding:5px; gap:4px; border:1px solid rgba(203,213,225,.72); border-radius:12px; background:rgba(255,255,255,.72); }
         .color-mode-button { min-width:78px; height:38px; padding:0 16px; border-radius:8px; color:#667085; font-size:13px; font-weight:600; transition:background .2s,color .2s,box-shadow .2s; }
@@ -244,14 +245,13 @@
                     </div>
                 </section>
                 <div class="color-mode-row" aria-label="色彩模式">
-                    <span class="color-mode-label">色彩模式 / Color mode</span>
                     <div class="color-mode-selector" role="group" aria-label="切换色彩模式">
                         <button type="button" class="color-mode-button active" data-color-mode="rgb" aria-pressed="true">RGB / HEX</button>
                         <button type="button" class="color-mode-button" data-color-mode="cmyk" aria-pressed="false">CMYK</button>
                     </div>
                 </div>
                 <section class="glass-panel p-6 md:p-10 mb-10">
-                    <h2 class="text-2xl font-bold mb-6 text-gray-900" data-i18n-zh="1. 主品牌色" data-i18n-en="1. Primary Color">1. 主品牌色</h2>
+                    <h2 class="text-2xl font-bold mb-6 text-gray-900" data-i18n-zh="主品牌色" data-i18n-en="Primary Color">主品牌色</h2>
                     <p class="text-gray-500 mb-6 text-sm">主品牌色定义了 Haier Design 的核心视觉识别，并为重点操作与品牌场景提供统一基准。</p>
 
                     <div>
@@ -286,13 +286,13 @@
                     </div>
                     <div class="usage-grid mt-6">
                         <div class="usage-card"><h4><span class="color-dot bg-[#E8F3FF]"></span><span data-i18n-zh="Blue-1–2 · 大面积承载" data-i18n-en="Blue-1–2 · Large Surfaces">Blue-1–2 · 大面积承载</span></h4><p data-i18n-zh="用于品牌浅背景、选中区域底色、信息提示容器和环境光晕。不得承担关键文字或单独表达状态。" data-i18n-en="Use for light brand backgrounds, selected-area fills, informational containers, and ambient glows. Do not use for key text or as the only status signal.">用于品牌浅背景、选中区域底色、信息提示容器和环境光晕。不得承担关键文字或单独表达状态。</p></div>
-                        <div class="usage-card"><h4><span class="color-dot bg-[#4292FF]"></span><span data-i18n-zh="Blue-3–5 · 交互反馈" data-i18n-en="Blue-3–5 · Interaction Feedback">Blue-3–5 · 交互反馈</span></h4><p data-i18n-zh="用于悬停、聚焦、选中描边、进度和轻量强调。相邻状态至少跨一个色阶，避免状态差异过弱。" data-i18n-en="Use for hover, focus, selected borders, progress, and light emphasis. Separate adjacent states by at least one shade.">用于悬停、聚焦、选中描边、进度和轻量强调。相邻状态至少跨一个色阶，避免状态差异过弱。</p></div>
                         <div class="usage-card"><h4><span class="color-dot bg-[#2283E2]"></span><span data-i18n-zh="Blue-6 · 主操作与品牌识别" data-i18n-en="Blue-6 · Primary Action & Brand">Blue-6 · 主操作与品牌识别</span></h4><p data-i18n-zh="用于页面唯一主按钮、关键开关开启态、当前导航和品牌标识。避免在同一视窗出现多个同权重蓝色焦点。" data-i18n-en="Use for the single primary button, key switch-on states, current navigation, and brand marks. Avoid multiple equal-weight blue focal points in one viewport.">用于页面唯一主按钮、关键开关开启态、当前导航和品牌标识。避免在同一视窗出现多个同权重蓝色焦点。</p></div>
+                        <div class="usage-card"><h4><span class="color-dot bg-[#4292FF]"></span><span data-i18n-zh="Blue-3–5 · 交互反馈" data-i18n-en="Blue-3–5 · Interaction Feedback">Blue-3–5 · 交互反馈</span></h4><p data-i18n-zh="用于悬停、聚焦、选中描边、进度和轻量强调。相邻状态至少跨一个色阶，避免状态差异过弱。" data-i18n-en="Use for hover, focus, selected borders, progress, and light emphasis. Separate adjacent states by at least one shade.">用于悬停、聚焦、选中描边、进度和轻量强调。相邻状态至少跨一个色阶，避免状态差异过弱。</p></div>
                         <div class="usage-card"><h4><span class="color-dot bg-[#124D8F]"></span><span data-i18n-zh="Blue-7–10 · 深色层级" data-i18n-en="Blue-7–10 · Dark Hierarchy">Blue-7–10 · 深色层级</span></h4><p data-i18n-zh="用于深色主题背景、按压态、品牌标题和高对比前景。大面积使用时必须验证文字与图标对比度。" data-i18n-en="Use for dark-theme surfaces, pressed states, brand headings, and high-contrast foregrounds. Validate text and icon contrast when used on large areas.">用于深色主题背景、按压态、品牌标题和高对比前景。大面积使用时必须验证文字与图标对比度。</p></div>
                     </div>
                 </section>
                 <section class="secondary-colors-section glass-panel p-6 md:p-10 mb-10">
-                    <h2 class="text-2xl font-bold mb-2 text-gray-900" data-i18n-zh="2. 辅助色" data-i18n-en="2. Secondary Colors">2. 辅助色</h2>
+                    <h2 class="text-2xl font-bold mb-2 text-gray-900" data-i18n-zh="辅助色" data-i18n-en="Secondary Colors">辅助色</h2>
                     <p class="text-gray-600 mb-8 max-w-3xl text-sm leading-relaxed"
                         data-i18n-zh="辅助色包含内容色与语义色。内容色用于图表、品类和主题表达；语义色专用于成功、警告与危险状态，两者禁止混用。"
                         data-i18n-en="Secondary colors include content colors and semantic colors. Content colors support charts, categories, and themes; semantic colors are reserved for success, warning, and danger states. Never mix the two roles.">
@@ -400,7 +400,7 @@
                     </div>
                 </section>
                 <section class="glass-panel p-6 md:p-10 mb-10">
-                    <h2 class="text-2xl font-bold mb-2 text-gray-900" data-i18n-zh="3. 中性色" data-i18n-en="3. Neutral Colors">3. 中性色</h2>
+                    <h2 class="text-2xl font-bold mb-2 text-gray-900" data-i18n-zh="中性色" data-i18n-en="Neutral Colors">中性色</h2>
                     <p class="text-gray-600 mb-8 max-w-3xl text-sm leading-relaxed">
                         以 9 阶灰度组织背景、分割与文本层级，通过明度差异建立清晰、克制的界面秩序。
                     </p>
@@ -451,11 +451,10 @@
                     </div>
                 </section>
                 <section class="glass-panel p-6 md:p-10 mb-10">
-                    <h2 class="text-2xl font-bold mb-2 text-gray-900" data-i18n-zh="4. 跨屏幕与硬件" data-i18n-en="4. Cross-screen & Hardware">4. 跨屏幕与硬件</h2>
+                    <h2 class="text-2xl font-bold mb-2 text-gray-900" data-i18n-zh="跨屏幕与硬件使用原则" data-i18n-en="Cross-screen & Hardware Principles">跨屏幕与硬件使用原则</h2>
                     <p class="text-gray-500 mb-6 text-sm" data-i18n-zh="同一颜色角色在 TFT、LED 与实体灯上必须保持一致，并依据硬件能力进行可识别的降级。" data-i18n-en="Keep each color role consistent across TFT, LED, and physical lighting, with recognizable fallbacks based on hardware capability.">同一颜色角色在 TFT、LED 与实体灯上必须保持一致，并依据硬件能力进行可识别的降级。</p>
                     <div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-5" data-i18n-zh="跨屏幕与硬件使用原则" data-i18n-en="Cross-screen & Hardware Principles">跨屏幕与硬件使用原则</h3>
-                        <div class="usage-grid">
+                        <div class="usage-grid hardware-usage-grid">
                             <div class="usage-card"><h4 data-i18n-zh="TFT · 保持语义 Token" data-i18n-en="TFT · Preserve Semantic Tokens">TFT · 保持语义 Token</h4><p data-i18n-zh="不同主题与屏幕尺寸可以调整明度，但品牌、成功、警告、危险的角色不可互换；前景与背景组合需满足可读性。" data-i18n-en="Themes and screen sizes may adjust lightness, but brand, success, warning, and danger roles must never swap. Foreground and background combinations must remain readable.">不同主题与屏幕尺寸可以调整明度，但品牌、成功、警告、危险的角色不可互换；前景与背景组合需满足可读性。</p></div>
                             <div class="usage-card"><h4 data-i18n-zh="LED · 颜色只做增强" data-i18n-en="LED · Color as Reinforcement">LED · 颜色只做增强</h4><p data-i18n-zh="低色彩 LED 不承担完整语义。固定标签、图标、亮灭和闪烁节奏必须先传达状态，颜色仅作为第二识别通道。" data-i18n-en="Low-color LED must not carry complete meaning. Fixed labels, icons, on/off states, and blink rhythm communicate status first; color is a secondary channel.">低色彩 LED 不承担完整语义。固定标签、图标、亮灭和闪烁节奏必须先传达状态，颜色仅作为第二识别通道。</p></div>
                             <div class="usage-card"><h4 data-i18n-zh="实体灯 · 控制亮度与干扰" data-i18n-en="Physical Light · Control Brightness & Distraction">实体灯 · 控制亮度与干扰</h4><p data-i18n-zh="夜间、卧室和近距离场景应降低亮度，持续警示不得使用高频闪烁；危险状态需同时提供声音或文字反馈。" data-i18n-en="Reduce brightness at night, in bedrooms, and at close range. Persistent alerts must avoid high-frequency flashing; danger states also require sound or text feedback.">夜间、卧室和近距离场景应降低亮度，持续警示不得使用高频闪烁；危险状态需同时提供声音或文字反馈。</p></div>
