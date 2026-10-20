@@ -16,11 +16,11 @@
     .eyebrow{color:var(--brand);font-size:.75rem;line-height:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
     .material-demo{position:relative;min-height:280px;overflow:hidden;isolation:isolate;background:linear-gradient(135deg,#082d55,#2283e2 55%,#80c5ff)}
     .material-demo:before,.material-demo:after{content:"";position:absolute;border-radius:999px;filter:blur(48px)}.material-demo:before{width:190px;height:190px;left:7%;top:15%;background:#3d77ca;opacity:.74}.material-demo:after{width:240px;height:240px;right:-4%;bottom:-36%;background:#f1fbff;opacity:.55}
-    .material-surface{position:relative;z-index:1;border:1px solid rgba(255,255,255,.46);box-shadow:inset 0 1px rgba(255,255,255,.56)}
-    .surface-solid{background:rgba(245,249,252,.82);backdrop-filter:blur(12px) saturate(110%);-webkit-backdrop-filter:blur(12px) saturate(110%)}
-    .surface-soft{background:rgba(255,255,255,.62);backdrop-filter:blur(24px) saturate(120%);-webkit-backdrop-filter:blur(24px) saturate(120%)}
-    .surface-focus{background:rgba(255,255,255,.34);backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%);border-color:rgba(255,255,255,.62);box-shadow:inset 0 1px rgba(255,255,255,.72),0 4px 12px rgba(16,24,40,.08)}
-    .surface-media{background:rgba(255,255,255,.16);backdrop-filter:blur(8px) saturate(115%);-webkit-backdrop-filter:blur(8px) saturate(115%);border-color:rgba(255,255,255,.4);box-shadow:inset 0 1px rgba(255,255,255,.5),0 4px 12px rgba(16,24,40,.05)}
+    .material-surface{position:relative;z-index:1;color:#fff;border:1px solid rgba(255,255,255,.36);box-shadow:inset 0 1px rgba(255,255,255,.34);text-shadow:0 1px 3px rgba(16,24,40,.48)}
+    .surface-solid{background:rgba(255,255,255,.38);backdrop-filter:blur(12px) saturate(108%);-webkit-backdrop-filter:blur(12px) saturate(108%)}
+    .surface-soft{background:rgba(255,255,255,.28);backdrop-filter:blur(24px) saturate(112%);-webkit-backdrop-filter:blur(24px) saturate(112%)}
+    .surface-focus{background:rgba(255,255,255,.18);backdrop-filter:blur(14px) saturate(112%);-webkit-backdrop-filter:blur(14px) saturate(112%);box-shadow:inset 0 1px rgba(255,255,255,.3),0 4px 12px rgba(16,24,40,.07)}
+    .surface-media{background:rgba(255,255,255,.1);backdrop-filter:blur(8px) saturate(108%);-webkit-backdrop-filter:blur(8px) saturate(108%);border-color:rgba(255,255,255,.3);box-shadow:inset 0 1px rgba(255,255,255,.28),0 4px 12px rgba(16,24,40,.05)}
     @font-face{font-family:'Montserrat Local';src:url('assets/fonts/Montserrat-Regular.otf') format('opentype');font-display:swap}
     .principle-card{padding:18px 18px 0 0;border-top:1px solid rgba(148,163,184,.28)}
     .principle-number{color:#86909C;font-family:'Montserrat Local',sans-serif;font-size:11px;font-weight:600;letter-spacing:.08em;margin-bottom:12px}.principle-heading{display:block;margin-bottom:8px}
@@ -67,10 +67,10 @@
           <div class="overflow-x-auto mb-8"><table class="w-full min-w-[760px] text-left text-sm">
             <thead><tr class="border-b border-black/10 text-xs text-gray-500"><th class="py-3 pr-4 font-medium">角色 / Token</th><th class="py-3 px-4 font-medium">视觉定义</th><th class="py-3 px-4 font-medium">推荐场景</th><th class="py-3 pl-4 font-medium">限制</th></tr></thead>
             <tbody class="text-gray-600">
-              <tr class="border-b border-black/5"><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Solid</strong><span class="token">material.solid</span></td><td class="py-5 px-4">浅色 82% / 深色 78%；blur 12</td><td class="py-5 px-4">数据密集卡片、设置页、长文本、告警详情</td><td class="py-5 pl-4">默认内容材质；复杂背景下优先保证可读性</td></tr>
-              <tr class="border-b border-black/5"><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Soft</strong><span class="token">material.soft</span></td><td class="py-5 px-4">浅色 62% / 深色 58%；blur 24</td><td class="py-5 px-4">内容分组、状态卡片、侧栏、设备概览</td><td class="py-5 pl-4">仅承载短文本；复杂背景上切换为 Solid</td></tr>
-              <tr class="border-b border-black/5"><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Focus</strong><span class="token">material.focus</span></td><td class="py-5 px-4">浅色 34% / 深色 28%；blur 14</td><td class="py-5 px-4">临时控制盘、导航浮层、弹窗、底部面板</td><td class="py-5 pl-4">只用于功能层；同屏不超过 2 个独立区域</td></tr>
-              <tr><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Media</strong><span class="token">material.media</span></td><td class="py-5 px-4">浅色 16% / 深色 12%；blur 8</td><td class="py-5 px-4">照片、视频、摄像头画面上的快捷控制</td><td class="py-5 pl-4">仅限视觉丰富且持续可见的媒体背景</td></tr>
+              <tr class="border-b border-black/5"><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Solid</strong><span class="token">material.solid</span></td><td class="py-5 px-4">白色层 38%；blur 12</td><td class="py-5 px-4">数据密集卡片、设置页、长文本、告警详情</td><td class="py-5 pl-4">默认内容材质；复杂背景下优先保证可读性</td></tr>
+              <tr class="border-b border-black/5"><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Soft</strong><span class="token">material.soft</span></td><td class="py-5 px-4">白色层 28%；blur 24</td><td class="py-5 px-4">内容分组、状态卡片、侧栏、设备概览</td><td class="py-5 pl-4">仅承载短文本；复杂背景上切换为 Solid</td></tr>
+              <tr class="border-b border-black/5"><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Focus</strong><span class="token">material.focus</span></td><td class="py-5 px-4">白色层 18%；blur 14</td><td class="py-5 px-4">临时控制盘、导航浮层、弹窗、底部面板</td><td class="py-5 pl-4">只用于功能层；同屏不超过 2 个独立区域</td></tr>
+              <tr><td class="py-5 pr-4"><strong class="text-gray-900 block mb-2">Media</strong><span class="token">material.media</span></td><td class="py-5 px-4">白色层 10%；blur 8</td><td class="py-5 px-4">照片、视频、摄像头画面上的快捷控制</td><td class="py-5 pl-4">仅限视觉丰富且持续可见的媒体背景</td></tr>
             </tbody>
           </table></div>
           <h3 class="text-base font-bold text-gray-900 mb-4">材质使用规则</h3>

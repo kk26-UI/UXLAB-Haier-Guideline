@@ -18,9 +18,9 @@
 </head>
 <body class="antialiased">
   <div class="aura-background"><div class="aura-blob aura-blob-1"></div><div class="aura-blob aura-blob-2"></div><div class="aura-blob aura-blob-3"></div></div>
-  <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开导航"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button></header>
+  <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开导航" data-i18n-aria-label-zh="打开导航" data-i18n-aria-label-en="Open navigation"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button></header>
   <div class="flex h-screen pt-16 md:pt-0">
-    <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+    <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" data-i18n-aria-label-zh="Haier Design 设计规范导航" data-i18n-aria-label-en="Haier Design guideline navigation" aria-hidden="true"></aside>
     <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
     <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
       <div class="max-w-[1240px] mx-auto pb-24">
@@ -30,7 +30,7 @@
         <section class="glass-panel p-6 md:p-10 mb-8">
           <h2 class="text-2xl font-bold mb-4">核心规则</h2>
           <p class="text-sm text-gray-500 leading-6 mb-4">24 列是跨设备统一的布局标尺，不代表每块屏幕都要显示 24 列。内容区域变窄时，系统可映射为 12、8 或 4 个可用列，保持信息顺序与跨列比例。</p>
-          <div class="fold-demo" aria-label="24、12、8、4 列的响应式折叠关系">
+          <div class="fold-demo" aria-label="24、12、8、4 列的响应式折叠关系" data-i18n-aria-label-zh="24、12、8、4 列的响应式折叠关系" data-i18n-aria-label-en="Responsive relationship between 24, 12, 8, and 4 columns">
               <div class="fold-row"><div class="fold-label"><strong>基准</strong>24 列</div><div class="fold-cells is-primary" style="grid-template-columns:repeat(24,minmax(0,1fr))"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
               <div class="fold-row"><div class="fold-label"><strong>宽屏</strong>12 列</div><div class="fold-cells" style="grid-template-columns:repeat(12,minmax(0,1fr))"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
               <div class="fold-row"><div class="fold-label"><strong>常规</strong>8 列</div><div class="fold-cells" style="grid-template-columns:repeat(8,minmax(0,1fr))"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
@@ -42,7 +42,7 @@
         <section class="glass-panel p-6 md:p-10 mb-8">
           <h2 class="text-2xl font-bold mb-2">栅格构成</h2><p class="text-sm text-gray-500 mb-6">栅格由容器、边距、列和沟槽共同组成。建议栅格系统的网格大小选定8作为栅格系统的原子单位。</p>
           <div class="grid lg:grid-cols-[1.12fr_.88fr] gap-6 items-stretch">
-            <div class="grid-anatomy" aria-label="容器宽度、外边距、列与沟槽的结构示意">
+            <div class="grid-anatomy" aria-label="容器宽度、外边距、列与沟槽的结构示意" data-i18n-aria-label-zh="容器宽度、外边距、列与沟槽的结构示意" data-i18n-aria-label-en="Diagram of container width, margins, columns, and gutters">
               <div class="grid-anatomy-width"><span>W · 可用容器宽度</span></div>
               <div class="grid-anatomy-body"><div class="grid-margin">M</div><div class="grid-column">C</div><div class="grid-column">C</div><div class="grid-column">C</div><div class="grid-column">C</div><div class="grid-margin">M</div></div>
               <div class="grid-gutter-marker"> ｜ G · 沟槽 ｜</div>
@@ -80,8 +80,8 @@
 
         <section class="glass-panel p-6 md:p-10 mb-8">
           <h2 class="text-2xl font-bold mb-8">布局示例</h2>
-          <div class="layout-section"><h3 class="text-lg font-bold mb-2">1280 × 480</h3><p class="text-sm text-gray-500 leading-6 max-w-3xl">Linux 1:1 画布，左右各保留 48，合计扣除 96；可用宽度为 1184，对应宽屏档位，采用 12 列与 20 沟槽。</p><div class="layout-figure"><div class="screen-example is-1280" aria-label="1280 × 480 画布的 12 列栅格示意"><div class="screen-size">1280 × 480</div><div class="screen-margin left">48</div><div class="screen-margin right">48</div><div class="screen-grid is-12"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div></div><div class="layout-facts"><div><strong>1280 − 96 = 1184 px</strong>可用宽度</div><div><strong>宽屏 · 12 列</strong>计算档位</div><div><strong>20</strong>沟槽大小</div></div></div></div>
-          <div class="layout-section"><h3 class="text-lg font-bold mb-2">1920 × 440</h3><p class="text-sm text-gray-500 leading-6 max-w-3xl">Linux 1:1 画布，左右各保留 48，合计扣除 96；可用宽度为 1824，对应超宽屏档位，采用 12 列与 24 沟槽。</p><div class="layout-figure"><div class="screen-example is-ultrawide" aria-label="1920 × 440 画布的 12 列栅格示意"><div class="screen-size">1920 × 440</div><div class="screen-margin left">48</div><div class="screen-margin right">48</div><div class="screen-grid is-12"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div></div><div class="layout-facts"><div><strong>1920 − 96 = 1824 px</strong>可用宽度</div><div><strong>超宽屏 · 12 列</strong>计算档位</div><div><strong>24</strong>沟槽大小</div></div></div></div>
+          <div class="layout-section"><h3 class="text-lg font-bold mb-2">1280 × 480</h3><p class="text-sm text-gray-500 leading-6 max-w-3xl">Linux 1:1 画布，左右各保留 48，合计扣除 96；可用宽度为 1184，对应宽屏档位，采用 12 列与 20 沟槽。</p><div class="layout-figure"><div class="screen-example is-1280" aria-label="1280 × 480 画布的 12 列栅格示意" data-i18n-aria-label-zh="1280 × 480 画布的 12 列栅格示意" data-i18n-aria-label-en="12-column grid example for a 1280 × 480 canvas"><div class="screen-size">1280 × 480</div><div class="screen-margin left">48</div><div class="screen-margin right">48</div><div class="screen-grid is-12"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div></div><div class="layout-facts"><div><strong>1280 − 96 = 1184 px</strong>可用宽度</div><div><strong>宽屏 · 12 列</strong>计算档位</div><div><strong>20</strong>沟槽大小</div></div></div></div>
+          <div class="layout-section"><h3 class="text-lg font-bold mb-2">1920 × 440</h3><p class="text-sm text-gray-500 leading-6 max-w-3xl">Linux 1:1 画布，左右各保留 48，合计扣除 96；可用宽度为 1824，对应超宽屏档位，采用 12 列与 24 沟槽。</p><div class="layout-figure"><div class="screen-example is-ultrawide" aria-label="1920 × 440 画布的 12 列栅格示意" data-i18n-aria-label-zh="1920 × 440 画布的 12 列栅格示意" data-i18n-aria-label-en="12-column grid example for a 1920 × 440 canvas"><div class="screen-size">1920 × 440</div><div class="screen-margin left">48</div><div class="screen-margin right">48</div><div class="screen-grid is-12"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div></div><div class="layout-facts"><div><strong>1920 − 96 = 1824 px</strong>可用宽度</div><div><strong>超宽屏 · 12 列</strong>计算档位</div><div><strong>24</strong>沟槽大小</div></div></div></div>
         </section>
 
         <section class="glass-panel p-6 md:p-10 mb-8"><h2 class="text-2xl font-bold mb-6">设计与验收清单</h2><div class="grid md:grid-cols-2 gap-8 text-sm text-gray-700"><ul class="space-y-3"><li>✓ 设计稿标注视口、缩放倍数、可用宽度与安全区</li><li>✓ 页面主体边缘、卡片和关键控件对齐列线</li><li>✓ 每个关键断点都有明确的跨列与重排规则</li><li>✓ 超过最大容器宽度后不继续拉宽正文</li></ul><ul class="space-y-3"><li>✓ 触控目标尺寸依据硬件距离规范，不随列宽压缩</li><li>✓ 200% 字号或长文本下不发生遮挡与溢出</li><li>✓ 横竖屏、分屏、系统栏出现时按容器重新计算</li><li>✓ 在真实硬件上验证圆角、包边、视距和可触达区</li></ul></div><div class="callout rounded-r-xl p-4 text-sm text-gray-700 leading-6 mt-6"><strong>例外：</strong>图表、视频和沉浸式背景可跨越列与沟槽，但其标题、图例、操作入口和数据标注仍应对齐栅格。</div></section>
@@ -106,10 +106,14 @@
       };
       Object.assign(translations, {
         '布局示例':'Layout examples',
+        '24 列是跨设备统一的布局标尺，不代表每块屏幕都要显示 24 列。内容区域变窄时，系统可映射为 12、8 或 4 个可用列，保持信息顺序与跨列比例。':'The 24-column system is a shared cross-device layout scale; it does not mean every screen must display 24 columns. As the content area narrows, the system maps to 12, 8, or 4 usable columns while preserving information order and span proportions.',
+        '｜ G · 沟槽 ｜':'｜ G · Gutter ｜',
+        '外边距':'Margin',
+        '沟槽':'Gutter',
         '1280 × 480':'1280 × 480',
         '1920 × 440':'1920 × 440',
-        'Linux 1:1 画布，对应宽屏档位，采用 12 列与 20 沟槽。':'For a Linux 1:1 canvas, reserve 48 on each side and subtract 96 in total. The available width is 1184, mapping to the Wide tier with 12 columns and a 20-unit gutter.',
-        'Linux 1:1 画布，对应超宽屏档位，采用 12 列与 24 沟槽。':'For a Linux 1:1 canvas, reserve 48 on each side and subtract 96 in total. The available width is 1824, mapping to the Ultra-wide tier with 12 columns and a 24-unit gutter.',
+        'Linux 1:1 画布，左右各保留 48，合计扣除 96；可用宽度为 1184，对应宽屏档位，采用 12 列与 20 沟槽。':'For a Linux 1:1 canvas, reserve 48 on each side and subtract 96 in total. The available width is 1184, mapping to the Wide tier with 12 columns and a 20-unit gutter.',
+        'Linux 1:1 画布，左右各保留 48，合计扣除 96；可用宽度为 1824，对应超宽屏档位，采用 12 列与 24 沟槽。':'For a Linux 1:1 canvas, reserve 48 on each side and subtract 96 in total. The available width is 1824, mapping to the Ultra-wide tier with 12 columns and a 24-unit gutter.',
         '1280 − 96 = 1184':'1280 − 96 = 1184',
         '宽屏 · 12 列':'Wide · 12 columns',
         '超宽屏 · 12 列':'Ultra-wide · 12 columns',

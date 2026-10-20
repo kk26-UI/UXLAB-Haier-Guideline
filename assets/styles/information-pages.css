@@ -60,6 +60,9 @@
   background-image: none; color: #2283e2; letter-spacing: .03em;
   font-size: 12px; font-weight: 600; margin-bottom: 8px;
 }
+html[lang="en"] #main-content .ia-seven-item h3::before {
+  content: "Principle " counter(原则-number, decimal-leading-zero);
+}
 /* LED categories use the site's neutral inner-card treatment. */
 #main-content article[class*="from-white/95"],
 #main-content .info-category-card,

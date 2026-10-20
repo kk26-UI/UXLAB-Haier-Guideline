@@ -295,28 +295,28 @@
 </head>
 <body class="antialiased">
   <div class="aura-background"></div>
-  <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开导航"><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700"></span></button></header>
+  <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开导航" data-i18n-aria-label-zh="打开导航" data-i18n-aria-label-en="Open navigation"><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span><span class="block w-6 h-0.5 bg-gray-700"></span></button></header>
   <div class="flex h-screen pt-16 md:pt-0">
-    <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+    <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" data-i18n-aria-label-zh="Haier Design 设计规范导航" data-i18n-aria-label-en="Haier Design guideline navigation" aria-hidden="true"></aside>
     <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
     <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
       <div class="max-w-[1200px] mx-auto pb-24">
         <section class="mb-12">
-          <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">信息与交互</h1>
-<p class="text-lg text-gray-500 max-w-3xl leading-relaxed mb-5">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900" data-i18n-zh="信息与交互" data-i18n-en="Information &amp; Interaction">信息与交互</h1>
+<p class="text-lg text-gray-500 max-w-3xl leading-relaxed mb-5" data-i18n-zh="统一跨品类、跨显示载体的信息架构、交互逻辑与页面布局规则，保障界面信息清晰、操作顺畅、布局聚焦，建立一致的品牌交互体验。" data-i18n-en="Unify information architecture, interaction logic, and page layouts across product categories and display types to deliver clear information, smooth operation, focused layouts, and a consistent brand experience.">
   统一跨品类、跨显示载体的信息架构、交互逻辑与页面布局规则，保障界面信息清晰、操作顺畅、布局聚焦，建立一致的品牌交互体验。
 </p>
 
         </section>
 
-<!-- 信息架构 · 清且轻：8 条原则 -->
+<!-- 信息架构：8 条原则 -->
 <section id="architecture" class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
 
   <div class="mb-8">
-    <h2 class="text-2xl font-bold text-gray-900 mb-3">
-      信息架构 · 清且轻
+    <h2 class="text-2xl font-bold text-gray-900 mb-3" data-i18n-zh="信息架构" data-i18n-en="Information Architecture">
+      信息架构
     </h2>
-    <p class="text-sm text-gray-500 leading-6">
+    <p class="text-sm text-gray-500 leading-6" data-i18n-zh="通过清晰分组、适度层级和完整导航，帮助用户理解信息并完成任务。" data-i18n-en="Help users understand information and complete tasks through clear grouping, limited hierarchy, and complete navigation.">
       通过清晰分组、适度层级和完整导航，帮助用户理解信息并完成任务。
     </p>
   </div>
@@ -325,11 +325,11 @@
 
     <!-- 原则 01 -->
     <article class="ia-seven-item">
-      <h3>同类信息应同组呈现；不同类信息应保持清晰边界，避免混淆。</h3>
+      <h3 data-i18n-zh="同类信息应同组呈现；不同类信息应保持清晰边界，避免混淆。" data-i18n-en="Group related information together. Keep unrelated information clearly separated.">同类信息应同组呈现；不同类信息应保持清晰边界，避免混淆。</h3>
       <div class="ia-image-box">
         <img
   src="assets/basic_design_rules/ia-rule-01.png"
-  alt="同类信息分组示意图"
+  alt="同类信息分组示意图" data-i18n-alt-zh="同类信息分组示意图" data-i18n-alt-en="Grouping related information"
   class="scale-[0.85]"
 >
       </div>
@@ -337,10 +337,10 @@
 
     <!-- 原则 02 -->
     <article class="ia-seven-item">
-      <h3>信息层级应控制在三级以内，降低用户理解与查找成本。</h3>
+      <h3 data-i18n-zh="信息层级应控制在三级以内，降低用户理解与查找成本。" data-i18n-en="Limit information hierarchy to three levels to make content easier to understand and find.">信息层级应控制在三级以内，降低用户理解与查找成本。</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ia-rule-02.png"
-  alt="同类信息分组示意图"
+  alt="同类信息分组示意图" data-i18n-alt-zh="同类信息分组示意图" data-i18n-alt-en="Information hierarchy limited to three levels"
   class="scale-[0.85]"
 >
       </div>
@@ -348,10 +348,10 @@
 
     <!-- 原则 03 -->
     <article class="ia-seven-item">
-      <h3>导航应覆盖全部任务路径，确保进出、上下与前后通路完整。</h3>
+      <h3 data-i18n-zh="导航应覆盖全部任务路径，确保进出、上下与前后通路完整。" data-i18n-en="Cover every task path, including entry, exit, upward, downward, forward, and back navigation.">导航应覆盖全部任务路径，确保进出、上下与前后通路完整。</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ia-rule-03.png"
-  alt="同类信息分组示意图"
+  alt="同类信息分组示意图" data-i18n-alt-zh="同类信息分组示意图" data-i18n-alt-en="Complete task navigation paths"
   class="scale-[1]"
 >
       </div>
@@ -359,10 +359,10 @@
 
     <!-- 原则 04 -->
     <article class="ia-seven-item">
-      <h3>同级信息并列、不嵌套；不同层级分开展示，保持关系清晰。</h3>
+      <h3 data-i18n-zh="同级信息并列、不嵌套；不同层级分开展示，保持关系清晰。" data-i18n-en="Place peer information side by side without nesting. Keep different levels distinct.">同级信息并列、不嵌套；不同层级分开展示，保持关系清晰。</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ia-rule-04.png"
-  alt="同类信息分组示意图"
+  alt="同类信息分组示意图" data-i18n-alt-zh="同类信息分组示意图" data-i18n-alt-en="Peer and hierarchical information organization"
   class="scale-[1]"
 >
       </div>
@@ -370,10 +370,10 @@
 
     <!-- 原则 05 -->
     <article class="ia-seven-item">
-      <h3>紧急重要消息应前置，通过全局推送或聚焦提示及时触达。</h3>
+      <h3 data-i18n-zh="紧急重要消息应前置，通过全局推送或聚焦提示及时触达。" data-i18n-en="Prioritize urgent, important messages with global notifications or prominent alerts.">紧急重要消息应前置，通过全局推送或聚焦提示及时触达。</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ia-rule-05.png"
-  alt="同类信息分组示意图"
+  alt="同类信息分组示意图" data-i18n-alt-zh="同类信息分组示意图" data-i18n-alt-en="Prominent urgent message notifications"
   class="scale-[0.85]"
 >
       </div>
@@ -381,10 +381,10 @@
 
     <!-- 原则 06 -->
     <article class="ia-seven-item">
-      <h3>信息应区分主次，突出常用信息，适度隐藏非常用信息。</h3>
+      <h3 data-i18n-zh="信息应区分主次，突出常用信息，适度隐藏非常用信息。" data-i18n-en="Establish clear priorities: highlight frequently used information and hide secondary details when appropriate.">信息应区分主次，突出常用信息，适度隐藏非常用信息。</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ia-rule-06.png"
-  alt="同类信息分组示意图"
+  alt="同类信息分组示意图" data-i18n-alt-zh="同类信息分组示意图" data-i18n-alt-en="Information priorities"
   class="scale-[0.85]"
 >
       </div>
@@ -392,10 +392,10 @@
 
     <!-- 原则 07 -->
 <article class="ia-seven-item">
-  <h3>同一信息状态应表达同一含义，并遵循统一视觉规则</h3>
+  <h3 data-i18n-zh="同一信息状态应表达同一含义，并遵循统一视觉规则" data-i18n-en="Use consistent meanings and visual rules for the same information state.">同一信息状态应表达同一含义，并遵循统一视觉规则</h3>
   <div class="ia-image-box">
     <img src="assets/basic_design_rules/ia-rule-07.png"
-  alt="同类信息分组示意图"
+  alt="同类信息分组示意图" data-i18n-alt-zh="同类信息分组示意图" data-i18n-alt-en="Consistent information states"
   class="scale-[1]"
 >
   </div>
@@ -403,10 +403,10 @@
 
     <!-- 原则 08 -->
     <article class="ia-seven-item">
-      <h3>功能与状态命名应一致、易懂，避免技术术语和内部用语。</h3>
+      <h3 data-i18n-zh="功能与状态命名应一致、易懂，避免技术术语和内部用语。" data-i18n-en="Use consistent, plain-language names for functions and states. Avoid technical jargon and internal terms.">功能与状态命名应一致、易懂，避免技术术语和内部用语。</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ia-rule-08.png"
-  alt="同类信息分组示意图"
+  alt="同类信息分组示意图" data-i18n-alt-zh="同类信息分组示意图" data-i18n-alt-en="Consistent function and state names"
   class="scale-[1]"
 >
       </div>
@@ -414,14 +414,14 @@
 
   </div>
 </section>
-<!-- 交互逻辑 · 顺且准：8 条原则 -->
+<!-- 交互逻辑：8 条原则 -->
 <section id="interaction-logic" class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
 
   <div class="mb-8">
-    <h2 class="text-2xl font-bold text-gray-900 mb-3">
-      交互逻辑 · 顺且准
+    <h2 class="text-2xl font-bold text-gray-900 mb-3" data-i18n-zh="交互逻辑" data-i18n-en="Interaction Logic">
+      交互逻辑
     </h2>
-    <p class="text-sm text-gray-500 leading-6">
+    <p class="text-sm text-gray-500 leading-6" data-i18n-zh="让任务路径顺畅、操作与反馈对应，保持交互方式和状态表达的一致性。" data-i18n-en="Keep task flows smooth, align actions with feedback, and use consistent interactions and state representations.">
       让任务路径顺畅、操作与反馈对应，保持交互方式和状态表达的一致性。
     </p>
   </div>
@@ -430,10 +430,10 @@
 
     <!-- 原则 01 -->
     <article class="ia-seven-item">
-      <h3>主任务交互路径应是线性路径，杜绝来回折返</h3>
+      <h3 data-i18n-zh="主任务交互路径应是线性路径，杜绝来回折返" data-i18n-en="Keep the main task flow linear and avoid backtracking.">主任务交互路径应是线性路径，杜绝来回折返</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/il-rule-01.png"
-  alt="线性任务路径与折返路径对比示意图"
+  alt="线性任务路径与折返路径对比示意图" data-i18n-alt-zh="线性任务路径与折返路径对比示意图" data-i18n-alt-en="Linear task flow compared with backtracking"
   class="scale-[0.8]"
 >
       </div>
@@ -441,10 +441,10 @@
 
     <!-- 原则 02 -->
     <article class="ia-seven-item">
-      <h3>操作手不可遮挡用户读取信息的视线</h3>
+      <h3 data-i18n-zh="操作手不可遮挡用户读取信息的视线" data-i18n-en="Ensure the operating hand does not obscure information users need to read.">操作手不可遮挡用户读取信息的视线</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/il-rule-02.png"
-             alt="操作手与信息显示位置示意图"
+             alt="操作手与信息显示位置示意图" data-i18n-alt-zh="操作手与信息显示位置示意图" data-i18n-alt-en="Hand position relative to displayed information"
              class="scale-[0.8]"
 >
       </div>
@@ -452,10 +452,10 @@
 
     <!-- 原则 03 -->
     <article class="ia-seven-item">
-      <h3>操作与反馈显示位置要匹配，遵循右控左显、下控上显</h3>
+      <h3 data-i18n-zh="操作与反馈显示位置要匹配，遵循右控左显、下控上显" data-i18n-en="Align controls with feedback: controls to the right of displays or below them.">操作与反馈显示位置要匹配，遵循右控左显、下控上显</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/il-rule-03.png"
-             alt="右控左显与下控上显示意图"
+             alt="右控左显与下控上显示意图" data-i18n-alt-zh="右控左显与下控上显示意图" data-i18n-alt-en="Controls to the right of or below displays"
              class="scale-[0.8]"
 >
       </div>
@@ -463,10 +463,10 @@
 
     <!-- 原则 04 -->
     <article class="ia-seven-item">
-      <h3>可交互控件与纯显示内容要明确区分</h3>
+      <h3 data-i18n-zh="可交互控件与纯显示内容要明确区分" data-i18n-en="Clearly distinguish interactive controls from display-only content.">可交互控件与纯显示内容要明确区分</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/il-rule-04.png"
-             alt="可交互控件与非交互信息区分示意图"
+             alt="可交互控件与非交互信息区分示意图" data-i18n-alt-zh="可交互控件与非交互信息区分示意图" data-i18n-alt-en="Interactive controls versus display-only information"
              class="scale-[0.8]"
 >
       </div>
@@ -474,10 +474,10 @@
 
     <!-- 原则 05 -->
     <article class="ia-seven-item">
-      <h3>信息反馈要即时、明确且精准，至少采用双通道反馈</h3>
+      <h3 data-i18n-zh="信息反馈要即时、明确且精准，至少采用双通道反馈" data-i18n-en="Provide immediate, clear, accurate feedback through at least two sensory channels.">信息反馈要即时、明确且精准，至少采用双通道反馈</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/il-rule-05.png"
-             alt="视觉与听觉等双通道反馈示意图"
+             alt="视觉与听觉等双通道反馈示意图" data-i18n-alt-zh="视觉与听觉等双通道反馈示意图" data-i18n-alt-en="Feedback through visual, auditory, and other sensory channels"
              class="scale-[0.8]"
 >
       </div>
@@ -485,10 +485,10 @@
 
     <!-- 原则 06 -->
     <article class="ia-seven-item">
-      <h3>同类型功能的交互方式要一致</h3>
+      <h3 data-i18n-zh="同类型功能的交互方式要一致" data-i18n-en="Use consistent interactions for similar functions.">同类型功能的交互方式要一致</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/il-rule-06.png"
-             alt="点触、滑触、长按等交互方式示意图"
+             alt="点触、滑触、长按等交互方式示意图" data-i18n-alt-zh="点触、滑触、长按等交互方式示意图" data-i18n-alt-en="Tap, swipe, and long-press interactions"
              class="scale-[0.8]"
 >
       </div>
@@ -496,10 +496,10 @@
 
     <!-- 原则 07 -->
     <article class="ia-seven-item">
-      <h3>减少复合按键和长按按键的多次使用；需清晰标注操作方式</h3>
+      <h3 data-i18n-zh="减少复合按键和长按按键的多次使用；需清晰标注操作方式" data-i18n-en="Minimize repeated button combinations and long presses. Clearly label how to operate them.">减少复合按键和长按按键的多次使用；需清晰标注操作方式</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/il-rule-07.png"
-             alt="复合按键与长按操作示意图"
+             alt="复合按键与长按操作示意图" data-i18n-alt-zh="复合按键与长按操作示意图" data-i18n-alt-en="Button combinations and long-press operations"
              class="scale-[0.8]"
 >
       </div>
@@ -507,10 +507,10 @@
 
     <!-- 原则 08 -->
     <article class="ia-seven-item">
-      <h3>单页面最好聚焦单任务</h3>
+      <h3 data-i18n-zh="单页面最好聚焦单任务" data-i18n-en="Keep each page focused on a single task.">单页面最好聚焦单任务</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/il-rule-08.png"
-             alt="单页面聚焦单任务示意图"
+             alt="单页面聚焦单任务示意图" data-i18n-alt-zh="单页面聚焦单任务示意图" data-i18n-alt-en="One task per page"
              class="scale-[0.8]"
 >
       </div>
@@ -518,14 +518,14 @@
 
   </div>
 </section>
-<!-- 页面布局 · 聚且适：8 条原则 -->
+<!-- 页面布局：8 条原则 -->
 <section id="page-layout" class="glass-panel p-6 md:p-10 mb-10 scroll-mt-8">
 
   <div class="mb-8">
-    <h2 class="text-2xl font-bold text-gray-900 mb-3">
-      页面布局 · 聚且适
+    <h2 class="text-2xl font-bold text-gray-900 mb-3" data-i18n-zh="页面布局" data-i18n-en="Page Layout">
+      页面布局
     </h2>
-    <p class="text-sm text-gray-500 leading-6">
+    <p class="text-sm text-gray-500 leading-6" data-i18n-zh="让核心信息与常用操作形成清晰焦点，并使显示位置与操作位置相互对应。" data-i18n-en="Create a clear focus for key information and frequent actions, and align displays with their controls.">
       让核心信息与常用操作形成清晰焦点，并使显示位置与操作位置相互对应。
     </p>
   </div>
@@ -534,10 +534,10 @@
 
     <!-- 原则 01 -->
     <article class="ia-seven-item">
-      <h3>整体布局均衡匀称</h3>
+      <h3 data-i18n-zh="整体布局均衡匀称" data-i18n-en="Keep the overall layout balanced and well proportioned.">整体布局均衡匀称</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ilayout-rule-01.png"
-             alt="整体布局均衡匀称示意图"
+             alt="整体布局均衡匀称示意图" data-i18n-alt-zh="整体布局均衡匀称示意图" data-i18n-alt-en="Balanced overall layout"
              class="scale-[0.85]"
 >
       </div>
@@ -545,10 +545,10 @@
 
     <!-- 原则 02 -->
     <article class="ia-seven-item">
-      <h3>核心按键与通用触点的界面位置要一致</h3>
+      <h3 data-i18n-zh="核心按键与通用触点的界面位置要一致" data-i18n-en="Keep core buttons and common touch targets in consistent positions.">核心按键与通用触点的界面位置要一致</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ilayout-rule-02.png"
-             alt="电源、启动及卖点功能按键位置示意图"
+             alt="电源、启动及卖点功能按键位置示意图" data-i18n-alt-zh="电源、启动及卖点功能按键位置示意图" data-i18n-alt-en="Consistent positions for power, start, and key feature buttons"
              class="scale-[0.85]"
 >
       </div>
@@ -556,10 +556,10 @@
 
     <!-- 原则 03 -->
     <article class="ia-seven-item">
-      <h3>同类型信息的位置与分组清晰，并通过位置、面积和视觉样式区分重要度</h3>
+      <h3 data-i18n-zh="同类型信息的位置与分组清晰，并通过位置、面积和视觉样式区分重要度" data-i18n-en="Group similar information clearly. Use position, size, and visual style to convey priority.">同类型信息的位置与分组清晰，并通过位置、面积和视觉样式区分重要度</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ilayout-rule-03.png"
-             alt="主功能、参数及附加功能的信息重要度示意图"
+             alt="主功能、参数及附加功能的信息重要度示意图" data-i18n-alt-zh="主功能、参数及附加功能的信息重要度示意图" data-i18n-alt-en="Information priorities for main functions, parameters, and additional functions"
              class="scale-[0.85]"
 >
       </div>
@@ -567,10 +567,10 @@
 
     <!-- 原则 04 -->
     <article class="ia-seven-item">
-      <h3>参数调节控件应与数值显示相邻；＋／－调节数字，＜／＞选择选项</h3>
+      <h3 data-i18n-zh="参数调节控件应与数值显示相邻；＋／－调节数字，＜／＞选择选项" data-i18n-en="Place adjustment controls next to values. Use +/− for numbers and &lt;/&gt; for options.">参数调节控件应与数值显示相邻；＋／－调节数字，＜／＞选择选项</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ilayout-rule-04.png"
-             alt="参数控件与数值显示相邻示意图"
+             alt="参数控件与数值显示相邻示意图" data-i18n-alt-zh="参数控件与数值显示相邻示意图" data-i18n-alt-en="Adjustment controls adjacent to displayed values"
              class="scale-[0.85]"
 >
       </div>
@@ -578,10 +578,10 @@
 
     <!-- 原则 05 -->
     <article class="ia-seven-item">
-      <h3>选择控件应与选择项位置相邻，包括物理旋钮选择</h3>
+      <h3 data-i18n-zh="选择控件应与选择项位置相邻，包括物理旋钮选择" data-i18n-en="Place selection controls next to their options, including physical rotary selectors.">选择控件应与选择项位置相邻，包括物理旋钮选择</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ilayout-rule-05.png"
-             alt="选择控件、选项及物理旋钮的位置关系示意图"
+             alt="选择控件、选项及物理旋钮的位置关系示意图" data-i18n-alt-zh="选择控件、选项及物理旋钮的位置关系示意图" data-i18n-alt-en="Selection controls, options, and physical rotary selectors"
              class="scale-[1]"
 >
       </div>
@@ -589,10 +589,10 @@
 
     <!-- 原则 06 -->
     <article class="ia-seven-item">
-      <h3>界面核心信息应聚焦，形成视觉焦点</h3>
+      <h3 data-i18n-zh="界面核心信息应聚焦，形成视觉焦点" data-i18n-en="Give key information a clear visual focal point.">界面核心信息应聚焦，形成视觉焦点</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ilayout-rule-06.png"
-             alt="界面核心信息形成视觉焦点示意图"
+             alt="界面核心信息形成视觉焦点示意图" data-i18n-alt-zh="界面核心信息形成视觉焦点示意图" data-i18n-alt-en="Key information as a visual focal point"
              class="scale-[1]"
 >
       </div>
@@ -600,10 +600,10 @@
 
     <!-- 原则 07 -->
     <article class="ia-seven-item">
-      <h3>常用且重要的信息应显眼、易触达；主要交互区域应集中</h3>
+      <h3 data-i18n-zh="常用且重要的信息应显眼、易触达；主要交互区域应集中" data-i18n-en="Make frequent, important information prominent and easy to reach. Group primary interactions together.">常用且重要的信息应显眼、易触达；主要交互区域应集中</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ilayout-rule-07.png"
-             alt="常用操作与主要交互区域聚焦示意图"
+             alt="常用操作与主要交互区域聚焦示意图" data-i18n-alt-zh="常用操作与主要交互区域聚焦示意图" data-i18n-alt-en="Grouped frequent actions and primary interaction areas"
              class="scale-[1]"
 >
       </div>
@@ -611,10 +611,10 @@
 
     <!-- 原则 08 -->
     <article class="ia-seven-item">
-      <h3>操作区与显示区应明确区分；操作区分清主次，常用触点相对聚焦</h3>
+      <h3 data-i18n-zh="操作区与显示区应明确区分；操作区分清主次，常用触点相对聚焦" data-i18n-en="Separate controls from displays. Prioritize controls and group frequent touch targets together.">操作区与显示区应明确区分；操作区分清主次，常用触点相对聚焦</h3>
       <div class="ia-image-box">
         <img src="assets/basic_design_rules/ilayout-rule-08.png"
-             alt="操作区与显示区的分区示意图"
+             alt="操作区与显示区的分区示意图" data-i18n-alt-zh="操作区与显示区的分区示意图" data-i18n-alt-en="Separate control and display areas"
              class="scale-[0.85]"
 >
       </div>

@@ -338,6 +338,14 @@ const HAIER_NAV_LABEL_EN = {
     '临时控制盘、导航浮层、弹窗、底部面板': 'Temporary controls, navigation overlays, dialogs, and bottom sheets',
     '只用于功能层；同屏不超过 2 个独立区域': 'Functional layer only; no more than two independent regions per screen',
     '浅色 16% / 深色 12%；blur 8': 'Light 16% / Dark 12%; blur 8',
+    '冷蓝暗层 56%；blur 12': 'Cool-blue dark layer 56%; blur 12',
+    '冷蓝暗层 42%；blur 24': 'Cool-blue dark layer 42%; blur 24',
+    '冷蓝暗层 28%；blur 14': 'Cool-blue dark layer 28%; blur 14',
+    '冷蓝暗层 16%；blur 8': 'Cool-blue dark layer 16%; blur 8',
+    '白色层 38%；blur 12': 'White layer 38%; blur 12',
+    '白色层 28%；blur 24': 'White layer 28%; blur 24',
+    '白色层 18%；blur 14': 'White layer 18%; blur 14',
+    '白色层 10%；blur 8': 'White layer 10%; blur 8',
     '照片、视频、摄像头画面上的快捷控制': 'Quick controls over photos, video, and camera feeds',
     '仅限视觉丰富且持续可见的媒体背景': 'Only for visually rich media backgrounds that remain visible',
     '材质使用规则': 'Material Usage Rules',
@@ -576,22 +584,31 @@ const HAIER_NAV_LABEL_EN = {
     '中文': 'Chinese',
     '英文': 'English',
     '数字': 'Numerals',
+    '中文字体': 'Chinese Font',
+    '英文字体': 'English Font',
     '标准中文字体 (Font Name)': 'Standard Chinese Font (Font Name)',
     '中文字体统一采用': 'Chinese typography uses',
     '方正兰亭黑 (FZLT Black)': 'FZLanTingHei (FZLT Black)',
     '，以保证在各种屏幕和终端设备上提供清晰、一致且富有科技感的阅读体验。': 'to provide a clear, consistent, and technological reading experience across screens and devices.',
     '下载字体安装包': 'Download font package',
+    '字重': 'Font Weight',
     '字重 Font Weight': 'Font Weight',
     '字重类别': 'Weight Category',
+    '展示': 'Preview',
     '展示 (Preview)': 'Preview',
+    '参考 CSS': 'CSS Reference',
     '参考 CSS (Weight)': 'CSS Weight',
+    '说明': 'Description',
     '说明 (Description)': 'Description',
     '粗黑 (Bold)': 'Bold',
     '黑 (Regular)': 'Regular',
     '纤黑 (Light)': 'Light',
     '文本样式 Text Style': 'Text Style',
+    '文本样式': 'Text Style',
     '层级 (Level)': 'Level',
+    '字号': 'Size',
     '字号 (Size)': 'Size',
+    '行高': 'Line Height',
     '行高 (Line Height)': 'Line Height',
     '显示': 'Display',
     '标题': 'Title',
@@ -600,6 +617,7 @@ const HAIER_NAV_LABEL_EN = {
     '正文': 'Body',
     '注：预览文字大小为适配页面阅读做了等比缩小展示，实际字号请以字号列标注的 pt 数值为准。': 'Note: Preview text is scaled down for page readability. Use the pt values in the size column as the source of truth.',
     '打印字号 (Print Font Size) 对照': 'Print Font Size Reference',
+    '打印字号对照': 'Print Font Size Reference',
     '物理尺寸': 'Physical Size',
     '字号 (pt)': 'Font Size (pt)',
     '预览': 'Preview',
@@ -1009,6 +1027,10 @@ const HAIER_NAV_LABEL_EN = {
 
     document.querySelectorAll('[data-i18n-aria-label-zh][data-i18n-aria-label-en]').forEach((element) => {
       element.setAttribute('aria-label', element.dataset[language === 'zh' ? 'i18nAriaLabelZh' : 'i18nAriaLabelEn']);
+    });
+
+    document.querySelectorAll('img[data-i18n-src-zh][data-i18n-src-en]').forEach((element) => {
+      element.setAttribute('src', element.dataset[language === 'zh' ? 'i18nSrcZh' : 'i18nSrcEn']);
     });
 
     document.querySelectorAll('[data-i18n-alt-zh][data-i18n-alt-en]').forEach((element) => {

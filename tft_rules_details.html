@@ -3125,6 +3125,26 @@ justify-items: center; min-height:300px; margin:0; border-radius:14px; backgroun
 
   "以AI和标准双模式为信息架构的首层和交互路径的出发点，扁平化架构，一键触发，首页即可启动上次使用程序或者功能；聚焦式交互，一屏聚焦单任务或者内容，同时通用性底部栏滑轮也可以快速找到目标选项": "Use AI and Standard modes as the top-level entry points. A flat architecture enables one-tap actions, including restarting the last-used program from the home screen. Focus each screen on one task or content area, while a shared bottom carousel provides quick access to other options.",
 
+  "首页": "Home",
+  "设置页": "Settings",
+  "二级页": "Secondary Pages",
+  "进程页": "Progress Pages",
+  "设备页": "Device",
+  "多层级": "Multiple Levels",
+  "单层级": "Single Level",
+  "二级分类页面": "Secondary Category Page",
+  "参数调节": "Parameter Adjustment",
+  "程序运行": "Program Running",
+  "程序完成": "Program Complete",
+  "待机": "Standby",
+  "识别": "Recognition",
+  "结果": "Results",
+  "耗材": "Consumables",
+  "能源": "Energy",
+  "设置": "Settings",
+  "跨品类 TFT 信息分区示意": "TFT Information Areas Across Appliance Categories",
+  "AI 与标准双模式主页示例": "AI and Standard Mode Home Screen Example",
+
   "横屏示例": "Landscape Examples",
   "竖屏示例": "Portrait Examples",
 
@@ -3178,6 +3198,10 @@ justify-items: center; min-height:300px; margin:0; border-radius:14px; backgroun
   }
   // Translate image alternative text for assistive technology.
   for (const img of root.querySelectorAll('img[alt]')) {
+    if (Object.prototype.hasOwnProperty.call(translations, img.alt)) {
+      img.alt = translations[img.alt];
+      continue;
+    }
     img.alt = img.alt
       .replaceAll('洗衣机', 'Washing Machine')
       .replaceAll('蒸烤箱', 'Steam Oven')
