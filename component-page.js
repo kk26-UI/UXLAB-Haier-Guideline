@@ -17,7 +17,8 @@ const COMPONENT_PAGES = {
   'component_card.html': ['3.5.1', '卡片', 'Card', '将相关内容与操作组织为一个可识别单元。卡片层级不应替代清晰的信息架构。', 'Groups related content and actions into a recognizable unit. Card layers do not replace clear information architecture.'],
   'component_list_tile.html': ['3.5.2', '列表', 'List / List Tile', '以一致结构呈现可扫描的信息集合。主信息、辅助信息和操作保持稳定对齐。', 'Presents scannable collections with a consistent structure. Align primary content, supporting content, and actions predictably.'],
   'component_avatar.html': ['3.5.3', '头像', 'Avatar', '代表用户、家庭或设备身份。图片不可用时使用稳定的文字或图标占位。', 'Represents a person, household, or device identity. Use a stable text or icon fallback when imagery is unavailable.'],
-  'component_divider.html': ['3.5.4', '分割线', 'Divider', '用于区分相邻内容组，不承担主要层级表达。优先通过间距建立关系，仅在必要时使用。', 'Separates adjacent content groups without carrying primary hierarchy. Prefer spacing and add dividers only when needed.'],
+  'component_image.html': ['3.5.4', '图片轮播', 'Image Carousel', '用于识别设备、呈现场景与说明操作。', 'Identify appliances, illustrate contexts, and explain tasks.'],
+  'component_divider.html': ['3.5.4', '图片轮播', 'Image Carousel', '用于识别设备、呈现场景与说明操作。', 'Identify appliances, illustrate contexts, and explain tasks.'],
   'component_badge.html': ['3.5.5', '徽标', 'Badge', '以紧凑形式表达计数或短状态。内容应简短，不将关键告警仅依赖颜色表达。', 'Expresses a count or short status compactly. Keep content brief and never communicate critical alerts by color alone.'],
   'component_dialog_modal.html': ['3.6.1', '对话框', 'Dialog / Modal', '用于需要用户立即关注或确认的短任务。避免嵌套弹窗，并始终提供明确退出路径。', 'Use for short tasks that require immediate attention or confirmation. Avoid nested dialogs and always provide a clear exit.'],
   'component_bottom_sheet.html': ['3.6.2', '抽屉', 'Bottom Sheet', '从屏幕底部呈现补充操作或内容，适合触控场景。保留背景上下文并支持清晰关闭。', 'Presents supporting actions or content from the bottom on touch devices. Preserve context and provide a clear dismiss path.'],
@@ -469,7 +470,7 @@ function renderTabsGuideline(language) {
   const bullets = items => items.map(x=>`<li class="flex gap-3 text-sm text-gray-600 leading-6"><span class="mt-[9px] w-1.5 h-1.5 shrink-0 rounded-full bg-[#2283E2]"></span><span>${x}</span></li>`).join('');
   const checks = (items,good)=>items.map(x=>`<li class="flex gap-3 text-sm text-gray-600 leading-6"><span class="${good?'text-emerald-500':'text-red-400'} font-bold">${good?'✓':'×'}</span><span>${x}</span></li>`).join('');
   const labels=[copy.overview,copy.energy,copy.history];
-  const typeTabs=kind=>labels.map((x,i)=>`<span class="${kind==='capsule'?'rounded-lg px-4 py-2 '+(i===0?'bg-white text-[#2283E2] shadow-sm':'text-gray-400'):kind==='card'?'rounded-t-lg border px-4 py-2 '+(i===0?'border-b-white bg-white text-[#2283E2]':'border-gray-200 bg-gray-50 text-gray-500'):kind==='text'?'px-3 py-2 '+(i===0?'font-semibold text-[#2283E2]':'text-gray-400'):'relative px-4 py-3 '+(i===0?'font-semibold text-[#2283E2] after:absolute after:inset-x-2 after:bottom-0 after:h-0.5 after:bg-[#2283E2]':'text-gray-400')}">${x}</span>`).join('');
+  const typeTabs=kind=>labels.map((x,i)=>`<span class="${kind==='capsule'?'rounded-lg px-4 py-2 '+(i===0?'bg-white text-[#2283E2] shadow-sm':'text-gray-400'):kind==='card'?'rounded-t-lg border px-4 py-2 '+(i===0?'border-b-white bg-white text-[#2283E2]':'border-gray-200 bg-gray-50 text-gray-500 opacity-70'):kind==='text'?'px-3 py-2 '+(i===0?'text-[#2283E2]':'text-gray-400'):'relative px-4 py-3 '+(i===0?'text-[#2283E2] after:absolute after:inset-x-2 after:bottom-0 after:h-0.5 after:bg-[#2283E2]':'text-gray-400')}">${x}</span>`).join('');
   return `<section class="mb-12"><h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">${copy.title}</h1><p class="text-lg text-gray-500 max-w-4xl leading-relaxed">${copy.intro}</p></section>
   <section class="glass-panel p-6 md:p-10 mb-8"><h2 class="text-2xl font-bold mb-3">${copy.useTitle}</h2><p class="text-sm text-gray-600 leading-7 max-w-4xl mb-7">${copy.useBody}</p><div class="overflow-x-auto"><table class="w-full min-w-[680px] text-sm"><tbody>${copy.decision.map((r,i)=>`<tr class="${i<copy.decision.length-1?'border-b':''}"><td class="py-4 w-1/4 font-semibold">${r[0]}</td><td class="py-4 w-1/4 text-[#2283E2]">${r[1]}</td><td class="py-4 text-gray-500">${r[2]}</td></tr>`).join('')}</tbody></table></div></section>
   <section class="glass-panel p-6 md:p-10 mb-8"><h2 class="text-2xl font-bold mb-2">${copy.anatomyTitle}</h2><p class="text-sm text-gray-500 leading-7 max-w-4xl mb-8">${copy.anatomyIntro}</p><div data-tabs-demo class="rounded-2xl border border-blue-100 bg-white/70 p-5 md:p-8"><div role="tablist" aria-label="${copy.title}" class="flex border-b border-gray-200 overflow-x-auto">${labels.map((x,i)=>`<button type="button" role="tab" id="demo-tab-${i}" aria-controls="demo-panel-${i}" aria-selected="${i===0}" tabindex="${i===0?'0':'-1'}" data-demo-tab="${i}" class="relative shrink-0 min-h-12 px-5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#2283E2] ${i===0?'font-semibold text-[#2283E2]':'text-gray-500'}">${x}<span data-indicator class="${i===0?'':'hidden'} absolute inset-x-4 bottom-0 h-0.5 rounded-full bg-[#2283E2]"></span></button>`).join('')}</div>${[copy.overviewText,copy.energyText,copy.historyText].map((x,i)=>`<div role="tabpanel" id="demo-panel-${i}" aria-labelledby="demo-tab-${i}" data-demo-panel="${i}" ${i?'hidden':''} class="min-h-28 px-5 py-8 text-sm text-gray-600">${x}</div>`).join('')}</div></section>
@@ -725,6 +726,24 @@ function renderNavigationGuideline(language) {
     ? { title: zh, description: zhDescription, overview: '基础规范', status: '状态规范', usage: '使用原则', anatomy: '组成结构', statusText: '默认、悬停、聚焦、按下、禁用与错误状态需使用一致的视觉语言，并满足键盘与触控可达性。', usageText: '先确认组件是否匹配用户任务，再定义内容、行为与边界条件。避免用视觉变体修补错误的信息结构。', anatomyText: '名称、内容区域、交互热区与反馈层应保持职责清晰；跨设备适配时优先保持语义和操作顺序。' }
     : { title: en, description: enDescription, overview: 'Foundation', status: 'States', usage: 'Usage', anatomy: 'Anatomy', statusText: 'Use a consistent visual language for default, hover, focus, pressed, disabled, and error states, with keyboard and touch accessibility.', usageText: 'Confirm the component matches the user task before defining content, behavior, and boundaries. Do not use visual variants to patch weak information structure.', anatomyText: 'Keep labels, content, touch targets, and feedback layers distinct. Preserve meaning and action order when adapting across devices.' };
   document.title = `Haier Design | ${text.title}`;
+  if (file === 'component_image.html' || file === 'component_divider.html') {
+    root.innerHTML = renderImageGuideline(language);
+    initImageExamples(root, language);
+    return;
+  }
+  if (file === 'component_badge.html') {
+    root.innerHTML = renderBadgeGuideline(language);
+    initBadgeExamples(root, language);
+    return;
+  }
+  if (file === 'component_avatar.html') {
+    root.innerHTML = renderAvatarGuideline(language);
+    return;
+  }
+  if (file === 'component_list_tile.html') {
+    root.innerHTML = renderListGuideline(language);
+    return;
+  }
   if (file === 'component_card.html') {
     root.innerHTML = renderCardGuideline(language);
     return;

@@ -1,0 +1,30 @@
+[
+  {
+    "file": "fabric-care-user.png",
+    "source": "User-provided image, 2026-10-23"
+  },
+  {
+    "file": "fabric-care-towels.png",
+    "source": "AI generated using built-in image_gen, matching the user-provided reference",
+    "reference": "fabric-care-user.png",
+    "created": "2026-10-23"
+  },
+  {
+    "file": "fabric-care-basket.png",
+    "source": "AI generated using built-in image_gen, matching the user-provided reference",
+    "reference": "fabric-care-user.png",
+    "created": "2026-10-23"
+  },
+  {
+    "file": "washer-user-front.png",
+    "source": "User-provided product image, 2026-10-23"
+  },
+  {
+    "file": "washer-user-left.png",
+    "source": "User-provided product image, 2026-10-23"
+  },
+  {
+    "file": "washer-user-right.png",
+    "source": "User-provided product image, 2026-10-23"
+  }
+]

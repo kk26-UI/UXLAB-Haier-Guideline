@@ -51,7 +51,7 @@ const HAIER_NAV_GROUPS = [
       { label: '卡片', href: 'component_card.html', page: 'component_card.html', child: true },
       { label: '列表', href: 'component_list_tile.html', page: 'component_list_tile.html', child: true },
       { label: '头像', href: 'component_avatar.html', page: 'component_avatar.html', child: true },
-      { label: '分割线', href: 'component_divider.html', page: 'component_divider.html', child: true },
+      { label: '图片轮播', href: 'component_image.html', page: 'component_image.html', child: true },
       { label: '徽标', href: 'component_badge.html', page: 'component_badge.html', child: true },
       { label: '3.6 反馈与浮层', id: 'components-feedback', disabled: true },
       { label: '对话框', href: 'component_dialog_modal.html', page: 'component_dialog_modal.html', child: true },
@@ -155,7 +155,7 @@ const HAIER_NAV_LABEL_EN = {
   '3.5.1 卡片': '3.5.1 Card',
   '3.5.2 列表': '3.5.2 List / List Tile',
   '3.5.3 头像': '3.5.3 Avatar',
-  '3.5.4 分割线': '3.5.4 Divider',
+  '3.5.4 图片轮播': '3.5.4 Image Carousel',
   '3.5.5 徽标': '3.5.5 Badge',
   '3.6 反馈与浮层': '3.6 Feedback & Overlays',
   '3.6.1 对话框': '3.6.1 Dialog / Modal',
@@ -180,7 +180,8 @@ const HAIER_NAV_LABEL_EN = {
   '卡片': 'Card',
   '列表': 'List / List Tile',
   '头像': 'Avatar',
-  '分割线': 'Divider',
+  '图片': 'Image',
+  '图片轮播': 'Image Carousel',
   '徽标': 'Badge',
   '对话框': 'Dialog / Modal',
   '抽屉': 'Bottom Sheet',
@@ -323,11 +324,18 @@ const HAIER_NAV_LABEL_EN = {
     '内容层保持稳定，功能层按需浮现。一个视图原则上只保留一个最高悬浮层级。': 'Keep the content layer stable and reveal the functional layer only when needed. As a rule, each view should have only one highest elevation level.',
     '层级材质': 'Hierarchy Materials',
     '针对家电屏、移动端、TV 与中控屏的高频场景，材质分为稳定内容层与临时功能层。透明度越高，信息承载能力越低；文本越多，材质越应接近不透明。': 'For common appliance display, mobile, TV, and control-panel scenarios, materials are divided into a stable content layer and a temporary functional layer. Greater transparency supports less information; text-heavy surfaces should be closer to opaque.',
+    '深色背景': 'Dark Background',
+    '浅色背景': 'Light Background',
+    '材质颜色保持白色透明层；深色背景使用白色前景，浅色背景切换为深色前景，并通过轻量描边保持边界。': 'Keep the material as a translucent white layer. Use white foreground content on dark backgrounds, switch to dark foreground content on light backgrounds, and preserve boundaries with a subtle outline.',
     '材质角色与 Token': 'Material Roles and Tokens',
     '角色 / Token': 'Role / Token',
     '视觉定义': 'Visual Definition',
     '推荐场景': 'Recommended Use',
     '限制': 'Constraints',
+    '深色背景 38% / 浅色背景 72%；blur 12': 'Dark background 38% / Light background 72%; blur 12',
+    '深色背景 28% / 浅色背景 56%；blur 24': 'Dark background 28% / Light background 56%; blur 24',
+    '深色背景 18% / 浅色背景 42%；blur 14': 'Dark background 18% / Light background 42%; blur 14',
+    '深色背景 10% / 浅色背景 28%；blur 8': 'Dark background 10% / Light background 28%; blur 8',
     '浅色 82% / 深色 78%；blur 12': 'Light 82% / Dark 78%; blur 12',
     '数据密集卡片、设置页、长文本、告警详情': 'Data-dense cards, settings, long-form text, and alert details',
     '默认内容材质；复杂背景下优先保证可读性': 'Default content material; prioritize readability on complex backgrounds',
@@ -510,7 +518,7 @@ const HAIER_NAV_LABEL_EN = {
     '灯光、触觉与听觉反馈规范。': 'Lighting, haptic, and audio feedback guidelines.',
     'AI 视觉标准与使用标准。': 'AI visual standards and usage guidelines.',
     '强制标准、UT、Figma 与验收机制。': 'Mandatory standards, UT, Figma, and acceptance mechanisms.',
-    'Haier Design 1.0.0 不仅是一套跨设备的 UI 库，更是一套连接屏幕显示、物理触觉、环境灯光与三维声音的“多感官编排系统”。我们以简约、清爽为基调，通过高度模块化的工程手段，赋能全品类家电产品的智能化进化。': 'Haier Design 1.0.0 is not only a cross-device UI library, but also a multisensory orchestration system connecting screen display, physical haptics, ambient lighting, and spatial sound. With a simple and fresh visual tone, highly modular engineering enables intelligent evolution across appliance categories.',
+    'Haier Design 1.0.2 不仅是一套跨设备的 UI 库，更是一套连接屏幕显示、物理触觉、环境灯光与三维声音的“多感官编排系统”。我们以简约、清爽为基调，通过高度模块化的工程手段，赋能全品类家电产品的智能化进化。': 'Haier Design 1.0.2 is not only a cross-device UI library, but also a multisensory orchestration system connecting screen display, physical haptics, ambient lighting, and spatial sound. With a simple and fresh visual tone, highly modular engineering enables intelligent evolution across appliance categories.',
     'Figma 中的标准预制件与组装逻辑。': 'Standard prefabs and assembly logic in Figma.',
     'Button 按钮、悬浮按钮、图标按钮等。': 'Buttons, floating buttons, icon buttons, and more.',
     'Checkbox、Radio、Switch、Slider 等筛选与控制组件。': 'Selection and control components such as checkbox, radio, switch, and slider.',
@@ -1382,7 +1390,7 @@ const HAIER_NAV_LABEL_EN = {
         ? 'sidebar-nav-item nav-child block px-4 py-2 text-sm font-normal text-gray-600 hover:text-blue-600 pl-7 rounded-r-lg transition-colors'
         : 'sidebar-nav-item block px-4 py-2.5 text-sm font-normal text-gray-700 hover:text-blue-600 rounded-xl transition-colors';
 
-    return `<a href="${normalizeHref(item.href)}" class="${baseClasses}${isCurrentPage ? ' active' : ''}" data-nav-id="${item.id || ''}" data-nav-page="${item.page || ''}">${childPrefix}${navLabel(item.label)}</a>`;
+    return `<a href="${normalizeHref(item.href)}" class="${baseClasses}${isCurrentPage ? ' active' : ''}" data-nav-id="${item.id || ''}" data-nav-page="${item.page || ''}"${isCurrentPage ? ' aria-current="page"' : ''}>${childPrefix}${navLabel(item.label)}</a>`;
   };
 
   const groupTemplate = (group) => {
@@ -1406,7 +1414,7 @@ const HAIER_NAV_LABEL_EN = {
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
       </button>
       <a href="index.html" class="inline-block" aria-label="Haier NEXT UX Guideline 首页"><img class="haier-brand-lockup" src="assets/brand/haier-logo.svg" alt="Haier"></a>
-      <p class="haier-brand-tagline text-sm">NEXT UX Guideline 1.0.0</p>
+      <p class="haier-brand-tagline text-sm">NEXT UX Guideline 1.0.2</p>
     </div>
     <nav class="flex-1 px-4 pb-12 space-y-1" aria-label="章节目录">
       ${HAIER_NAV_GROUPS.map(groupTemplate).join('')}
@@ -1488,6 +1496,7 @@ const HAIER_NAV_LABEL_EN = {
     sidebar.setAttribute('aria-hidden', String(!open && window.innerWidth < 768));
     mobileButton?.setAttribute('aria-expanded', String(open));
     backdrop?.classList.toggle('hidden', !open);
+    if (open) requestAnimationFrame(() => revealNavLink(sidebar.querySelector('.sidebar-nav-item.active')));
   };
 
   mobileButton?.setAttribute('aria-controls', 'sidebar');
@@ -1496,11 +1505,34 @@ const HAIER_NAV_LABEL_EN = {
   backdrop?.addEventListener('click', () => setMenuOpen(false));
 
   const navLinks = sidebar.querySelectorAll('.sidebar-nav-item');
-  const setActiveNavLink = (activeLink) => {
+  const revealNavLink = (link) => {
+    if (!link || !sidebar.clientHeight) return;
+
+    const sidebarRect = sidebar.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    const targetScrollTop =
+      sidebar.scrollTop +
+      linkRect.top -
+      sidebarRect.top -
+      (sidebar.clientHeight - linkRect.height) / 2;
+
+    sidebar.scrollTop = Math.max(0, targetScrollTop);
+  };
+  const setActiveNavLink = (activeLink, reveal = false) => {
     navLinks.forEach((link) => {
       link.classList.toggle('active', link === activeLink);
+      if (link === activeLink) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
     });
+    if (reveal) requestAnimationFrame(() => revealNavLink(activeLink));
   };
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => revealNavLink(sidebar.querySelector('.sidebar-nav-item.active')));
+  });
 
   navLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
@@ -1513,7 +1545,7 @@ const HAIER_NAV_LABEL_EN = {
         if (target) {
           event.preventDefault();
           scrollSpyPausedUntil = Date.now() + 300;
-          setActiveNavLink(link);
+          setActiveNavLink(link, true);
           const previousScrollBehavior = mainContent.style.scrollBehavior;
           mainContent.style.scrollBehavior = 'auto';
           mainContent.scrollTop = Math.max(target.offsetTop - 40, 0);
@@ -1537,7 +1569,7 @@ const HAIER_NAV_LABEL_EN = {
         const initialLink = sidebar.querySelector(`[data-nav-id="${currentHash}"]`);
         if (initialLink) {
           scrollSpyPausedUntil = Date.now() + 300;
-          setActiveNavLink(initialLink);
+          setActiveNavLink(initialLink, true);
         }
       });
     }

@@ -1,0 +1,14 @@
+{
+  "mode": "built-in image_gen",
+  "reference": "fabric-care-user.png",
+  "images": [
+    {
+      "file": "fabric-care-towels.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: 16:9 landscape image for a fabric-care carousel. Input image is a STYLE REFERENCE only. Generate ONE new photograph, not a collage. Match its soft diffuse natural window light, warm ivory whites, pale oak, muted sage green, subtle beige-gray, airy uncluttered home setting, shallow depth of field and tactile high-end photographic texture. Scene: a neatly folded stack of thick sage-green and warm ivory cotton bath towels on a pale oak counter, with a loosely folded cream cotton throw draping softly beside them, a softly blurred white ceramic pot with green foliage in the background. No plush animal in this new shot. Close lifestyle photography, believable cotton loops and fibers, gentle shadows, calm fresh clean mood. Compose as a wide 16:9 photograph, main objects on the right half with quiet softly blurred space on the left, similar scale and camera height to the reference. No text, logo, watermark, illustration, CGI or artificial shine. This is a distinct companion photograph in the same visual series."
+    },
+    {
+      "file": "fabric-care-basket.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: 16:9 landscape photograph for a fabric-care carousel. Input image is a STYLE REFERENCE only. Generate ONE new photograph, not a collage. Match the supplied reference's warm ivory and off-white, muted sage green, pale natural oak and soft beige tones, delicate photographic fibers, gentle diffuse daylight, shallow depth of field, quiet fresh premium home mood. Scene: a light natural woven laundry basket on a pale oak tabletop, containing softly folded ivory cotton baby clothes and a muted sage-green cotton blanket, with one soft ivory sleeve draping naturally over the basket edge. A very softly blurred small green plant in a white pot in the airy cream background. No plush rabbit, no towels stack: distinct subject from the original and its companion. Capture actual fabric weave, soft folds, wicker grain and subtle shadows without exaggerated texture. Main subject toward center-right, calm negative space to the left. Wide horizontal 16:9 composition, natural eye-level close lifestyle photography, consistent camera distance and softness with the reference. No people, text, logo, watermark, cartoon, CGI or artificial shine."
+    }
+  ]
+}
