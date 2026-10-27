@@ -27,3 +27,12 @@
 
 /* Triple the spacing between the three appearance examples. */
 .badge-doc .bd-strip{gap:96px}@media(max-width:767px){.badge-doc .bd-strip{gap:60px}}
+
+/* Match the stepper component specification tables. */
+.badge-doc .bd-table-wrap{overflow-x:auto;border:1px solid #e5e7eb;border-radius:16px;background:rgba(255,255,255,.65)}
+.badge-doc .bd-table-wrap table{border-collapse:collapse;width:100%;min-width:680px;font-size:13px;line-height:1.7}
+.badge-doc .bd-table-wrap th,.badge-doc .bd-table-wrap td{padding:14px 18px;text-align:left;border-bottom:1px solid #E1E7EE;vertical-align:top}
+.badge-doc .bd-table-wrap thead th{font-weight:600;color:#596774;background:#F5F8FC}
+.badge-doc .bd-table-wrap tbody th{font-weight:400;color:#666666;width:auto}
+.badge-doc .bd-table-wrap tr:last-child>*{border-bottom:0}
+.badge-doc .bd-anchor>.bd-dot,.badge-doc .bd-strip .bd-dot{width:8px;height:8px}

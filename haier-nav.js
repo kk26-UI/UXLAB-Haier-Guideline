@@ -390,7 +390,7 @@ const HAIER_NAV_LABEL_EN = {
     '必须配合背景遮罩；同屏只能有一个': 'Must use a backdrop; only one may appear on screen',
     '光源与颜色': 'Light Source and Color',
     '统一使用顶部环境光，Y 轴向下偏移；中性色阴影以': 'Use a consistent overhead ambient light with a downward Y-axis offset; use',
-    '为基色。深色模式降低黑色阴影效果，改用 1px 浅色轮廓保持边界。': 'as the neutral shadow base. In dark mode, reduce black shadow and use a 1px light outline to preserve boundaries.',
+    '为基色。深色模式降低黑色阴影效果，改用 1dp 浅色轮廓保持边界。': 'as the neutral shadow base. In dark mode, reduce black shadow and use a 1dp light outline to preserve boundaries.',
     '交互变化': 'Interaction Changes',
     '按下时降低一级或缩短阴影，悬停最多提高一级；层级变化需与位移或缩放方向一致，持续时间遵循动态效果规范。': 'On press, lower the elevation by one level or shorten the shadow; on hover, raise it by no more than one level. Elevation changes must match movement or scale direction and follow the motion guidelines.',
     '使用与验收': 'Usage and Validation',

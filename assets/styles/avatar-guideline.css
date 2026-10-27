@@ -5,3 +5,8 @@
 
 /* Match optical bounds and rendered stroke widths across type examples. */
 .avatar-doc .av-types .av-face{width:56px;height:56px}.avatar-doc .av-types .av-face svg{width:40px;height:40px;stroke:currentColor;fill:none}.avatar-doc .av-types .av-face svg.av-home-icon{width:36px;height:36px;stroke:currentColor;fill:none}.avatar-doc .av-types .av-face svg path,.avatar-doc .av-types .av-face svg circle{stroke:currentColor;stroke-width:1.5px;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+
+/* Match Steps state examples while retaining the two-column type layout. */
+.avatar-doc .av-types{gap:16px}.avatar-doc .av-types>.av-type{padding:20px;border:1px solid #eee;border-radius:12px;background:rgba(255,255,255,.6)}.avatar-doc .av-types>.av-type h3{font-size:12px;font-weight:400;line-height:18px;color:#6b7280;margin:0 0 12px}.av-type-example{display:flex;align-items:center;min-height:56px}.avatar-doc .av-types>.av-type>p{margin:12px 0 0;font-size:12px;line-height:20px;color:#6b7280}
+/* Match the Steps component specification table. */
+.avatar-doc .av-table-wrap{border:1px solid #e5e7eb;border-radius:16px;background:rgba(255,255,255,.65);overflow-x:auto}.avatar-doc .av-table-wrap table{border-collapse:collapse;width:100%;min-width:680px;font-size:13px;line-height:1.7}.avatar-doc .av-table-wrap th,.avatar-doc .av-table-wrap td{padding:14px 18px;text-align:left;border-bottom:1px solid #e1e7ee;vertical-align:top;font-weight:400}.avatar-doc .av-table-wrap thead th{font-weight:600;color:#596774;background:#f5f8fc}.avatar-doc .av-table-wrap tbody th{width:auto;white-space:nowrap}.avatar-doc .av-table-wrap tbody tr:last-child>*{border-bottom:0}
