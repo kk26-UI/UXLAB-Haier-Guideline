@@ -1559,6 +1559,32 @@ const HAIER_NAV_LABEL_EN = {
   });
 
   initNavigationStyleOverrides();
+  // Keep the research resource in one place for every guideline page.
+  const hideUserTestingLink = ['index.html', 'assets.html', 'changelog.html'].includes(currentPage) || HAIER_NAV_GROUPS
+    .find((group) => group.id === 'principles').items.some((item) => item.page === currentPage);
+  document.querySelectorAll('footer').forEach((footer) => {
+    if (hideUserTestingLink || !footer.textContent.includes('Haier Design Lab') || footer.querySelector('[data-user-testing-link]')) return;
+    const resource = document.createElement('div');
+    resource.style.marginBottom = '20px';
+    const link = document.createElement('a');
+    link.dataset.userTestingLink = '';
+    link.href = 'https://ihaier.feishu.cn/wiki/We1qwxkgCi9uNykKSfZc2rcmncf?from=from_copylink&sheet=Eiqnn1';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = currentLanguage === 'zh' ? '用户测试数据 ↗' : 'User testing data ↗';
+    link.setAttribute('aria-label', currentLanguage === 'zh' ? '用户测试数据（在新标签页打开）' : 'User testing data (opens in a new tab)');
+    link.className = 'haier-user-testing-link';
+    resource.appendChild(link);
+    footer.prepend(resource);
+  });
+  const resourceStyle = document.createElement('style');
+  resourceStyle.textContent = `
+    .haier-user-testing-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: #2283E2; font-size: 14px; font-weight: 500; text-decoration: none; border-radius: 8px; transition: color .2s, background-color .2s; }
+    .haier-user-testing-link:hover { color: #1766b3; background-color: rgba(34,131,226,.08); text-decoration: underline; text-underline-offset: 4px; }
+    .haier-user-testing-link:focus-visible { outline: 2px solid #2283E2; outline-offset: 4px; }
+    @media (prefers-reduced-motion: reduce) { .haier-user-testing-link { transition: none; } }
+  `;
+  document.head.appendChild(resourceStyle);
   initLanguageSwitcher();
 
   if (mainContent && currentHash) {
