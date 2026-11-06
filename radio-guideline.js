@@ -39,7 +39,7 @@ function renderRadioGuideline(language) {
       t('同组只放同一维度且彼此互斥的选项','Keep each group to one dimension of mutually exclusive options'),
       t('保留当前选中项，并直接说明禁用原因','Preserve the current selection and explain disabled options directly'),
       t('使用独立按钮启动程序或提交设置','Use a separate button to start a program or submit settings')
-    ],true)}</ul></article><article class="bg-red-50/80 border border-red-100 rounded-3xl p-6 md:p-8"><h2 class="text-xl font-bold text-red-800 mb-5">${t('避免','Avoid')}</h2><ul class="space-y-3">${list([
+    ],true)}</ul></article><article class="bg-red-50/80 border border-red-100 rounded-3xl p-6 md:p-8"><h2 class="text-xl font-bold text-red-800 mb-5">${t('避免',"Don't")}</h2><ul class="space-y-3">${list([
       t('将程序、温度和附加功能混在同一组','Mix programs, temperatures, and optional features in one group'),
       t('点击选项后立即启动高风险设备任务','Start a high-risk device task immediately after selection'),
       t('使用半选态或无提示地替换用户选择','Use an indeterminate state or silently replace the user’s choice')

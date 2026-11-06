@@ -247,13 +247,7 @@ html[lang="en"] #main-content .ia-seven-item h3::before {
   font-size: 14px; line-height: 1.75; font-weight: 400; color: #667085;
 }
 
-/* Place height category labels at the right edge of their example groups. */
-#main-content #scene-type-02 .scene-category-header {
-  justify-content: flex-end;
-}
-#main-content #scene-type-02 .scene-category-header h3 {
-  text-align: right;
-}
+
 /* Button guidance uses neutral text, borderless surfaces and consistent hierarchy. */
 #main-content .led-pane[data-led-pane="button"] section.glass-panel { border: 0; }
 #main-content .led-pane[data-led-pane="button"] .button-type-title {
@@ -447,14 +441,28 @@ body.led-guideline-page #main-content .led-pane[data-led-pane="button"] .button-
   border-radius: 4px;
 }
 
-/* Align prototype labels to the existing diagram edge without resizing images. */
+/* Prototype category subtitles align left with the shared blue marker. */
 body.led-guideline-page #main-content .led-pane[data-led-pane="scene"] .scene-category-header {
-  justify-content: flex-end;
-  text-align: right;
-  padding-right: 28px;
+  justify-content: flex-start;
+  gap: 10px;
+  padding-left: 20px;
+  padding-right: 0;
 }
+body.led-guideline-page #main-content .led-pane[data-led-pane="scene"] .scene-category-header h3 {
+  text-align: left;
+}
+body.led-guideline-page #main-content .led-pane[data-led-pane="scene"] .scene-category-header::before {
+  content: "";
+  display: block;
+  width: 4px;
+  height: 22px;
+  flex: 0 0 4px;
+  background: #2283E2;
+  border-radius: 4px;
+}
+
 @media (max-width:767px) {
   body.led-guideline-page #main-content .led-pane[data-led-pane="scene"] .scene-category-header {
-    padding-right: 24px;
+    padding-left: 16px;
   }
 }

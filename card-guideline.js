@@ -28,7 +28,7 @@ function renderCardGuideline(language) {
  t('卡片边缘对齐栅格，跨列与沟槽保持一致','Align card edges to the grid with consistent spans and gutters'),
  t('加载、空白和异常时保留布局，并说明原因与下一步','Preserve layout through loading, empty, and error states; explain the cause and next step'),
  t('在目标 TFT 上验证可读性、触控热区与长文本','Validate readability, touch targets, and long text on the target TFT')
-].map(x=>`<li class="flex gap-3 text-sm leading-7 text-gray-600"><span class="text-emerald-600 font-bold" aria-hidden="true">✓</span><span>${x}</span></li>`).join('')}</ul></article><article class="bg-red-50/80 border border-red-100 rounded-3xl p-6 md:p-8"><h2 class="text-xl font-bold text-red-800 mb-5">${t('避免','Avoid')}</h2><ul class="space-y-3">${[
+].map(x=>`<li class="flex gap-3 text-sm leading-7 text-gray-600"><span class="text-emerald-600 font-bold" aria-hidden="true">✓</span><span>${x}</span></li>`).join('')}</ul></article><article class="bg-red-50/80 border border-red-100 rounded-3xl p-6 md:p-8"><h2 class="text-xl font-bold text-red-800 mb-5">${t('避免',"Don't")}</h2><ul class="space-y-3">${[
  t('将无关内容堆入同一卡片，或反复嵌套容器','Combine unrelated subjects in one card or repeatedly nest containers'),
  t('随意改变卡片宽度，让边缘侵入沟槽或超出栅格','Use arbitrary widths that intrude into gutters or extend beyond the grid'),
  t('用透明度表达离线，或只用颜色区分状态','Fade the whole card to indicate offline status or rely on color alone'),

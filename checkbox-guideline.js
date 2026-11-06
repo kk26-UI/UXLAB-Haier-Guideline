@@ -43,7 +43,7 @@ ${section('selection',t('全选与数量规则','Select-all and count rules'),''
   t('将可独立组合的功能作为选项','Use options for independently combinable features'),
   t('用半选状态表示组内部分选中','Use partial state when some group items are selected'),
   t('明确全选范围、数量限制与禁用原因','Explain select-all scope, selection limits, and disabled reasons')
-])}</ul></article><article class="bg-red-50/80 border border-red-100 rounded-3xl p-6 md:p-8"><h2 class="text-xl font-bold text-red-800 mb-5">${t('避免','Avoid')}</h2><ul class="space-y-3">${list([
+])}</ul></article><article class="bg-red-50/80 border border-red-100 rounded-3xl p-6 md:p-8"><h2 class="text-xl font-bold text-red-800 mb-5">${t('避免',"Don't")}</h2><ul class="space-y-3">${list([
   t('用复选框选择互斥程序','Use checkboxes for mutually exclusive programs'),
   t('默认勾选高能耗附加功能','Preselect energy-intensive extras'),
   t('用半选表示待执行，或通过全选修改禁用项','Use partial state for pending actions or change disabled items via Select all')

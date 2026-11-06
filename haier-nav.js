@@ -53,10 +53,10 @@ const HAIER_NAV_GROUPS = [
       { label: '头像', href: 'component_avatar.html', page: 'component_avatar.html', child: true },
       { label: '图片轮播', href: 'component_image.html', page: 'component_image.html', child: true },
       { label: '徽标', href: 'component_badge.html', page: 'component_badge.html', child: true },
-      { label: '3.6 反馈与浮层', id: 'components-feedback', disabled: true },
-      { label: '对话框', href: 'component_dialog_modal.html', page: 'component_dialog_modal.html', child: true },
+      { label: '3.6 反馈', id: 'components-feedback', disabled: true },
+      { label: '全局提示', href: 'component_dialog_modal.html', page: 'component_dialog_modal.html', child: true },
       { label: '抽屉', href: 'component_bottom_sheet.html', page: 'component_bottom_sheet.html', child: true },
-      { label: '消息提示', href: 'component_snackbar_toast.html', page: 'component_snackbar_toast.html', child: true },
+      { label: '通知提醒', href: 'component_snackbar_toast.html', page: 'component_snackbar_toast.html', child: true },
       { label: '弹窗', href: 'component_tooltip.html', page: 'component_tooltip.html', child: true },
       { label: '进度条', href: 'component_progress_indicator.html', page: 'component_progress_indicator.html', child: true },
     ],
@@ -157,11 +157,11 @@ const HAIER_NAV_LABEL_EN = {
   '3.5.3 头像': '3.5.3 Avatar',
   '3.5.4 图片轮播': '3.5.4 Image Carousel',
   '3.5.5 徽标': '3.5.5 Badge',
-  '3.6 反馈与浮层': '3.6 Feedback & Overlays',
-  '3.6.1 对话框': '3.6.1 Dialog / Modal',
-  '3.6.2 抽屉': '3.6.2 Bottom Sheet',
-  '3.6.3 消息提示': '3.6.3 Snackbar / Toast',
-  '3.6.4 弹窗': '3.6.4 Tooltip',
+  '3.6 反馈': '3.6 Feedback',
+  '3.6.1 全局提示': '3.6.1 Message',
+  '3.6.2 抽屉': '3.6.2 Drawer',
+  '3.6.3 通知提醒': '3.6.3 Notification',
+  '3.6.4 弹窗': '3.6.4 Popup',
   '3.6.5 进度条': '3.6.5 Progress Indicator',
   '按钮': 'Buttons',
   '开关': 'Switch / Toggle',
@@ -183,10 +183,10 @@ const HAIER_NAV_LABEL_EN = {
   '图片': 'Image',
   '图片轮播': 'Image Carousel',
   '徽标': 'Badge',
-  '对话框': 'Dialog / Modal',
-  '抽屉': 'Bottom Sheet',
-  '消息提示': 'Snackbar / Toast',
-  '弹窗': 'Tooltip',
+  '全局提示': 'Message',
+  '抽屉': 'Drawer',
+  '通知提醒': 'Notification',
+  '弹窗': 'Popup',
   '进度条': 'Progress Indicator',
   '4. 硬件 Hardware': '4. Hardware',
   '4.1 TFT 屏幕': '4.1 TFT Screens',
@@ -1558,9 +1558,70 @@ const HAIER_NAV_LABEL_EN = {
     });
   });
 
+  const initPracticeComparisons = () => {
+    const style = document.createElement('style');
+    style.textContent = `
+      #main-content .guideline-practice-pair { display:grid!important; grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:24px!important; }
+      #main-content .guideline-practice-card { min-width:0; padding:24px!important; border:1px solid #e1e7ee!important; border-radius:16px!important; background:rgba(255,255,255,.55)!important; box-shadow:none!important; }
+      #main-content .guideline-practice-card > :is(h2,h3,h4,h5) { font-size:20px!important; font-weight:700!important; line-height:1.5!important; color:#1d1d1f!important; margin:0!important; }
+      #main-content .guideline-practice-card ul { padding:0!important; list-style:none!important; margin:16px 0 0!important; }
+      #main-content .guideline-practice-card li { display:block!important; font-size:14px!important; line-height:1.9!important; color:#596574!important; margin-top:10px!important; }
+      #main-content .guideline-practice-card li::before { content:'✓'!important; color:#26a870!important; margin-right:10px; }
+      #main-content .guideline-practice-avoid li::before { content:'×'!important; color:#f23d3d!important; }
+      #main-content .guideline-practice-card .guideline-practice-marker { display:none!important; }
+      @media(max-width:600px) { #main-content .guideline-practice-pair { grid-template-columns:minmax(0,1fr)!important; gap:16px!important; } }
+    `;
+    document.head.appendChild(style);
+    const positive = /^(推荐|正确|Do|Recommended)$/i;
+    const negative = /^(错误|避免|不推荐|不应该|Don't|Don’t|Avoid|Incorrect)$/i;
+    const update = () => {
+      if (!mainContent) return;
+      mainContent.querySelectorAll('h2,h3,h4,h5').forEach((heading) => {
+        const label = heading.textContent.trim();
+        if (!positive.test(label)) return;
+        const card = heading.parentElement;
+        const pair = card?.parentElement;
+        if (!pair || pair.children.length !== 2) return;
+        const other = [...pair.children].find((element) => element !== card);
+        const otherHeading = other?.querySelector('h2,h3,h4,h5');
+        if (!otherHeading || !negative.test(otherHeading.textContent.trim())) return;
+        pair.classList.add('guideline-practice-pair');
+        card.classList.add('guideline-practice-card');
+        other.classList.add('guideline-practice-card', 'guideline-practice-avoid');
+        [[heading, '推荐', 'Do'], [otherHeading, '避免', "Don't"]].forEach(([title, zh, en]) => {
+          title.setAttribute('data-i18n-zh', zh);
+          title.setAttribute('data-i18n-en', en);
+          const text = currentLanguage === 'zh' ? zh : en;
+          if (title.textContent !== text) title.textContent = text;
+        });
+        [card, other].forEach((element) => {
+          element.querySelectorAll('li').forEach((item) => {
+            const first = item.firstChild;
+            if (first?.nodeType === Node.TEXT_NODE && /^\s*[✓✔×✕✗]\s*/.test(first.textContent)) {
+              first.textContent = first.textContent.replace(/^\s*[✓✔×✕✗]\s*/, '');
+            }
+          });
+          element.querySelectorAll('li > span:first-child').forEach((marker) => {
+            if (/^[✓✔×✕✗]$/.test(marker.textContent.trim())) marker.classList.add('guideline-practice-marker');
+          });
+        });
+      });
+    };
+    update();
+    if (mainContent) {
+      const observer = new MutationObserver(() => {
+        observer.disconnect();
+        update();
+        observer.observe(mainContent, { childList:true, subtree:true });
+      });
+      observer.observe(mainContent, { childList:true, subtree:true });
+    }
+  };
+
   initNavigationStyleOverrides();
+  initPracticeComparisons();
   // Keep the research resource in one place for every guideline page.
-  const hideUserTestingLink = ['index.html', 'assets.html', 'changelog.html'].includes(currentPage) || HAIER_NAV_GROUPS
+  const hideUserTestingLink = ['index.html', 'components.html', 'assets.html', 'changelog.html'].includes(currentPage) || HAIER_NAV_GROUPS
     .find((group) => group.id === 'principles').items.some((item) => item.page === currentPage);
   document.querySelectorAll('footer').forEach((footer) => {
     if (hideUserTestingLink || !footer.textContent.includes('Haier Design Lab') || footer.querySelector('[data-user-testing-link]')) return;
