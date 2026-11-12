@@ -3,161 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n-zh="Haier Design | 资产与推行" data-i18n-en="Haier Design | Assets & Governance">Haier Design | 资产与推行</title>
+    <title data-i18n-zh="Haier Design | 资产与推行" data-i18n-en="Haier Design | Assets &amp; Governance">Haier Design | 资产与推行</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --brand-primary: #2283E2;
-            --brand-light: #E5F0FF;
-            --text-main: #1D1D1F;
-            --text-secondary: #86868B;
-            --glass-bg: rgba(255, 255, 255, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.4);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #F5F7FA;
-            color: var(--text-main);
-            overflow-x: hidden;
-        }
-
-        /* 弥散光晕动画背景 */
-        .aura-background {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: -1;
-            overflow: hidden;
-            background: #F4F7FB;
-        }
-        .aura-blob {
-            position: absolute;
-            filter: blur(120px);
-            opacity: 0.6;
-            animation: float 20s infinite ease-in-out alternate;
-        }
-        .aura-blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #C4E0FF; animation-delay: 0s; }
-        .aura-blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: #E0E8FF; animation-delay: -5s; }
-        .aura-blob-3 { top: 40%; left: 60%; width: 40vw; height: 40vw; background: #E8F4FF; animation-delay: -10s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10%, 15%) scale(1.1); }
-        }
-
-        /* 磨玻璃质感卡片核心类 */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-            border-radius: 24px;
-        }
-
-        /* 侧边栏样式 */
-        .sidebar-nav-item {
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-        .sidebar-nav-item.active {
-            color: var(--brand-primary);
-            font-weight: 600;
-            border-left-color: var(--brand-primary);
-            background: linear-gradient(90deg, var(--brand-light) 0%, transparent 100%);
-        }
-
-        /* 代码与Token块 */
-        .token-block {
-            background: rgba(255,255,255,0.8);
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 0.85rem;
-        }
-        
-        /* 隐藏原生滚动条，美化 */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
-
-        /* Haier 纯文本 Logo 的基础样式 */
-        .haier-logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #2283E2; /* 海尔蓝 */
-            color: white;
-            font-family: Arial, Helvetica, sans-serif; /* 使用最基础的无衬线字体 */
-            font-weight: bold;
-            border-radius: 8px; /* 轻微圆角 */
-        }
+        :root { --brand-primary:#2283E2; --brand-light:#E5F0FF; --text-main:#1D1D1F; --text-secondary:#86868B; --glass-bg:rgba(255,255,255,.6); --glass-border:rgba(255,255,255,.4); }
+        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; background:#F5F7FA; color:var(--text-main); overflow-x:hidden; }
+        .aura-background { position:fixed; inset:0; z-index:-1; overflow:hidden; background:#F4F7FB; }
+        .aura-blob { position:absolute; filter:blur(120px); opacity:.6; animation:float 20s infinite ease-in-out alternate; }
+        .aura-blob-1 { top:-10%; left:-10%; width:50vw; height:50vw; background:#C4E0FF; }
+        .aura-blob-2 { bottom:-20%; right:-10%; width:60vw; height:60vw; background:#E0E8FF; animation-delay:-5s; }
+        .aura-blob-3 { top:40%; left:60%; width:40vw; height:40vw; background:#E8F4FF; animation-delay:-10s; }
+        @keyframes float { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(10%,15%) scale(1.1)} }
+        .glass-panel { background:var(--glass-bg); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid var(--glass-border); box-shadow:0 8px 32px rgba(0,0,0,.04); border-radius:24px; }
+        .sidebar-nav-item { transition:all .3s ease; border-left:3px solid transparent; }
+        .sidebar-nav-item.active { color:var(--brand-primary); font-weight:600; border-left-color:var(--brand-primary); background:linear-gradient(90deg,var(--brand-light) 0%,transparent 100%); }
+        .haier-logo-container { display:flex; align-items:center; justify-content:center; background-color:#2283E2; color:white; font-family:Arial,Helvetica,sans-serif; font-weight:bold; border-radius:8px; }
     </style>
 </head>
-
 <body class="antialiased">
-    <div class="aura-background">
-        <div class="aura-blob aura-blob-1"></div>
-        <div class="aura-blob aura-blob-2"></div>
-        <div class="aura-blob aura-blob-3"></div>
-    </div>
-    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center">
-        <div class="flex items-center">
-            <div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">
-                Haier
-            </div>
-            <h1 class="font-bold text-lg">Haier Design</h1>
-        </div>
-        <button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        </button>
-    </header>
-
+    <div class="aura-background"><div class="aura-blob aura-blob-1"></div><div class="aura-blob aura-blob-2"></div><div class="aura-blob aura-blob-3"></div></div>
+    <header class="md:hidden glass-panel rounded-none fixed top-0 w-full z-50 p-4 flex justify-between items-center"><div class="flex items-center"><div class="haier-logo-container w-10 h-10 mr-3 text-[14px]">Haier</div><h1 class="font-bold text-lg">Haier Design</h1></div><button id="mobile-menu-btn" class="p-2 bg-black/5 rounded-lg" aria-label="打开目录"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button></header>
     <div class="flex h-screen pt-16 md:pt-0">
-<aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
-<div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
-        <main class="flex-1 md:ml-72 p-6 md:p-12 lg:p-20 overflow-y-auto h-full scroll-smooth" id="main-content">
-            <section id="assets" class="mb-20 scroll-mt-10">
-                <h2 class="text-3xl font-bold mb-2" data-i18n-zh="8. 资产与推行" data-i18n-en="8. Assets & Governance">8. 资产与推行</h2>
-                <p class="text-gray-500 mb-8">确保规范能够落地并维持高统一度的执行手册。</p>
+        <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass-panel rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
+        <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+        <main class="flex-1 md:ml-72 p-6 md:p-10 lg:p-12 overflow-y-auto h-full scroll-smooth" id="main-content">
+            <div class="max-w-[1200px] mx-auto pb-24">
+<section id="assets-figma" class="mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900" data-i18n-zh="资产与推行" data-i18n-en="Assets &amp; Governance">资产与推行</h1>
+                    <p class="text-lg text-gray-500 max-w-3xl leading-relaxed" data-i18n-zh="集团内 Haier Design System 组件库的访问、订阅与分发规则。" data-i18n-en="Access, subscription, and distribution rules for the Haier Design System component library.">集团内 Haier Design System 组件库的访问、订阅与分发规则。</p>
+                </section>
 
-                <div id="assets-strict" class="glass-panel p-8 md:p-10 mb-8 scroll-mt-10 border-l-4 border-l-red-500">
-                    <h3 class="text-xl font-bold mb-4 text-red-600">8.1 强制规范标准 Mandatory Standards</h3>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-600 text-sm">
-                        <li><strong>返回按钮一致性：</strong> 固定采用 <code>Icon/Action/Back-Line</code>，严禁私自替换。</li>
-                        <li><strong>主操作区高度：</strong> 触屏底部确认 Button 热区高度严禁小于 <code>64pt</code>。</li>
-                        <li><strong>错误警示标准：</strong> 系统报错必须伴随 <code>L3</code> 级物理警告音。</li>
-                    </ul>
-                </div>
+                <section class="glass-panel p-6 md:p-10 mb-8">
+                    <h2 class="text-2xl font-bold mb-3 text-gray-900">Haier Design System Figma Kit</h2>
+                    <p class="text-sm text-gray-600 leading-6 whitespace-normal 2xl:whitespace-nowrap" data-i18n-zh="请先使用海尔企业邮箱注册并登录 Figma，再点击下方链接查看文件。若无法打开，请联系组件库管理员核验账号并开通查看权限。" data-i18n-en="Register for Figma with your Haier corporate email and sign in before opening the file below. If you cannot open it, contact the library administrator to verify your account and grant view access.">请先使用海尔企业邮箱注册并登录 Figma，再点击下方链接查看文件。若无法打开，请联系组件库管理员核验账号并开通查看权限。</p>
+                    <a class="inline-flex items-center mt-5 px-4 py-2 rounded-xl bg-[#2283E2] hover:bg-blue-600 text-white text-sm font-semibold transition-colors" href="https://www.figma.com/design/CZMR8B5Aapub17At81ZnfI/Haier-Design-System?node-id=22-23&amp;t=RvVb9oAWxTzw65oi-1" data-i18n-zh="打开 Haier Design System Figma Kit" data-i18n-en="Open the Haier Design System Figma Kit">打开 Haier Design System Figma Kit</a>
+                </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                    <div id="assets-ut" class="glass-panel p-6 scroll-mt-10">
-                        <h4 class="font-bold text-gray-800 mb-2">8.2 UT 数据推导</h4>
-                        <p class="text-xs text-gray-500">基于用户测试得到的设计改良数据看板。</p>
+                <section class="glass-panel p-6 md:p-10 mb-8">
+                    <h2 class="text-2xl font-bold mb-3 text-gray-900" data-i18n-zh="组件库权限管理" data-i18n-en="Component library permissions">组件库权限管理</h2>
+                    <div class="mt-6 divide-y divide-gray-200">
+                        <div class="grid gap-2 sm:grid-cols-[160px_minmax(0,1fr)] sm:gap-6 py-5">
+                            <h3 class="text-base font-semibold leading-6 mb-2 text-gray-900" data-i18n-zh="组件库订阅" data-i18n-en="Subscribe to the component library">组件库订阅</h3>
+                            <p class="text-sm text-gray-600 leading-6 max-w-3xl" data-i18n-zh="获得组件库查看权限后，在自己有编辑权限的集团项目文件中，通过 Assets → Libraries 添加已发布的 Haier Design System 组件库。收到更新提示时，先确认变更对项目的影响，再应用更新。" data-i18n-en="Once you have view access to the library, open Assets → Libraries in a group project file you can edit and add the published Haier Design System library. Review the impact on your project before applying library updates.">获得组件库查看权限后，在自己有编辑权限的集团项目文件中，通过 Assets → Libraries 添加已发布的 Haier Design System 组件库。收到更新提示时，先确认变更对项目的影响，再应用更新。</p>
+                        </div>
+                        <div class="grid gap-2 sm:grid-cols-[160px_minmax(0,1fr)] sm:gap-6 py-5">
+                            <h3 class="text-base font-semibold leading-6 mb-2 text-gray-900" data-i18n-zh="源文件编辑权限" data-i18n-en="Edit access to the source file">源文件编辑权限</h3>
+                            <p class="text-sm text-gray-600 leading-6 max-w-3xl" data-i18n-zh="查看和订阅组件库只需该库的查看权限。源文件编辑须占用付费坐席，仅向承担组件维护职责且经审批的人员开放。请勿随意申请编辑权限。" data-i18n-en="Viewing and subscribing to the library require only view access to the library itself. Editing the source file requires a paid seat and is reserved for approved library maintainers. Request edit access only for assigned maintenance work.">查看和订阅组件库只需该库的查看权限。源文件编辑须占用付费坐席，仅向承担组件维护职责且经审批的人员开放。请勿随意申请编辑权限。</p>
+                        </div>
+                        <div class="grid gap-2 sm:grid-cols-[160px_minmax(0,1fr)] sm:gap-6 py-5">
+                            <h3 class="text-base font-semibold leading-6 mb-2 text-gray-900" data-i18n-zh="发布与分发" data-i18n-en="Publishing and distribution">发布与分发</h3>
+                            <p class="text-sm text-gray-600 leading-6 max-w-3xl" data-i18n-zh="授权维护人员统一发布正式版本并附上变更说明。组件库管理员按项目需要将查看权限分配给集团内指定团队或成员，并在项目结束或人员离开时回收相应权限。集团内分发请使用官方链接，禁止公开分享、对外转发或另行发布组件库副本。" data-i18n-en="Authorized maintainers publish official releases with release notes. The library administrator grants view access to designated internal teams or members as needed and revokes it when projects end or members leave. Use the official link for internal distribution. Public sharing, external forwarding, and republishing copies of the library are prohibited.">授权维护人员统一发布正式版本并附上变更说明。组件库管理员按项目需要将查看权限分配给集团内指定团队或成员，并在项目结束或人员离开时回收相应权限。集团内分发请使用官方链接，禁止公开分享、对外转发或另行发布组件库副本。</p>
+                        </div>
                     </div>
-                    <div id="assets-figma" class="glass-panel p-6 scroll-mt-10">
-                        <h4 class="font-bold text-gray-800 mb-2">8.3 Figma 资产授权</h4>
-                        <p class="text-xs text-gray-500">集团内组件库的订阅与分发权限管理标准。</p>
-                    </div>
-                    <div id="assets-qa" class="glass-panel p-6 scroll-mt-10">
-                        <h4 class="font-bold text-gray-800 mb-2">8.4 统一度验收</h4>
-                        <p class="text-xs text-gray-500">开发走查与验证标准，确保落地 90% 还原度。</p>
-                    </div>
-                </div>
-            </section>
-
-            
-            
-            <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
-
+                </section>
+                <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>
+            </div>
         </main>
     </div>
-
     <script src="haier-nav.js"></script>
-    <script>
-        // 左侧导航由 haier-nav.js 统一渲染与管理。
-    </script>
+
 </body>
 </html>

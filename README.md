@@ -5,7 +5,7 @@
 ## 发布入口
 
 唯一正式入口是 [`index.html`](index.html)。GitHub Pages、静态托管平台和一念轻应用
-均应从该文件启动。`Haier_Guideline.html` 与 `haier_os_design_system.html` 仅用于兼容
+均应从该文件启动。`Haier_Guideline.html`、`haier_os_design_system.html` 与 `motion.html` 仅用于兼容
 历史链接，不是独立页面，也不应被识别为应用入口。
 
 ## 页面与资源约定

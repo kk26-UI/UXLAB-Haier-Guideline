@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Haier Design | 其它屏幕形态设计标准</title>
+  <title>Haier Design | 异形屏</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -14,10 +14,34 @@
     .haier-logo{display:flex;align-items:center;justify-content:center;background:#2283E2;color:#fff;font-weight:700;border-radius:8px}
     .chip{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;background:#E5F0FF;color:#1769B0;font-size:12px;font-weight:600}
     .rule{border-left:3px solid rgba(34,131,226,.38);padding-left:1.25rem}
-    .rule-card{background:rgba(255,255,255,.62);border:1px solid rgba(190,202,216,.58);border-radius:18px}.do-card,.dont-card{position:relative;overflow:hidden}.do-card:before,.dont-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}.do-card:before{background:#23A36D}.dont-card:before{background:#E05252}
-    .screen{position:relative;overflow:hidden;background:linear-gradient(145deg,#18283e,#0b1220);box-shadow:inset 0 0 0 1px #ffffff22,0 18px 45px #16365f24}
-    .safe{position:absolute;border:1px dashed #66b5ff;background:#2283e212;color:white;display:flex;align-items:center;justify-content:center;font-size:11px}
-    .spec-table th{font-size:12px;color:#667085;font-weight:600;text-align:left;padding:12px 16px;border-bottom:1px solid #E5E7EB}.spec-table td{padding:14px 16px;border-bottom:1px solid #EEF2F6;font-size:14px;vertical-align:top}.spec-table tr:last-child td{border-bottom:0}.metric{background:rgba(255,255,255,.62);border-radius:16px;padding:20px}.principle-grid{column-gap:2.5rem;row-gap:2.25rem}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:#D0D5DD;border-radius:8px}
+    .constraint-table{border-collapse:collapse;width:100%;min-width:640px;font-size:13px;line-height:1.7}
+    .constraint-table th,.constraint-table td{text-align:left;padding:14px 18px;border-bottom:1px solid #E1E7EE;vertical-align:middle}
+    .constraint-table thead th{font-weight:600;color:#596774;background:#F5F8FC}
+    .constraint-table tbody tr:last-child > *{border-bottom:0}
+    .screen{position:relative;overflow:hidden;background:#FFFFFF;border:1px solid #EEEEEE;box-shadow:none}
+    .safe{position:absolute;border:1px dashed #66b5ff;background:#2283e212;color:#374151;display:flex;align-items:center;justify-content:center;font-size:11px}
+    .example-group{display:grid;grid-template-columns:120px minmax(0,1fr);gap:28px;align-items:start}
+    .example-group > h3{margin:0}
+    .example-content{min-width:0}
+    .example-knob-content{container-type:inline-size}
+    .example-group + .example-group{margin-top:32px;padding-top:28px;border-top:1px solid #EEEEEE}
+    .example-media{display:grid;gap:20px;margin-top:20px;min-width:0}
+    .example-media figure{margin:0;min-width:0}
+    .example-media img{display:block;width:100%;max-width:100%;height:auto}
+    .example-media figcaption{margin-top:10px;font-size:12px;line-height:1.6;color:#667085;text-align:center}
+    .example-knobs{grid-template-columns:repeat(3,minmax(0,1fr));max-width:560px;margin-inline:auto}
+    .example-knobs img{max-width:160px;margin-inline:auto}
+    .example-knobs figure:first-child{
+      transform:translateX(clamp(-80px,calc((560px - 100cqw) / 2),0px));
+    }
+    .example-knobs figure:last-child{
+      transform:translateX(clamp(0px,calc((100cqw - 560px) / 2),80px));
+    }
+    .example-projections{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .example-projections img{background:#0F172A;border-radius:8px}
+    .example-strips{gap:20px}
+    @media(max-width:600px){.example-group{grid-template-columns:minmax(0,1fr);gap:12px}.example-media{gap:12px}.example-knobs img{max-width:120px}.example-projections{grid-template-columns:minmax(0,1fr);max-width:360px;margin-inline:auto}}
+    .metric{background:rgba(255,255,255,.62);border-radius:16px;padding:20px}.principle-grid{column-gap:2.5rem;row-gap:2.25rem}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:#D0D5DD;border-radius:8px}
   </style>
 </head>
 <body class="antialiased"><div class="aura"></div>
@@ -25,16 +49,16 @@
   <div class="flex h-screen pt-16 md:pt-0">
     <aside id="sidebar" class="hidden md:flex flex-col w-72 h-full fixed top-0 left-0 glass rounded-none border-r border-white/50 z-40 overflow-y-auto" aria-label="Haier Design 设计规范导航" aria-hidden="true"></aside>
     <div id="sidebar-backdrop" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 hidden md:hidden"></div>
-    <main class="flex-1 md:ml-72 p-6 md:p-12 lg:p-20 overflow-y-auto h-full">
+    <main id="main-content" class="flex-1 min-w-0 md:ml-72 p-6 md:p-12 lg:p-20 overflow-y-auto h-full">
       <article id="hw-other" class="max-w-6xl mx-auto pb-20">
         <header class="mb-10">
-          <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">其它屏幕形态</h1>
-          <p class="text-lg text-gray-500 max-w-3xl leading-8">面向异形屏、透明屏、投影、镜面屏、超宽与窄条屏等非标准显示载体，在真实空间中建立清晰、舒适、可控且可降级的体验。</p>
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">异形屏</h1>
+          <p class="text-lg text-gray-500 max-w-3xl leading-8">面向圆形屏、曲面屏、透明屏、投影、镜面屏、超宽与窄条屏等非标准显示载体，在真实空间中建立清晰、舒适、可控且可降级的体验。</p>
         </header>
 
         <section class="glass p-7 md:p-9 mb-8">
-          <h2 class="text-2xl font-bold mb-2">屏幕适应环境，内容服务任务</h2>
-          <p class="text-gray-600 leading-7 max-w-4xl">其它屏幕通常与家具、空间、材质和环境光共同构成体验。界面应根据真实使用环境控制亮度、对比度、信息密度和显示范围，优先呈现当前任务所需内容；进入更强视觉模式前须由用户主动触发，并始终提供明确退出路径。</p>
+          <h2 class="text-2xl font-bold mb-2">使用原则</h2>
+          <p class="text-gray-600 leading-7 max-w-4xl">异形屏通常与家具、空间、材质和环境光共同构成体验。界面应根据真实使用环境控制亮度、对比度、信息密度和显示范围，优先呈现当前任务所需内容。进入更强视觉模式前须由用户主动触发，并始终提供明确退出路径。</p>
           <div class="grid md:grid-cols-3 principle-grid mt-7">
             <div class="rule"><h3 class="font-semibold mb-2">环境共存</h3><p class="text-sm text-gray-600 leading-6">信息轻量出现，不遮蔽环境，不抢占持续注意力。</p></div>
             <div class="rule"><h3 class="font-semibold mb-2">局部聚焦</h3><p class="text-sm text-gray-600 leading-6">通过遮罩、亮度或声效，短时强调关键任务。</p></div>
@@ -43,15 +67,21 @@
         </section>
 
         <section class="glass p-7 md:p-9 mb-8">
-          <div class="mb-7"><h2 class="text-2xl font-bold mb-2">屏幕形态与首要约束</h2><p class="text-sm text-gray-500">先识别显示载体与真实环境限制，再选择合适的内容和交互模式。</p></div>
-          <div class="overflow-x-auto"><table class="spec-table w-full bg-white/60 rounded-2xl overflow-hidden"><thead><tr><th>屏幕形态</th><th>首要约束</th><th>验收重点</th></tr></thead><tbody>
-            <tr><td class="font-medium">异形与曲面屏</td><td>建立可见区、内容安全区与触达区，关键信息避开圆角、开孔和强曲率区域。</td><td>结构遮挡与不同视角下，核心内容完整可见。</td></tr>
-            <tr><td class="font-medium">透明与镜面屏</td><td>使用局部底板、描边和明暗自适应，不仅依赖颜色表达状态。</td><td>在明暗、纹理和动态背景上验证可读性。</td></tr>
-            <tr><td class="font-medium">投影界面</td><td>将表面纹理、环境光、投射角度和人体遮挡纳入布局。</td><td>投影偏移或被遮挡时，关键任务仍可完成。</td></tr>
-            <tr><td class="font-medium">超宽与窄条屏</td><td>按视线与任务分段重排内容，不整体缩小标准页面。</td><td>单一主任务清晰，跨区操作路径不过长。</td></tr>
-            <tr><td class="font-medium">低刷新与电子纸</td><td>减少连续动画和频繁刷新，用版式、图形与文字共同表达变化。</td><td>刷新过程中不产生可误解的残影或状态。</td></tr>
-            <tr><td class="font-medium">多屏与拼接屏</td><td>明确主次屏与跨屏连续性，关键控件避开拼缝。</td><td>断连时每块屏仍能表达必要状态。</td></tr>
-          </tbody></table></div>
+          <h2 id="usage-constraints" class="text-2xl font-bold mb-2">使用约束</h2>
+          <p class="text-sm text-gray-500 leading-6 mb-7">先识别显示载体与真实环境限制，再选择合适的内容和交互模式。</p>
+          <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white/65" role="region" aria-labelledby="usage-constraints" tabindex="0">
+            <table class="constraint-table">
+              <thead><tr><th scope="col">屏幕形态</th><th scope="col">首要约束</th><th scope="col">验收重点</th></tr></thead>
+              <tbody class="text-gray-600">
+                <tr><th scope="row" class="font-semibold text-gray-900">异形与曲面屏</th><td>建立可见区、内容安全区与触达区，关键信息避开圆角、开孔和强曲率区域。</td><td>结构遮挡与不同视角下，核心内容完整可见。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">透明与镜面屏</th><td>使用局部底板、描边和明暗自适应，不仅依赖颜色表达状态。</td><td>在明暗、纹理和动态背景上验证可读性。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">投影界面</th><td>将表面纹理、环境光、投射角度和人体遮挡纳入布局。</td><td>投影偏移或被遮挡时，关键任务仍可完成。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">超宽与窄条屏</th><td>按视线与任务分段重排内容，不整体缩小标准页面。</td><td>单一主任务清晰，跨区操作路径不过长。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">低刷新与电子纸</th><td>减少连续动画和频繁刷新，用版式、图形与文字共同表达变化。</td><td>刷新过程中不产生可误解的残影或状态。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">多屏与拼接屏</th><td>明确主次屏与跨屏连续性，关键控件避开拼缝。</td><td>断连时每块屏仍能表达必要状态。</td></tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section class="glass p-7 md:p-9 mb-8">
@@ -63,7 +93,6 @@
                 <li><b class="text-gray-900">2. 内容安全区</b>：在可见区内再次留白，承载标题、数值、告警与核心状态。</li>
                 <li><b class="text-gray-900">3. 交互安全区</b>：依据输入方式单独定义；可看见不代表可触达或可准确点击。</li>
               </ol>
-              <div class="rule rounded-r-xl p-4 mt-5 text-sm text-gray-600">所有安全区尺寸必须由真实硬件样机验证，不可仅依据渲染图推算。</div>
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div class="screen aspect-square rounded-[38%_16%_38%_16%]"><div class="safe inset-[18%] rounded-2xl">关键内容区</div></div>
@@ -73,50 +102,114 @@
         </section>
 
         <section class="glass p-7 md:p-9 mb-8">
-          <h2 class="text-2xl font-bold mb-7">使用边界</h2>
-          <div class="grid md:grid-cols-2 gap-5">
-            <div class="rule-card do-card p-6 pl-7"><p class="text-xs font-bold text-emerald-600 mb-4">DO</p><ul class="space-y-3 text-sm text-gray-600"><li>• 根据屏幕形态重新组织信息层级与阅读方向。</li><li>• 优先保留当前状态、核心任务和必要操作。</li><li>• 为边缘、拼缝、开孔和结构遮挡保留安全距离。</li><li>• 在真实材质、角度与环境光下验证设计。</li></ul></div>
-            <div class="rule-card dont-card p-6 pl-7"><p class="text-xs font-bold text-red-500 mb-4">DON’T</p><ul class="space-y-3 text-sm text-gray-600"><li>• 不要将标准页面直接等比缩小后套用。</li><li>• 不要为了填满画布而增加无关信息和装饰。</li><li>• 不要让边缘内容、高亮或动效持续争抢注意力。</li><li>• 不要假设可显示区域同时也是可触达区域。</li></ul></div>
+          <h2 id="comfort-control" class="text-2xl font-bold mb-2">舒适控制</h2>
+          <p class="text-sm text-gray-500 leading-6 mb-7">视觉表现不得妨碍用户理解环境、设备状态或退出当前体验。</p>
+          <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white/65" role="region" aria-labelledby="comfort-control" tabindex="0">
+            <table class="constraint-table">
+              <thead><tr><th scope="col">原则</th><th scope="col">设计要求</th><th scope="col">验收重点</th></tr></thead>
+              <tbody class="text-gray-600">
+                <tr><th scope="row" class="font-semibold text-gray-900">温和提示</th><td>优先使用轻微亮度、局部遮罩、尺寸和声音提示引导注意。</td><td>仅在告警等必要情境中增强提示强度。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">安全姿态</th><td>避免要求用户持续抬头、追逐信息或跨越障碍完成操作。</td><td>不同身高、站坐姿与移动状态下均可安全使用。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">可预测转换</th><td>模式、亮度和显示区域变化应平滑且可追踪。</td><td>无突发全屏、高亮闪烁或方向跳变。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">明确进退</th><td>沉浸、投影扩展或隐私显示由用户主动开启，并提供常驻退出控制。</td><td>返回、暂停和关闭的结果清晰且可恢复。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">减少动态</th><td>为视敏感用户提供静态替代，信息不依赖动画过程或单一感官。</td><td>关闭动效后仍能完整理解状态和结果。</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">真实状态可见</th><td>不得隐藏门体、加热、制冷、运转或安全等设备关键状态。</td><td>任何视觉模式下均能识别安全相关反馈。</td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
         <section class="glass p-7 md:p-9 mb-8">
-          <div class="mb-7"><h2 class="text-2xl font-bold mb-2">舒适度与用户控制</h2><p class="text-sm text-gray-500">视觉表现不得妨碍用户理解环境、设备状态或退出当前体验。</p></div>
-          <div class="overflow-x-auto"><table class="spec-table w-full bg-white/60 rounded-2xl overflow-hidden"><thead><tr><th>原则</th><th>设计要求</th><th>验收重点</th></tr></thead><tbody>
-            <tr><td class="font-medium">温和提示</td><td>优先使用轻微亮度、局部遮罩、尺寸和声音提示引导注意。</td><td>仅在告警等必要情境中增强提示强度。</td></tr>
-            <tr><td class="font-medium">安全姿态</td><td>避免要求用户持续抬头、追逐信息或跨越障碍完成操作。</td><td>不同身高、站坐姿与移动状态下均可安全使用。</td></tr>
-            <tr><td class="font-medium">可预测转换</td><td>模式、亮度和显示区域变化应平滑且可追踪。</td><td>无突发全屏、高亮闪烁或方向跳变。</td></tr>
-            <tr><td class="font-medium">明确进退</td><td>沉浸、投影扩展或隐私显示由用户主动开启，并提供常驻退出控制。</td><td>返回、暂停和关闭的结果清晰且可恢复。</td></tr>
-            <tr><td class="font-medium">减少动态</td><td>为视敏感用户提供静态替代，信息不依赖动画过程或单一感官。</td><td>关闭动效后仍能完整理解状态和结果。</td></tr>
-            <tr><td class="font-medium">真实状态可见</td><td>不得隐藏门体、加热、制冷、运转或安全等设备关键状态。</td><td>任何视觉模式下均能识别安全相关反馈。</td></tr>
-          </tbody></table></div>
-        </section>
-
-        <section class="glass overflow-hidden mb-8">
-          <div class="p-7 md:p-9 pb-4"><h2 class="text-2xl font-bold">环境与可读性基线</h2></div>
-          <div class="overflow-x-auto px-7 md:px-9 pb-8"><table class="spec-table w-full bg-white/60 rounded-2xl overflow-hidden"><thead><tr><th>验证维度</th><th>最低要求</th><th>推荐检查</th></tr></thead><tbody>
-            <tr><td><b>环境光</b></td><td>明暗环境中均能识别核心状态</td><td>逆光、反射、夜间与局部强光</td></tr>
-            <tr><td><b>观看位置</b></td><td>典型距离与偏角下信息层级稳定</td><td>站姿、坐姿、儿童视线与侧视角</td></tr>
-            <tr><td><b>背景变化</b></td><td>透明/投影内容在复杂背景上可辨</td><td>浅色、深色、纹理与移动背景</td></tr>
-            <tr><td><b>输入反馈</b></td><td>每次操作都有即时、可感知的确认</td><td>触控失败、误触、遮挡和戴手套</td></tr>
-            <tr><td><b>能力降级</b></td><td>断网、低亮、低刷新时保留核心任务</td><td>传感器异常、多屏断连与性能下降</td></tr>
-          </tbody></table></div>
+          <h2 id="environment-adaptation" class="text-2xl font-bold mb-7">环境适配</h2>
+          <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white/65" role="region" aria-labelledby="environment-adaptation" tabindex="0">
+            <table class="constraint-table">
+              <thead><tr><th scope="col">验证维度</th><th scope="col">最低要求</th><th scope="col">推荐检查</th></tr></thead>
+              <tbody class="text-gray-600">
+                <tr><th scope="row" class="font-semibold text-gray-900">环境光</th><td>明暗环境中均能识别核心状态</td><td>逆光、反射、夜间与局部强光</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">观看位置</th><td>典型距离与偏角下信息层级稳定</td><td>站姿、坐姿、儿童视线与侧视角</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">背景变化</th><td>透明/投影内容在复杂背景上可辨</td><td>浅色、深色、纹理与移动背景</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">输入反馈</th><td>每次操作都有即时、可感知的确认</td><td>触控失败、误触、遮挡和戴手套</td></tr>
+                <tr><th scope="row" class="font-semibold text-gray-900">能力降级</th><td>断网、低亮、低刷新时保留核心任务</td><td>传感器异常、多屏断连与性能下降</td></tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section class="glass p-7 md:p-9 mb-8">
-          <h2 class="text-2xl font-bold mb-4">感知、隐私与空间数据</h2>
-          <p class="text-sm text-gray-600 leading-6 max-w-4xl">当屏幕体验使用人体存在、视线、手势、房间结构、摄像头或麦克风数据时，只在功能确需时请求权限，并说明用途。公共或半公共空间默认隐藏个人信息；感知中断时不得让虚拟控件停留在可误解的状态，应平滑降级为明确的基础交互。</p>
+          <h2 class="text-2xl font-bold mb-6">设计示例</h2>
+          <section class="example-group">
+            <h3 class="text-sm font-semibold leading-6">圆形/旋钮</h3>
+            <div class="example-content example-knob-content">
+              <p class="text-sm text-gray-600 leading-6">将当前程序、时长和启动入口放在圆形屏幕的主要视区，边缘仅露出相邻程序作为切换提示。</p>
+              <div class="example-media example-knobs">
+                <figure>
+                  <img src="assets/examples/irregular-displays/knob-status.png" width="600" height="600" loading="lazy" decoding="sync" alt="圆形屏中央突出 45 分钟和智能运行状态" data-i18n-alt-zh="圆形屏中央突出 45 分钟和智能运行状态" data-i18n-alt-en="Round display highlighting 45 minutes and the smart cycle status">
+                  <figcaption>运行状态</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/examples/irregular-displays/knob-selection.png" width="600" height="600" loading="lazy" decoding="sync" alt="圆形屏居中显示衬衫程序卡片，底部为启动按钮" data-i18n-alt-zh="圆形屏居中显示衬衫程序卡片，底部为启动按钮" data-i18n-alt-en="Round display with the shirt cycle card centered above the Start button">
+                  <figcaption>程序选择</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/examples/irregular-displays/knob-detail.png" width="600" height="600" loading="lazy" decoding="sync" alt="圆形屏左侧显示衬衫程序和 60 分钟，右侧展示衬衫图像" data-i18n-alt-zh="圆形屏左侧显示衬衫程序和 60 分钟，右侧展示衬衫图像" data-i18n-alt-en="Round display showing the shirt cycle and its 60-minute duration beside a shirt image">
+                  <figcaption>程序详情</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="example-group">
+            <h3 class="text-sm font-semibold leading-6">超长/超窄</h3>
+            <div class="example-content">
+              <p class="text-sm text-gray-600 leading-6">横向组织模式、程序与设备状态，分别突出运行进度和当前选择。</p>
+              <div class="example-media example-strips">
+                <figure>
+                  <a href="assets/examples/irregular-displays/ultra-wide-status.png"><img src="assets/examples/irregular-displays/ultra-wide-status.png" width="3840" height="200" alt="超长窄条屏中央显示 45 分钟和智能运行状态，右侧为预计完成时间与启动按钮" data-i18n-alt-zh="超长窄条屏中央显示 45 分钟和智能运行状态，右侧为预计完成时间与启动按钮" data-i18n-alt-en="Ultra-wide strip display showing 45 minutes and the smart cycle status in the center, with the estimated finish time and Start button to the right"></a>
+                  <figcaption>运行状态</figcaption>
+                </figure>
+                <figure>
+                  <a href="assets/examples/irregular-displays/ultra-wide-strip.png"><img src="assets/examples/irregular-displays/ultra-wide-strip.png" width="3840" height="200" alt="超长窄条屏横排多个洗护程序，中央突出衬衫程序" data-i18n-alt-zh="超长窄条屏横排多个洗护程序，中央突出衬衫程序" data-i18n-alt-en="Ultra-wide strip display with a horizontal row of laundry cycles and the shirt cycle highlighted in the center"></a>
+                  <figcaption>程序选择</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="example-group">
+            <h3 class="text-sm font-semibold leading-6">投影/透明</h3>
+            <div class="example-content">
+              <p class="text-sm text-gray-600 leading-6">用局部底色突出剩余时长、运行状态或选中的程序，让主要信息与环境背景保持区分。</p>
+              <div class="example-media example-projections">
+                <figure>
+                  <img src="assets/examples/irregular-displays/projection-status.png" width="1920" height="600" loading="lazy" decoding="sync" alt="投影界面在局部蓝色底板上显示剩余时间、运行状态和预计完成时间" data-i18n-alt-zh="投影界面在局部蓝色底板上显示剩余时间、运行状态和预计完成时间" data-i18n-alt-en="Projected interface showing time remaining, cycle status, and estimated finish time on a local blue backplate">
+                  <figcaption>运行状态</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/examples/irregular-displays/projection-selection.png" width="1920" height="600" loading="lazy" decoding="sync" alt="投影界面底部排列洗护程序，选中的衬衫程序以描边卡片突出" data-i18n-alt-zh="投影界面底部排列洗护程序，选中的衬衫程序以描边卡片突出" data-i18n-alt-en="Projected interface with laundry cycles along the bottom and the selected shirt cycle highlighted in an outlined card">
+                  <figcaption>程序选择</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
         </section>
 
-        <section class="glass p-7 md:p-9">
-          <h2 class="text-2xl font-bold mb-6">设计与验收流程</h2>
-          <div class="grid md:grid-cols-5 gap-4">
-            <div class="bg-white/70 rounded-xl p-4"><b>01 边界建模</b><p class="text-xs text-gray-500 mt-2">可见区、触达区、安全区</p></div>
-            <div class="bg-white/70 rounded-xl p-4"><b>02 场景分级</b><p class="text-xs text-gray-500 mt-2">共存、聚焦、全幅模式</p></div>
-            <div class="bg-white/70 rounded-xl p-4"><b>03 重排与降级</b><p class="text-xs text-gray-500 mt-2">保留主任务和替代反馈</p></div>
-            <div class="bg-white/70 rounded-xl p-4"><b>04 样机验证</b><p class="text-xs text-gray-500 mt-2">真实材质、光照和角度</p></div>
-            <div class="bg-white/70 rounded-xl p-4"><b>05 极端验收</b><p class="text-xs text-gray-500 mt-2">断连、遮挡、误触与无障碍</p></div>
-          </div>
+        <section class="grid md:grid-cols-2 gap-8">
+          <article class="bg-emerald-50/80 border border-emerald-100 rounded-3xl p-6 md:p-8">
+            <h2 class="text-xl font-bold text-emerald-800 mb-5">推荐</h2>
+            <ul>
+              <li>根据屏幕形态重新组织信息层级与阅读方向。</li>
+              <li>优先保留当前状态、核心任务和必要操作。</li>
+              <li>为边缘、拼缝、开孔和结构遮挡保留安全距离。</li>
+              <li>在真实材质、角度与环境光下验证设计。</li>
+            </ul>
+          </article>
+          <article class="bg-red-50/80 border border-red-100 rounded-3xl p-6 md:p-8">
+            <h2 class="text-xl font-bold text-red-800 mb-5">避免</h2>
+            <ul>
+              <li>将标准页面直接等比缩小后套用。</li>
+              <li>为了填满画布而增加无关信息和装饰。</li>
+              <li>让边缘内容、高亮或动效持续争抢注意力。</li>
+              <li>假设可显示区域同时也是可触达区域。</li>
+            </ul>
+          </article>
         </section>
       </article>
       <footer class="pt-10 pb-16 text-center text-gray-400 text-sm"><p class="font-light">&copy; 2026 Haier Design Lab. Internal Confidential.</p></footer>

@@ -38,6 +38,61 @@
     .principle-card:nth-child(2) .case-figure:first-child .case-frame{background-image:url('assets/tft-principles/reachability-good.png')}
     .principle-card:nth-child(2) .case-figure:nth-child(2) .case-frame{background-image:url('assets/tft-principles/reachability-bad.png')}
     #hw-tft>section:nth-of-type(6) article{background:transparent}
+    .tft-hardware { margin-bottom: 2.5rem; }
+    .tft-card {
+      container-type: inline-size;
+      min-width: 0;
+      padding: clamp(1.25rem, 3vw, 2.25rem);
+      background: rgba(255, 255, 255, .76);
+      border: 1px solid #e1eaf3;
+      border-radius: 24px;
+    }
+    .tft-card + .tft-card { margin-top: 1rem; }
+    .tft-card-title { margin-bottom: 1.5rem; font-size: 1.25rem; line-height: 1.4; font-weight: 700; }
+    .tft-size-grid, .tft-ppi-grid, .tft-thresholds { display: grid; gap: 1rem; }
+    .tft-size-grid, .tft-ppi-grid { grid-template-columns: minmax(0, 1fr); }
+    .tft-size, .tft-ppi-group {
+      min-width: 0;
+      padding: 1rem;
+      border: 1px solid #e3ecf5;
+      border-radius: 14px;
+      background: #f8fafc;
+    }
+    .tft-screen-preview { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 6.25rem; place-items: center; margin-bottom: .75rem; }
+    .tft-screen-outline { max-width: 100%; background: #e5f0ff; border: 1px solid #9dcaf0; border-radius: 5px; }
+    .tft-size h4 { margin-bottom: .75rem; font-size: 1.125rem; font-weight: 700; }
+    .tft-size dt { font-size: .75rem; color: var(--muted); }
+    .tft-size dd { margin: .1rem 0 0; font-size: .875rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .tft-size dd + dt { margin-top: .5rem; }
+    .tft-ppi-group h4 { font-size: 1rem; font-weight: 700; }
+    .tft-ppi-group .tft-thresholds { margin-top: .85rem; }
+    .tft-thresholds dt { color: #1769b0; font-size: .75rem; font-weight: 700; }
+    .tft-thresholds dd { margin: .25rem 0 0; color: var(--ink); font-size: .875rem; line-height: 1.65; }
+    .tft-thresholds strong { font-weight: 700; font-variant-numeric: tabular-nums; }
+    .tft-thresholds p { margin: .25rem 0 0; color: var(--muted); font-size: .875rem; line-height: 1.65; }
+    .tft-color-table { border-collapse: collapse; table-layout: fixed; width: 100%; min-width: 760px; font-size: 13px; line-height: 1.7; }
+    .tft-color-table th, .tft-color-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid #e1e7ee; vertical-align: top; }
+    .tft-color-table thead th { font-weight: 600; color: #596774; background: #f5f8fc; }
+    .tft-color-table thead th:nth-child(1) { width: 14%; }
+    .tft-color-table thead th:nth-child(2) { width: 20%; }
+    .tft-color-table thead th:nth-child(3) { width: 33%; }
+    .tft-color-table tbody th { font-weight: 600; color: #111827; }
+    .tft-color-table td { color: #4b5563; }
+    .tft-color-table tbody tr:last-child > * { border-bottom: 0; }
+    .tft-color-table td p + p { margin-top: .5rem; }
+    .tft-color-table td a { color: #1769b0; text-decoration: underline; text-underline-offset: .15em; }
+    .tft-color-table strong { color: #111827; font-weight: 600; }
+    .tft-color-table strong span { margin-right: .35rem; color: #1769b0; font-size: .75rem; }
+    .tft-color-table td div + div { margin-top: .65rem; padding-top: .65rem; border-top: 1px solid #e1e7ee; }
+    @container (min-width: 18rem) {
+      .tft-size-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @container (min-width: 36rem) {
+      .tft-ppi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @container (min-width: 46rem) {
+      .tft-size-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
   </style>
 </head>
 <body class="antialiased"><div class="aura"></div>
@@ -48,6 +103,140 @@
       <div class="mb-10"><h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">TFT 屏幕</h2><p class="text-lg text-gray-500 max-w-3xl leading-relaxed">面向家电全彩图形显示与触控界面的设计规范。以真实硬件环境中的清晰、直接、稳定和可恢复为首要标准。</p></div>
 
       <section class="glass p-7 md:p-9 mb-8"><h3 class="text-2xl font-bold mb-2">设备特征</h3><p class="text-sm text-gray-500 mb-7">开始设计前，先以产品形态、安装方式和主要任务定义界面，而不是直接套用移动端页面。</p><div class="grid grid-cols-1 md:grid-cols-2 gap-5 principle-grid"><article class="rule"><h4 class="font-semibold mb-2">显示</h4><p class="text-sm text-gray-600 leading-6">TFT 能承载图形、文字、色彩与动态状态，但可用面积、亮度、可视角度和表面反射受硬件限制。内容密度必须以量产屏幕为准。</p></article><article class="rule"><h4 class="font-semibold mb-2">使用姿态</h4><p class="text-sm text-gray-600 leading-6">屏幕通常固定在产品上，用户可能站立、俯视或侧视，并在移动中快速操作。界面需适应不同身高、视距和环境光。</p></article><article class="rule"><h4 class="font-semibold mb-2">输入</h4><p class="text-sm text-gray-600 leading-6">产品可使用触控、实体按键、旋钮或语音，也可能组合使用。所有输入方式需指向同一套状态和操作结果。</p></article><article class="rule"><h4 class="font-semibold mb-2">交互任务</h4><p class="text-sm text-gray-600 leading-6">家电任务既包含开机、启动等快速操作，也包含模式配置和运行监控。离开后返回界面，应能继续理解当前状态。</p></article></div></section>
+
+      <div class="tft-hardware" id="tft-hardware-standards">
+
+        <section class="tft-card" aria-labelledby="tft-size-title">
+          <h3 class="tft-card-title" id="tft-size-title">TFT 尺寸优选库</h3>
+          <div class="tft-size-grid">
+            <div class="tft-size">
+              <div class="tft-screen-preview" aria-hidden="true"><div class="tft-screen-outline" style="width: 139px; aspect-ratio: 252.86 / 57.95"></div></div>
+              <h4>10.11″</h4>
+              <dl><dt>分辨率</dt><dd>1920 × 440&nbsp;px</dd><dt>AA 尺寸</dt><dd>252.86 × 57.95&nbsp;mm</dd></dl>
+            </div>
+            <div class="tft-size">
+              <div class="tft-screen-preview" aria-hidden="true"><div class="tft-screen-outline" style="width: 59px; aspect-ratio: 107.6 / 172.2"></div></div>
+              <h4>8″</h4>
+              <dl><dt>分辨率</dt><dd>800 × 1280&nbsp;px</dd><dt>AA 尺寸</dt><dd>107.6 × 172.2&nbsp;mm</dd></dl>
+            </div>
+            <div class="tft-size">
+              <div class="tft-screen-preview" aria-hidden="true"><div class="tft-screen-outline" style="width: 88px; aspect-ratio: 160.60 / 60.22"></div></div>
+              <h4>6.86″</h4>
+              <dl><dt>分辨率</dt><dd>1280 × 480&nbsp;px</dd><dt>AA 尺寸</dt><dd>160.60 × 60.22&nbsp;mm</dd></dl>
+            </div>
+            <div class="tft-size">
+              <div class="tft-screen-preview" aria-hidden="true"><div class="tft-screen-outline" style="width: 48px; aspect-ratio: 86.40 / 51.84"></div></div>
+              <h4>3.97″</h4>
+              <dl><dt>分辨率</dt><dd>800 × 480&nbsp;px</dd><dt>AA 尺寸</dt><dd>86.40 × 51.84&nbsp;mm</dd></dl>
+            </div>
+          </div>
+        </section>
+
+        <section class="tft-card" aria-labelledby="tft-ppi-title">
+          <h3 class="tft-card-title" id="tft-ppi-title">屏幕像素密度</h3>
+          <div class="tft-ppi-grid">
+            <div class="tft-ppi-group">
+              <h4>10.11″ 以下中小尺寸</h4>
+              <dl class="tft-thresholds">
+                <div><dt>底线</dt><dd><strong>≥ 150 PPI</strong><p>文字边缘可辨，图标无明显锯齿。低于此值，近距离可见像素颗粒。</p></dd></div>
+                <div><dt>体验保障</dt><dd><strong>≥ 180 PPI</strong><p>正常操作距离下接近看不出像素点，界面质感明显提升。</p></dd></div>
+              </dl>
+            </div>
+            <div class="tft-ppi-group">
+              <h4>21.5″ 以上大尺寸</h4>
+              <dl class="tft-thresholds">
+                <div><dt>底线</dt><dd><strong>≥ 90 PPI</strong><p>高于 32″ Full HD 的 69 PPI。21.5″ Full HD 的 102 PPI 可作为参照。</p></dd></div>
+                <div><dt>体验保障</dt><dd><strong>≥ 100 PPI</strong><p>约为 21.5″、1080p 屏幕的水平。</p></dd></div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section class="tft-card" aria-labelledby="tft-color-title">
+          <h3 class="tft-card-title" id="tft-color-title">色彩标准补充</h3>
+          <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white/65" role="region" aria-labelledby="tft-color-title" tabindex="0">
+            <table class="tft-color-table">
+              <thead>
+                <tr>
+                  <th scope="col">指标</th>
+                  <th scope="col">含义（体验视角）</th>
+                  <th scope="col">现行国标/国际标准</th>
+                  <th scope="col">执行标准</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">色域</th>
+                  <td>屏幕能呈现的颜色范围，影响食材、织物和影像的色彩是否丰富。</td>
+                  <td>
+                    <p>GB/T 18910.61—2021 第 5.10 节规定色域覆盖率的测试方法，无统一强制百分比。sRGB 是互联网和家电界面的常用基准。原资料以 100% sRGB 约对应 72% NTSC 作为选型参考。DCI-P3 可呈现更鲜艳的色彩。</p>
+                  </td>
+                  <td>
+                    <div><strong><span>MUST</span> ≥ 100% sRGB</strong><p>或等效 ≥ 72% NTSC 覆盖率。</p></div>
+                    <div><strong><span>TARGET</span> ≥ 90% DCI-P3</strong><p>须标注覆盖率、测试标准和色域空间。色域容积不能代替覆盖率。</p></div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">色深</th>
+                  <td>颜色过渡的细腻程度，影响渐变背景和暗部是否出现色带。</td>
+                  <td>
+                    <p>无强制国际限值。行业常见分级为 6-bit（262K 色，渐变易断层）、8-bit（16.7M 色，家电界面基准）和 10-bit（约 10.7 亿色，过渡更细腻）。6-bit 加 FRC 抖动可模拟 8-bit 观感。</p>
+                  </td>
+                  <td>
+                    <div><strong><span>MUST</span> 原生 8-bit（16.7M 色）</strong></div>
+                    <div><strong><span>TARGET</span> 10-bit</strong><p>采用 FRC 时，规格书须注明原生位数与 FRC 后位数，并验证静态渐变无明显色带。仅标注 256K 或 262K 色不满足体验基准。</p></div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">色准（ΔE）</th>
+                  <td>屏幕显示颜色与参考颜色的偏差，影响正红色和肤色等颜色的还原。</td>
+                  <td>
+                    <p>无统一强制限值。消费级参考为 ΔE ≤ 3（如 T/TAF 246—2024），部分采购规范要求 ΔE ≤ 1–2。测试须注明色块数量、标准光源和色差公式（如 CIEDE2000）。</p>
+                  </td>
+                  <td>
+                    <div><strong><span>MUST</span> 平均 ΔE ≤ 3</strong></div>
+                    <div><strong><span>TARGET</span> 平均 ΔE ≤ 2</strong><p>适用于中高端。报告应纳入最大 ΔE，供应商须提供基于标准色卡（如 ColorChecker）的实测报告。</p></div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">色度均匀性</th>
+                  <td>屏幕不同区域的颜色一致程度，影响大面积纯色背景是否出现四角偏黄或偏蓝。</td>
+                  <td>
+                    <p>ISO 9241-307 包含色度不均匀性的人因评估框架。相关研究常以 Δu′v′ ≤ 0.02 为参考。LED 显示屏采购中常见 Cx、Cy 偏差要求在 ±0.002–0.003 量级，TFT 领域无统一限值。</p>
+                  </td>
+                  <td>
+                    <div><strong><span>MUST</span> ΔCx、ΔCy ≤ 0.010</strong><p>采用 9 点或 13 点白场测量。等效 Δu′v′ 限值为 ≤ 0.010–0.015。</p></div>
+                    <div><strong><span>TARGET</span> ΔCx、ΔCy ≤ 0.005</strong><p>或 Δu′v′ ≤ 0.005。测试须注明画面（白场或灰场）和点位。</p></div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">对比度（静态）</th>
+                  <td>同一画面内最亮白与最暗黑的亮度比，影响暗部层次是否发灰。</td>
+                  <td>
+                    <p>GB/T 18910.61—2021 第 5.5 节规定测试方法，要求关闭局部调光，未设统一最低限值。行业采购可见 ≥ 3000:1、≥ 5000:1 等参考要求。动态对比度（如 100000:1）不能作为静态对比度的体验依据。</p>
+                  </td>
+                  <td>
+                    <div><strong><span>MUST</span> 暗室静态对比度 ≥ 1000:1</strong><p>基础可读要求。中高端须达到 ≥ 1500:1。</p></div>
+                    <div><strong><span>TARGET</span> ≥ 3000:1</strong><p>验收与规格书须注明数值为关闭局部调光后测得的静态对比度。</p></div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">视角色偏</th>
+                  <td>视线偏离屏幕法线时的颜色变化，影响侧站或弯腰操作时的显示效果。</td>
+                  <td>
+                    <p>GB/T 18910.61—2021 第 5.6 节规定视角色偏的测试方法，未设限值。ISO 9241-307 相关实践以 0.02 作为色度一致性的参考量级。</p>
+                    <p>EBU 的灰阶跟踪以 Δu*v* 表示色差。1.0 为可见性参考，0.5 为使差异不可见的容差。本卡的执行阈值采用 Δu′v′ 色度差。 <a href="https://tech.ebu.ch/publications/tech3320">EBU Tech 3320</a></p>
+                  </td>
+                  <td>
+                    <div><strong><span>MUST</span> Δu′v′ ≤ 0.02</strong><p>在水平和垂直 45° 视角下，相对于法线白点测量。</p></div>
+                    <div><strong><span>TARGET</span> Δu′v′ ≤ 0.010</strong><p>或在 60° 视角下仍满足 Δu′v′ ≤ 0.02。供应商须提供指定角度的色度偏移数据。仅标注 178° 可视角度无法验收。</p></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
 
       <section class="glass p-7 md:p-9 mb-8"><h3 class="text-2xl font-bold mb-2">设计原则</h3><p class="text-sm text-gray-500 mb-7">通过正反案例对照，快速判断 TFT 界面是否满足核心任务、触控与认知一致性的要求。</p><div class="grid grid-cols-1 gap-5">
         <article class="principle-card"><div class="rule"><h4 class="font-semibold mb-2">内容优先</h4><p class="text-sm text-gray-600 leading-6">突出当前状态、核心任务和下一步操作。减少遮挡内容的弹层与无必要的全屏跳转，让用户始终知道设备正在做什么。</p></div><div class="case-grid"><figure class="case-figure"><figcaption class="case-caption do">正面案例 · 保持核心信息优先展示</figcaption><div class="case-frame do" role="img" aria-label="内容优先正面案例：两个屏幕状态均显示制冷与26摄氏度，依次选中制冷和日晒"><div class="state-pair case-state-pair"><div class="mini-state"><div class="temp-core"><img src="assets/icons/tft-official/cool.svg" alt="制冷"><strong>26°C</strong></div><div class="mode-nav"><img class="mode-btn selected" src="assets/icons/tft-official/cool.svg" alt="制冷已选中"><img class="mode-btn" src="assets/icons/tft-official/sun.svg" alt="日晒"><img class="mode-btn" src="assets/icons/tft-official/fridge.svg" alt="冰箱"></div></div><div class="mini-state"><div class="temp-core"><img src="assets/icons/tft-official/cool.svg" alt="制冷"><strong>26°C</strong></div><div class="mode-nav"><img class="mode-btn" src="assets/icons/tft-official/cool.svg" alt="制冷"><img class="mode-btn selected" src="assets/icons/tft-official/sun.svg" alt="日晒已选中"><img class="mode-btn" src="assets/icons/tft-official/fridge.svg" alt="冰箱"></div></div></div></div></figure><figure class="case-figure"><figcaption class="case-caption dont">反面案例 · 弹层与卡片争夺焦点</figcaption><div class="case-frame dont" role="img" aria-label="内容优先反面案例：多重卡片和弹层遮挡核心状态"><div class="ui-screen"><div class="ui-clutter"><div class="ui-tile"><img src="assets/icons/tft-official/cool.svg" alt=""></div><div class="ui-tile"><img src="assets/icons/tft-official/air-supply.svg" alt=""></div><div class="ui-tile"><img src="assets/icons/tft-official/wind-speed-low.svg" alt=""></div><div class="ui-tile"><img src="assets/icons/tft-official/diy.svg" alt=""></div><div class="ui-tile"><img src="assets/icons/tft-official/sun.svg" alt=""></div><div class="ui-tile"><img src="assets/icons/tft-official/fridge.svg" alt=""></div><div class="ui-tile"><img src="assets/icons/tft-official/play.svg" alt=""></div><div class="ui-tile"><img src="assets/icons/tft-official/settings.svg" alt=""></div></div><div class="ui-modal"><img src="assets/icons/tft-official/cool.svg" alt=""></div></div></div></figure></div></article>

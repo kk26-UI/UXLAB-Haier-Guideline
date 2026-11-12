@@ -67,16 +67,7 @@ const HAIER_NAV_GROUPS = [
     items: [
       { label: '4.1 TFT 屏幕', href: 'hardware_tft.html', page: 'hardware_tft.html', id: 'hw-tft' },
       { label: '4.2 LED 屏幕', href: 'hardware_led.html', page: 'hardware_led.html', id: 'hw-led' },
-      { label: '4.3 其它屏幕形态', href: 'hardware_other.html', page: 'hardware_other.html', id: 'hw-other' },
-    ],
-  },
-  {
-    id: 'motion',
-    label: '5. 动效 Motion',
-    items: [
-      { label: '5.1 背景动效', href: 'motion.html#motion-bg', id: 'motion-bg' },
-      { label: '5.2 转场 Transitions', href: 'motion.html#motion-transitions', id: 'motion-transitions' },
-      { label: '5.3 微交互', href: 'motion.html#motion-micro', id: 'motion-micro' },
+      { label: '4.3 异形屏', href: 'hardware_other.html', page: 'hardware_other.html', id: 'hw-other' },
     ],
   },
   {
@@ -84,32 +75,22 @@ const HAIER_NAV_GROUPS = [
     label: '多感官交互 Sensory',
     items: [
       { label: '灯光 Lighting', href: 'lighting.html', page: 'lighting.html', id: 'sensory-lighting' },
-      { label: '触摸 Touch', href: 'touch.html', page: 'touch.html', id: 'sensory-touch' },
       { label: '音效 Audio', href: 'audio.html', page: 'audio.html', id: 'sensory-audio' },
     ],
   },
   {
     id: 'ai',
-    label: '7. AI',
+    label: '6. AI',
     items: [
-      { label: '7.1 AI 使用标准', href: 'ai_usage.html', page: 'ai_usage.html', id: 'ai-usage' },
-      { label: '7.2 AI 视觉标准', href: 'ai_visual.html', page: 'ai_visual.html', id: 'ai-visual' },
-    ],
-  },
-  {
-    id: 'assets',
-    label: '8. 资产与推行 Assets',
-    items: [
-      { label: '8.1 强制规范标准', href: 'assets.html#assets-strict', id: 'assets-strict' },
-      { label: '8.2 UT数据推导与沉淀', href: 'assets.html#assets-ut', id: 'assets-ut' },
-      { label: '8.3 Figma资产授权', href: 'assets.html#assets-figma', id: 'assets-figma' },
-      { label: '8.4 统一度验收机制', href: 'assets.html#assets-qa', id: 'assets-qa' },
+      { label: '6.1 AI 使用标准', href: 'ai_usage.html', page: 'ai_usage.html', id: 'ai-usage' },
+      { label: '6.2 AI 视觉标准', href: 'ai_visual.html', page: 'ai_visual.html', id: 'ai-visual' },
     ],
   },
 ];
 
 const HAIER_NAV_STANDALONE_ITEMS = [
-  { label: '9. 更新日志 Log', href: 'changelog.html#changelog', id: 'changelog', standalone: true },
+  { label: '7. 资产与推行 Assets', href: 'assets.html', page: 'assets.html', id: 'assets', standalone: true },
+  { label: '8. 更新日志 Log', href: 'changelog.html#changelog', id: 'changelog', standalone: true },
 ];
 
 const HAIER_NAV_LABEL_EN = {
@@ -191,24 +172,15 @@ const HAIER_NAV_LABEL_EN = {
   '4. 硬件 Hardware': '4. Hardware',
   '4.1 TFT 屏幕': '4.1 TFT Screens',
   '4.2 LED 屏幕': '4.2 LED Screens',
-  '4.3 其它屏幕形态': '4.3 Other Screens',
-  '5. 动效 Motion': '5. Motion',
-  '5.1 背景动效': '5.1 Background Motion',
-  '5.2 转场 Transitions': '5.2 Transitions',
-  '5.3 微交互': '5.3 Micro-interactions',
+  '4.3 异形屏': '4.3 Irregular Displays',
   '多感官交互 Sensory': 'Sensory Interaction',
   '灯光 Lighting': 'Lighting',
-  '触摸 Touch': 'Touch',
   '音效 Audio': 'Audio',
-  '7. AI': '7. AI',
-  '7.1 AI 使用标准': '7.1 AI Usage Guidelines',
-  '7.2 AI 视觉标准': '7.2 AI Visual Standards',
-  '8. 资产与推行 Assets': '8. Assets & Governance',
-  '8.1 强制规范标准': '8.1 Mandatory Standards',
-  '8.2 UT数据推导与沉淀': '8.2 UT Data',
-  '8.3 Figma资产授权': '8.3 Figma Assets',
-  '8.4 统一度验收机制': '8.4 Consistency QA',
-  '9. 更新日志 Log': '9. Changelog',
+  '6. AI': '6. AI',
+  '6.1 AI 使用标准': '6.1 AI Usage Guidelines',
+  '6.2 AI 视觉标准': '6.2 AI Visual Standards',
+  '7. 资产与推行 Assets': '7. Assets & Governance',
+  '8. 更新日志 Log': '8. Changelog',
 };
 
 (function initHaierNavigation() {
@@ -221,7 +193,6 @@ const HAIER_NAV_LABEL_EN = {
 
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   const currentLanguage = localStorage.getItem('haier-guideline-language') || 'zh';
-  const sensorySubpages = new Set(['lighting.html', 'touch.html', 'audio.html']);
   let scrollSpyPausedUntil = 0;
   const stripNavNumber = (label) => label.replace(/^\d+(?:\.\d+)*\.?\s*/, '').trim();
   const zhNavLabel = (label) => {
@@ -513,12 +484,9 @@ const HAIER_NAV_LABEL_EN = {
     '设计决策的最高原则与体验取舍依据。': 'Top principles for design decisions and experience tradeoffs.',
     '视觉基础与信息架构。': 'Visual foundations and information architecture.',
     '操作、输入、导航、数据与反馈组件。': 'Action, input, navigation, data, and feedback components.',
-    'TFT、LED 与其它屏幕形态规范。': 'Guidelines for TFT, LED, and other screen forms.',
-    '背景动效、转场与微交互。': 'Background motion, transitions, and micro-interactions.',
-    '灯光、触觉与听觉反馈规范。': 'Lighting, haptic, and audio feedback guidelines.',
+    'TFT、LED 与异形屏规范。': 'Guidelines for TFT, LED, and irregular displays.',
     'AI 视觉标准与使用标准。': 'AI visual standards and usage guidelines.',
-    '强制标准、UT、Figma 与验收机制。': 'Mandatory standards, UT, Figma, and acceptance mechanisms.',
-    'Haier Design 1.0.2 不仅是一套跨设备的 UI 库，更是一套连接屏幕显示、物理触觉、环境灯光与三维声音的“多感官编排系统”。我们以简约、清爽为基调，通过高度模块化的工程手段，赋能全品类家电产品的智能化进化。': 'Haier Design 1.0.2 is not only a cross-device UI library, but also a multisensory orchestration system connecting screen display, physical haptics, ambient lighting, and spatial sound. With a simple and fresh visual tone, highly modular engineering enables intelligent evolution across appliance categories.',
+    'Haier Design 1.0.3 不仅是一套跨设备的 UI 库，更是一套连接屏幕显示、物理触觉、环境灯光与三维声音的“多感官编排系统”。我们以简约、清爽为基调，通过高度模块化的工程手段，赋能全品类家电产品的智能化进化。': 'Haier Design 1.0.3 is not only a cross-device UI library, but also a multisensory orchestration system connecting screen display, physical haptics, ambient lighting, and spatial sound. With a simple and fresh visual tone, highly modular engineering enables intelligent evolution across appliance categories.',
     'Figma 中的标准预制件与组装逻辑。': 'Standard prefabs and assembly logic in Figma.',
     'Button 按钮、悬浮按钮、图标按钮等。': 'Buttons, floating buttons, icon buttons, and more.',
     'Checkbox、Radio、Switch、Slider 等筛选与控制组件。': 'Selection and control components such as checkbox, radio, switch, and slider.',
@@ -541,34 +509,17 @@ const HAIER_NAV_LABEL_EN = {
     '图文混排：明确印刷丝印文字与触摸 LED 图标的对齐基线。': 'Mixed text and graphics: define alignment baselines for printed labels and touch LED icons.',
     '异形屏、透明屏、投影等特种硬件。': 'Special hardware such as irregular screens, transparent screens, and projection.',
     '[ 极端环境适配策略... ]': '[ Extreme environment adaptation strategy... ]',
-    '界面元素的动态表现原则。': 'Motion principles for interface elements.',
-    '弥散光晕的呼吸节律、状态切换时的平滑过度动画。': 'Breathing rhythm for aura backgrounds and smooth transitions during state changes.',
-    '页面切换、层级进入与退出时的节奏规范。': 'Rhythm rules for page changes and hierarchy enter/exit transitions.',
-    '按钮点击反弹、图标状态切换小动画。': 'Button press rebound and small animations for icon state changes.',
     '设备的物理反馈体验与屏外融合。': 'Physical device feedback and off-screen integration.',
     '界面状态应与灯光反馈保持同步，让物理环境成为系统反馈的一部分。': 'Interface state should stay synchronized with lighting feedback, making the physical environment part of system feedback.',
     'AI 净洗模式中': 'In AI wash mode',
     '物理 LED 导光条': 'the physical LED light guide',
     '与屏幕动画完全同步': 'is fully synchronized with screen animation',
-    '[ 马达震动曲线参数 (Tick / Pop) 载入中... ]': '[ Motor vibration curve parameters (Tick / Pop) loading... ]',
     '音效需符合整体“柔软”基调，避免尖锐蜂鸣，倡导使用柔和合成音。': 'Sound effects should match the overall soft tone, avoiding sharp beeps and favoring gentle synthesized sounds.',
     '[ 系统 UI 音效矩阵 (.wav) 载入中... ]': '[ System UI sound matrix (.wav) loading... ]',
     'AI 智能特性的专属体验规范，覆盖视觉识别、语音反馈与使用边界。': 'Dedicated experience guidelines for AI features, covering visual recognition, voice feedback, and usage boundaries.',
     '语音唤醒时的视觉波形与拾音状态反馈。': 'Visual waveform and pickup-state feedback during voice wake-up.',
     '“正在思考”与“识别完成”的流光转场动效。': 'Flowing-light transitions for thinking and recognition-complete states.',
     '[ 主动响应与被动建议的交互流程树... ]': '[ Interaction flow tree for active responses and passive suggestions... ]',
-    '确保规范能够落地并维持高统一度的执行手册。': 'Execution manual for implementing the guidelines and maintaining high consistency.',
-    '返回按钮一致性：': 'Back button consistency:',
-    '固定采用': 'Always use',
-    '，严禁私自替换。': '; do not replace it arbitrarily.',
-    '主操作区高度：': 'Primary action area height:',
-    '触屏底部确认 Button 热区高度严禁小于': 'The bottom confirmation button touch area on touchscreens must not be less than',
-    '错误警示标准：': 'Error warning standard:',
-    '系统报错必须伴随': 'System errors must include',
-    '级物理警告音。': 'level physical warning sound.',
-    '基于用户测试得到的设计改良数据看板。': 'Design improvement dashboard based on user testing data.',
-    '集团内组件库的订阅与分发权限管理标准。': 'Subscription and distribution permission standards for the group component library.',
-    '开发走查与验证标准，确保落地 90% 还原度。': 'Development review and validation standards to ensure 90% implementation fidelity.',
     '版本演进记录。': 'Version evolution record.',
     '版本号': 'Version',
     '日期': 'Date',
@@ -713,15 +664,9 @@ const HAIER_NAV_LABEL_EN = {
     '4.1.2 尺寸 Dimensions': '4.1.2 Dimensions',
     '4.1.3 标准适配 Standard Adaptation': '4.1.3 Standard Adaptation',
     '4.2 LED 屏幕 LED Screens': '4.2 LED Screens',
-    '4.3 其它 Others': '4.3 Others',
-    '5. 动效': '5. Motion',
-    '5.1 背景': '5.1 Background',
-    '5.2 转场 Transitions': '5.2 Transitions',
-    '5.3 微交互 Micro-interactions': '5.3 Micro-interactions',
     '6. 多感官交互': '6. Sensory Interaction',
     '6.1 视觉 Visuals': '6.1 Visuals',
     '6.1.1 灯光 Lighting：Aura Sync 虚实同频': '6.1.1 Lighting: Aura Sync',
-    '6.2 触觉 Haptics': '6.2 Haptics',
     '6.3 听觉 Audio': '6.3 Audio',
     '7.1 AI 视觉标准 AI Visual Standards': '7.1 AI Visual Standards',
     '7.1.1 AI 图标 AI Iconography': '7.1.1 AI Iconography',
@@ -729,11 +674,7 @@ const HAIER_NAV_LABEL_EN = {
     '7.1.3 AI 动效': '7.1.3 AI Motion',
     '7.2 AI 使用标准': '7.2 AI Usage Guidelines',
     '8. 资产与推行': '8. Assets & Governance',
-    '8.1 强制规范标准 Mandatory Standards': '8.1 Mandatory Standards',
-    '8.2 UT 数据推导': '8.2 UT Data',
-    '8.3 Figma 资产授权': '8.3 Figma Asset Authorization',
-    '8.4 统一度验收': '8.4 Consistency Acceptance',
-    '9. 更新日志': '9. Changelog',
+    '8. 更新日志': '8. Changelog',
     '色彩规范': 'Color Guidelines',
     '1. 主品牌色': '1. Primary Brand Colors',
     '主品牌色': 'Primary Brand Color',
@@ -965,9 +906,8 @@ const HAIER_NAV_LABEL_EN = {
     'grid_system_details.html': 'Haier Design | Grid System',
     'components.html': 'Haier Design | Components',
     'hardware.html': 'Haier Design | Hardware',
-    'motion.html': 'Haier Design | Motion',
+    'hardware_other.html': 'Haier Design | Irregular Displays',
     'lighting.html': 'Haier Design | Lighting',
-    'touch.html': 'Haier Design | Touch',
     'audio.html': 'Haier Design | Audio',
     'ai.html': 'Haier Design | AI',
     'assets.html': 'Haier Design | Assets & Governance',
@@ -978,23 +918,15 @@ const HAIER_NAV_LABEL_EN = {
     if (!mainContent || currentPage === 'index.html') return;
 
     const pageTitle = mainContent.querySelector('h1');
-    const isSensorySubpage = sensorySubpages.has(currentPage);
-    if (isSensorySubpage && pageTitle?.previousElementSibling?.tagName === 'P') {
-      pageTitle.previousElementSibling.remove();
-    }
-    const pageIntro = isSensorySubpage ? null : pageTitle?.closest('section');
-    const pageDescription = isSensorySubpage
-      ? (pageTitle?.nextElementSibling?.tagName === 'P' ? pageTitle.nextElementSibling : null)
-      : (pageIntro ? Array.from(pageIntro.children).find((element) => element.tagName === 'P') || pageIntro.querySelector('p') : null);
+    const pageIntro = pageTitle?.closest('section');
+    const pageDescription = pageIntro
+      ? Array.from(pageIntro.children).find((element) => element.tagName === 'P') || pageIntro.querySelector('p')
+      : null;
     if (pageIntro) pageIntro.classList.add('guideline-page-intro');
     pageTitle?.classList.add('guideline-page-title');
     pageDescription?.classList.add('guideline-page-description');
 
     const container = Array.from(mainContent.children).find((element) => element.id !== 'language-switcher');
-    if (isSensorySubpage) {
-      mainContent.classList.add('guideline-sensory-main');
-      container?.classList.add('guideline-sensory-page');
-    }
     let link = mainContent.querySelector('a[href="index.html"], a[href="haier_os_design_system.html"], a[href="Haier_Guideline.html"], a[href="foundations.html"]');
 
     if (!link && container) {
@@ -1185,23 +1117,6 @@ const HAIER_NAV_LABEL_EN = {
         font-weight: 400 !important;
       }
 
-      .guideline-sensory-page {
-        width: 100% !important;
-        max-width: 1200px !important;
-        margin-right: auto !important;
-        margin-left: auto !important;
-        padding-bottom: 6rem !important;
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-      }
-
-      #main-content.guideline-sensory-main {
-        padding: 1.5rem !important;
-      }
-
-      .guideline-sensory-page > .guideline-page-description {
-        margin-bottom: 2.25rem !important;
-      }
-
       .guideline-home-link {
         min-width: auto !important;
         padding: 0.5rem 1rem !important;
@@ -1244,10 +1159,6 @@ const HAIER_NAV_LABEL_EN = {
       }
 
       @media (min-width: 768px) {
-        #main-content.guideline-sensory-main {
-          padding: 2.5rem !important;
-        }
-
         .guideline-page-title {
           font-size: 3rem !important;
           line-height: 1 !important;
@@ -1265,12 +1176,6 @@ const HAIER_NAV_LABEL_EN = {
 
         body.haier-sidebar-collapsed #sidebar-restore-button {
           display: flex;
-        }
-      }
-
-      @media (min-width: 1024px) {
-        #main-content.guideline-sensory-main {
-          padding: 3rem !important;
         }
       }
 
@@ -1414,7 +1319,7 @@ const HAIER_NAV_LABEL_EN = {
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
       </button>
       <a href="index.html" class="inline-block" aria-label="Haier NEXT UX Guideline 首页"><img class="haier-brand-lockup" src="assets/brand/haier-logo.svg" alt="Haier"></a>
-      <p class="haier-brand-tagline text-sm">NEXT UX Guideline 1.0.2</p>
+      <p class="haier-brand-tagline text-sm">NEXT UX Guideline 1.0.3</p>
     </div>
     <nav class="flex-1 px-4 pb-12 space-y-1" aria-label="章节目录">
       ${HAIER_NAV_GROUPS.map(groupTemplate).join('')}
