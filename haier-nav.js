@@ -837,7 +837,7 @@ const HAIER_NAV_LABEL_EN = {
     '× 仅凭宽高比决定全部断点': '× Determine every breakpoint from aspect ratio alone',
     '© 2026 Haier Design 设计团队 · 内部保密': '© 2026 Haier Design Lab · Internal Confidential'
   };
-  Object.assign(FALLBACK_I18N_EN, window.HAIER_HARDWARE_I18N_EN || {});
+  Object.assign(FALLBACK_I18N_EN, window.HAIER_HARDWARE_I18N_EN || {}, window.HAIER_AI_I18N_EN || {});
   Object.assign(FALLBACK_I18N_EN, {
     '背景': 'Background',
     '背景是界面的情境感知层：建立空间纵深，辅助状态表达，同时绝不干扰前景任务、组件与文字。': 'Background is the interface’s contextual layer: it creates spatial depth and supports state expression without interfering with foreground tasks, components, or text.',
@@ -999,7 +999,7 @@ const HAIER_NAV_LABEL_EN = {
     switcher.id = 'language-switcher';
     switcher.className = 'fixed top-6 right-6 md:static md:ml-auto z-50 pointer-events-none';
     switcher.innerHTML = `
-      <button type="button" class="pointer-events-auto min-w-[72px] px-5 py-2 rounded-full bg-white/80 hover:bg-white text-gray-600 hover:text-blue-600 border border-white/60 shadow-sm backdrop-blur-md text-xs font-semibold transition-colors" aria-label="切换中英文" data-language-toggle>
+      <button type="button" class="pointer-events-auto min-w-[72px] px-5 py-2 rounded-full bg-white/80 hover:bg-white text-gray-600 hover:text-blue-600 border border-white/60 shadow-sm backdrop-blur-md text-xs font-semibold transition-colors" aria-label="${currentLanguage === 'zh' ? '切换中英文' : 'Switch to Chinese'}" data-language-toggle>
         <span data-language-label>${currentLanguage === 'zh' ? 'EN' : '中文'}</span>
       </button>
     `;
@@ -1055,6 +1055,15 @@ const HAIER_NAV_LABEL_EN = {
         -webkit-backdrop-filter: blur(22px) !important;
         border-color: rgba(255, 255, 255, 0.9) !important;
         box-shadow: 0 12px 36px rgba(34, 131, 226, 0.08) !important;
+      }
+
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.1); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.2); }
+
+      @supports not selector(::-webkit-scrollbar) {
+        main { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.1) transparent; }
       }
 
       #sidebar {
@@ -1315,13 +1324,13 @@ const HAIER_NAV_LABEL_EN = {
 
   sidebar.innerHTML = `
     <div class="relative p-8 pb-4">
-      <button type="button" class="hidden md:flex absolute top-6 right-5" aria-label="收起左侧导航" title="收起导航" data-sidebar-collapse>
+      <button type="button" class="hidden md:flex absolute top-6 right-5" aria-label="${currentLanguage === 'zh' ? '收起左侧导航' : 'Collapse sidebar'}" title="${currentLanguage === 'zh' ? '收起导航' : 'Collapse navigation'}" data-sidebar-collapse>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
       </button>
-      <a href="index.html" class="inline-block" aria-label="Haier NEXT UX Guideline 首页"><img class="haier-brand-lockup" src="assets/brand/haier-logo.svg" alt="Haier"></a>
+      <a href="index.html" class="inline-block" aria-label="${currentLanguage === 'zh' ? 'Haier NEXT UX Guideline 首页' : 'Haier NEXT UX Guideline home'}"><img class="haier-brand-lockup" src="assets/brand/haier-logo.svg" alt="Haier"></a>
       <p class="haier-brand-tagline text-sm">NEXT UX Guideline 1.0.3</p>
     </div>
-    <nav class="flex-1 px-4 pb-12 space-y-1" aria-label="章节目录">
+    <nav class="flex-1 px-4 pb-12 space-y-1" aria-label="${currentLanguage === 'zh' ? '章节目录' : 'Guideline chapters'}">
       ${HAIER_NAV_GROUPS.map(groupTemplate).join('')}
       <div class="mt-2 pt-2 border-t border-white/50">
         ${HAIER_NAV_STANDALONE_ITEMS.map(navItemTemplate).join('')}
@@ -1331,8 +1340,8 @@ const HAIER_NAV_LABEL_EN = {
   const sidebarRestoreButton = document.createElement('button');
   sidebarRestoreButton.id = 'sidebar-restore-button';
   sidebarRestoreButton.type = 'button';
-  sidebarRestoreButton.setAttribute('aria-label', '展开左侧导航');
-  sidebarRestoreButton.setAttribute('title', '展开导航');
+  sidebarRestoreButton.setAttribute('aria-label', currentLanguage === 'zh' ? '展开左侧导航' : 'Expand sidebar');
+  sidebarRestoreButton.setAttribute('title', currentLanguage === 'zh' ? '展开导航' : 'Expand navigation');
   sidebarRestoreButton.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>';
   document.body.appendChild(sidebarRestoreButton);
 

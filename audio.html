@@ -23,6 +23,8 @@
     <style>
         @font-face { font-family:'FZLanTingHei'; src:url('assets/fonts/FZLanTingHei-Regular.ttf') format('truetype'); font-weight:400; font-display:swap; }
         @font-face { font-family:'Montserrat'; src:url('assets/fonts/Montserrat-Regular.otf') format('opentype'); font-weight:400; font-display:swap; }
+        /* Keep the off-screen playback status within the scrolling library. */
+        .audio-library { position:relative; }
         .audio-tablist { display:flex; gap:32px; border-bottom:1px solid #e5e7eb; }
         .audio-tab {
             flex:0 0 auto; min-width:56px; padding:0 0 14px; border-bottom:2px solid transparent;
